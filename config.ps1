@@ -1,6 +1,12 @@
 param([switch]$DryRun, [switch]$SkipBackup, [string]$Run)
+
 Write-Host 'Starting to configure this machine'
+
+scoop hold git-with-openssh
+
 . $PSScriptRoot\config-functions.ps1
+
+#store in profile
 $backupDir = 'C:\ConfigurationBackup'
 mkdir $backupDir -ErrorAction Ignore
 
