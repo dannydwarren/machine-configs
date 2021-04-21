@@ -1,9 +1,6 @@
 param([switch]$DryRun, [switch]$SkipBackup, [string]$Run)
-
 Write-Host 'Starting to configure this machine'
-
 . $PSScriptRoot\config-functions.ps1
-
 $backupDir = 'C:\ConfigurationBackup'
 mkdir $backupDir -ErrorAction Ignore
 
@@ -44,3 +41,6 @@ Block "Backup Registry" {
 } {
     $SkipBackup
 }
+
+& $PSScriptRoot\powershell\config.ps1
+if (!$DryRun -and !$Run) { . $profile } # make profile available to scripts below
