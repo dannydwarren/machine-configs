@@ -56,3 +56,5 @@ Block "Git config" {
 } {
     (git config --get-all --global include.path) -match "danny\.gitconfig"
 }
+
+& $PSScriptRoot\windows\config.ps1
