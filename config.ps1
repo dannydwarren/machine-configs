@@ -58,3 +58,4 @@ Block "Git config" {
 }
 
 & $PSScriptRoot\windows\config.ps1
+& $PSScriptRoot\install\install.ps1
