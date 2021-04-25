@@ -48,10 +48,9 @@ Block "Hide Control Panel in Navigation pane" {
 Block "Internet Options > Advanced > Browsing > Use inline AutoComplete in File Explorer and Run Dialog = On" {
     Set-RegistryValue "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoComplete" -Name "Append Completion" -Value "yes"
 }
-# TODO: Ask Ben
-# Block "Hide Folders Section in This PC" {
-#     & "$PSScriptRoot\Hide Folders Section in This PC.ps1"
-# }
+Block "Hide Folders Section in This PC" {
+    & "$PSScriptRoot\Hide Folders Section in This PC.ps1"
+}
 # TODO: Ask Ben
 Block "shell:sendto VS Code" {
     Create-Shortcut -Target "$env:LocalAppData\Programs\Microsoft VS Code\Code.exe" -Link "$((New-Object -ComObject WScript.Shell).SpecialFolders.Item("sendto"))\nCode.lnk"

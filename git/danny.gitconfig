@@ -30,6 +30,7 @@
 	lgn = log --graph --decorate -30 --all --topo-order --date=format:'%Y-%m-%d %H:%M:%S' --pretty=format:'%C(cyan)%h%Creset %C(black bold)%ad%Creset %C(green)%an%Creset%C(auto)%d%n        %C(white bold)%s%Creset'
 	lgb = log --graph --decorate -30 --topo-order --date=format:'%Y-%m-%d %H:%M:%S' --pretty=format:'%C(cyan)%h%Creset %C(black bold)%ad%Creset%C(auto)%d %s'
 	lgab = log --graph --decorate -30 --topo-order --date=format:'%Y-%m-%d %H:%M:%S' --pretty=format:'%C(cyan)%h%Creset %C(black bold)%ad%Creset %C(green)%<(12)%an%Creset%C(auto)%d %s'
+	all = add -A
 	commitwip = !git add -A && git commit -m WIP
     cw = commitwip
 	continuewip = "!if [ \"$(git log -1 --pretty=format:%B)\" == \"WIP\" ]; then git reset HEAD~1; else echo 'The last commit was not \"WIP\"'; fi"

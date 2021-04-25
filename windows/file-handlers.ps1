@@ -1,6 +1,6 @@
-# Block "Associate extensionless files with VS Code" {
-#     & "$PSScriptRoot\Associate Extensionless Files with VS Code.ps1"
-# }
+Block "Associate extensionless files with VS Code" {
+    & "$PSScriptRoot\associate-extensionless-files-with-vs-code.ps1"
+}
 
 Block "Create generic file handler" {
     Set-RegistryValue "HKLM:\SOFTWARE\Classes\Ben.VSCode\shell\open\command" -Value """$env:LocalAppData\Programs\Microsoft VS Code\Code.exe"" ""%1"""
@@ -29,6 +29,16 @@ function 7ZipFileBlock([string]$Extension, [int]$IconIndex) {
 
 AssociateFileBlock txt VSCodeSourceFile
 AssociateFileBlock log VSCodeSourceFile
+AssociateFileBlock log1 VSCodeSourceFile
+AssociateFileBlock log2 VSCodeSourceFile
+AssociateFileBlock log3 VSCodeSourceFile
+AssociateFileBlock log4 VSCodeSourceFile
+AssociateFileBlock log5 VSCodeSourceFile
+AssociateFileBlock log6 VSCodeSourceFile
+AssociateFileBlock log7 VSCodeSourceFile
+AssociateFileBlock log8 VSCodeSourceFile
+AssociateFileBlock log9 VSCodeSourceFile
+AssociateFileBlock log10 VSCodeSourceFile
 AssociateFileBlock ps1 VSCodeSourceFile
 AssociateFileBlock ini VSCodeSourceFile
 AssociateFileBlock json VSCodeSourceFile
@@ -39,6 +49,11 @@ AssociateFileBlock creds VSCodeSourceFile
 AssociateFileBlock pgpass VSCodeSourceFile
 AssociateFileBlock yarnrc VSCodeSourceFile
 AssociateFileBlock nvmrc VSCodeSourceFile
+AssociateFileBlock csx VSCodeSourceFile
+AssociateFileBlock cs VSCodeSourceFile
+AssociateFileBlock fsx VSCodeSourceFile
+AssociateFileBlock fs VSCodeSourceFile
+AssociateFileBlock java VSCodeSourceFile
 
 # TODO: Ask Ben
 Block "Set .ahk Edit command to VS Code" {
