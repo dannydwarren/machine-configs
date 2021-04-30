@@ -1,12 +1,13 @@
 [user]
 	name = Danny Warren
-[core]
-	editor = code --wait --new-window
-[status]
-	short = true
-	branch = true
 [credential]
 	helper = manager
+[core]
+	editor = code --wait --new-window
+# Not supported by the mob tool as of 2021-04-29
+# [status]
+# 	short = true
+# 	branch = true
 [url "https://"]
 	insteadOf = git://
 [url "https://github.com/"]
@@ -17,10 +18,15 @@
 	rebase = true
 [fetch]
 	prune = true
+[diff]
+	tool = vscode
+[merge]
+	tool = vscode
 [difftool]
 	prompt = false
+[difftool "vscode"]
 	cmd = code --wait --diff $LOCAL $REMOTE
-[mergetool]
+[mergetool "vscode"]
 	cmd = code --wait $MERGED
 [alias]
 	logf = log -10 --topo-order --date=format:'%Y-%m-%d %H:%M:%S' --pretty=format:'%C(cyan)%h%Creset   %C(black bold)%ad%Creset   %C(green)%<(12)%an%Creset %s'
