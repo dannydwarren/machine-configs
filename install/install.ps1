@@ -278,6 +278,10 @@ InstallFromScoopBlock Paint.NET paint.net
 
 InstallFromScoopBlock "TreeSize Free" treesize-free
 
+# TODO: Review settings that I want
+#   Multi-monitor
+#   Default meeting uses personal PIN
+#   Auto-update enabled
 Block "Install Zoom" {
     Download-File https://zoom.us/client/latest/ZoomInstaller.exe $env:tmp\ZoomInstaller.exe
     . "$env:tmp\ZoomInstaller.exe"
@@ -301,7 +305,55 @@ Block "Install Zoom" {
     Set-RegistryValue "HKLM:\SOFTWARE\Policies\Zoom\Zoom Meetings\General" -Name SetUseSystemDefaultSpeakerForVOIP -Value 1
     Set-RegistryValue "HKLM:\SOFTWARE\Policies\Zoom\Zoom Meetings\General" -Name AutoJoinVoIP -Value 1
     Set-RegistryValue "HKLM:\SOFTWARE\Policies\Zoom\Zoom Meetings\General" -Name MuteVoIPWhenJoinMeeting -Value 1
-    Set-RegistryValue "HKLM:\SOFTWARE\Policies\Zoom\Zoom Meetings\General" -Name EnterFullScreenWhenViewingSharedScreen -Value 0
+    Set-RegistryValue "HKLM:\SOFTWARE\Policies\Zoom\Zoom Meetings\General" -Name EnterFullScreenWhenViewingSharedScreen -Value 1
 } {
     Test-ProgramInstalled Zoom
 }
+
+Block "Install SQL Server" {
+    # https://docs.microsoft.com/en-us/sql/database-engine/install-windows/install-sql-server-from-the-command-prompt
+    # Download-File https://go.microsoft.com/fwlink/?linkid=866662 $env:tmp\SQL2019-SSEI-Dev.exe
+    Download-File https://go.microsoft.com/fwlink/?linkid=853016 $env:tmp\SQLServer2017-SSEI-Dev.exe
+    $installArgs = "/Action=Install", "/IAcceptSqlServerLicenseTerms", "/InstallPath=`"C:\Program Files\Microsoft SQL Server`"", "/Features=FullText", "/SecurityMode=SQL", "/Verbose"
+    Start-Process $env:tmp\SQLServer2017-SSEI-Dev.exe $installArgs -Wait
+} {
+    Test-ProgramInstalled "SQL Server 2017"
+}
+
+Block "Install SQL Server Management Studio" {
+    # https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms
+    Download-File https://aka.ms/ssmsfullsetup $env:tmp\SSMS-Setup-ENU.exe
+    $installArgs = "/Passive", "/NoRestart"
+    Start-Process $env:tmp\SSMS-Setup-ENU.exe $installArgs -Wait
+} {
+    Test-ProgramInstalled "SQL Server Management Studio"
+}
+
+# TODO: Missing Apps
+#   Corsair iCUE Software
+#       Restore Settings
+#   CPUID HWMonitor
+#   Epic Games Launcher
+#   FileBot
+#       Register
+#   Logitech Gaming Software (already installed)
+#       Restore Settings
+#   Microsoft Azure CLI
+#   Microsoft Azure Storage Emulator (v5.10)
+#   NVidia Control Panel ???
+#   OBS Studio ???
+#   Origin
+#   Pandora (MS Store)
+#   Postman
+#   RGB Fusion
+#   SyncToy (May need to come from local 'Restoration Tools')
+#   Todoist (Windows Installer)
+#   Trident Z Lighting Control (G.Skill)
+#       Restore Settings
+#   Ubuntu (MS Store)
+#   Unity ???
+#   Uplay
+
+# FOR WORK
+#    JetBrains Toolbox
+#       Rider   
