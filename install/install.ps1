@@ -355,5 +355,6 @@ Block "Install SQL Server Management Studio" {
 #   Uplay
 
 # FOR WORK
-#    JetBrains Toolbox
-#       Rider   
+#   JetBrains Toolbox
+#       Rider
+#   Terraform   
