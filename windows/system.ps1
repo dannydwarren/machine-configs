@@ -10,6 +10,11 @@ Block "System > Power & sleep > Screen > When plugged in, turn off after = 20 mi
 Block "System > Power & sleep > Sleep > On battery power, PC goes to sleep after = 20 minutes" {
     powercfg /change standby-timeout-dc 20
 }
+if ((Configured $forWork) -and -not (Configured $forHome)) {
+    Block "System > Power & sleep > Sleep > When plugged in, PC goes to sleep after = 60 minutes" {
+        powercfg /change standby-timeout-ac 60
+    }
+}
 # TODO: Ask Ben
 Block "System > Power & sleep > Additional power settings > Choose what closing the lid does > When I close the lid (Plugged in) = Do nothing" {
     # https://docs.microsoft.com/en-us/windows-hardware/customize/power-settings/power-button-and-lid-settings-lid-switch-close-action

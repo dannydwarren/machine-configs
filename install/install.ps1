@@ -270,6 +270,18 @@ FirstRunBlock "Configure 7-Zip" {
     WaitWhileProcess 7zFM
 }
 
+
+
+
+Block "Install Todoist" {
+    Download-File "https://todoist.com/windows_app" "$env:tmp\Todoist.exe"
+    . "$env:tmp\Todoist.exe"
+    DeleteDesktopShortcut Todoist
+} {
+    Test-ProgramInstalled Todoist
+}
+
+
 InstallFromScoopBlock "Logitech Gaming Software" logitech-gaming-software-np
 
 InstallFromScoopBlock scrcpy scrcpy
