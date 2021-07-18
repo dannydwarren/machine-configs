@@ -1,6 +1,5 @@
-﻿using Configurator.Installers;
-using Configurator.Lists;
-using Configurator.PowerShell;
+﻿using Configurator.PowerShell;
+using Configurator.Scoop;
 using Configurator.Utilities;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,17 +13,14 @@ namespace Configurator
 
     public class MachineConfigurator : IDannyConfig
     {
-        private readonly IArguments arguments;
         private readonly IPowerShellConfiguration powerShellConfiguration;
         private readonly IScoopInstaller scoopInstaller;
-        private readonly IScoopList scoopList;
+        private readonly IScoopAppRepository scoopList;
 
-        public MachineConfigurator(IArguments arguments,
-            IPowerShellConfiguration powerShellConfiguration,
+        public MachineConfigurator(IPowerShellConfiguration powerShellConfiguration,
             IScoopInstaller scoopInstaller,
-            IScoopList scoopList)
+            IScoopAppRepository scoopList)
         {
-            this.arguments = arguments;
             this.powerShellConfiguration = powerShellConfiguration;
             this.scoopInstaller = scoopInstaller;
             this.scoopList = scoopList;
@@ -34,9 +30,12 @@ namespace Configurator
         {
             await powerShellConfiguration.SetExecutionPolicyAsync();
 
-            var scoopAppsToInstall = (await scoopList.LoadAsync())
-                .Where(x => x.Environment.HasFlag(arguments.Environment))
-                .ToList();
+            await InstallScoopAppsAsync();
+        }
+
+        private async Task InstallScoopAppsAsync()
+        {
+            var scoopAppsToInstall = await scoopList.LoadAsync();
 
             foreach (var scoopApp in scoopAppsToInstall)
             {

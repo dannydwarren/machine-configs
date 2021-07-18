@@ -1,6 +1,5 @@
-﻿using Configurator.Installers;
-using Configurator.Lists;
-using Configurator.PowerShell;
+﻿using Configurator.PowerShell;
+using Configurator.Scoop;
 using Configurator.Utilities;
 using Moq;
 using System.Collections.Generic;
@@ -17,12 +16,11 @@ namespace Configurator.UnitTests
             var scoopApps = new List<ScoopApp>
             {
                 new ScoopApp{ AppId = RandomString(), Environment = InstallEnvironment.Personal },
-                new ScoopApp{ AppId = RandomString(), Environment = InstallEnvironment.Work },
                 new ScoopApp{ AppId = RandomString(), Environment = InstallEnvironment.All }
             };
 
             GetMock<IArguments>().SetupGet(x => x.Environment).Returns(InstallEnvironment.Personal);
-            GetMock<IScoopList>().Setup(x => x.LoadAsync()).ReturnsAsync(scoopApps);
+            GetMock<IScoopAppRepository>().Setup(x => x.LoadAsync()).ReturnsAsync(scoopApps);
 
             await BecauseAsync(() => ClassUnderTest.ExecuteAsync());
 
@@ -34,8 +32,7 @@ namespace Configurator.UnitTests
             It("installs apps via scoop matching the install environment", () =>
             {
                 GetMock<IScoopInstaller>().Verify(x => x.InstallAsync(scoopApps[0].AppId));
-                GetMock<IScoopInstaller>().VerifyNever(x => x.InstallAsync(scoopApps[1].AppId));
-                GetMock<IScoopInstaller>().Verify(x => x.InstallAsync(scoopApps[2].AppId));
+                GetMock<IScoopInstaller>().Verify(x => x.InstallAsync(scoopApps[1].AppId));
             });
         }
     }

@@ -4,19 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Configurator.Lists
+namespace Configurator.Scoop
 {
-    public interface IScoopList
+    public interface IScoopAppRepository
     {
         Task<List<ScoopApp>> LoadAsync();
     }
 
-    public class ScoopList : IScoopList
+    public class ScoopAppRepository : IScoopAppRepository
     {
         private readonly IArguments arguments;
         private readonly IFileSystem fileSystem;
 
-        public ScoopList(IArguments arguments, IFileSystem fileSystem)
+        public ScoopAppRepository(IArguments arguments, IFileSystem fileSystem)
         {
             this.arguments = arguments;
             this.fileSystem = fileSystem;
@@ -26,7 +26,9 @@ namespace Configurator.Lists
         {
             var rawApps = await fileSystem.ReadAllLinesAsync(arguments.ScoopAppsPath);
 
-            return rawApps.Select(ParseApp).ToList();
+            return rawApps.Select(ParseApp)
+                .Where(x => x.Environment.HasFlag(arguments.Environment))
+                .ToList();
         }
 
         private ScoopApp ParseApp(string rawApp, int index)

@@ -1,5 +1,5 @@
 ﻿using Configurator.Configuration;
-using Configurator.Lists;
+using Configurator.Scoop;
 using Configurator.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;

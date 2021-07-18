@@ -1,4 +1,4 @@
-﻿using Configurator.Lists;
+﻿using Configurator.Scoop;
 
 namespace Configurator.Utilities
 {

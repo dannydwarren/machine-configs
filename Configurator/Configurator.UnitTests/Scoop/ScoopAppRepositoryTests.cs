@@ -1,4 +1,4 @@
-﻿using Configurator.Lists;
+﻿using Configurator.Scoop;
 using Configurator.Utilities;
 using Moq;
 using Shouldly;
@@ -7,9 +7,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Configurator.UnitTests.Lists
+namespace Configurator.UnitTests.Scoop
 {
-    public class ScoopListTests : UnitTestBase<ScoopList>
+    public class ScoopAppRepositoryTests : UnitTestBase<ScoopAppRepository>
     {
         [Fact]
         public async Task When_loading_apps_to_install_with_scoop()
@@ -30,20 +30,20 @@ namespace Configurator.UnitTests.Lists
 
 
             GetMock<IArguments>().SetupGet(x => x.ScoopAppsPath).Returns(scoopAppsPath);
+            GetMock<IArguments>().SetupGet(x => x.Environment).Returns(InstallEnvironment.Personal);
             GetMock<IFileSystem>().Setup(x => x.ReadAllLinesAsync(scoopAppsPath)).ReturnsAsync(csvLines);
 
             var apps = await BecauseAsync(() => ClassUnderTest.LoadAsync());
 
             It("parses scoop apps", () =>
             {
+                apps.Count.ShouldBe(3);
                 apps[0].AppId.ShouldBe(appId1);
                 apps[0].Environment.ShouldBe(InstallEnvironment.Personal);
-                apps[1].AppId.ShouldBe(appId2);
-                apps[1].Environment.ShouldBe(InstallEnvironment.Work);
-                apps[2].AppId.ShouldBe(appId3);
-                apps[2].Environment.ShouldBe(InstallEnvironment.Personal | InstallEnvironment.Work);
-                apps[3].AppId.ShouldBe(appId4);
-                apps[3].Environment.ShouldBe(InstallEnvironment.All);
+                apps[1].AppId.ShouldBe(appId3);
+                apps[1].Environment.ShouldBe(InstallEnvironment.Personal | InstallEnvironment.Work);
+                apps[2].AppId.ShouldBe(appId4);
+                apps[2].Environment.ShouldBe(InstallEnvironment.All);
             });
         }
 

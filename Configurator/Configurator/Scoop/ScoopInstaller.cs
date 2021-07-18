@@ -2,7 +2,7 @@
 using Configurator.PowerShell;
 using System.Threading.Tasks;
 
-namespace Configurator.Installers
+namespace Configurator.Scoop
 {
     public interface IScoopInstaller
     {

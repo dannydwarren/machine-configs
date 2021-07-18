@@ -1,10 +1,10 @@
 ﻿using Configurator.Configuration;
-using Configurator.Installers;
 using Configurator.PowerShell;
+using Configurator.Scoop;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Configurator.UnitTests.Installers
+namespace Configurator.UnitTests.Scoop
 {
     public class ScoopInstallerTests : UnitTestBase<ScoopInstaller>
     {
