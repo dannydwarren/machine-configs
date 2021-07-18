@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Configurator.UnitTests
 {
-    public class UnitTestBase<TClassUnderTest>: IEngine
+    public class UnitTestBase<TClassUnderTest> : IEngine
     {
         private IEngine Engine { get; }
         private AutoMoqer mocker;
@@ -33,7 +33,7 @@ namespace Configurator.UnitTests
         {
             return Engine.Because(act);
         }
-       
+
         public async Task<TResult> BecauseAsync<TResult>(Func<Task<TResult>> act)
         {
             return await Engine.Because(act);
@@ -42,6 +42,24 @@ namespace Configurator.UnitTests
         public TException? BecauseThrows<TException>(Action act) where TException : Exception
         {
             return Engine.BecauseThrows<TException>(act);
+        }
+
+        public async Task<TException?> BecauseThrowsAsync<TException>(Func<Task> act) where TException : Exception
+        {
+            try
+            {
+                await BecauseAsync(act);
+            }
+            catch (TException ex)
+            {
+                return ex;
+            }
+            catch (Exception ex)
+            {
+                throw new EngineException("Act threw an unexpected exception.", ex);
+            }
+
+            return null;
         }
 
         public void It(string assertionMessage, Action assertion)

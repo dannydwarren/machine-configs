@@ -1,4 +1,5 @@
-﻿using Configurator.Installers;
+﻿using Configurator.Configuration;
+using Configurator.Installers;
 using Configurator.PowerShell;
 using System.Threading.Tasks;
 using Xunit;
@@ -16,7 +17,9 @@ namespace Configurator.UnitTests.Installers
 
             It("invokes scoop via powershell", () =>
             {
+                GetMock<IConsoleLogger>().Verify(x => x.Info($"Installing '{appId}'"));
                 GetMock<IPowerShell>().Verify(x => x.ExecuteAsync($"scoop install {appId}"));
+                GetMock<IConsoleLogger>().Verify(x => x.Result($"Installed '{appId}'"));
             });
         }
     }
