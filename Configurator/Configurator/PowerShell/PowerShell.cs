@@ -1,7 +1,6 @@
 ﻿using Configurator.Configuration;
 using System;
 using System.Linq;
-using System.Management.Automation.Runspaces;
 using System.Threading.Tasks;
 
 namespace Configurator.PowerShell
@@ -18,15 +17,13 @@ namespace Configurator.PowerShell
     {
         private readonly IConsoleLogger consoleLogger;
         private readonly System.Management.Automation.PowerShell powershell;
-        private readonly Runspace runspace;
         private bool disposedValue;
 
-        public PowerShell(IConsoleLogger consoleLogger)
+        public PowerShell(IPowerShellConnection connection, IConsoleLogger consoleLogger)
         {
             this.consoleLogger = consoleLogger;
 
-            runspace = RunspaceFactory.CreateRunspace();
-            powershell = System.Management.Automation.PowerShell.Create(runspace);
+            powershell = connection.Powershell;
 
             powershell.Streams.Debug.DataAdded += DebugDataAdded;
             powershell.Streams.Verbose.DataAdded += VerboseDataAdded;
@@ -38,8 +35,6 @@ namespace Configurator.PowerShell
 
         public async Task<PowerShellResult> ExecuteAsync(string script)
         {
-            runspace.Open();
-
             powershell.AddScript(script);
 
             var output = await powershell.InvokeAsync();
@@ -101,12 +96,6 @@ namespace Configurator.PowerShell
         {
             if (!disposedValue)
             {
-                if (disposing)
-                {
-                    runspace.Dispose();
-                    powershell.Dispose();
-                }
-
                 powershell.Streams.Debug.DataAdded -= DebugDataAdded;
                 powershell.Streams.Verbose.DataAdded -= VerboseDataAdded;
                 powershell.Streams.Information.DataAdded -= InformationDataAdded;

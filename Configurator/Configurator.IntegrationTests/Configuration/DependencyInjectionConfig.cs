@@ -1,7 +1,6 @@
-﻿using Configurator.PowerShell;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Configurator.Configuration
+namespace Configurator.IntegrationTests.Configuration
 {
     public static class DependencyInjectionConfig
     {
@@ -14,7 +13,7 @@ namespace Configurator.Configuration
                 }
             );
 
-            services.AddSingleton<IPowerShellConnection>(new PowerShellConnection());
+            Configurator.Configuration.DependencyInjectionConfig.ConfigureServices(services);
         }
     }
 }

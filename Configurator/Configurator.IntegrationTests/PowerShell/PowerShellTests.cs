@@ -1,4 +1,6 @@
-﻿using Configurator.Configuration;
+﻿using AutoMoqCore;
+using Configurator.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using Shouldly;
 using System.Threading.Tasks;
@@ -8,6 +10,20 @@ namespace Configurator.IntegrationTests.PowerShell
 {
     public class PowerShellTests : IntegrationTestBase<Configurator.PowerShell.PowerShell>
     {
+        private AutoMoqer mocker;
+        private Mock<IConsoleLogger> mockConsoleLogger;
+
+        public PowerShellTests()
+        {
+            mocker = new AutoMoqer();
+            mockConsoleLogger = GetMock<IConsoleLogger>();
+        }
+
+        protected override void RegisterTestSpecificServices(ServiceCollection services)
+        {
+            services.AddTransient(x => mockConsoleLogger.Object);
+        }
+
         [Fact]
         public async Task When_writing_to_debug()
         {
@@ -19,7 +35,7 @@ Write-Debug 'Hello World'";
 
             It("logs as debug", () =>
             {
-                GetMock<IConsoleLogger>().Verify(x => x.Debug("Hello World"), Times.Exactly(2));
+                mockConsoleLogger.Verify(x => x.Debug("Hello World"), Times.Exactly(2));
             });
         }
 
@@ -34,7 +50,7 @@ Write-Verbose 'Hello World'";
 
             It("logs as info", () =>
             {
-                GetMock<IConsoleLogger>().Verify(x => x.Verbose("Hello World"), Times.Exactly(2));
+                mockConsoleLogger.Verify(x => x.Verbose("Hello World"), Times.Exactly(2));
             });
         }
 
@@ -48,7 +64,7 @@ Write-Host 'Hello World'";
 
             It("logs as info", () =>
             {
-                GetMock<IConsoleLogger>().Verify(x => x.Info("Hello World"), Times.Exactly(2));
+                mockConsoleLogger.Verify(x => x.Info("Hello World"), Times.Exactly(2));
             });
         }
 
@@ -62,7 +78,7 @@ Write-Information 'Hello World'";
 
             It("logs as info", () =>
             {
-                GetMock<IConsoleLogger>().Verify(x => x.Info("Hello World"), Times.Exactly(2));
+                mockConsoleLogger.Verify(x => x.Info("Hello World"), Times.Exactly(2));
             });
         }
 
@@ -76,7 +92,7 @@ Write-Warning 'Hello World'";
 
             It("logs as warn", () =>
             {
-                GetMock<IConsoleLogger>().Verify(x => x.Warn("Hello World"), Times.Exactly(2));
+                mockConsoleLogger.Verify(x => x.Warn("Hello World"), Times.Exactly(2));
             });
         }
 
@@ -90,7 +106,7 @@ Write-Error 'Hello World'";
 
             It("logs as error", () =>
             {
-                GetMock<IConsoleLogger>().Verify(x => x.Error("Hello World"), Times.Exactly(2));
+                mockConsoleLogger.Verify(x => x.Error("Hello World"), Times.Exactly(2));
             });
         }
 
@@ -104,8 +120,8 @@ Write-Progress -Activity 'Hello World' -Status '2 Complete' -PercentComplete 100
 
             It("logs as info", () =>
             {
-                GetMock<IConsoleLogger>().Verify(x => x.Progress($"Hello World -> Status: 1 Complete; PercentComplete: 50"));
-                GetMock<IConsoleLogger>().Verify(x => x.Progress($"Hello World -> Status: 2 Complete; PercentComplete: 100"));
+                mockConsoleLogger.Verify(x => x.Progress($"Hello World -> Status: 1 Complete; PercentComplete: 50"));
+                mockConsoleLogger.Verify(x => x.Progress($"Hello World -> Status: 2 Complete; PercentComplete: 100"));
             });
         }
 
@@ -120,6 +136,11 @@ Write-Progress -Activity 'Hello World' -Status '2 Complete' -PercentComplete 100
             {
                 output.AsString.ShouldBe("Hello World");
             });
+        }
+
+        private Mock<TMock> GetMock<TMock>() where TMock : class
+        {
+            return mocker.GetMock<TMock>();
         }
     }
 }

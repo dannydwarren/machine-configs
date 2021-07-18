@@ -1,22 +1,25 @@
-﻿using AutoMoqCore;
-using Moq;
-using SpecBecause;
+﻿using SpecBecause;
 using System;
-using System.Linq;
-using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using Configurator.IntegrationTests.Configuration;
 
 namespace Configurator.IntegrationTests
 {
-    public class IntegrationTestBase<TClassUnderTest> : IEngine
+    public class IntegrationTestBase<TClassUnderTest> : IEngine where TClassUnderTest : class
     {
+        private ServiceProvider serviceProvider;
+
         private IEngine Engine { get; }
-        private AutoMoqer mocker;
 
         public IntegrationTestBase(IEngine? engine = null)
         {
             Engine = engine ?? new Engine();
-            mocker = new AutoMoqer();
+
+            var serviceCollection = new ServiceCollection();
+            RegisterRequiredServices(serviceCollection);
+            RegisterTestSpecificServices(serviceCollection);
+            serviceProvider = serviceCollection.BuildServiceProvider();
         }
 
         public void Because(Action act)
@@ -51,26 +54,25 @@ namespace Configurator.IntegrationTests
 
         public void Dispose()
         {
-            classUnderTest = default;
             Engine.Dispose();
+            serviceProvider.Dispose();
         }
 
         private TClassUnderTest? classUnderTest;
-        protected TClassUnderTest ClassUnderTest => classUnderTest ??= mocker.Create<TClassUnderTest>();
+        protected TClassUnderTest ClassUnderTest => classUnderTest ??= serviceProvider.GetService<TClassUnderTest>()!;
 
-        protected Mock<TMock> GetMock<TMock>() where TMock : class
+        protected virtual void RegisterTestSpecificServices(ServiceCollection services) { }
+
+        protected U GetInstance<U>()
         {
-            return mocker.GetMock<TMock>();
+            return serviceProvider.GetService<U>()!;
         }
 
-        protected TAny IsAny<TAny>()
+        private static void RegisterRequiredServices(ServiceCollection services)
         {
-            return Moq.It.IsAny<TAny>();
-        }
+            DependencyInjectionConfig.ConfigureServices(services);
 
-        protected List<TAny> IsSequenceEqual<TAny>(IEnumerable<TAny> collection)
-        {
-            return Moq.It.Is<List<TAny>>(x => x.SequenceEqual(collection));
+            services.AddTransient<TClassUnderTest, TClassUnderTest>();
         }
 
         protected Guid NewGuid() => Guid.NewGuid();

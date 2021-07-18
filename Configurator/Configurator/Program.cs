@@ -15,9 +15,11 @@ namespace Configurator
                 environment: InstallEnvironment.Personal
             ));
 
-            var config = services.GetRequiredService<IDannyConfig>();
+            var config = services.GetRequiredService<IMachineConfigurator>();
 
             await config.ExecuteAsync();
+
+            await services.DisposeAsync();
         }
 
         private static ServiceProvider ConfigureServices(Arguments arguments)

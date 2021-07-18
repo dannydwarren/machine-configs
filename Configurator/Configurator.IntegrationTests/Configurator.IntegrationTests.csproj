@@ -9,6 +9,7 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0-release-20210626-04" />
+        <PackageReference Include="Scrutor" Version="3.3.0" />
         <PackageReference Include="Shouldly" Version="4.0.3" />
         <PackageReference Include="SpecBecause" Version="0.0.2-alpha" />
         <PackageReference Include="AutoMoqCore" Version="2.1.0" />

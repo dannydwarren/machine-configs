@@ -1,17 +1,15 @@
 ﻿using Configurator.PowerShell;
 using Configurator.Scoop;
-using Configurator.Utilities;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Configurator
 {
-    public interface IDannyConfig
+    public interface IMachineConfigurator
     {
         Task ExecuteAsync();
     }
 
-    public class MachineConfigurator : IDannyConfig
+    public class MachineConfigurator : IMachineConfigurator
     {
         private readonly IPowerShellConfiguration powerShellConfiguration;
         private readonly IScoopInstaller scoopInstaller;
