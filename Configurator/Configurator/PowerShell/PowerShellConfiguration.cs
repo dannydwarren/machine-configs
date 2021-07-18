@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using Configurator.Configuration;
+using System.Threading.Tasks;
 
 namespace Configurator.PowerShell
 {
@@ -10,15 +11,21 @@ namespace Configurator.PowerShell
     public class PowerShellConfiguration : IPowerShellConfiguration
     {
         private readonly IPowerShell powerShell;
+        private readonly IConsoleLogger consoleLogger;
 
-        public PowerShellConfiguration(IPowerShell powerShell)
+        public PowerShellConfiguration(IPowerShell powerShell, IConsoleLogger consoleLogger)
         {
             this.powerShell = powerShell;
+            this.consoleLogger = consoleLogger;
         }
 
         public async Task<string> SetExecutionPolicyAsync()
         {
-            return await powerShell.ExecuteAsync("Set-ExecutionPolicy RemoteSigned");
+            var result = await powerShell.ExecuteAsync(@"Set-ExecutionPolicy RemoteSigned
+Get-ExecutionPolicy");
+            consoleLogger.Result($"Execution Policy: {result.AsString}");
+
+            return result.AsString;
         }
     }
 }

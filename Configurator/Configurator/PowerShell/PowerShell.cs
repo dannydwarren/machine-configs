@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Configurator.Configuration;
+using System;
 using System.Linq;
 using System.Management.Automation.Runspaces;
 using System.Threading.Tasks;
@@ -7,46 +8,124 @@ namespace Configurator.PowerShell
 {
     public interface IPowerShell
     {
-        Task<string> ExecuteAsync(string script);
+        Task<PowerShellResult> ExecuteAsync(string script);
     }
 
-    public class PowerShell : IPowerShell
+    /// <summary>
+    /// Documentation: https://docs.microsoft.com/en-us/dotnet/api/system.management.automation.powershell?view=powershellsdk-7.0.0
+    /// </summary>
+    public class PowerShell : IPowerShell, IDisposable
     {
-        public async Task<string> ExecuteAsync(string script)
+        private readonly IConsoleLogger consoleLogger;
+        private readonly System.Management.Automation.PowerShell powershell;
+        private readonly Runspace runspace;
+        private bool disposedValue;
+
+        public PowerShell(IConsoleLogger consoleLogger)
         {
-            using var runspace = RunspaceFactory.CreateRunspace();
-            using var powershell = System.Management.Automation.PowerShell.Create(runspace);
+            this.consoleLogger = consoleLogger;
+
+            runspace = RunspaceFactory.CreateRunspace();
+            powershell = System.Management.Automation.PowerShell.Create(runspace);
+
+            powershell.Streams.Debug.DataAdded += DebugDataAdded;
+            powershell.Streams.Verbose.DataAdded += VerboseDataAdded;
+            powershell.Streams.Information.DataAdded += InformationDataAdded;
+            powershell.Streams.Warning.DataAdded += WarningDataAdded;
+            powershell.Streams.Error.DataAdded += ErrorDataAdded;
+            powershell.Streams.Progress.DataAdded += ProgressDataAdded;
+        }
+
+        public async Task<PowerShellResult> ExecuteAsync(string script)
+        {
             runspace.Open();
+
             powershell.AddScript(script);
 
-            var result = await powershell.InvokeAsync();
+            var output = await powershell.InvokeAsync();
 
-            var objects = result.ReadAll();
-            for(var i = 0; i < objects.Count; i++)
-            {
-                Console.WriteLine($"Item: {i}");
-                Console.WriteLine(objects[i].ToString());
-                Console.WriteLine(Environment.NewLine+Environment.NewLine);
-            }
+            var result = output.LastOrDefault();
 
-            if (powershell.Streams.Debug.Any())
+            return new PowerShellResult
             {
-                Console.WriteLine($"Debug:{Environment.NewLine}{string.Join(Environment.NewLine+Environment.NewLine, powershell.Streams.Debug.Select(x => x.Message))}");
-            }
-            if (powershell.Streams.Information.Any())
-            {
-                Console.WriteLine($"Information:{Environment.NewLine}{string.Join(Environment.NewLine + Environment.NewLine, powershell.Streams.Information.Select(x => x.MessageData))}");
-            }
-            if (powershell.Streams.Warning.Any())
-            {
-                Console.WriteLine($"Warning:{Environment.NewLine}{string.Join(Environment.NewLine + Environment.NewLine, powershell.Streams.Warning.Select(x => x.Message))}");
-            }
-            if (powershell.Streams.Error.Any())
-            {
-                throw new Exception($"{nameof(PowerShell)} - Error occured while executing script \"{script}\".{Environment.NewLine}{Environment.NewLine}{string.Join(Environment.NewLine + Environment.NewLine, powershell.Streams.Error.Select(x => x.Exception.ToString()))}");
-            }
-
-            return "";
+                AsString = result?.ToString() ?? ""
+            };
         }
+
+        private void DebugDataAdded(object? sender, System.Management.Automation.DataAddedEventArgs e)
+        {
+            var data = powershell.Streams.Debug[e.Index];
+
+            consoleLogger.Debug(data.Message);
+        }
+
+        private void VerboseDataAdded(object? sender, System.Management.Automation.DataAddedEventArgs e)
+        {
+            var data = powershell.Streams.Verbose[e.Index];
+
+            consoleLogger.Verbose(data.Message);
+        }
+
+        private void InformationDataAdded(object? sender, System.Management.Automation.DataAddedEventArgs e)
+        {
+            var data = powershell.Streams.Information[e.Index];
+
+            if (data.MessageData != null)
+            {
+                consoleLogger.Info(data.MessageData.ToString()!);
+            }
+        }
+
+        private void WarningDataAdded(object? sender, System.Management.Automation.DataAddedEventArgs e)
+        {
+            var data = powershell.Streams.Warning[e.Index];
+
+            consoleLogger.Warn(data.Message);
+        }
+
+        private void ErrorDataAdded(object? sender, System.Management.Automation.DataAddedEventArgs e)
+        {
+            var data = powershell.Streams.Error[e.Index];
+
+            consoleLogger.Error(data.ToString());
+        }
+
+        private void ProgressDataAdded(object? sender, System.Management.Automation.DataAddedEventArgs e)
+        {
+            var data = powershell.Streams.Progress[e.Index];
+
+            consoleLogger.Progress($"{data.Activity} -> Status: {data.StatusDescription}; PercentComplete: {data.PercentComplete}");
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    runspace.Dispose();
+                    powershell.Dispose();
+                }
+
+                powershell.Streams.Debug.DataAdded -= DebugDataAdded;
+                powershell.Streams.Verbose.DataAdded -= VerboseDataAdded;
+                powershell.Streams.Information.DataAdded -= InformationDataAdded;
+                powershell.Streams.Warning.DataAdded -= WarningDataAdded;
+                powershell.Streams.Error.DataAdded -= ErrorDataAdded;
+                powershell.Streams.Progress.DataAdded -= ProgressDataAdded;
+                disposedValue = true;
+            }
+        }
+
+        void IDisposable.Dispose()
+        {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+    }
+
+    public class PowerShellResult
+    {
+        public string AsString { get; set; } = "";
     }
 }
