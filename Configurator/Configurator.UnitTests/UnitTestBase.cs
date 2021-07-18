@@ -4,6 +4,7 @@ using System.Linq;
 using AutoMoqCore;
 using Moq;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Configurator.UnitTests
 {
@@ -23,9 +24,19 @@ namespace Configurator.UnitTests
             Engine.Because(act);
         }
 
+        public async Task BecauseAsync(Func<Task> act)
+        {
+            await Engine.Because(act);
+        }
+
         public TResult Because<TResult>(Func<TResult> act)
         {
             return Engine.Because(act);
+        }
+       
+        public async Task<TResult> BecauseAsync<TResult>(Func<Task<TResult>> act)
+        {
+            return await Engine.Because(act);
         }
 
         public TException? BecauseThrows<TException>(Action act) where TException : Exception

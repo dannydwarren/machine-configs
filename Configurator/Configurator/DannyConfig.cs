@@ -1,9 +1,29 @@
-﻿namespace Configurator
+﻿using Configurator.Installers;
+using Configurator.PowerShell;
+using System.Threading.Tasks;
+
+namespace Configurator
 {
-    public class DannyConfig
+    public interface IDannyConfig
     {
-        public void Execute()
+        Task ExecuteAsync();
+    }
+
+    public class DannyConfig : IDannyConfig
+    {
+        private readonly IPowerShellConfiguration powerShellConfiguration;
+        private readonly IScoopInstaller scoopInstaller;
+
+        public DannyConfig(IPowerShellConfiguration powerShellConfiguration, IScoopInstaller scoopInstaller)
         {
+            this.powerShellConfiguration = powerShellConfiguration;
+            this.scoopInstaller = scoopInstaller;
+        }
+
+        public async Task ExecuteAsync()
+        {
+            await powerShellConfiguration.SetExecutionPolicyAsync();
+            await scoopInstaller.InstallAsync("mob");
         }
     }
 }
