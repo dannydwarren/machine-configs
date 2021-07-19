@@ -1,6 +1,4 @@
-﻿using Configurator.PowerShell;
-using Configurator.Utilities;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace Configurator.Configuration
 {
@@ -14,8 +12,6 @@ namespace Configurator.Configuration
                     scan.FromAssembliesOf(typeof(DependencyInjectionConfig)).AddClasses().AsMatchingInterface().WithTransientLifetime();
                 }
             );
-
-            services.AddSingleton<IPowerShell>(x => new PowerShell.PowerShell(x.GetRequiredService<IConsoleLogger>()));
         }
     }
 }
