@@ -13,10 +13,11 @@ namespace Configurator.UnitTests.Git
         [Fact]
         public async Task When_including_a_custom_gitconfig()
         {
-            var gitconfigPath = RandomString();
+            var gitconfigPath = $"{RandomString()}\\{RandomString()}";
+            var gitconfigPathEscaped = gitconfigPath.Replace(@"\", @"\\");
             var powerShellResult = new PowerShellResult { AsString = true.ToString() };
             
-            GetMock<IPowerShell>().Setup(x => x.ExecuteAsync(Is<string>(x => x.Contains(gitconfigPath)))).ReturnsAsync(powerShellResult);
+            GetMock<IPowerShell>().Setup(x => x.ExecuteAsync(Is<string>(x => x.Contains(gitconfigPath)), Is<string>(x => x.Contains(gitconfigPathEscaped)))).ReturnsAsync(powerShellResult);
 
             var result = await BecauseAsync(() => ClassUnderTest.IncludeCustomGitconfigAsync(gitconfigPath));
 

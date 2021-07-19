@@ -9,6 +9,7 @@ namespace Configurator.PowerShell
     public interface IPowerShell
     {
         Task<PowerShellResult> ExecuteAsync(string script);
+        Task<PowerShellResult> ExecuteAsync(string script, string completeCheckScript);
     }
 
     /// <summary>
@@ -38,6 +39,25 @@ namespace Configurator.PowerShell
         }
 
         public async Task<PowerShellResult> ExecuteAsync(string script)
+        {
+            return await ExecuteScriptAsync(script);
+        }
+
+        public async Task<PowerShellResult> ExecuteAsync(string script, string completeCheckScript)
+        {
+            var preCheckResult = await ExecuteScriptAsync(completeCheckScript);
+
+            if (preCheckResult.AsBool ?? false)
+            {
+                return preCheckResult;
+            }
+
+            await ExecuteScriptAsync(script);
+
+            return await ExecuteScriptAsync(completeCheckScript);
+        }
+
+        private async Task<PowerShellResult> ExecuteScriptAsync(string script)
         {
             powershell.AddScript(script);
 
@@ -135,6 +155,6 @@ namespace Configurator.PowerShell
     public class PowerShellResult
     {
         public string AsString { get; set; } = "";
-        public bool AsBool => bool.TryParse(AsString, out var result) && result;
+        public bool? AsBool => bool.TryParse(AsString, out var result) ? result : null;
     }
 }

@@ -22,13 +22,14 @@ namespace Configurator.Git
 
         public async Task<bool> IncludeCustomGitconfigAsync(string gitconfigPath)
         {
+            var script = @$"git config --global --add include.path {gitconfigPath}";
+            var completeCheckScript = @$"(git config --get-all --global include.path) -match ""{gitconfigPath.Replace(@"\", @"\\")}""";
+
             consoleLogger.Info("Including custom gitconfig");
-            var result = await powerShell.ExecuteAsync(@$"
-git config --global --add include.path {gitconfigPath}
-(git config --get-all --global include.path) -match ""{gitconfigPath.Replace(@"\", @"\\")}""");
+            var result = await powerShell.ExecuteAsync(script, completeCheckScript);
             consoleLogger.Result("Included custom gitconfig");
 
-            return result.AsBool;
+            return result.AsBool ?? false;
         }
     }
 }

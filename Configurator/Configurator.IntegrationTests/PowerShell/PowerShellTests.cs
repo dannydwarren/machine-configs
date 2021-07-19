@@ -16,7 +16,7 @@ namespace Configurator.IntegrationTests.PowerShell
         public PowerShellTests()
         {
             mocker = new AutoMoqer();
-            mockConsoleLogger = GetMock<IConsoleLogger>();
+            mockConsoleLogger = mocker.GetMock<IConsoleLogger>();
         }
 
         protected override void RegisterTestSpecificServices(ServiceCollection services)
@@ -126,21 +126,81 @@ Write-Progress -Activity 'Hello World' -Status '2 Complete' -PercentComplete 100
         }
 
         [Fact]
-        public async Task When_writing_to_output()
+        public async Task When_executing()
         {
             var script = @"Write-Output 'Hello World'";
 
             var output = await BecauseAsync(() => ClassUnderTest.ExecuteAsync(script));
 
-            It("captured as output", () =>
+            It("returns output", () =>
             {
                 output.AsString.ShouldBe("Hello World");
             });
         }
 
-        private Mock<TMock> GetMock<TMock>() where TMock : class
+        [Fact]
+        public async Task When_executing_script_for_the_first_time_with_complete_check()
         {
-            return mocker.GetMock<TMock>();
+            var script = @"$testVar = $false
+Write-Information ""testVar=$testVar""
+$testVar = $true
+Write-Information ""testVar=$testVar""";
+            var completeCheckScript = "$testVar -eq $true";
+
+            var output = await BecauseAsync(() => ClassUnderTest.ExecuteAsync(script, completeCheckScript));
+
+            It("returns output", () =>
+            {
+                mockConsoleLogger.Verify(x => x.Info("testVar=False"));
+                mockConsoleLogger.Verify(x => x.Info("testVar=True"));
+                output.AsBool.ShouldNotBeNull().ShouldBeTrue();
+            });
+        }
+
+        [Fact]
+        public async Task When_executing_script_that_has_already_been_completed()
+        {
+            var script = @"Write-Information 'Should not get this'";
+            var completeCheckScript = "$true";
+
+            var output = await BecauseAsync(() => ClassUnderTest.ExecuteAsync(script, completeCheckScript));
+
+            It("returns output", () =>
+            {
+                mockConsoleLogger.Verify(x => x.Info("Should not get this"), Times.Exactly(0));
+                output.AsBool.ShouldNotBeNull().ShouldBeTrue();
+            });
+        }
+
+        [Fact]
+        public async Task When_executing_script_for_the_first_time_with_failing_complete_check()
+        {
+            var script = @"Write-Information 'Script run'";
+            var completeCheckScript = "$false";
+
+            var output = await BecauseAsync(() => ClassUnderTest.ExecuteAsync(script, completeCheckScript));
+
+            It("returns output", () =>
+            {
+                mockConsoleLogger.Verify(x => x.Info("Script run"));
+                output.AsBool.ShouldNotBeNull().ShouldBeFalse();
+            });
+        }
+
+        [Fact]
+        public async Task When_executing_script_for_the_first_time_with_complete_check_missing_result()
+        {
+            var script = @"Write-Information 'Script run'";
+            var completeCheckScript = "'NotTrue'";
+
+            var output = await BecauseAsync(() => ClassUnderTest.ExecuteAsync(script, completeCheckScript));
+
+            It("returns output", () =>
+            {
+                mockConsoleLogger.Verify(x => x.Info("Script run"));
+                output.AsString.ShouldBe("NotTrue");
+                output.AsBool.ShouldBeNull();
+            });
         }
     }
 }
