@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Configurator.Configuration
+namespace Configurator.Utilities
 {
     public interface IConsoleLogger
     {
@@ -57,7 +57,7 @@ namespace Configurator.Configuration
             Console.ForegroundColor = ConsoleColor.White;
         }
 
-        public static void Write(string level, string message)
+        private static void Write(string level, string message)
         {
             var logMessage = $"[{DateTimeOffset.Now:O}] [{level}] {message}";
             Console.WriteLine(logMessage);

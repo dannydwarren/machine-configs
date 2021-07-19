@@ -4,20 +4,22 @@ namespace Configurator.Utilities
 {
     public interface IArguments
     {
-        string ScoopAppsPath { get; }
         InstallEnvironment Environment { get; }
+        string ScoopAppsPath { get; }
+        string GitconfigPath { get; }
     }
 
     public class Arguments : IArguments
     {
-        public Arguments(string scoopAppsPath, InstallEnvironment environment)
+        public Arguments(InstallEnvironment environment, string scoopAppsPath, string gitconfigPath)
         {
             ScoopAppsPath = scoopAppsPath;
             Environment = environment;
+            GitconfigPath = gitconfigPath;
         }
 
-        public string ScoopAppsPath { get; }
-
         public InstallEnvironment Environment { get; }
+        public string ScoopAppsPath { get; }
+        public string GitconfigPath { get; }
     }
 }

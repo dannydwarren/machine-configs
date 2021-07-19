@@ -1,5 +1,5 @@
-﻿using Configurator.Configuration;
-using Configurator.PowerShell;
+﻿using Configurator.PowerShell;
+using Configurator.Utilities;
 using System.Threading.Tasks;
 
 namespace Configurator.Scoop

@@ -86,6 +86,11 @@ namespace Configurator.UnitTests
             return Moq.It.IsAny<TAny>();
         }
 
+        protected TAny Is<TAny>(Func<TAny, bool> match)
+        {
+            return Moq.It.Is<TAny>(x => match(x));
+        }
+
         protected List<TAny> IsSequenceEqual<TAny>(IEnumerable<TAny> collection)
         {
             return Moq.It.Is<List<TAny>>(x => x.SequenceEqual(collection));

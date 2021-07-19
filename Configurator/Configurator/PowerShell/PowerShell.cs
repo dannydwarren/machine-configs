@@ -1,6 +1,7 @@
-﻿using Configurator.Configuration;
+﻿using Configurator.Utilities;
 using System;
 using System.Linq;
+using System.Management.Automation.Runspaces;
 using System.Threading.Tasks;
 
 namespace Configurator.PowerShell
@@ -16,14 +17,17 @@ namespace Configurator.PowerShell
     public class PowerShell : IPowerShell, IDisposable
     {
         private readonly IConsoleLogger consoleLogger;
+        private readonly Runspace runspace;
         private readonly System.Management.Automation.PowerShell powershell;
         private bool disposedValue;
 
-        public PowerShell(IPowerShellConnection connection, IConsoleLogger consoleLogger)
+        public PowerShell(IConsoleLogger consoleLogger)
         {
             this.consoleLogger = consoleLogger;
 
-            powershell = connection.Powershell;
+            runspace = RunspaceFactory.CreateRunspace();
+            powershell = System.Management.Automation.PowerShell.Create(runspace);
+            runspace.Open();
 
             powershell.Streams.Debug.DataAdded += DebugDataAdded;
             powershell.Streams.Verbose.DataAdded += VerboseDataAdded;
@@ -41,10 +45,18 @@ namespace Configurator.PowerShell
 
             var result = output.LastOrDefault();
 
+            Clear();
+
             return new PowerShellResult
             {
                 AsString = result?.ToString() ?? ""
             };
+        }
+
+        private void Clear()
+        {
+            powershell.Streams.ClearStreams();
+            powershell.Commands.Clear();
         }
 
         private void DebugDataAdded(object? sender, System.Management.Automation.DataAddedEventArgs e)
@@ -96,12 +108,19 @@ namespace Configurator.PowerShell
         {
             if (!disposedValue)
             {
+                if (disposing)
+                {
+                    runspace.Dispose();
+                    powershell.Dispose();
+                }
+
                 powershell.Streams.Debug.DataAdded -= DebugDataAdded;
                 powershell.Streams.Verbose.DataAdded -= VerboseDataAdded;
                 powershell.Streams.Information.DataAdded -= InformationDataAdded;
                 powershell.Streams.Warning.DataAdded -= WarningDataAdded;
                 powershell.Streams.Error.DataAdded -= ErrorDataAdded;
                 powershell.Streams.Progress.DataAdded -= ProgressDataAdded;
+                
                 disposedValue = true;
             }
         }
@@ -116,5 +135,6 @@ namespace Configurator.PowerShell
     public class PowerShellResult
     {
         public string AsString { get; set; } = "";
+        public bool AsBool => bool.TryParse(AsString, out var result) && result;
     }
 }

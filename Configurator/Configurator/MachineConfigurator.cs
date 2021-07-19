@@ -1,5 +1,7 @@
-﻿using Configurator.PowerShell;
+﻿using Configurator.Git;
+using Configurator.PowerShell;
 using Configurator.Scoop;
+using Configurator.Utilities;
 using System.Threading.Tasks;
 
 namespace Configurator
@@ -11,17 +13,23 @@ namespace Configurator
 
     public class MachineConfigurator : IMachineConfigurator
     {
+        private readonly IArguments arguments;
         private readonly IPowerShellConfiguration powerShellConfiguration;
         private readonly IScoopInstaller scoopInstaller;
         private readonly IScoopAppRepository scoopList;
+        private readonly IGitConfiguration gitConfiguration;
 
-        public MachineConfigurator(IPowerShellConfiguration powerShellConfiguration,
+        public MachineConfigurator(IArguments arguments,
+            IPowerShellConfiguration powerShellConfiguration,
             IScoopInstaller scoopInstaller,
-            IScoopAppRepository scoopList)
+            IScoopAppRepository scoopList,
+            IGitConfiguration gitConfiguration)
         {
+            this.arguments = arguments;
             this.powerShellConfiguration = powerShellConfiguration;
             this.scoopInstaller = scoopInstaller;
             this.scoopList = scoopList;
+            this.gitConfiguration = gitConfiguration;
         }
 
         public async Task ExecuteAsync()
@@ -29,6 +37,8 @@ namespace Configurator
             await powerShellConfiguration.SetExecutionPolicyAsync();
 
             await InstallScoopAppsAsync();
+
+            await gitConfiguration.IncludeCustomGitconfigAsync(arguments.GitconfigPath);
         }
 
         private async Task InstallScoopAppsAsync()

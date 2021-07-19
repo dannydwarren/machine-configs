@@ -72,6 +72,9 @@
 	b = branch -a
 	pushu = "!git push -u origin $(git branch --show-current)"
 	pushnv = push --no-verify
+	del = branch -d
+	delf = branch -D
+	delorigin = push origin --delete
 	# REMOTES
 	listremotes = remote -v
 	lr = listremotes 

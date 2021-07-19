@@ -1,6 +1,6 @@
-﻿using Configurator.Configuration;
-using Configurator.PowerShell;
+﻿using Configurator.PowerShell;
 using Configurator.Scoop;
+using Configurator.Utilities;
 using System.Threading.Tasks;
 using Xunit;
 

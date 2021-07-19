@@ -11,9 +11,9 @@ namespace Configurator
         static async Task Main(string[] args)
         {
             var services = ConfigureServices(new Arguments(
+                environment: InstallEnvironment.Personal,
                 scoopAppsPath: @"C:\src\machine-configs\install\ScoopApps.csv",
-                environment: InstallEnvironment.Personal
-            ));
+                gitconfigPath: @"C:\src\machine-configs\git\danny.gitconfig"));
 
             var config = services.GetRequiredService<IMachineConfigurator>();
 

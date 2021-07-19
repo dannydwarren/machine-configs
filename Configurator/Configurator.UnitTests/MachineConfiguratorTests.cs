@@ -1,4 +1,5 @@
-﻿using Configurator.PowerShell;
+﻿using Configurator.Git;
+using Configurator.PowerShell;
 using Configurator.Scoop;
 using Configurator.Utilities;
 using Moq;
@@ -19,7 +20,9 @@ namespace Configurator.UnitTests
                 new ScoopApp{ AppId = RandomString(), Environment = InstallEnvironment.All }
             };
 
+            var gitConfigPath = RandomString();
             GetMock<IArguments>().SetupGet(x => x.Environment).Returns(InstallEnvironment.Personal);
+            GetMock<IArguments>().SetupGet(x => x.GitconfigPath).Returns(gitConfigPath);
             GetMock<IScoopAppRepository>().Setup(x => x.LoadAsync()).ReturnsAsync(scoopApps);
 
             await BecauseAsync(() => ClassUnderTest.ExecuteAsync());
@@ -33,6 +36,11 @@ namespace Configurator.UnitTests
             {
                 GetMock<IScoopInstaller>().Verify(x => x.InstallAsync(scoopApps[0].AppId));
                 GetMock<IScoopInstaller>().Verify(x => x.InstallAsync(scoopApps[1].AppId));
+            });
+
+            It("configures git", () =>
+            {
+                GetMock<IGitConfiguration>().Verify(x => x.IncludeCustomGitconfigAsync(gitConfigPath));
             });
         }
     }

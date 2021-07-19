@@ -1,4 +1,4 @@
-﻿using Configurator.Configuration;
+﻿using Configurator.Utilities;
 using System.Threading.Tasks;
 
 namespace Configurator.PowerShell

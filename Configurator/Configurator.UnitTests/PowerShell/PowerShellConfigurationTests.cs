@@ -1,5 +1,5 @@
-﻿using Configurator.Configuration;
-using Configurator.PowerShell;
+﻿using Configurator.PowerShell;
+using Configurator.Utilities;
 using Moq;
 using Shouldly;
 using System.Threading.Tasks;
@@ -17,7 +17,7 @@ namespace Configurator.UnitTests.PowerShell
                 AsString = RandomString()
             };
             
-            GetMock<IPowerShell>().Setup(x => x.ExecuteAsync(IsAny<string>())).ReturnsAsync(result);
+            GetMock<IPowerShell>().Setup(x => x.ExecuteAsync(Is<string>(x=> x.Contains("RemoteSigned")))).ReturnsAsync(result);
 
             var policy = await BecauseAsync(() => ClassUnderTest.SetExecutionPolicyAsync());
 

@@ -1,5 +1,5 @@
 ﻿using AutoMoqCore;
-using Configurator.Configuration;
+using Configurator.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using Shouldly;
