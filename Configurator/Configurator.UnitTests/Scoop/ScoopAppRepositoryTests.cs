@@ -35,7 +35,7 @@ namespace Configurator.UnitTests.Scoop
 
             var apps = await BecauseAsync(() => ClassUnderTest.LoadAsync());
 
-            It("parses scoop apps", () =>
+            It("loads scoop apps for the environment", () =>
             {
                 apps.Count.ShouldBe(3);
                 apps[0].AppId.ShouldBe(appId1);
@@ -63,7 +63,7 @@ namespace Configurator.UnitTests.Scoop
 
             var exception = await BecauseThrowsAsync<Exception>(() => ClassUnderTest.LoadAsync());
 
-            It("provices a useful error message", () =>
+            It("provides a useful error message", () =>
             {
                 exception.ShouldNotBeNull()
                     .Message.ShouldBe($"Malformed scoop app on line 1 [missing parts]: {csvLines[0]}");
@@ -86,7 +86,7 @@ namespace Configurator.UnitTests.Scoop
 
             var exception = await BecauseThrowsAsync<Exception>(() => ClassUnderTest.LoadAsync());
 
-            It("provices a useful error message", () =>
+            It("provides a useful error message", () =>
             {
                 exception.ShouldNotBeNull()
                     .Message.ShouldBe($"Malformed scoop app on line 1 [invalid install environment]: {csvLines[0]}");

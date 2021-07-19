@@ -20,10 +20,15 @@ namespace Configurator.UnitTests
                 new ScoopApp{ AppId = RandomString(), Environment = InstallEnvironment.All }
             };
 
-            var gitConfigPath = RandomString();
+            var gitconfigs = new List<Gitconfig>
+            {
+                new Gitconfig{ Path = RandomString(), Environment = InstallEnvironment.Personal},
+                new Gitconfig{ Path = RandomString(), Environment = InstallEnvironment.Personal}
+            };
+
             GetMock<IArguments>().SetupGet(x => x.Environment).Returns(InstallEnvironment.Personal);
-            GetMock<IArguments>().SetupGet(x => x.GitconfigPath).Returns(gitConfigPath);
             GetMock<IScoopAppRepository>().Setup(x => x.LoadAsync()).ReturnsAsync(scoopApps);
+            GetMock<IGitconfigRepository>().Setup(x => x.LoadAsync()).ReturnsAsync(gitconfigs);
 
             await BecauseAsync(() => ClassUnderTest.ExecuteAsync());
 
@@ -40,7 +45,8 @@ namespace Configurator.UnitTests
 
             It("configures git", () =>
             {
-                GetMock<IGitConfiguration>().Verify(x => x.IncludeCustomGitconfigAsync(gitConfigPath));
+                GetMock<IGitConfiguration>().Verify(x => x.IncludeGitconfigAsync(gitconfigs[0].Path));
+                GetMock<IGitConfiguration>().Verify(x => x.IncludeGitconfigAsync(gitconfigs[1].Path));
             });
         }
     }

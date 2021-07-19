@@ -6,7 +6,7 @@ namespace Configurator.Git
 {
     public interface IGitConfiguration
     {
-        Task<bool> IncludeCustomGitconfigAsync(string gitconfigPath);
+        Task<bool> IncludeGitconfigAsync(string gitconfigPath);
     }
 
     public class GitConfiguration : IGitConfiguration
@@ -20,14 +20,14 @@ namespace Configurator.Git
             this.consoleLogger = consoleLogger;
         }
 
-        public async Task<bool> IncludeCustomGitconfigAsync(string gitconfigPath)
+        public async Task<bool> IncludeGitconfigAsync(string gitconfigPath)
         {
             var script = @$"git config --global --add include.path {gitconfigPath}";
             var completeCheckScript = @$"(git config --get-all --global include.path) -match ""{gitconfigPath.Replace(@"\", @"\\")}""";
 
-            consoleLogger.Info("Including custom gitconfig");
+            consoleLogger.Info($"Including gitconfig: {gitconfigPath}");
             var result = await powerShell.ExecuteAsync(script, completeCheckScript);
-            consoleLogger.Result("Included custom gitconfig");
+            consoleLogger.Result($"Included gitconfig: {gitconfigPath}");
 
             return result.AsBool ?? false;
         }
