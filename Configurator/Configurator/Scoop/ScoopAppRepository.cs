@@ -71,12 +71,4 @@ namespace Configurator.Scoop
         public string AppId { get; set; } = "";
         public InstallEnvironment Environment { get; set; }
     }
-
-    [Flags]
-    public enum InstallEnvironment
-    {
-        Personal = 1 << 0,
-        Work = 1 << 1,
-        All = Personal | Work
-    }
 }

@@ -1,6 +1,4 @@
-﻿using Configurator.Scoop;
-
-namespace Configurator.Utilities
+﻿namespace Configurator.Utilities
 {
     public interface IArguments
     {

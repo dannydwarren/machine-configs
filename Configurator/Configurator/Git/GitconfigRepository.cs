@@ -1,5 +1,4 @@
-﻿using Configurator.Scoop;
-using Configurator.Utilities;
+﻿using Configurator.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

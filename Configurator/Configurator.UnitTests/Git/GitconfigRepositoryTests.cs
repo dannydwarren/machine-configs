@@ -1,5 +1,4 @@
 ﻿using Configurator.Git;
-using Configurator.Scoop;
 using Configurator.Utilities;
 using Moq;
 using Shouldly;
