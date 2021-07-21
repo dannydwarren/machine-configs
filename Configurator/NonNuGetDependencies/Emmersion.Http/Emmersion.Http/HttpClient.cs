@@ -83,6 +83,52 @@ namespace Emmersion.Http
             }
         }
 
+        public HttpStreamResponse ExecuteAsStream(IHttpRequest request)
+        {
+            return ExecuteAsStream(request, timeoutMilliseconds: 0);
+        }
+
+        public async Task<HttpStreamResponse> ExecuteAsStreamAsync(IHttpRequest request)
+        {
+            var requestMessage = BuildRequestMessage(request);
+            try
+            {
+                var response = await client.SendAsync(requestMessage).ConfigureAwait(continueOnCapturedContext: false);
+                return await BuildStreamResponse(response);
+            }
+            catch (TaskCanceledException)
+            {
+                throw new HttpTimeoutException();
+            }
+        }
+
+        public HttpStreamResponse ExecuteAsStream(IHttpRequest request, int timeoutMilliseconds)
+        {
+            var task = ExecuteAsStreamAsync(request);
+            if (timeoutMilliseconds > 0)
+            {
+                task.Wait(timeoutMilliseconds);
+                if (!task.IsCompleted)
+                {
+                    throw new HttpTimeoutException();
+                }
+            }
+
+            try
+            {
+                return task.Result;
+            }
+            catch (AggregateException ex)
+            {
+                if (ex.InnerExceptions.Count(e => e is HttpTimeoutException) >= 1)
+                {
+                    throw new HttpTimeoutException();
+                }
+
+                throw;
+            }
+        }
+
         private HttpRequestMessage BuildRequestMessage(IHttpRequest request)
         {
             var message = new HttpRequestMessage(GetRequestMethod(request.Method), request.Url);
@@ -110,6 +156,13 @@ namespace Emmersion.Http
             if (response == null) throw new Exception("Unable to read web response");
 
             return new HttpResponse((int) response.StatusCode, GetResponseHeaders(response), await response.Content.ReadAsStringAsync());
+        }
+
+        private static async Task<HttpStreamResponse> BuildStreamResponse(HttpResponseMessage response)
+        {
+            if (response == null) throw new Exception("Unable to read web response");
+
+            return new HttpStreamResponse((int) response.StatusCode, GetResponseHeaders(response), await response.Content.ReadAsStreamAsync());
         }
 
         private static HttpContent GetContent(IHttpRequest request)

@@ -18,4 +18,8 @@
         <PackageReference Include="Scrutor" Version="3.3.0" />
         <PackageReference Include="System.Management.Automation" Version="7.0.6" />
     </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\NonNuGetDependencies\Emmersion.Http\Emmersion.Http\Emmersion.Http.csproj" />
+    </ItemGroup>
 </Project>

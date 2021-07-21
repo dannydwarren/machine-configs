@@ -130,6 +130,23 @@ namespace Emmersion.Http.IntegrationTests
         }
 
         [Test]
+        public void WhenPerformingGetAsAStream()
+        {
+            var request = new HttpRequest {Url = "http://httpbin.org/get?foo=bar"};
+
+            var response = client.ExecuteAsStream(request);
+
+            Assert.That(response.StatusCode, Is.EqualTo(expected: 200));
+            Assert.That(response.Stream, Has.Length.GreaterThan(0));
+            Assert.That(response.Headers.GetAllHeaderNames().Count, Is.GreaterThan(expected: 0));
+
+            using var streamReader = new StreamReader(response.Stream);
+            var json = streamReader.ReadToEnd();
+            dynamic responseBody = JsonConvert.DeserializeObject(json);
+            Assert.That((string) responseBody["args"]["foo"], Is.EqualTo("bar"));
+        }
+
+        [Test]
         public void WhenPerformingSimplePostingWithJson()
         {
             var request = new HttpRequest {Url = "http://httpbin.org/post", Method = HttpMethod.POST, Body = "{\"username\":\"standard-user\", \"password\":\"testing1\"}"};
