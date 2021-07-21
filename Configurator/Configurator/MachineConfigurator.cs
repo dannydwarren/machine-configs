@@ -1,8 +1,8 @@
 ﻿using Configurator.Git;
 using Configurator.PowerShell;
 using Configurator.Scoop;
-using Configurator.Utilities;
 using System.Threading.Tasks;
+using Configurator.Winget;
 
 namespace Configurator
 {
@@ -13,35 +13,38 @@ namespace Configurator
 
     public class MachineConfigurator : IMachineConfigurator
     {
-        private readonly IArguments arguments;
         private readonly IPowerShellConfiguration powerShellConfiguration;
         private readonly IScoopInstaller scoopInstaller;
-        private readonly IScoopAppRepository scoopList;
+        private readonly IScoopAppRepository scoopAppRepository;
         private readonly IGitConfiguration gitConfiguration;
         private readonly IGitconfigRepository gitconfigRepository;
+        private readonly IWingetAppRepository wingetAppRepository;
+        private readonly IWingetAppInstaller wingetAppInstaller;
 
-        public MachineConfigurator(IArguments arguments,
-            IPowerShellConfiguration powerShellConfiguration,
+        public MachineConfigurator(IPowerShellConfiguration powerShellConfiguration,
             IScoopInstaller scoopInstaller,
-            IScoopAppRepository scoopList,
+            IScoopAppRepository scoopAppRepository,
             IGitConfiguration gitConfiguration,
-            IGitconfigRepository gitconfigRepository)
+            IGitconfigRepository gitconfigRepository,
+            IWingetAppRepository wingetAppRepository,
+            IWingetAppInstaller wingetAppInstaller)
         {
-            this.arguments = arguments;
             this.powerShellConfiguration = powerShellConfiguration;
             this.scoopInstaller = scoopInstaller;
-            this.scoopList = scoopList;
+            this.scoopAppRepository = scoopAppRepository;
             this.gitConfiguration = gitConfiguration;
             this.gitconfigRepository = gitconfigRepository;
+            this.wingetAppRepository = wingetAppRepository;
+            this.wingetAppInstaller = wingetAppInstaller;
         }
 
         public async Task ExecuteAsync()
         {
             await powerShellConfiguration.SetExecutionPolicyAsync();
 
-            await InstallScoopAppsAsync();
-
             await IncludeCustomGitconfigsAsync();
+            await InstallWingetAppsAsync();
+            await InstallScoopAppsAsync();
         }
 
         private async Task IncludeCustomGitconfigsAsync()
@@ -54,9 +57,19 @@ namespace Configurator
             }
         }
 
+        private async Task InstallWingetAppsAsync()
+        {
+            var wingetApps = await wingetAppRepository.LoadAsync();
+
+            foreach (var wingetApp in wingetApps)
+            {
+                await wingetAppInstaller.InstallAsync(wingetApp);
+            }
+        }
+
         private async Task InstallScoopAppsAsync()
         {
-            var scoopAppsToInstall = await scoopList.LoadAsync();
+            var scoopAppsToInstall = await scoopAppRepository.LoadAsync();
 
             foreach (var scoopApp in scoopAppsToInstall)
             {

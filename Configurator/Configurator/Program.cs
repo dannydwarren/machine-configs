@@ -11,9 +11,11 @@ namespace Configurator
         {
             var services = ConfigureServices(new Arguments(
                 environment: InstallEnvironment.Personal,
-                scoopAppsPath: @"C:\src\machine-configs\install\ScoopApps.csv",
                 gitconfigsPath: @"C:\src\machine-configs\git\Gitconfigs.csv",
-                downloadsDir: @"C:\Users\danny\Downloads"));
+                wingetAppsPath: @"C:\src\machine-configs\install\WingetApps.csv",
+                scoopAppsPath: @"C:\src\machine-configs\install\ScoopApps.csv",
+                downloadsDir: @"C:\Users\danny\Downloads"
+            ));
 
             var config = services.GetRequiredService<IMachineConfigurator>();
 
