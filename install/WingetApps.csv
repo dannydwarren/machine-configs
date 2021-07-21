@@ -9,7 +9,7 @@ Corsair.iCUE,Personal
 CPUID.HWMonitor,All
 Docker.DockerDesktop,Work
 EpicGames.EpicGamesLauncher,Personal
-PointPlanck.FileBot,Personal,
+PointPlanck.FileBot,Personal
 Google.Chrome,All
 JetBrains.Rider,Work
 LogMeIn.LastPass,All
@@ -20,8 +20,8 @@ Microsoft.VisualStudioCode,All
 Microsoft.VisualStudio.2019.Professional,Personal
 Nvidia.GeForceExperience,Personal
 ElectronicArts.EADesktop,Personal
-plex.Plex,Personal
-Postman.Postman,All,
+plex.plexmediaserver,Media
+Postman.Postman,All
 CPUID.CPU-Z.AORUS,Personal
 SlackTechnologies.Slack,All
 Valve.Steam,Personal
@@ -29,8 +29,13 @@ Doist.Todoist,All
 Canonical.Ubuntu,All
 Ubisoft.Connect,All
 VideoLAN.VLC,All
-Microsoft.WindowsSDK,Personal
 Zoom.Zoom,All
 voidtools.Everything,All
 7zip.7zip,All
 AnyDeskSoftwareGmbH.AnyDesk,Work
+Microsoft.SQLServerManagementStudio,All
+Microsoft.WindowsTerminal,All
+Microsoft.AzureStorageEmulator,Work
+Microsoft.WindowsSDK,Personal
+JAMSoftware.TreeSizeFree,All
+Rufus.Rufus,All
