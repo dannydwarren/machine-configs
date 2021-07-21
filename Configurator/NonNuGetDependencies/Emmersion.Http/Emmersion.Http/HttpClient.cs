@@ -11,6 +11,9 @@ namespace Emmersion.Http
         HttpResponse Execute(IHttpRequest request);
         HttpResponse Execute(IHttpRequest request, int timeoutMilliseconds);
         Task<HttpResponse> ExecuteAsync(IHttpRequest request);
+        HttpStreamResponse ExecuteAsStream(IHttpRequest request);
+        HttpStreamResponse ExecuteAsStream(IHttpRequest request, int timeoutMilliseconds);
+        Task<HttpStreamResponse> ExecuteAsStreamAsync(IHttpRequest request);
     }
 
     public class HttpClient : IHttpClient, IDisposable
