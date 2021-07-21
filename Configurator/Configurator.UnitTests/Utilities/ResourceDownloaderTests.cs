@@ -1,14 +1,13 @@
 ﻿using System;
 using System.IO;
-using Configurator.Installers;
+using System.Threading.Tasks;
+using Configurator.Utilities;
 using Emmersion.Http;
 using Moq;
 using Shouldly;
-using System.Threading.Tasks;
-using Configurator.Utilities;
 using Xunit;
 
-namespace Configurator.UnitTests.Installers
+namespace Configurator.UnitTests.Utilities
 {
     public class ResourceDownloaderTests : UnitTestBase<ResourceDownloader>
     {

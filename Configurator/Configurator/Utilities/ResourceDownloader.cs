@@ -1,11 +1,15 @@
 ﻿using System;
-using Emmersion.Http;
 using System.Threading.Tasks;
-using Configurator.Utilities;
+using Emmersion.Http;
 
-namespace Configurator.Installers
+namespace Configurator.Utilities
 {
-    public class ResourceDownloader
+    public interface IResourceDownloader
+    {
+        Task<string> ExecuteAsync(string fileUrl, string fileName);
+    }
+
+    public class ResourceDownloader : IResourceDownloader
     {
         private readonly IArguments arguments;
         private readonly IHttpClient httpClient;
