@@ -39,3 +39,6 @@ Microsoft.AzureStorageEmulator,Work
 Microsoft.WindowsSDK,Personal
 JAMSoftware.TreeSizeFree,All
 Rufus.Rufus,All
+Twilio.Authy,All
+Microsoft.dotnet --version 3.1,All #how do we handle versions?
+Microsoft.dotnet --version 5,All #how do we handle versions?
