@@ -9,6 +9,7 @@ namespace Configurator.Utilities
     {
         Task<List<string>> ReadAllLinesAsync(string path);
         Task WriteStreamAsync(string path, Stream stream);
+        void Delete(string path);
     }
 
     public class FileSystem : IFileSystem
@@ -23,6 +24,11 @@ namespace Configurator.Utilities
             var memoryStream = new MemoryStream();
             await stream.CopyToAsync(memoryStream);
             await File.WriteAllBytesAsync(path, memoryStream.ToArray());
+        }
+
+        public void Delete(string path)
+        {
+            File.Delete(path);
         }
     }
 }
