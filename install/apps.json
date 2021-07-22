@@ -1,0 +1,253 @@
+{
+    "WingetApps": [
+        {
+            "AppId": "Git.Git",
+            "EnvironmentsRaw": "All"
+        },
+        {
+            "AppId": "Microsoft.OfficeDeploymentTool",
+            "EnvironmentsRaw": "All"
+        },
+        {
+            "AppId": "Discord.Discord",
+            "EnvironmentsRaw": "All",
+            "DeleteDesktopShortcut": "Discord"
+        },
+        {
+            "AppId": "Microsoft.AzureDataStudio",
+            "EnvironmentsRaw": "Work"
+        },
+        {
+            "AppId": "Microsoft.AzureCLI",
+            "EnvironmentsRaw": "Work"
+        },
+        {
+            "AppId": "Blizzard.BattleNet",
+            "EnvironmentsRaw": "Personal",
+            "DeleteDesktopShortcut": "Battle.net"
+        },
+        {
+            "AppId": "alcpu.CoreTemp",
+            "EnvironmentsRaw": "All"
+        },
+        {
+            "AppId": "Corsair.iCUE",
+            "EnvironmentsRaw": "Personal"
+        },
+        {
+            "AppId": "CPUID.HWMonitor",
+            "EnvironmentsRaw": "All"
+        },
+        {
+            "AppId": "Docker.DockerDesktop",
+            "EnvironmentsRaw": "Work",
+            "DeleteDesktopShortcut": "Docker Desktop"
+        },
+        {
+            "AppId": "EpicGames.EpicGamesLauncher",
+            "EnvironmentsRaw": "Personal"
+        },
+        {
+            "AppId": "PointPlanck.FileBot",
+            "EnvironmentsRaw": "Personal"
+        },
+        {
+            "AppId": "Google.Chrome",
+            "EnvironmentsRaw": "All"
+        },
+        {
+            "AppId": "JetBrains.Rider",
+            "EnvironmentsRaw": "Work"
+        },
+        {
+            "AppId": "LogMeIn.LastPass",
+            "EnvironmentsRaw": "All"
+        },
+        {
+            "AppId": "Logitech.LGS",
+            "EnvironmentsRaw": "Personal"
+        },
+        {
+            "AppId": "Microsoft.EdgeDev",
+            "EnvironmentsRaw": "All",
+            "DeleteDesktopShortcut": "Microsoft Edge Dev"
+        },
+        {
+            "AppId": "Microsoft.OneDrive",
+            "EnvironmentsRaw": "Personal"
+        },
+        {
+            "AppId": "Microsoft.VisualStudioCode",
+            "EnvironmentsRaw": "All"
+        },
+        {
+            "AppId": "Microsoft.VisualStudio.2019.Professional",
+            "EnvironmentsRaw": "Personal"
+        },
+        {
+            "AppId": "Nvidia.GeForceExperience",
+            "EnvironmentsRaw": "Personal"
+        },
+        {
+            "AppId": "ElectronicArts.EADesktop",
+            "EnvironmentsRaw": "Personal"
+        },
+        {
+            "AppId": "plex.plexmediaserver",
+            "EnvironmentsRaw": "Media"
+        },
+        {
+            "AppId": "Postman.Postman",
+            "EnvironmentsRaw": "All"
+        },
+        {
+            "AppId": "CPUID.CPU-Z.AORUS",
+            "EnvironmentsRaw": "Personal"
+        },
+        {
+            "AppId": "SlackTechnologies.Slack",
+            "EnvironmentsRaw": "All",
+            "DeleteDesktopShortcut": "Slack"
+        },
+        {
+            "AppId": "Valve.Steam",
+            "EnvironmentsRaw": "Personal",
+            "DeleteDesktopShortcut": "Steam"
+        },
+        {
+            "AppId": "Doist.Todoist",
+            "EnvironmentsRaw": "All",
+            "DeleteDesktopShortcut": "Todoist"
+        },
+        {
+            "AppId": "Canonical.Ubuntu",
+            "EnvironmentsRaw": "All"
+        },
+        {
+            "AppId": "Ubisoft.Connect",
+            "EnvironmentsRaw": "All"
+        },
+        {
+            "AppId": "VideoLAN.VLC",
+            "EnvironmentsRaw": "All"
+        },
+        {
+            "AppId": "Zoom.Zoom",
+            "EnvironmentsRaw": "All",
+            "DeleteDesktopShortcut": "Zoom"
+        },
+        {
+            "AppId": "voidtools.Everything",
+            "EnvironmentsRaw": "All"
+        },
+        {
+            "AppId": "7zip.7zip",
+            "EnvironmentsRaw": "All"
+        },
+        {
+            "AppId": "AnyDeskSoftwareGmbH.AnyDesk",
+            "EnvironmentsRaw": "Work"
+        },
+        {
+            "AppId": "Microsoft.SQLServerManagementStudio",
+            "EnvironmentsRaw": "All"
+        },
+        {
+            "AppId": "Microsoft.WindowsTerminal",
+            "EnvironmentsRaw": "All"
+        },
+        {
+            "AppId": "Microsoft.AzureStorageEmulator",
+            "EnvironmentsRaw": "Work"
+        },
+        {
+            "AppId": "Microsoft.WindowsSDK",
+            "EnvironmentsRaw": "Personal"
+        },
+        {
+            "AppId": "JAMSoftware.TreeSizeFree",
+            "EnvironmentsRaw": "All"
+        },
+        {
+            "AppId": "Rufus.Rufus",
+            "EnvironmentsRaw": "All"
+        },
+        {
+            "AppId": "Twilio.Authy",
+            "EnvironmentsRaw": "All",
+            "DeleteDesktopShortcut": "Authy"
+        },
+        {
+            "AppId": "Microsoft.dotnet --version 3.1",
+            "EnvironmentsRaw": "All"
+        },
+        {
+            "AppId": "Microsoft.dotnet --version 5",
+            "EnvironmentsRaw": "All"
+        }
+    ],
+    "ScoopApps": [
+        {
+            "AppId": "mob",
+            "EnvironmentsRaw": "All"
+        },
+        {
+            "AppId": "scrcpy",
+            "EnvironmentsRaw": "All"
+        },
+        {
+            "AppId": "nvm",
+            "EnvironmentsRaw": "All"
+        },
+        {
+            "AppId": "paint.net",
+            "EnvironmentsRaw": "All"
+        },
+        {
+            "AppId": "baretail",
+            "EnvironmentsRaw": "All"
+        },
+        {
+            "AppId": "terraform",
+            "EnvironmentsRaw": "Work"
+        },
+        {
+            "AppId": "sysinternals",
+            "EnvironmentsRaw": "All"
+        }
+    ],
+    "NonPackageApps": [
+        {
+            "AppId": "GospelLibrary",
+            "EnvironmentsRaw": "Personal"
+        },
+        {
+            "AppId": "Origin#May be replaced with ElectronicArts.EADesktop",
+            "EnvironmentsRaw": "Personal"
+        },
+        {
+            "AppId": "Pandora",
+            "EnvironmentsRaw": "All"
+        },
+        {
+            "AppId": "RGBFusion",
+            "EnvironmentsRaw": "Personal"
+        },
+        {
+            "AppId": "SyncToy2.1",
+            "EnvironmentsRaw": "Personal"
+        },
+        {
+            "AppId": "TridentZLightingControl",
+            "EnvironmentsRaw": "Personal"
+        },
+        {
+            "AppId": "Uplay#May be replaced with Ubisoft.Connect",
+            "EnvironmentsRaw": "Personal"
+        },
+        {
+            "AppId": "ZoomIt",
+            "EnvironmentsRaw": "All"
+        }
+    ]
+}
