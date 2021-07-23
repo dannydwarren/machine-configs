@@ -2,28 +2,28 @@
 using Configurator.PowerShell;
 using Configurator.Utilities;
 
-namespace Configurator.Winget
+namespace Configurator.Apps
 {
-    public interface IWingetAppInstaller
+    public interface IAppInstaller
     {
-        Task InstallAsync(WingetApp app);
+        Task InstallAsync(IApp app);
     }
 
-    public class WingetAppInstaller : IWingetAppInstaller
+    public class AppInstaller : IAppInstaller
     {
         private readonly IPowerShell powerShell;
         private readonly IConsoleLogger consoleLogger;
 
-        public WingetAppInstaller(IPowerShell powerShell, IConsoleLogger consoleLogger)
+        public AppInstaller(IPowerShell powerShell, IConsoleLogger consoleLogger)
         {
             this.powerShell = powerShell;
             this.consoleLogger = consoleLogger;
         }
 
-        public async Task InstallAsync(WingetApp app)
+        public async Task InstallAsync(IApp app)
         {
             consoleLogger.Info($"Installing '{app.AppId}'");
-            await powerShell.ExecuteAsync($"winget install {app.AppId}");
+            await powerShell.ExecuteAsync(app.InstallScript);
             consoleLogger.Result($"Installed '{app.AppId}'");
         }
     }

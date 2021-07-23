@@ -1,10 +1,9 @@
 ﻿using Configurator.Git;
 using Configurator.PowerShell;
-using Configurator.Scoop;
 using Moq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Configurator.Winget;
+using Configurator.Apps;
 using Xunit;
 
 namespace Configurator.UnitTests
@@ -14,39 +13,39 @@ namespace Configurator.UnitTests
         [Fact]
         public async Task When_executing()
         {
-            var scoopApps = new List<ScoopApp>
+            var apps = new Apps.Apps
             {
-                new ScoopApp{ AppId = RandomString(), Environment = InstallEnvironment.Personal },
-                new ScoopApp{ AppId = RandomString(), Environment = InstallEnvironment.All }
+                ScoopApps = new List<ScoopApp>
+                {
+                    new() {AppId = RandomString(), Environments = "Personal"},
+                    new() {AppId = RandomString(), Environments = "All"}
+                },
+                WingetApps = new List<WingetApp>
+                {
+                    new() {AppId = RandomString(), Environments = "Personal"},
+                    new() {AppId = RandomString(), Environments = "Personal"}
+                }
             };
+
 
             var gitconfigs = new List<Gitconfig>
             {
-                new Gitconfig{ Path = RandomString(), Environment = InstallEnvironment.Personal},
-                new Gitconfig{ Path = RandomString(), Environment = InstallEnvironment.Personal}
+                new() {Path = RandomString(), Environment = InstallEnvironment.Personal},
+                new() {Path = RandomString(), Environment = InstallEnvironment.Personal}
             };
 
-            var wingetApps = new List<WingetApp>
-            {
-                new WingetApp{AppId = RandomString(), Environment = InstallEnvironment.Personal},
-                new WingetApp{AppId = RandomString(), Environment = InstallEnvironment.Personal}
-            };
-
-            GetMock<IScoopAppRepository>().Setup(x => x.LoadAsync()).ReturnsAsync(scoopApps);
+            GetMock<IAppsRepository>().Setup(x => x.LoadAsync()).ReturnsAsync(apps);
             GetMock<IGitconfigRepository>().Setup(x => x.LoadAsync()).ReturnsAsync(gitconfigs);
-            GetMock<IWingetAppRepository>().Setup(x => x.LoadAsync()).ReturnsAsync(wingetApps);
 
             await BecauseAsync(() => ClassUnderTest.ExecuteAsync());
 
-            It("enables scripts to be executed", () =>
-            {
-                GetMock<IPowerShellConfiguration>().Verify(x => x.SetExecutionPolicyAsync());
-            });
+            It("enables scripts to be executed",
+                () => { GetMock<IPowerShellConfiguration>().Verify(x => x.SetExecutionPolicyAsync()); });
 
             It("installs apps via scoop", () =>
             {
-                GetMock<IScoopInstaller>().Verify(x => x.InstallAsync(scoopApps[0].AppId));
-                GetMock<IScoopInstaller>().Verify(x => x.InstallAsync(scoopApps[1].AppId));
+                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(apps.ScoopApps[0]));
+                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(apps.ScoopApps[1]));
             });
 
             It("configures git", () =>
@@ -57,8 +56,8 @@ namespace Configurator.UnitTests
 
             It("installs apps via winget", () =>
             {
-                GetMock<IWingetAppInstaller>().Verify(x => x.InstallAsync(wingetApps[0]));
-                GetMock<IWingetAppInstaller>().Verify(x => x.InstallAsync(wingetApps[1]));
+                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(apps.WingetApps[0]));
+                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(apps.WingetApps[1]));
             });
         }
     }

@@ -1,33 +1,35 @@
-﻿namespace Configurator.Utilities
+﻿using System.Collections.Generic;
+
+namespace Configurator.Utilities
 {
     public interface IArguments
     {
         InstallEnvironment Environment { get; }
+        string AppsPath { get; }
         string GitconfigsPath { get; }
-        string WingetAppsPath { get; }
-        string ScoopAppsPath { get; }
         string DownloadsDir { get; }
+        List<string> Environments { get; }
     }
 
     public class Arguments : IArguments
     {
         public Arguments(InstallEnvironment environment,
+            string appsPath,
             string gitconfigsPath,
-            string wingetAppsPath,
-            string scoopAppsPath,
-            string downloadsDir)
+            string downloadsDir,
+            List<string> environments)
         {
             Environment = environment;
+            AppsPath = appsPath;
             GitconfigsPath = gitconfigsPath;
-            WingetAppsPath = wingetAppsPath;
-            ScoopAppsPath = scoopAppsPath;
             DownloadsDir = downloadsDir;
+            Environments = environments;
         }
 
         public InstallEnvironment Environment { get; }
+        public string AppsPath { get; }
         public string GitconfigsPath { get; }
-        public string WingetAppsPath { get; }
-        public string ScoopAppsPath { get; }
         public string DownloadsDir { get; }
+        public List<string> Environments { get; }
     }
 }

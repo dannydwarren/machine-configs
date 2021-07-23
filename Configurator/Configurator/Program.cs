@@ -1,4 +1,5 @@
-﻿using Configurator.Configuration;
+﻿using System.Collections.Generic;
+using Configurator.Configuration;
 using Configurator.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
@@ -11,10 +12,10 @@ namespace Configurator
         {
             var services = ConfigureServices(new Arguments(
                 environment: InstallEnvironment.Personal,
+                appsPath: @"C:\src\machine-configs\install\apps.json",
                 gitconfigsPath: @"C:\src\machine-configs\git\Gitconfigs.csv",
-                wingetAppsPath: @"C:\src\machine-configs\install\WingetApps.csv",
-                scoopAppsPath: @"C:\src\machine-configs\install\ScoopApps.csv",
-                downloadsDir: @"C:\Users\danny\Downloads"
+                downloadsDir: @"C:\Users\danny\Downloads",
+                environments: new List<string> {"Personal"}
             ));
 
             var config = services.GetRequiredService<IMachineConfigurator>();

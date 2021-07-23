@@ -1,12 +1,12 @@
 ﻿using System.Threading.Tasks;
+using Configurator.Apps;
 using Configurator.PowerShell;
 using Configurator.Utilities;
-using Configurator.Winget;
 using Xunit;
 
-namespace Configurator.UnitTests.Winget
+namespace Configurator.UnitTests.App
 {
-    public class WingetAppInstallerTests : UnitTestBase<WingetAppInstaller>
+    public class AppInstallerTests : UnitTestBase<AppInstaller>
     {
         [Fact]
         public async Task When_installing()
@@ -18,10 +18,10 @@ namespace Configurator.UnitTests.Winget
 
             await BecauseAsync(() => ClassUnderTest.InstallAsync(app));
 
-            It("invokes winget via powershell", () =>
+            It("runs the install script", () =>
             {
                 GetMock<IConsoleLogger>().Verify(x => x.Info($"Installing '{app.AppId}'"));
-                GetMock<IPowerShell>().Verify(x => x.ExecuteAsync($"winget install {app.AppId}"));
+                GetMock<IPowerShell>().Verify(x => x.ExecuteAsync(app.InstallScript));
                 GetMock<IConsoleLogger>().Verify(x => x.Result($"Installed '{app.AppId}'"));
             });
         }

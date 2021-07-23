@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Management.Automation.Runspaces;
-using System.Threading.Tasks;
 
 namespace Configurator.PowerShell
 {
