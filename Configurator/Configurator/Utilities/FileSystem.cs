@@ -11,6 +11,7 @@ namespace Configurator.Utilities
         Task<string> ReadAllTextAsync(string path);
         Task WriteStreamAsync(string path, Stream stream);
         void Delete(string path);
+        List<string> EnumerateFileSystemEntries(string path);
     }
 
     public class FileSystem : IFileSystem
@@ -34,7 +35,22 @@ namespace Configurator.Utilities
 
         public void Delete(string path)
         {
-            File.Delete(path);
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
+
+            if (Directory.Exists(path))
+            {
+                Directory.Delete(path);
+            }
+        }
+
+        public List<string> EnumerateFileSystemEntries(string path)
+        {
+            return Directory.EnumerateFileSystemEntries(path)
+                .Select(x => Path.Combine(path, x))
+                .ToList();
         }
     }
 }

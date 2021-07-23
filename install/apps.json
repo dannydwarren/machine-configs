@@ -10,8 +10,7 @@
         },
         {
             "AppId": "Discord.Discord",
-            "Environments": "All",
-            "DeleteDesktopShortcut": "Discord"
+            "Environments": "All"
         },
         {
             "AppId": "Microsoft.AzureDataStudio",
@@ -23,8 +22,7 @@
         },
         {
             "AppId": "Blizzard.BattleNet",
-            "Environments": "Personal",
-            "DeleteDesktopShortcut": "Battle.net"
+            "Environments": "Personal"
         },
         {
             "AppId": "alcpu.CoreTemp",
@@ -40,8 +38,7 @@
         },
         {
             "AppId": "Docker.DockerDesktop",
-            "Environments": "Work",
-            "DeleteDesktopShortcut": "Docker Desktop"
+            "Environments": "Work"
         },
         {
             "AppId": "EpicGames.EpicGamesLauncher",
@@ -69,8 +66,7 @@
         },
         {
             "AppId": "Microsoft.EdgeDev",
-            "Environments": "All",
-            "DeleteDesktopShortcut": "Microsoft Edge Dev"
+            "Environments": "All"
         },
         {
             "AppId": "Microsoft.OneDrive",
@@ -106,18 +102,15 @@
         },
         {
             "AppId": "SlackTechnologies.Slack",
-            "Environments": "All",
-            "DeleteDesktopShortcut": "Slack"
+            "Environments": "All"
         },
         {
             "AppId": "Valve.Steam",
-            "Environments": "Personal",
-            "DeleteDesktopShortcut": "Steam"
+            "Environments": "Personal"
         },
         {
             "AppId": "Doist.Todoist",
-            "Environments": "All",
-            "DeleteDesktopShortcut": "Todoist"
+            "Environments": "All"
         },
         {
             "AppId": "Canonical.Ubuntu",
@@ -133,8 +126,7 @@
         },
         {
             "AppId": "Zoom.Zoom",
-            "Environments": "All",
-            "DeleteDesktopShortcut": "Zoom"
+            "Environments": "All"
         },
         {
             "AppId": "voidtools.Everything",
@@ -174,8 +166,7 @@
         },
         {
             "AppId": "Twilio.Authy",
-            "Environments": "All",
-            "DeleteDesktopShortcut": "Authy"
+            "Environments": "All"
         },
         {
             "AppId": "Microsoft.dotnet --version 3.1",
