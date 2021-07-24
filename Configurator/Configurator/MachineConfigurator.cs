@@ -3,6 +3,7 @@ using Configurator.Git;
 using Configurator.PowerShell;
 using System.Threading.Tasks;
 using Configurator.Apps;
+using Configurator.Installers;
 
 namespace Configurator
 {
@@ -18,18 +19,21 @@ namespace Configurator
         private readonly IGitConfiguration gitConfiguration;
         private readonly IGitconfigRepository gitconfigRepository;
         private readonly IAppInstaller appInstaller;
+        private readonly IDownloadInstaller downloadInstaller;
 
         public MachineConfigurator(IPowerShellConfiguration powerShellConfiguration,
             IAppsRepository appsRepository,
             IGitConfiguration gitConfiguration,
             IGitconfigRepository gitconfigRepository,
-            IAppInstaller appInstaller)
+            IAppInstaller appInstaller,
+            IDownloadInstaller downloadInstaller)
         {
             this.powerShellConfiguration = powerShellConfiguration;
             this.appsRepository = appsRepository;
             this.gitConfiguration = gitConfiguration;
             this.gitconfigRepository = gitconfigRepository;
             this.appInstaller = appInstaller;
+            this.downloadInstaller = downloadInstaller;
         }
 
         public async Task ExecuteAsync()
@@ -38,9 +42,18 @@ namespace Configurator
 
             var apps = await appsRepository.LoadAsync();
 
+            await InstallPowerShellAppPackages(apps.PowerShellAppPackages);
             await IncludeCustomGitconfigsAsync();
             await InstallWingetAppsAsync(apps.WingetApps);
             await InstallScoopAppsAsync(apps.ScoopApps);
+        }
+
+        private async Task InstallPowerShellAppPackages(List<PowerShellAppPackage> powerShellAppPackages)
+        {
+            foreach (var appPackage in powerShellAppPackages)
+            {
+                await downloadInstaller.InstallAsync(appPackage);
+            }
         }
 
         private async Task IncludeCustomGitconfigsAsync()

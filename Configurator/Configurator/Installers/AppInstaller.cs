@@ -1,9 +1,10 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using Configurator.Apps;
 using Configurator.PowerShell;
 using Configurator.Utilities;
 
-namespace Configurator.Apps
+namespace Configurator.Installers
 {
     public interface IAppInstaller
     {

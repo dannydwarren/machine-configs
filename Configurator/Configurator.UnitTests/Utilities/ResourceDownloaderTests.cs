@@ -31,7 +31,7 @@ namespace Configurator.UnitTests.Utilities
             GetMock<IFileSystem>().Setup(x => x.WriteStreamAsync(IsAny<string>(), httpResponse.Stream))
                 .Callback<string, Stream>((path, _) => capturedPath = path);
 
-            var downloadedFilePath = await BecauseAsync(() => ClassUnderTest.ExecuteAsync(fileUrl, fileName));
+            var downloadedFilePath = await BecauseAsync(() => ClassUnderTest.DownloadAsync(fileUrl, fileName));
 
             It("downloads the required file", () =>
             {
@@ -60,7 +60,7 @@ namespace Configurator.UnitTests.Utilities
             GetMock<IHttpClient>().Setup(x => x.ExecuteAsStreamAsync(IsAny<IHttpRequest>()))
                 .ReturnsAsync(httpResponse);
 
-            var exception = await BecauseThrowsAsync<Exception>(() => ClassUnderTest.ExecuteAsync(fileUrl, fileName));
+            var exception = await BecauseThrowsAsync<Exception>(() => ClassUnderTest.DownloadAsync(fileUrl, fileName));
 
             It("throws an informative exception", () =>
             {

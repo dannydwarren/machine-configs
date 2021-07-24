@@ -6,7 +6,7 @@ namespace Configurator.Utilities
 {
     public interface IResourceDownloader
     {
-        Task<string> ExecuteAsync(string fileUrl, string fileName);
+        Task<string> DownloadAsync(string fileUrl, string fileName);
     }
 
     public class ResourceDownloader : IResourceDownloader
@@ -24,7 +24,7 @@ namespace Configurator.Utilities
             this.fileSystem = fileSystem;
         }
 
-        public async Task<string> ExecuteAsync(string fileUrl, string fileName)
+        public async Task<string> DownloadAsync(string fileUrl, string fileName)
         {
             var httpRequest = new HttpRequest
             {

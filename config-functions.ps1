@@ -103,17 +103,6 @@ function InstallFromGitHubAssetBlock([string]$User, [string]$Repo, [string]$Asse
     } $CompleteCheck
 }
 
-function InstallFromScoopBlock([string]$AppName, [string]$AppId, [scriptblock]$AfterInstall) {
-    Block "Install $AppName" {
-        scoop install $AppId
-        if ($AfterInstall) {
-            Invoke-Command $AfterInstall
-        }
-    } {
-        scoop export | Select-String $AppId
-    }
-}
-
 # Get AppName with
 #   Get-StartApps name
 # Get ProductId by searching for app at

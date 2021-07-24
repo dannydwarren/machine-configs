@@ -7,7 +7,7 @@ using Moq;
 using Shouldly;
 using Xunit;
 
-namespace Configurator.UnitTests.App
+namespace Configurator.UnitTests.Apps
 {
     public class AppsRepositoryTests : UnitTestBase<AppsRepository>
     {
@@ -18,7 +18,7 @@ namespace Configurator.UnitTests.App
             var appsJson = RandomString();
             var specifiedEnvironment = new List<string> {"Personal", "Work"};
             var excludedEnvironment = "Media";
-            var expectedApps = new Apps.Apps
+            var expectedApps = new Configurator.Apps.Apps
             {
                 WingetApps = new()
                 {
@@ -43,7 +43,7 @@ namespace Configurator.UnitTests.App
             GetMock<IArguments>().SetupGet(x => x.AppsPath).Returns(appsPath);
             GetMock<IArguments>().SetupGet(x => x.Environments).Returns(specifiedEnvironment);
             GetMock<IFileSystem>().Setup(x => x.ReadAllTextAsync(appsPath)).ReturnsAsync(appsJson);
-            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<Apps.Apps>(appsJson)).Returns(expectedApps);
+            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<Configurator.Apps.Apps>(appsJson)).Returns(expectedApps);
 
             var apps = await BecauseAsync(() => ClassUnderTest.LoadAsync());
 
@@ -72,7 +72,7 @@ namespace Configurator.UnitTests.App
             var appsPath = RandomString();
             var appsJson = RandomString();
             var specifiedEnvironment = new List<string> {"All"};
-            var expectedApps = new Apps.Apps
+            var expectedApps = new Configurator.Apps.Apps
             {
                 WingetApps = new()
                 {
@@ -97,7 +97,7 @@ namespace Configurator.UnitTests.App
             GetMock<IArguments>().SetupGet(x => x.AppsPath).Returns(appsPath);
             GetMock<IArguments>().SetupGet(x => x.Environments).Returns(specifiedEnvironment);
             GetMock<IFileSystem>().Setup(x => x.ReadAllTextAsync(appsPath)).ReturnsAsync(appsJson);
-            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<Apps.Apps>(appsJson)).Returns(expectedApps);
+            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<Configurator.Apps.Apps>(appsJson)).Returns(expectedApps);
 
             var apps = await BecauseAsync(() => ClassUnderTest.LoadAsync());
 

@@ -4,6 +4,7 @@ using Moq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Configurator.Apps;
+using Configurator.Installers;
 using Xunit;
 
 namespace Configurator.UnitTests
@@ -13,8 +14,13 @@ namespace Configurator.UnitTests
         [Fact]
         public async Task When_executing()
         {
-            var apps = new Apps.Apps
+            var apps = new Configurator.Apps.Apps
             {
+                PowerShellAppPackages = new List<PowerShellAppPackage>
+                {
+                    new() {AppId = RandomString(), Environments = "Personal"},
+                    new() {AppId = RandomString(), Environments = "All"}
+                },
                 ScoopApps = new List<ScoopApp>
                 {
                     new() {AppId = RandomString(), Environments = "Personal"},
@@ -26,7 +32,6 @@ namespace Configurator.UnitTests
                     new() {AppId = RandomString(), Environments = "Personal"}
                 }
             };
-
 
             var gitconfigs = new List<Gitconfig>
             {
@@ -41,6 +46,12 @@ namespace Configurator.UnitTests
 
             It("enables scripts to be executed",
                 () => { GetMock<IPowerShellConfiguration>().Verify(x => x.SetExecutionPolicyAsync()); });
+
+            It("installs PowerShell app packages", () =>
+            {
+                GetMock<IDownloadInstaller>().Verify(x => x.InstallAsync(apps.PowerShellAppPackages[0]));
+                GetMock<IDownloadInstaller>().Verify(x => x.InstallAsync(apps.PowerShellAppPackages[1]));
+            });
 
             It("installs apps via scoop", () =>
             {

@@ -2,11 +2,12 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Configurator.Apps;
+using Configurator.Installers;
 using Configurator.PowerShell;
 using Configurator.Utilities;
 using Xunit;
 
-namespace Configurator.UnitTests.App
+namespace Configurator.UnitTests.Installers
 {
     public class AppInstallerTests : UnitTestBase<AppInstaller>
     {
@@ -45,11 +46,15 @@ namespace Configurator.UnitTests.App
 
             await BecauseAsync(() => ClassUnderTest.InstallAsync(app));
 
-            It("runs the install script", () =>
+            It("logs", () =>
             {
                 GetMock<IConsoleLogger>().Verify(x => x.Info($"Installing '{app.AppId}'"));
-                GetMock<IPowerShell>().Verify(x => x.ExecuteAsync(app.InstallScript));
                 GetMock<IConsoleLogger>().Verify(x => x.Result($"Installed '{app.AppId}'"));
+            });
+
+            It("runs the install script", () =>
+            {
+                GetMock<IPowerShell>().Verify(x => x.ExecuteAsync(app.InstallScript));
             });
 
             It("deletes desktop shortcuts", () =>
