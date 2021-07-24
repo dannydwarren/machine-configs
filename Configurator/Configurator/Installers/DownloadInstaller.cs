@@ -32,7 +32,7 @@ namespace Configurator.Installers
 
             IDownloader downloader = downloaderFactory.GetDownloader(app.Downloader);
 
-            var downloadedFilePath = await downloader.DownloadAsync(app.DownloaderArgs);
+            var downloadedFilePath = await downloader.DownloadAsync(app.DownloaderArgs.ToString()!);
 
             var installScript = $"{app.InstallScript} {downloadedFilePath}";
 

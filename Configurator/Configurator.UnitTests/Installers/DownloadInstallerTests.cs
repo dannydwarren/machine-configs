@@ -1,4 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.IO;
+using System.Text;
+using System.Text.Json;
+using System.Threading.Tasks;
 using Configurator.Apps;
 using Configurator.Downloaders;
 using Configurator.Installers;
@@ -14,18 +17,22 @@ namespace Configurator.UnitTests.Installers
         [Fact]
         public async Task When_installing()
         {
+            var buffer = Encoding.UTF8.GetBytes("{ \"prop1\": 1 }");
+            var memoryStream = new MemoryStream(buffer);
+            var downloaderArgsDoc = await JsonDocument.ParseAsync(memoryStream);
+
             var appMock = GetMock<IDownloadApp>();
             appMock.SetupGet(x => x.AppId).Returns(RandomString());
             appMock.SetupGet(x => x.InstallScript).Returns(RandomString());
             appMock.SetupGet(x => x.VerificationScript).Returns(RandomString());
             appMock.SetupGet(x => x.Downloader).Returns(RandomString());
-            appMock.SetupGet(x => x.DownloaderArgs).Returns(RandomString());
+            appMock.SetupGet(x => x.DownloaderArgs).Returns(downloaderArgsDoc.RootElement);
             var app = appMock.Object;
 
             var downloadedFilePath = RandomString();
 
             var downloaderMock = GetMock<IDownloader>();
-            downloaderMock.Setup(x => x.DownloadAsync(app.DownloaderArgs)).ReturnsAsync(downloadedFilePath);
+            downloaderMock.Setup(x => x.DownloadAsync(app.DownloaderArgs.ToString()!)).ReturnsAsync(downloadedFilePath);
             var downloader = downloaderMock.Object;
 
             GetMock<IDownloaderFactory>().Setup(x => x.GetDownloader(app.Downloader)).Returns(downloader);
@@ -47,18 +54,22 @@ namespace Configurator.UnitTests.Installers
         [Fact]
         public async Task When_installing_with_no_verification_script()
         {
+            var buffer = Encoding.UTF8.GetBytes("{ \"prop1\": 1 }");
+            var memoryStream = new MemoryStream(buffer);
+            var downloaderArgsDoc = await JsonDocument.ParseAsync(memoryStream);
+
             var appMock = GetMock<IDownloadApp>();
             appMock.SetupGet(x => x.AppId).Returns(RandomString());
             appMock.SetupGet(x => x.InstallScript).Returns(RandomString());
             appMock.SetupGet(x => x.VerificationScript).Returns((string)null!);
             appMock.SetupGet(x => x.Downloader).Returns(RandomString());
-            appMock.SetupGet(x => x.DownloaderArgs).Returns(RandomString());
+            appMock.SetupGet(x => x.DownloaderArgs).Returns(downloaderArgsDoc.RootElement);
             var app = appMock.Object;
 
             var downloadedFilePath = RandomString();
 
             var downloaderMock = GetMock<IDownloader>();
-            downloaderMock.Setup(x => x.DownloadAsync(app.DownloaderArgs)).ReturnsAsync(downloadedFilePath);
+            downloaderMock.Setup(x => x.DownloadAsync(app.DownloaderArgs.ToString()!)).ReturnsAsync(downloadedFilePath);
             var downloader = downloaderMock.Object;
 
             GetMock<IDownloaderFactory>().Setup(x => x.GetDownloader(app.Downloader)).Returns(downloader);

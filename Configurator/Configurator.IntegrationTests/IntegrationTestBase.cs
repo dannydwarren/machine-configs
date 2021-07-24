@@ -9,17 +9,16 @@ namespace Configurator.IntegrationTests
     public class IntegrationTestBase<TClassUnderTest> : IEngine where TClassUnderTest : class
     {
         private ServiceProvider serviceProvider;
-
         private IEngine Engine { get; }
+
+        protected ServiceCollection Services { get; }
 
         public IntegrationTestBase(IEngine? engine = null)
         {
             Engine = engine ?? new Engine();
 
-            var serviceCollection = new ServiceCollection();
-            RegisterRequiredServices(serviceCollection);
-            RegisterTestSpecificServices(serviceCollection);
-            serviceProvider = serviceCollection.BuildServiceProvider();
+            Services = new ServiceCollection();
+            RegisterRequiredServices(Services);
         }
 
         public void Because(Action act)
@@ -59,9 +58,19 @@ namespace Configurator.IntegrationTests
         }
 
         private TClassUnderTest? classUnderTest;
-        protected TClassUnderTest ClassUnderTest => classUnderTest ??= serviceProvider.GetService<TClassUnderTest>()!;
+        protected TClassUnderTest ClassUnderTest
+        {
+            get
+            {
+                if (classUnderTest == null)
+                {
+                    serviceProvider = Services.BuildServiceProvider();
+                    classUnderTest = serviceProvider.GetService<TClassUnderTest>()!;
+                }
 
-        protected virtual void RegisterTestSpecificServices(ServiceCollection services) { }
+                return classUnderTest;
+            }
+        }
 
         protected U GetInstance<U>()
         {

@@ -34,14 +34,16 @@ namespace Configurator.Apps
             {
                 WingetApps = apps.WingetApps.Where(IsForEnvironment).ToList(),
                 ScoopApps = apps.ScoopApps.Where(IsForEnvironment).ToList(),
-                NonPackageApps = apps.NonPackageApps.Where(IsForEnvironment).ToList()
+                NonPackageApps = apps.NonPackageApps.Where(IsForEnvironment).ToList(),
+                PowerShellAppPackages = apps.PowerShellAppPackages.Where(IsForEnvironment).ToList()
             };
         }
 
         private bool IsForEnvironment(IApp app)
         {
             return arguments.Environments.Any(x => x.ToLower() == "all")
-                   || arguments.Environments.Any(x => app.Environments.Contains(x));
+                   || app.Environments.ToLower().Contains("all")
+                   || arguments.Environments.Any(x => app.Environments.ToLower().Contains(x.ToLower()));
         }
     }
 }

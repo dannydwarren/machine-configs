@@ -1,3 +1,5 @@
+using System.Text.Json;
+
 namespace Configurator.Apps
 {
     public interface IApp
@@ -11,6 +13,6 @@ namespace Configurator.Apps
     public interface IDownloadApp : IApp
     {
         string Downloader { get; }
-        string DownloaderArgs { get; }
+        JsonElement DownloaderArgs { get; }
     }
 }

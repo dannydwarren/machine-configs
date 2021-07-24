@@ -28,4 +28,19 @@
       <ProjectReference Include="..\Configurator\Configurator.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="Apps\apps_scoop_only.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Apps\apps_winget_only.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Apps\apps_non-package_only.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Apps\apps_power-shell-app-package_only.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>

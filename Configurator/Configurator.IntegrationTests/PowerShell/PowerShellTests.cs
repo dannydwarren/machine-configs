@@ -17,11 +17,8 @@ namespace Configurator.IntegrationTests.PowerShell
         {
             mocker = new AutoMoqer();
             mockConsoleLogger = mocker.GetMock<IConsoleLogger>();
-        }
 
-        protected override void RegisterTestSpecificServices(ServiceCollection services)
-        {
-            services.AddTransient(x => mockConsoleLogger.Object);
+            Services.AddTransient(_ => mockConsoleLogger.Object);
         }
 
         [Fact]
