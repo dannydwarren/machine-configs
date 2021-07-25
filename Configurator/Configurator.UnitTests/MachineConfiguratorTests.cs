@@ -1,10 +1,12 @@
-﻿using Configurator.Git;
+﻿using System;
+using Configurator.Git;
 using Configurator.PowerShell;
 using Moq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Configurator.Apps;
 using Configurator.Installers;
+using Configurator.Utilities;
 using Xunit;
 
 namespace Configurator.UnitTests
@@ -69,6 +71,21 @@ namespace Configurator.UnitTests
             {
                 GetMock<IAppInstaller>().Verify(x => x.InstallAsync(apps.WingetApps[0]));
                 GetMock<IAppInstaller>().Verify(x => x.InstallAsync(apps.WingetApps[1]));
+            });
+        }
+
+        [Fact]
+        public async Task When_an_exception_occurs()
+        {
+            var exception = new Exception(RandomString());
+
+            GetMock<IPowerShellConfiguration>().Setup(x => x.SetExecutionPolicyAsync()).Throws(exception);
+
+            await BecauseAsync(() => ClassUnderTest.ExecuteAsync());
+
+            It("logs the exception as an error", () =>
+            {
+                GetMock<IConsoleLogger>().Setup(x => x.Error(exception.ToString()));
             });
         }
     }

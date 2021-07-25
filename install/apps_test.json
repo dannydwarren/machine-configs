@@ -1,0 +1,14 @@
+{
+    "PowerShellAppPackages": [
+        {
+            "AppId": "Microsoft.Winget.Source",
+            "Environments": "All",
+            "Downloader": "GitHubAssetDownloader",
+            "DownloaderArgs": {
+                "User": "microsoft",
+                "Repo": "winget-cli",
+                "Extension": "*.msixbundle"
+            }
+        }
+    ]
+}

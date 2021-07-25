@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Configurator.Git;
 using Configurator.PowerShell;
 using System.Threading.Tasks;
 using Configurator.Apps;
 using Configurator.Installers;
+using Configurator.Utilities;
 
 namespace Configurator
 {
@@ -20,13 +22,15 @@ namespace Configurator
         private readonly IGitconfigRepository gitconfigRepository;
         private readonly IAppInstaller appInstaller;
         private readonly IDownloadInstaller downloadInstaller;
+        private readonly IConsoleLogger consoleLogger;
 
         public MachineConfigurator(IPowerShellConfiguration powerShellConfiguration,
             IAppsRepository appsRepository,
             IGitConfiguration gitConfiguration,
             IGitconfigRepository gitconfigRepository,
             IAppInstaller appInstaller,
-            IDownloadInstaller downloadInstaller)
+            IDownloadInstaller downloadInstaller,
+            IConsoleLogger consoleLogger)
         {
             this.powerShellConfiguration = powerShellConfiguration;
             this.appsRepository = appsRepository;
@@ -34,9 +38,22 @@ namespace Configurator
             this.gitconfigRepository = gitconfigRepository;
             this.appInstaller = appInstaller;
             this.downloadInstaller = downloadInstaller;
+            this.consoleLogger = consoleLogger;
         }
 
         public async Task ExecuteAsync()
+        {
+            try
+            {
+                await ExecuteInternalAsync();
+            }
+            catch (Exception e)
+            {
+                consoleLogger.Error(e.ToString());
+            }
+        }
+
+        private async Task ExecuteInternalAsync()
         {
             await powerShellConfiguration.SetExecutionPolicyAsync();
 
