@@ -69,11 +69,11 @@ namespace Configurator.UnitTests
 
         public void Dispose()
         {
-            classUnderTest = default;
+            classUnderTest = default!;
             Engine.Dispose();
         }
 
-        private TClassUnderTest? classUnderTest;
+        private TClassUnderTest classUnderTest = default!;
         protected TClassUnderTest ClassUnderTest => classUnderTest ??= mocker.Create<TClassUnderTest>();
 
         protected Mock<TMock> GetMock<TMock>() where TMock : class

@@ -16,7 +16,7 @@ namespace Configurator.IntegrationTests.Apps
 
         public AppsRepositoryTests()
         {
-            AutoMoqer mocker = new();
+            var mocker = new AutoMoqer();
             mockArgs = mocker.GetMock<IArguments>();
             mockArgs.SetupGet(x => x.Environments).Returns(new List<string> {"Test"});
         }

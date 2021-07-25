@@ -20,25 +20,25 @@ namespace Configurator.UnitTests
             {
                 PowerShellAppPackages = new List<PowerShellAppPackage>
                 {
-                    new() {AppId = RandomString(), Environments = "Personal"},
-                    new() {AppId = RandomString(), Environments = "All"}
+                    new PowerShellAppPackage {AppId = RandomString(), Environments = "Personal"},
+                    new PowerShellAppPackage {AppId = RandomString(), Environments = "All"}
                 },
                 ScoopApps = new List<ScoopApp>
                 {
-                    new() {AppId = RandomString(), Environments = "Personal"},
-                    new() {AppId = RandomString(), Environments = "All"}
+                    new ScoopApp {AppId = RandomString(), Environments = "Personal"},
+                    new ScoopApp {AppId = RandomString(), Environments = "All"}
                 },
                 WingetApps = new List<WingetApp>
                 {
-                    new() {AppId = RandomString(), Environments = "Personal"},
-                    new() {AppId = RandomString(), Environments = "Personal"}
+                    new WingetApp {AppId = RandomString(), Environments = "Personal"},
+                    new WingetApp {AppId = RandomString(), Environments = "Personal"}
                 }
             };
 
             var gitconfigs = new List<Gitconfig>
             {
-                new() {Path = RandomString(), Environment = InstallEnvironment.Personal},
-                new() {Path = RandomString(), Environment = InstallEnvironment.Personal}
+                new Gitconfig {Path = RandomString(), Environment = InstallEnvironment.Personal},
+                new Gitconfig {Path = RandomString(), Environment = InstallEnvironment.Personal}
             };
 
             GetMock<IAppsRepository>().Setup(x => x.LoadAsync()).ReturnsAsync(apps);

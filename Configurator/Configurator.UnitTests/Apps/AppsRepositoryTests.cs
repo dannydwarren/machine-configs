@@ -17,28 +17,28 @@ namespace Configurator.UnitTests.Apps
         {
             loadedApps = new Configurator.Apps.Apps
             {
-                WingetApps = new()
+                WingetApps = new List<WingetApp>
                 {
                     new WingetApp {AppId = RandomString(), Environments = "Personal".ToLower()},
                     new WingetApp {AppId = RandomString(), Environments = "Media"},
                     new WingetApp {AppId = RandomString(), Environments = "Work"},
                     new WingetApp {AppId = RandomString(), Environments = "All"}
                 },
-                ScoopApps = new()
+                ScoopApps = new List<ScoopApp>
                 {
                     new ScoopApp {AppId = RandomString(), Environments = "Personal"},
                     new ScoopApp {AppId = RandomString(), Environments = "Media"},
                     new ScoopApp {AppId = RandomString(), Environments = "Work"},
                     new ScoopApp {AppId = RandomString(), Environments = "All"}
                 },
-                NonPackageApps = new()
+                NonPackageApps = new List<NonPackageApp>
                 {
                     new NonPackageApp {AppId = RandomString(), Environments = "Personal"},
                     new NonPackageApp {AppId = RandomString(), Environments = "Media"},
                     new NonPackageApp {AppId = RandomString(), Environments = "Work"},
                     new NonPackageApp {AppId = RandomString(), Environments = "All"}
                 },
-                PowerShellAppPackages = new()
+                PowerShellAppPackages = new List<PowerShellAppPackage>
                 {
                     new PowerShellAppPackage {AppId = RandomString(), Environments = "Personal"},
                     new PowerShellAppPackage {AppId = RandomString(), Environments = "Media"},
