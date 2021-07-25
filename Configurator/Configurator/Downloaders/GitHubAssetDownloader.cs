@@ -25,10 +25,10 @@ namespace Configurator.Downloaders
             var args = jsonSerializer.Deserialize<GitHubAssetDownloaderArgs>(argsJson)!;
 
             var getAssetInfoScript =
-                @$"$asset = (iwr https://api.github.com/repos/{args.User}/{args.Repo}/releases/latest | ConvertFrom-Json).assets | ? {{ $_.name -like {args.Extension} }}
+                @$"$asset = (iwr https://api.github.com/repos/{args.User}/{args.Repo}/releases/latest | ConvertFrom-Json).assets | ? {{ $_.name -like '{args.Extension}' }}
 $downloadUrl = $asset | select -exp browser_download_url
 $fileName = $asset | select -exp name
-Write-Output @{{ FileName = $fileName; Url = $downloadUrl }}";
+Write-Output ""{{ `""FileName`"": `""$fileName`"", `""Url`"": `""$downloadUrl`"" }}""";
 
             var result = await powerShell.ExecuteAsync(getAssetInfoScript);
             var assetInfo = jsonSerializer.Deserialize<GitHubAssetInfo>(result.AsString)!;

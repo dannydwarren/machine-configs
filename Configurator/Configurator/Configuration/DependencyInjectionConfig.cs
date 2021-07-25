@@ -9,9 +9,15 @@ namespace Configurator.Configuration
             services.Scan(
                 scan =>
                 {
-                    scan.FromAssembliesOf(typeof(DependencyInjectionConfig)).AddClasses().AsMatchingInterface().WithTransientLifetime();
+                    scan.FromAssembliesOf(typeof(DependencyInjectionConfig))
+                        .AddClasses()
+                        .AsSelf()
+                        .AsMatchingInterface()
+                        .WithTransientLifetime();
                 }
             );
+
+            Emmersion.Http.DependencyInjectionConfig.ConfigureServices(services);
         }
     }
 }
