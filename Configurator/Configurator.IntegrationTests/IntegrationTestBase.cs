@@ -8,7 +8,7 @@ namespace Configurator.IntegrationTests
 {
     public class IntegrationTestBase<TClassUnderTest> : IEngine where TClassUnderTest : class
     {
-        private ServiceProvider serviceProvider;
+        private ServiceProvider? serviceProvider;
         private IEngine Engine { get; }
 
         protected ServiceCollection Services { get; }
@@ -54,7 +54,7 @@ namespace Configurator.IntegrationTests
         public void Dispose()
         {
             Engine.Dispose();
-            serviceProvider.Dispose();
+            serviceProvider!.Dispose();
         }
 
         private TClassUnderTest? classUnderTest;
@@ -72,9 +72,9 @@ namespace Configurator.IntegrationTests
             }
         }
 
-        protected U GetInstance<U>()
+        protected TService GetInstance<TService>()
         {
-            return serviceProvider.GetService<U>()!;
+            return serviceProvider!.GetService<TService>()!;
         }
 
         private static void RegisterRequiredServices(ServiceCollection services)
