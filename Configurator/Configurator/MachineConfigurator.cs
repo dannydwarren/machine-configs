@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Configurator.Git;
 using Configurator.PowerShell;
 using System.Threading.Tasks;
 using Configurator.Apps;
@@ -18,24 +17,18 @@ namespace Configurator
     {
         private readonly IPowerShellConfiguration powerShellConfiguration;
         private readonly IManifestRepository manifestRepository;
-        private readonly IGitConfiguration gitConfiguration;
-        private readonly IGitconfigRepository gitconfigRepository;
         private readonly IAppInstaller appInstaller;
         private readonly IDownloadInstaller downloadInstaller;
         private readonly IConsoleLogger consoleLogger;
 
         public MachineConfigurator(IPowerShellConfiguration powerShellConfiguration,
             IManifestRepository manifestRepository,
-            IGitConfiguration gitConfiguration,
-            IGitconfigRepository gitconfigRepository,
             IAppInstaller appInstaller,
             IDownloadInstaller downloadInstaller,
             IConsoleLogger consoleLogger)
         {
             this.powerShellConfiguration = powerShellConfiguration;
             this.manifestRepository = manifestRepository;
-            this.gitConfiguration = gitConfiguration;
-            this.gitconfigRepository = gitconfigRepository;
             this.appInstaller = appInstaller;
             this.downloadInstaller = downloadInstaller;
             this.consoleLogger = consoleLogger;
@@ -59,43 +52,27 @@ namespace Configurator
 
             var manifest = await manifestRepository.LoadAsync();
 
-            await InstallPowerShellAppPackages(manifest.PowerShellAppPackages);
-            await IncludeCustomGitconfigsAsync();
-            await InstallWingetAppsAsync(manifest.WingetApps);
-            await InstallScoopAppsAsync(manifest.ScoopApps);
+            await InstallDownloadApps(manifest.PowerShellAppPackages);
+            await InstallAppsAsync(manifest.WingetApps);
+            await InstallAppsAsync(manifest.ScoopApps);
+            await InstallAppsAsync(manifest.Gitconfigs);
         }
 
-        private async Task InstallPowerShellAppPackages(List<PowerShellAppPackage> powerShellAppPackages)
+        private async Task InstallDownloadApps<TDownloadApp>(List<TDownloadApp> downloadApps)
+            where TDownloadApp : IDownloadApp
         {
-            foreach (var appPackage in powerShellAppPackages)
+            foreach (var downloadApp in downloadApps)
             {
-                await downloadInstaller.InstallAsync(appPackage);
+                await downloadInstaller.InstallAsync(downloadApp);
             }
         }
 
-        private async Task IncludeCustomGitconfigsAsync()
+        private async Task InstallAppsAsync<TApp>(List<TApp> apps)
+            where TApp : IApp
         {
-            var gitconfigs = await gitconfigRepository.LoadAsync();
-
-            foreach (var gitconfig in gitconfigs)
+            foreach (var app in apps)
             {
-                await gitConfiguration.IncludeGitconfigAsync(gitconfig.Path);
-            }
-        }
-
-        private async Task InstallWingetAppsAsync(List<WingetApp> wingetApps)
-        {
-            foreach (var wingetApp in wingetApps)
-            {
-                await appInstaller.InstallAsync(wingetApp);
-            }
-        }
-
-        private async Task InstallScoopAppsAsync(List<ScoopApp> scoopApps)
-        {
-            foreach (var scoopApp in scoopApps)
-            {
-                await appInstaller.InstallAsync(scoopApp);
+                await appInstaller.InstallAsync(app);
             }
         }
     }

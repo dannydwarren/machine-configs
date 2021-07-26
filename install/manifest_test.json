@@ -1,4 +1,9 @@
 {
+    "Gitconfigs": [
+        {
+            "AppId": "C:\\src\\machine-configs\\git\\danny.gitconfig"
+        }
+    ],
     "PowerShellAppPackages": [
         {
             "AppId": "Microsoft.Winget.Source",

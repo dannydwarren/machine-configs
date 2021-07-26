@@ -44,7 +44,14 @@ namespace Configurator.UnitTests
                     new PowerShellAppPackage {AppId = RandomString(), Environments = "Media"},
                     new PowerShellAppPackage {AppId = RandomString(), Environments = "Work"},
                     new PowerShellAppPackage {AppId = RandomString(), Environments = "All"}
-                }
+                },
+                Gitconfigs = new List<GitconfigApp>
+                {
+                    new GitconfigApp {AppId = RandomString(), Environments = "Personal"},
+                    new GitconfigApp {AppId = RandomString(), Environments = "Media"},
+                    new GitconfigApp {AppId = RandomString(), Environments = "Work"},
+                    new GitconfigApp {AppId = RandomString(), Environments = "All"}
+                },
             };
         }
 
@@ -86,6 +93,12 @@ namespace Configurator.UnitTests
                 manifest.PowerShellAppPackages.ShouldAllBe(x => x.Environments != excludedEnvironment);
                 manifest.PowerShellAppPackages.Count.ShouldBe(3);
             });
+
+            It($"filters {nameof(manifest.Gitconfigs)} by the specified environment", () =>
+            {
+                manifest.Gitconfigs.ShouldAllBe(x => x.Environments != excludedEnvironment);
+                manifest.Gitconfigs.Count.ShouldBe(3);
+            });
         }
 
         [Fact]
@@ -120,6 +133,11 @@ namespace Configurator.UnitTests
             It($"includes all {nameof(manifest.PowerShellAppPackages)}", () =>
             {
                 manifest.PowerShellAppPackages.Count.ShouldBe(4);
+            });
+
+            It($"includes all {nameof(manifest.Gitconfigs)}", () =>
+            {
+                manifest.Gitconfigs.Count.ShouldBe(4);
             });
         }
     }

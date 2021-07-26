@@ -1,5 +1,4 @@
 ﻿using System;
-using Configurator.Git;
 using Configurator.PowerShell;
 using Moq;
 using System.Collections.Generic;
@@ -32,17 +31,15 @@ namespace Configurator.UnitTests
                 {
                     new WingetApp {AppId = RandomString(), Environments = "Personal"},
                     new WingetApp {AppId = RandomString(), Environments = "Personal"}
+                },
+                Gitconfigs = new List<GitconfigApp>
+                {
+                    new GitconfigApp {AppId = RandomString(), Environments = "Personal"},
+                    new GitconfigApp {AppId = RandomString(), Environments = "Personal"}
                 }
             };
 
-            var gitconfigs = new List<Gitconfig>
-            {
-                new Gitconfig {Path = RandomString(), Environment = InstallEnvironment.Personal},
-                new Gitconfig {Path = RandomString(), Environment = InstallEnvironment.Personal}
-            };
-
             GetMock<IManifestRepository>().Setup(x => x.LoadAsync()).ReturnsAsync(manifest);
-            GetMock<IGitconfigRepository>().Setup(x => x.LoadAsync()).ReturnsAsync(gitconfigs);
 
             await BecauseAsync(() => ClassUnderTest.ExecuteAsync());
 
@@ -61,10 +58,10 @@ namespace Configurator.UnitTests
                 GetMock<IAppInstaller>().Verify(x => x.InstallAsync(manifest.ScoopApps[1]));
             });
 
-            It("configures git", () =>
+            It("installs gitconfigs", () =>
             {
-                GetMock<IGitConfiguration>().Verify(x => x.IncludeGitconfigAsync(gitconfigs[0].Path));
-                GetMock<IGitConfiguration>().Verify(x => x.IncludeGitconfigAsync(gitconfigs[1].Path));
+                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(manifest.Gitconfigs[0]));
+                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(manifest.Gitconfigs[1]));
             });
 
             It("installs apps via winget", () =>

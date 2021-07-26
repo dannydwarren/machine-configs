@@ -66,6 +66,21 @@ namespace Configurator.IntegrationTests
         }
 
         [Fact]
+        public async Task When_parsing_gitconfigs()
+        {
+            mockArgs.SetupGet(x => x.ManifestPath).Returns("./TestManifests/manifest_gitconfigs_only.json");
+
+            Services.AddTransient(_ => mockArgs.Object);
+
+            var manifest = await BecauseAsync(() => ClassUnderTest.LoadAsync());
+
+            It("parses", () =>
+            {
+                manifest.Gitconfigs.ShouldHaveSingleItem().AppId.ShouldBe("gitconfig-app-id");
+            });
+        }
+
+        [Fact]
         public async Task When_parsing_power_shell_app_packages()
         {
             mockArgs.SetupGet(x => x.ManifestPath).Returns("./TestManifests/manifest_power-shell-app-package_only.json");

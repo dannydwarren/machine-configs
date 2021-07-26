@@ -219,6 +219,11 @@
             }
         }
     ],
+    "Gitconfigs": [
+        {
+            "AppId": "C:\\src\\machine-configs\\git\\danny.gitconfig"
+        }
+    ],
     "NonPackageApps": [
         {
             "AppId": "GospelLibrary",

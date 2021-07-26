@@ -36,7 +36,8 @@ namespace Configurator
                 WingetApps = manifest.WingetApps.Where(IsForEnvironment).ToList(),
                 ScoopApps = manifest.ScoopApps.Where(IsForEnvironment).ToList(),
                 NonPackageApps = manifest.NonPackageApps.Where(IsForEnvironment).ToList(),
-                PowerShellAppPackages = manifest.PowerShellAppPackages.Where(IsForEnvironment).ToList()
+                PowerShellAppPackages = manifest.PowerShellAppPackages.Where(IsForEnvironment).ToList(),
+                Gitconfigs = manifest.Gitconfigs.Where(IsForEnvironment).ToList(),
             };
         }
 

@@ -41,6 +41,9 @@
       <None Update="TestManifests\manifest_power-shell-app-package_only.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="TestManifests\manifest_gitconfigs_only.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>
