@@ -1,20 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Linq;
 using Configurator.Configuration;
 using Configurator.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
+using Configurator.PowerShell;
 
 namespace Configurator
 {
     class Program
     {
-        static async Task Main(string[] args)
+        // manifestPath: @"https://raw.githubusercontent.com/dannydwarren/machine-configs/main/manifests/danny.manifest.json",
+        static async Task Main(string manifestPath = @"https://raw.githubusercontent.com/dannydwarren/machine-configs/main/manifests/manifest_test.json", string environments = "Test")
         {
             var services = ConfigureServices(new Arguments(
-                // manifestPath: @"https://raw.githubusercontent.com/dannydwarren/machine-configs/main/manifests/danny.manifest.json",
-                manifestPath: @"https://raw.githubusercontent.com/dannydwarren/machine-configs/main/manifests/manifest_test.json",
-                environments: new List<string> {"Personal"}
+                manifestPath: manifestPath,
+                environments: environments.Split("|", StringSplitOptions.RemoveEmptyEntries).ToList()
             ));
+
+            var powerShell = services.GetRequiredService<IPowerShell>();
+            var result = await powerShell.ExecuteAsync("$PSVersionTable.PSVersion.ToString()");
+            Console.WriteLine($"PowerShell Version: {result.AsString}");
 
             var config = services.GetRequiredService<IMachineConfigurator>();
 
