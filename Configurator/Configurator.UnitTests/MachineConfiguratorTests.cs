@@ -16,7 +16,7 @@ namespace Configurator.UnitTests
         [Fact]
         public async Task When_executing()
         {
-            var apps = new Configurator.Apps.Apps
+            var manifest = new Manifest
             {
                 PowerShellAppPackages = new List<PowerShellAppPackage>
                 {
@@ -41,7 +41,7 @@ namespace Configurator.UnitTests
                 new Gitconfig {Path = RandomString(), Environment = InstallEnvironment.Personal}
             };
 
-            GetMock<IAppsRepository>().Setup(x => x.LoadAsync()).ReturnsAsync(apps);
+            GetMock<IManifestRepository>().Setup(x => x.LoadAsync()).ReturnsAsync(manifest);
             GetMock<IGitconfigRepository>().Setup(x => x.LoadAsync()).ReturnsAsync(gitconfigs);
 
             await BecauseAsync(() => ClassUnderTest.ExecuteAsync());
@@ -51,14 +51,14 @@ namespace Configurator.UnitTests
 
             It("installs PowerShell app packages", () =>
             {
-                GetMock<IDownloadInstaller>().Verify(x => x.InstallAsync(apps.PowerShellAppPackages[0]));
-                GetMock<IDownloadInstaller>().Verify(x => x.InstallAsync(apps.PowerShellAppPackages[1]));
+                GetMock<IDownloadInstaller>().Verify(x => x.InstallAsync(manifest.PowerShellAppPackages[0]));
+                GetMock<IDownloadInstaller>().Verify(x => x.InstallAsync(manifest.PowerShellAppPackages[1]));
             });
 
             It("installs apps via scoop", () =>
             {
-                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(apps.ScoopApps[0]));
-                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(apps.ScoopApps[1]));
+                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(manifest.ScoopApps[0]));
+                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(manifest.ScoopApps[1]));
             });
 
             It("configures git", () =>
@@ -69,8 +69,8 @@ namespace Configurator.UnitTests
 
             It("installs apps via winget", () =>
             {
-                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(apps.WingetApps[0]));
-                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(apps.WingetApps[1]));
+                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(manifest.WingetApps[0]));
+                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(manifest.WingetApps[1]));
             });
         }
 

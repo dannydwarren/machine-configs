@@ -1,22 +1,23 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using Configurator.Apps;
 using Configurator.Configuration;
 using Configurator.Utilities;
 
-namespace Configurator.Apps
+namespace Configurator
 {
-    public interface IAppsRepository
+    public interface IManifestRepository
     {
-        Task<Apps> LoadAsync();
+        Task<Manifest> LoadAsync();
     }
 
-    public class AppsRepository : IAppsRepository
+    public class ManifestRepository : IManifestRepository
     {
         private readonly IArguments arguments;
         private readonly IFileSystem fileSystem;
         private readonly IJsonSerializer jsonSerializer;
 
-        public AppsRepository(IArguments arguments,
+        public ManifestRepository(IArguments arguments,
             IFileSystem fileSystem,
             IJsonSerializer jsonSerializer)
         {
@@ -25,17 +26,17 @@ namespace Configurator.Apps
             this.jsonSerializer = jsonSerializer;
         }
 
-        public async Task<Apps> LoadAsync()
+        public async Task<Manifest> LoadAsync()
         {
-            var appsJson = await fileSystem.ReadAllTextAsync(arguments.AppsPath);
-            var apps = jsonSerializer.Deserialize<Apps>(appsJson)!;
+            var manifestJson = await fileSystem.ReadAllTextAsync(arguments.ManifestPath);
+            var manifest = jsonSerializer.Deserialize<Manifest>(manifestJson)!;
 
-            return new Apps
+            return new Manifest
             {
-                WingetApps = apps.WingetApps.Where(IsForEnvironment).ToList(),
-                ScoopApps = apps.ScoopApps.Where(IsForEnvironment).ToList(),
-                NonPackageApps = apps.NonPackageApps.Where(IsForEnvironment).ToList(),
-                PowerShellAppPackages = apps.PowerShellAppPackages.Where(IsForEnvironment).ToList()
+                WingetApps = manifest.WingetApps.Where(IsForEnvironment).ToList(),
+                ScoopApps = manifest.ScoopApps.Where(IsForEnvironment).ToList(),
+                NonPackageApps = manifest.NonPackageApps.Where(IsForEnvironment).ToList(),
+                PowerShellAppPackages = manifest.PowerShellAppPackages.Where(IsForEnvironment).ToList()
             };
         }
 

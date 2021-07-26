@@ -17,7 +17,7 @@ namespace Configurator
     public class MachineConfigurator : IMachineConfigurator
     {
         private readonly IPowerShellConfiguration powerShellConfiguration;
-        private readonly IAppsRepository appsRepository;
+        private readonly IManifestRepository manifestRepository;
         private readonly IGitConfiguration gitConfiguration;
         private readonly IGitconfigRepository gitconfigRepository;
         private readonly IAppInstaller appInstaller;
@@ -25,7 +25,7 @@ namespace Configurator
         private readonly IConsoleLogger consoleLogger;
 
         public MachineConfigurator(IPowerShellConfiguration powerShellConfiguration,
-            IAppsRepository appsRepository,
+            IManifestRepository manifestRepository,
             IGitConfiguration gitConfiguration,
             IGitconfigRepository gitconfigRepository,
             IAppInstaller appInstaller,
@@ -33,7 +33,7 @@ namespace Configurator
             IConsoleLogger consoleLogger)
         {
             this.powerShellConfiguration = powerShellConfiguration;
-            this.appsRepository = appsRepository;
+            this.manifestRepository = manifestRepository;
             this.gitConfiguration = gitConfiguration;
             this.gitconfigRepository = gitconfigRepository;
             this.appInstaller = appInstaller;
@@ -57,12 +57,12 @@ namespace Configurator
         {
             await powerShellConfiguration.SetExecutionPolicyAsync();
 
-            var apps = await appsRepository.LoadAsync();
+            var manifest = await manifestRepository.LoadAsync();
 
-            await InstallPowerShellAppPackages(apps.PowerShellAppPackages);
+            await InstallPowerShellAppPackages(manifest.PowerShellAppPackages);
             await IncludeCustomGitconfigsAsync();
-            await InstallWingetAppsAsync(apps.WingetApps);
-            await InstallScoopAppsAsync(apps.ScoopApps);
+            await InstallWingetAppsAsync(manifest.WingetApps);
+            await InstallScoopAppsAsync(manifest.ScoopApps);
         }
 
         private async Task InstallPowerShellAppPackages(List<PowerShellAppPackage> powerShellAppPackages)

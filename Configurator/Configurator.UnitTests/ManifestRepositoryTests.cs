@@ -7,15 +7,15 @@ using Moq;
 using Shouldly;
 using Xunit;
 
-namespace Configurator.UnitTests.Apps
+namespace Configurator.UnitTests
 {
-    public class AppsRepositoryTests : UnitTestBase<AppsRepository>
+    public class ManifestRepositoryTests : UnitTestBase<ManifestRepository>
     {
-        private Configurator.Apps.Apps loadedApps;
+        private readonly Manifest loadedManifest;
 
-        public AppsRepositoryTests()
+        public ManifestRepositoryTests()
         {
-            loadedApps = new Configurator.Apps.Apps
+            loadedManifest = new Manifest
             {
                 WingetApps = new List<WingetApp>
                 {
@@ -51,75 +51,75 @@ namespace Configurator.UnitTests.Apps
         [Fact]
         public async Task When_loading()
         {
-            var appsPath = RandomString();
-            var appsJson = RandomString();
+            var manifestPath = RandomString();
+            var manifestJson = RandomString();
             var specifiedEnvironment = new List<string> {"Personal", "Work"};
             var excludedEnvironment = "Media";
 
-            GetMock<IArguments>().SetupGet(x => x.AppsPath).Returns(appsPath);
+            GetMock<IArguments>().SetupGet(x => x.ManifestPath).Returns(manifestPath);
             GetMock<IArguments>().SetupGet(x => x.Environments).Returns(specifiedEnvironment);
-            GetMock<IFileSystem>().Setup(x => x.ReadAllTextAsync(appsPath)).ReturnsAsync(appsJson);
-            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<Configurator.Apps.Apps>(appsJson)).Returns(loadedApps);
+            GetMock<IFileSystem>().Setup(x => x.ReadAllTextAsync(manifestPath)).ReturnsAsync(manifestJson);
+            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<Manifest>(manifestJson)).Returns(loadedManifest);
 
-            var apps = await BecauseAsync(() => ClassUnderTest.LoadAsync());
+            var manifest = await BecauseAsync(() => ClassUnderTest.LoadAsync());
 
-            It($"filters {nameof(apps.WingetApps)} by the specified environment", () =>
+            It($"filters {nameof(manifest.WingetApps)} by the specified environment", () =>
             {
-                apps.WingetApps.ShouldAllBe(x => x.Environments != excludedEnvironment);
-                apps.WingetApps.Count.ShouldBe(3);
+                manifest.WingetApps.ShouldAllBe(x => x.Environments != excludedEnvironment);
+                manifest.WingetApps.Count.ShouldBe(3);
             });
 
-            It($"filters {nameof(apps.ScoopApps)} by the specified environment", () =>
+            It($"filters {nameof(manifest.ScoopApps)} by the specified environment", () =>
             {
-                apps.ScoopApps.ShouldAllBe(x => x.Environments != excludedEnvironment);
-                apps.ScoopApps.Count.ShouldBe(3);
+                manifest.ScoopApps.ShouldAllBe(x => x.Environments != excludedEnvironment);
+                manifest.ScoopApps.Count.ShouldBe(3);
             });
 
-            It($"filters {nameof(apps.NonPackageApps)} by the specified environment", () =>
+            It($"filters {nameof(manifest.NonPackageApps)} by the specified environment", () =>
             {
-                apps.NonPackageApps.ShouldAllBe(x => x.Environments != excludedEnvironment);
-                apps.NonPackageApps.Count.ShouldBe(3);
+                manifest.NonPackageApps.ShouldAllBe(x => x.Environments != excludedEnvironment);
+                manifest.NonPackageApps.Count.ShouldBe(3);
             });
 
-            It($"filters {nameof(apps.PowerShellAppPackages)} by the specified environment", () =>
+            It($"filters {nameof(manifest.PowerShellAppPackages)} by the specified environment", () =>
             {
-                apps.PowerShellAppPackages.ShouldAllBe(x => x.Environments != excludedEnvironment);
-                apps.PowerShellAppPackages.Count.ShouldBe(3);
+                manifest.PowerShellAppPackages.ShouldAllBe(x => x.Environments != excludedEnvironment);
+                manifest.PowerShellAppPackages.Count.ShouldBe(3);
             });
         }
 
         [Fact]
         public async Task When_loading_for_all_environments()
         {
-            var appsPath = RandomString();
-            var appsJson = RandomString();
+            var manifestPath = RandomString();
+            var manifestJson = RandomString();
             var specifiedEnvironment = new List<string> {"All"};
 
-            GetMock<IArguments>().SetupGet(x => x.AppsPath).Returns(appsPath);
+            GetMock<IArguments>().SetupGet(x => x.ManifestPath).Returns(manifestPath);
             GetMock<IArguments>().SetupGet(x => x.Environments).Returns(specifiedEnvironment);
-            GetMock<IFileSystem>().Setup(x => x.ReadAllTextAsync(appsPath)).ReturnsAsync(appsJson);
-            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<Configurator.Apps.Apps>(appsJson)).Returns(loadedApps);
+            GetMock<IFileSystem>().Setup(x => x.ReadAllTextAsync(manifestPath)).ReturnsAsync(manifestJson);
+            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<Manifest>(manifestJson)).Returns(loadedManifest);
 
-            var apps = await BecauseAsync(() => ClassUnderTest.LoadAsync());
+            var manifest = await BecauseAsync(() => ClassUnderTest.LoadAsync());
 
-            It($"includes all {nameof(apps.WingetApps)}", () =>
+            It($"includes all {nameof(manifest.WingetApps)}", () =>
             {
-                apps.WingetApps.Count.ShouldBe(4);
+                manifest.WingetApps.Count.ShouldBe(4);
             });
 
-            It($"includes all {nameof(apps.ScoopApps)}", () =>
+            It($"includes all {nameof(manifest.ScoopApps)}", () =>
             {
-                apps.ScoopApps.Count.ShouldBe(4);
+                manifest.ScoopApps.Count.ShouldBe(4);
             });
 
-            It($"includes all {nameof(apps.NonPackageApps)}", () =>
+            It($"includes all {nameof(manifest.NonPackageApps)}", () =>
             {
-                apps.NonPackageApps.Count.ShouldBe(4);
+                manifest.NonPackageApps.Count.ShouldBe(4);
             });
 
-            It($"includes all {nameof(apps.PowerShellAppPackages)}", () =>
+            It($"includes all {nameof(manifest.PowerShellAppPackages)}", () =>
             {
-                apps.PowerShellAppPackages.Count.ShouldBe(4);
+                manifest.PowerShellAppPackages.Count.ShouldBe(4);
             });
         }
     }

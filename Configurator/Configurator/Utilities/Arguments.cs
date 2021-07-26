@@ -5,7 +5,7 @@ namespace Configurator.Utilities
     public interface IArguments
     {
         InstallEnvironment Environment { get; }
-        string AppsPath { get; }
+        string ManifestPath { get; }
         string GitconfigsPath { get; }
         string DownloadsDir { get; }
         List<string> Environments { get; }
@@ -14,20 +14,20 @@ namespace Configurator.Utilities
     public class Arguments : IArguments
     {
         public Arguments(InstallEnvironment environment,
-            string appsPath,
+            string manifestPath,
             string gitconfigsPath,
             string downloadsDir,
             List<string> environments)
         {
             Environment = environment;
-            AppsPath = appsPath;
+            ManifestPath = manifestPath;
             GitconfigsPath = gitconfigsPath;
             DownloadsDir = downloadsDir;
             Environments = environments;
         }
 
         public InstallEnvironment Environment { get; }
-        public string AppsPath { get; }
+        public string ManifestPath { get; }
         public string GitconfigsPath { get; }
         public string DownloadsDir { get; }
         public List<string> Environments { get; }

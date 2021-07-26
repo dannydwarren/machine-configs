@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using Configurator.Apps;
 
-namespace Configurator.Apps
+namespace Configurator
 {
-    public class Apps
+    public class Manifest
     {
         public List<WingetApp> WingetApps { get; set; } = new List<WingetApp>();
         public List<ScoopApp> ScoopApps { get; set; } = new List<ScoopApp>();

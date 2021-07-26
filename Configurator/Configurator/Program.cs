@@ -12,8 +12,8 @@ namespace Configurator
         {
             var services = ConfigureServices(new Arguments(
                 environment: InstallEnvironment.Personal,
-                // appsPath: @"C:\src\machine-configs\install\apps.json",
-                appsPath: @"C:\src\machine-configs\install\apps_test.json",
+                // manifestPath: @"C:\src\machine-configs\install\manifest.json",
+                manifestPath: @"C:\src\machine-configs\install\manifest_test.json",
                 gitconfigsPath: @"C:\src\machine-configs\git\Gitconfigs.csv",
                 downloadsDir: @"C:\Users\danny\Downloads",
                 environments: new List<string> {"Personal"}
