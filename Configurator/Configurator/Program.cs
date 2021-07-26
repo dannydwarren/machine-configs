@@ -11,9 +11,8 @@ namespace Configurator
         static async Task Main(string[] args)
         {
             var services = ConfigureServices(new Arguments(
-                // manifestPath: @"C:\src\machine-configs\install\manifest.json",
-                manifestPath: @"C:\src\machine-configs\install\manifest_test.json",
-                downloadsDir: @"C:\Users\danny\Downloads",
+                // manifestPath: @"https://raw.githubusercontent.com/dannydwarren/machine-configs/main/manifests/danny.manifest.json",
+                manifestPath: @"https://raw.githubusercontent.com/dannydwarren/machine-configs/main/manifests/manifest_test.json",
                 environments: new List<string> {"Personal"}
             ));
 

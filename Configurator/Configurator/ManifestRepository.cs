@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Configurator.Apps;
 using Configurator.Configuration;
@@ -16,19 +17,23 @@ namespace Configurator
         private readonly IArguments arguments;
         private readonly IFileSystem fileSystem;
         private readonly IJsonSerializer jsonSerializer;
+        private readonly IResourceDownloader resourceDownloader;
 
         public ManifestRepository(IArguments arguments,
             IFileSystem fileSystem,
-            IJsonSerializer jsonSerializer)
+            IJsonSerializer jsonSerializer,
+            IResourceDownloader resourceDownloader)
         {
             this.arguments = arguments;
             this.fileSystem = fileSystem;
             this.jsonSerializer = jsonSerializer;
+            this.resourceDownloader = resourceDownloader;
         }
 
         public async Task<Manifest> LoadAsync()
         {
-            var manifestJson = await fileSystem.ReadAllTextAsync(arguments.ManifestPath);
+            Console.WriteLine($"ManifestPath: {arguments.ManifestPath}");
+            var manifestJson = await ReadManifestAsync();
             var manifest = jsonSerializer.Deserialize<Manifest>(manifestJson)!;
 
             return new Manifest
@@ -39,6 +44,24 @@ namespace Configurator
                 PowerShellAppPackages = manifest.PowerShellAppPackages.Where(IsForEnvironment).ToList(),
                 Gitconfigs = manifest.Gitconfigs.Where(IsForEnvironment).ToList(),
             };
+        }
+
+        private async Task<string> ReadManifestAsync()
+        {
+            var manifestFilePath = arguments.ManifestPath;
+            if (arguments.ManifestPath.StartsWith("http"))
+            {
+                manifestFilePath = await resourceDownloader.DownloadAsync(arguments.ManifestPath,
+                    GetFileNameFromHttpResource(arguments.ManifestPath));
+            }
+
+            return await fileSystem.ReadAllTextAsync(manifestFilePath);
+        }
+
+        private string GetFileNameFromHttpResource(string httpManifestPath)
+        {
+            var lastSlash = httpManifestPath.LastIndexOf("/", StringComparison.Ordinal);
+            return httpManifestPath[(lastSlash + 1)..];
         }
 
         private bool IsForEnvironment(IApp app)

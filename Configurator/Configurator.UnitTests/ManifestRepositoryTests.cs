@@ -140,5 +140,28 @@ namespace Configurator.UnitTests
                 manifest.Gitconfigs.Count.ShouldBe(4);
             });
         }
+
+        [Fact]
+        public async Task When_loading_from_http_resource()
+        {
+            var manifestFilename = $"{RandomString()}.json";
+            var httpManifestPath = @$"http://url-only/{manifestFilename}";
+            var downloadedManifestPath = RandomString();
+            var manifestJson = RandomString();
+            var specifiedEnvironment = new List<string> {"All"};
+
+            GetMock<IArguments>().SetupGet(x => x.ManifestPath).Returns(httpManifestPath);
+            GetMock<IArguments>().SetupGet(x => x.Environments).Returns(specifiedEnvironment);
+            GetMock<IResourceDownloader>().Setup(x => x.DownloadAsync(httpManifestPath, manifestFilename)).ReturnsAsync(downloadedManifestPath);
+            GetMock<IFileSystem>().Setup(x => x.ReadAllTextAsync(downloadedManifestPath)).ReturnsAsync(manifestJson);
+            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<Manifest>(manifestJson)).Returns(loadedManifest);
+
+            var manifest = await BecauseAsync(() => ClassUnderTest.LoadAsync());
+
+            It("builds the manifest", () =>
+            {
+                manifest.ShouldNotBeNull();
+            });
+        }
     }
 }
