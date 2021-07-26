@@ -22,9 +22,9 @@ namespace Configurator.Utilities
 
         public List<string> LoadSystemEntries()
         {
-            var publicDesktopSystemEntries = fileSystem.EnumerateFileSystemEntries(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
-            var userProfileDesktopSystemEntries = fileSystem.EnumerateFileSystemEntries(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),"Desktop"));
-            return publicDesktopSystemEntries.Union(userProfileDesktopSystemEntries).ToList();
+            var userDesktopSystemEntries = fileSystem.EnumerateFileSystemEntries(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
+            var commonDesktopSystemEntries = fileSystem.EnumerateFileSystemEntries(Environment.GetFolderPath(Environment.SpecialFolder.CommonDesktopDirectory));
+            return userDesktopSystemEntries.Union(commonDesktopSystemEntries).ToList();
         }
 
         public void DeletePaths(List<string> paths)

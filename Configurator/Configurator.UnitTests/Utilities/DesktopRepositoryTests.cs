@@ -13,23 +13,23 @@ namespace Configurator.UnitTests.Utilities
         [Fact]
         public void When_loading_system_entries()
         {
-            var publicDesktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            var userProfileDesktopPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Desktop");
-            var publicDesktopSystemEntries = new List<string>
+            var userDesktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            var commonDesktopPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonDesktopDirectory);
+            var userDesktopSystemEntries = new List<string>
             {
-                Path.Combine(publicDesktopPath, RandomString()),
-                Path.Combine(publicDesktopPath, RandomString())
+                Path.Combine(userDesktopPath, RandomString()),
+                Path.Combine(userDesktopPath, RandomString())
             };
-            var userProfileDesktopSystemEntries =new List<string>
+            var commonDesktopSystemEntries =new List<string>
             {
-                Path.Combine(userProfileDesktopPath, RandomString()),
-                Path.Combine(userProfileDesktopPath, RandomString()),
-                Path.Combine(userProfileDesktopPath, RandomString())
+                Path.Combine(commonDesktopPath, RandomString()),
+                Path.Combine(commonDesktopPath, RandomString()),
+                Path.Combine(commonDesktopPath, RandomString())
             };
-            var allDesktopsSystemEntries = publicDesktopSystemEntries.Union(userProfileDesktopSystemEntries);
+            var allDesktopsSystemEntries = userDesktopSystemEntries.Union(commonDesktopSystemEntries);
 
-            GetMock<IFileSystem>().Setup(x => x.EnumerateFileSystemEntries(publicDesktopPath)).Returns(publicDesktopSystemEntries);
-            GetMock<IFileSystem>().Setup(x => x.EnumerateFileSystemEntries(userProfileDesktopPath)).Returns(userProfileDesktopSystemEntries);
+            GetMock<IFileSystem>().Setup(x => x.EnumerateFileSystemEntries(userDesktopPath)).Returns(userDesktopSystemEntries);
+            GetMock<IFileSystem>().Setup(x => x.EnumerateFileSystemEntries(commonDesktopPath)).Returns(commonDesktopSystemEntries);
 
             var filenames = Because(() => ClassUnderTest.LoadSystemEntries());
 

@@ -62,5 +62,28 @@ namespace Configurator.UnitTests.Installers
                 GetMock<IDesktopRepository>().Verify(x => x.DeletePaths(desktopSystemEntriesAddedDuringInstall));
             });
         }
+
+        [Fact]
+        public async Task When_installing_and_nothing_was_added_to_the_desktop()
+        {
+            var app = new WingetApp
+            {
+                AppId = RandomString()
+            };
+
+            var desktopSystemEntries = new List<string>
+            {
+                RandomString(),
+            };
+
+            GetMock<IDesktopRepository>().Setup(x => x.LoadSystemEntries()).Returns(desktopSystemEntries);
+
+            await BecauseAsync(() => ClassUnderTest.InstallAsync(app));
+
+            It("deletes desktop shortcuts", () =>
+            {
+                GetMock<IDesktopRepository>().VerifyNever(x => x.DeletePaths(IsAny<List<string>>()));
+            });
+        }
     }
 }

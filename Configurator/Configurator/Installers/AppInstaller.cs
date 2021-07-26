@@ -28,9 +28,16 @@ namespace Configurator.Installers
         {
             consoleLogger.Info($"Installing '{app.AppId}'");
             var preInstallDesktopSystemEntries = desktopRepository.LoadSystemEntries();
+
             await powerShell.ExecuteAsync(app.InstallScript);
+
             var postInstallDesktopSystemEntries = desktopRepository.LoadSystemEntries();
-            desktopRepository.DeletePaths(postInstallDesktopSystemEntries.Except(preInstallDesktopSystemEntries).ToList());
+            var desktopSystemEntriesToDelete = postInstallDesktopSystemEntries.Except(preInstallDesktopSystemEntries).ToList();
+            if (desktopSystemEntriesToDelete.Any())
+            {
+                desktopRepository.DeletePaths(desktopSystemEntriesToDelete);
+            }
+
             consoleLogger.Result($"Installed '{app.AppId}'");
         }
     }
