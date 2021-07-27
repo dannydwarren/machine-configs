@@ -43,8 +43,10 @@ namespace Configurator.UnitTests
 
             await BecauseAsync(() => ClassUnderTest.ExecuteAsync());
 
-            It("enables scripts to be executed",
-                () => { GetMock<IPowerShellConfiguration>().Verify(x => x.SetExecutionPolicyAsync()); });
+            It("initializes the system", () =>
+            {
+                GetMock<ISystemInitializer>().Verify(x => x.InitializeAsync());
+            });
 
             It("installs PowerShell app packages", () =>
             {

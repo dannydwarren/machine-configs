@@ -15,19 +15,19 @@ namespace Configurator
 
     public class MachineConfigurator : IMachineConfigurator
     {
-        private readonly IPowerShellConfiguration powerShellConfiguration;
+        private readonly ISystemInitializer systemInitializer;
         private readonly IManifestRepository manifestRepository;
         private readonly IAppInstaller appInstaller;
         private readonly IDownloadInstaller downloadInstaller;
         private readonly IConsoleLogger consoleLogger;
 
-        public MachineConfigurator(IPowerShellConfiguration powerShellConfiguration,
+        public MachineConfigurator(ISystemInitializer systemInitializer,
             IManifestRepository manifestRepository,
             IAppInstaller appInstaller,
             IDownloadInstaller downloadInstaller,
             IConsoleLogger consoleLogger)
         {
-            this.powerShellConfiguration = powerShellConfiguration;
+            this.systemInitializer = systemInitializer;
             this.manifestRepository = manifestRepository;
             this.appInstaller = appInstaller;
             this.downloadInstaller = downloadInstaller;
@@ -48,7 +48,7 @@ namespace Configurator
 
         private async Task ExecuteInternalAsync()
         {
-            await powerShellConfiguration.SetExecutionPolicyAsync();
+            await systemInitializer.InitializeAsync();
 
             var manifest = await manifestRepository.LoadAsync();
 
