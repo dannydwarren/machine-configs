@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Configurator.Installers;
 using Configurator.PowerShell;
 using Xunit;
 
@@ -14,6 +15,11 @@ namespace Configurator.UnitTests
             It("sets the PowerShell execution policy", () =>
             {
                 GetMock<IPowerShellConfiguration>().Verify(x => x.SetExecutionPolicyAsync());
+            });
+
+            It("installs winget-cli", () =>
+            {
+                GetMock<IWingetCliInstaller>().Verify(x => x.InstallAsync());
             });
         }
     }
