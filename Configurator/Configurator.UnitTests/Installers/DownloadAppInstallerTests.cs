@@ -12,7 +12,7 @@ using Xunit;
 
 namespace Configurator.UnitTests.Installers
 {
-    public class DownloadInstallerTests : UnitTestBase<DownloadInstaller>
+    public class DownloadAppInstallerTests : UnitTestBase<DownloadAppInstaller>
     {
         [Fact]
         public async Task When_installing()

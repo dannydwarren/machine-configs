@@ -18,19 +18,19 @@ namespace Configurator
         private readonly ISystemInitializer systemInitializer;
         private readonly IManifestRepository manifestRepository;
         private readonly IAppInstaller appInstaller;
-        private readonly IDownloadInstaller downloadInstaller;
+        private readonly IDownloadAppInstaller downloadAppInstaller;
         private readonly IConsoleLogger consoleLogger;
 
         public MachineConfigurator(ISystemInitializer systemInitializer,
             IManifestRepository manifestRepository,
             IAppInstaller appInstaller,
-            IDownloadInstaller downloadInstaller,
+            IDownloadAppInstaller downloadAppInstaller,
             IConsoleLogger consoleLogger)
         {
             this.systemInitializer = systemInitializer;
             this.manifestRepository = manifestRepository;
             this.appInstaller = appInstaller;
-            this.downloadInstaller = downloadInstaller;
+            this.downloadAppInstaller = downloadAppInstaller;
             this.consoleLogger = consoleLogger;
         }
 
@@ -63,7 +63,7 @@ namespace Configurator
         {
             foreach (var downloadApp in downloadApps)
             {
-                await downloadInstaller.InstallAsync(downloadApp);
+                await downloadAppInstaller.InstallAsync(downloadApp);
             }
         }
 

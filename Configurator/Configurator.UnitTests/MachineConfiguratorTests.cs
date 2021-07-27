@@ -50,8 +50,8 @@ namespace Configurator.UnitTests
 
             It("installs PowerShell app packages", () =>
             {
-                GetMock<IDownloadInstaller>().Verify(x => x.InstallAsync(manifest.PowerShellAppPackages[0]));
-                GetMock<IDownloadInstaller>().Verify(x => x.InstallAsync(manifest.PowerShellAppPackages[1]));
+                GetMock<IDownloadAppInstaller>().Verify(x => x.InstallAsync(manifest.PowerShellAppPackages[0]));
+                GetMock<IDownloadAppInstaller>().Verify(x => x.InstallAsync(manifest.PowerShellAppPackages[1]));
             });
 
             It("installs apps via scoop", () =>

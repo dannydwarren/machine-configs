@@ -6,18 +6,18 @@ using Configurator.Utilities;
 
 namespace Configurator.Installers
 {
-    public interface IDownloadInstaller
+    public interface IDownloadAppInstaller
     {
         Task InstallAsync(IDownloadApp app);
     }
 
-    public class DownloadInstaller : IDownloadInstaller
+    public class DownloadAppInstaller : IDownloadAppInstaller
     {
         private readonly IConsoleLogger consoleLogger;
         private readonly IPowerShell powerShell;
         private readonly IDownloaderFactory downloaderFactory;
 
-        public DownloadInstaller(IConsoleLogger consoleLogger,
+        public DownloadAppInstaller(IConsoleLogger consoleLogger,
             IPowerShell powerShell,
             IDownloaderFactory downloaderFactory)
         {
