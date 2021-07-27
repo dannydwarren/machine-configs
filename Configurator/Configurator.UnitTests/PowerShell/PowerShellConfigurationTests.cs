@@ -1,7 +1,6 @@
 ﻿using Configurator.PowerShell;
 using Configurator.Utilities;
 using Moq;
-using Shouldly;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -12,19 +11,25 @@ namespace Configurator.UnitTests.PowerShell
         [Fact]
         public async Task When_setting_execution_policy()
         {
-            var result = new PowerShellResult
+            var executionPolicy = "RemoteSigned";
+            var powerShellResult = new PowerShellResult
             {
                 AsString = RandomString()
             };
-            
-            GetMock<IPowerShell>().Setup(x => x.ExecuteAsync(Is<string>(x=> x.Contains("RemoteSigned")))).ReturnsAsync(result);
 
-            var policy = await BecauseAsync(() => ClassUnderTest.SetExecutionPolicyAsync());
+            GetMock<IPowerShell>().Setup(x => x.ExecuteAsync(Is<string>(y => y.Contains(executionPolicy)))).ReturnsAsync(powerShellResult);
 
-            It("reports the set policy", () =>
+            await BecauseAsync(() => ClassUnderTest.SetExecutionPolicyAsync());
+
+            It("reports the set policy for PowerShell", () =>
             {
-                GetMock<IConsoleLogger>().Verify(x => x.Result($"Execution Policy: {result.AsString}"));
-                policy.ShouldBe(result.AsString);
+                GetMock<IConsoleLogger>().Verify(x => x.Result($"PowerShell - Execution Policy: {powerShellResult.AsString}"));
+            });
+
+            It("sets and reports the set policy for Windows PowerShell", () =>
+            {
+                GetMock<IWindowsPowerShell>().Verify(x => x.Execute(Is<string>(y => y.Contains("RemoteSigned"))));
+                GetMock<IConsoleLogger>().Verify(x => x.Result($"Windows PowerShell - Execution Policy: {executionPolicy}"));
             });
         }
     }

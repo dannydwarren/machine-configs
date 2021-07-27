@@ -5,27 +5,33 @@ namespace Configurator.PowerShell
 {
     public interface IPowerShellConfiguration
     {
-        Task<string> SetExecutionPolicyAsync();
+        Task SetExecutionPolicyAsync();
     }
 
     public class PowerShellConfiguration : IPowerShellConfiguration
     {
         private readonly IPowerShell powerShell;
+        private readonly IWindowsPowerShell windowsPowerShell;
         private readonly IConsoleLogger consoleLogger;
 
-        public PowerShellConfiguration(IPowerShell powerShell, IConsoleLogger consoleLogger)
+        public PowerShellConfiguration(IPowerShell powerShell, IWindowsPowerShell windowsPowerShell, IConsoleLogger consoleLogger)
         {
             this.powerShell = powerShell;
+            this.windowsPowerShell = windowsPowerShell;
             this.consoleLogger = consoleLogger;
         }
 
-        public async Task<string> SetExecutionPolicyAsync()
+        public async Task SetExecutionPolicyAsync()
         {
-            var result = await powerShell.ExecuteAsync(@"Set-ExecutionPolicy RemoteSigned
-Get-ExecutionPolicy");
-            consoleLogger.Result($"Execution Policy: {result.AsString}");
+            var executionPolicy = "RemoteSigned";
+            var script = @$"Set-ExecutionPolicy {executionPolicy} -Force
+Get-ExecutionPolicy";
 
-            return result.AsString;
+            var powerShellResult = await powerShell.ExecuteAsync(script);
+            consoleLogger.Result($"PowerShell - Execution Policy: {powerShellResult.AsString}");
+
+            windowsPowerShell.Execute(script);
+            consoleLogger.Result($"Windows PowerShell - Execution Policy: {executionPolicy}");
         }
     }
 }

@@ -10,12 +10,11 @@ namespace Configurator.IntegrationTests.PowerShell
 {
     public class PowerShellTests : IntegrationTestBase<Configurator.PowerShell.PowerShell>
     {
-        private AutoMoqer mocker;
-        private Mock<IConsoleLogger> mockConsoleLogger;
+        private readonly Mock<IConsoleLogger> mockConsoleLogger;
 
         public PowerShellTests()
         {
-            mocker = new AutoMoqer();
+            AutoMoqer mocker = new AutoMoqer();
             mockConsoleLogger = mocker.GetMock<IConsoleLogger>();
 
             Services.AddTransient(_ => mockConsoleLogger.Object);
