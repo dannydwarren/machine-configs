@@ -6,6 +6,6 @@ namespace Configurator.Apps
         public string Environments { get; set; } = "";
 
         public string InstallScript => $"scoop install {AppId}";
-        public string VerificationScript => $"scoop export | Select-String {AppId}";
+        public string VerificationScript => $"(scoop export | Select-String {AppId}) -ne $null";
     }
 }

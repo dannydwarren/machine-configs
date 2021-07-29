@@ -6,6 +6,6 @@ namespace Configurator.Apps
         public string Environments { get; set; } = "";
 
         public string InstallScript => $"winget install {AppId}";
-        public string VerificationScript => $"winget list {AppId}";
+        public string VerificationScript => $"(winget list | Select-String {AppId}) -ne $null";
     }
 }
