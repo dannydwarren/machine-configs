@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Configurator.PowerShell;
 using System.Threading.Tasks;
 using Configurator.Apps;
 using Configurator.Installers;
@@ -51,6 +50,11 @@ namespace Configurator
             await systemInitializer.InitializeAsync();
 
             var manifest = await manifestRepository.LoadAsync();
+
+            consoleLogger.Debug($"Loaded {manifest.PowerShellAppPackages.Count} {nameof(manifest.PowerShellAppPackages)}");
+            consoleLogger.Debug($"Loaded {manifest.WingetApps.Count} {nameof(manifest.WingetApps)}");
+            consoleLogger.Debug($"Loaded {manifest.ScoopApps.Count} {nameof(manifest.ScoopApps)}");
+            consoleLogger.Debug($"Loaded {manifest.Gitconfigs.Count} {nameof(manifest.Gitconfigs)}");
 
             await InstallDownloadApps(manifest.PowerShellAppPackages);
             await InstallAppsAsync(manifest.WingetApps);

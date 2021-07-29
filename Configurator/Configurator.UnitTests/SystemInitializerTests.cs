@@ -21,6 +21,11 @@ namespace Configurator.UnitTests
             {
                 GetMock<IWingetCliInstaller>().Verify(x => x.InstallAsync());
             });
+
+            It("installs scoop-cli", () =>
+            {
+                GetMock<IScoopCliInstaller>().Verify(x => x.InstallAsync());
+            });
         }
     }
 }
