@@ -1,4 +1,16 @@
 {
+    "WingetApps": [
+        {
+            "AppId": "Git.Git",
+            "Environments": "All"
+        }
+    ],
+    "ScoopApps": [
+        {
+            "AppId": "mob",
+            "Environments": "All"
+        }
+    ],
     "Gitconfigs": [
         {
             "AppId": "C:\\src\\machine-configs\\git\\danny.gitconfig",
