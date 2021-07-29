@@ -14,9 +14,65 @@ namespace Configurator.UnitTests.Installers
         [Fact]
         public async Task When_installing()
         {
-            var app = new WingetApp
+            var app = new ScriptApp
             {
-                AppId = RandomString()
+                AppId = RandomString(),
+                InstallScript = RandomString(),
+                VerificationScript = RandomString()
+            };
+
+            var desktopSystemEntriesPreInstall = new List<string>
+            {
+                RandomString(),
+            };
+
+            var desktopSystemEntriesAddedDuringInstall = new List<string>
+            {
+                RandomString(),
+                RandomString(),
+            };
+
+            var desktopSystemEntriesPostInstall =
+                desktopSystemEntriesPreInstall.Union(desktopSystemEntriesAddedDuringInstall).ToList();
+
+            bool isPreInstall = true;
+            GetMock<IDesktopRepository>().Setup(x => x.LoadSystemEntries()).Returns(() =>
+            {
+                if (isPreInstall)
+                {
+                    isPreInstall = false;
+                    return desktopSystemEntriesPreInstall;
+                }
+                return desktopSystemEntriesPostInstall;
+            });
+
+            await BecauseAsync(() => ClassUnderTest.InstallAsync(app));
+
+            It("logs", () =>
+            {
+                GetMock<IConsoleLogger>().Verify(x => x.Info($"Installing '{app.AppId}'"));
+                GetMock<IConsoleLogger>().Verify(x => x.Result($"Installed '{app.AppId}'"));
+            });
+
+            It("runs the install script", () =>
+            {
+                GetMock<IPowerShell>().Verify(x => x.ExecuteAsync(app.InstallScript, app.VerificationScript));
+            });
+
+            It("deletes desktop shortcuts", () =>
+            {
+                GetMock<IDesktopRepository>().Verify(x => x.DeletePaths(desktopSystemEntriesAddedDuringInstall));
+            });
+        }
+
+        [Fact]
+        public async Task When_installing_and_no_verification_script_was_provided()
+        {
+            var app = new ScriptApp
+            {
+                AppId = RandomString(),
+                InstallScript = RandomString(),
+                VerificationScript = null
             };
 
             var desktopSystemEntriesPreInstall = new List<string>
