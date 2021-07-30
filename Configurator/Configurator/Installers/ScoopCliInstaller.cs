@@ -14,7 +14,17 @@ namespace Configurator.Installers
         {
             AppId = "ScoopCli",
             InstallScript = @"powershell -Command ""iwr -useb get.scoop.sh | iex""",
-            VerificationScript = "(Get-Command scoop).Name"
+            VerificationScript = @"function Test-CommandExists
+{
+    param ($command)
+    $oldPreference = $ErrorActionPreference
+    $ErrorActionPreference = 'stop'
+    try {if(Get-Command $command){return $true}}
+    catch {return $false}
+    finally {$ErrorActionPreference=$oldPreference}
+}
+
+Test-CommandExists scoop"
         };
 
         private readonly IAppInstaller appInstaller;
