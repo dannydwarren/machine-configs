@@ -14,7 +14,8 @@
         },
         {
             "AppId": "Microsoft.AzureDataStudio",
-            "Environments": "Work"
+            "Environments": "Work",
+            "Notes": "VerificationScript not working"
         },
         {
             "AppId": "Microsoft.AzureCLI",
@@ -22,7 +23,8 @@
         },
         {
             "AppId": "Blizzard.BattleNet",
-            "Environments": "Personal"
+            "Environments": "Personal",
+            "Notes":"Installs the auto-updater which requires manual interaction to actually install Battle.NET"
         },
         {
             "AppId": "alcpu.CoreTemp",
@@ -78,7 +80,8 @@
         },
         {
             "AppId": "Microsoft.VisualStudio.2019.Professional",
-            "Environments": "Personal"
+            "Environments": "Personal",
+            "Notes": "Causes PC reboot"
         },
         {
             "AppId": "Nvidia.GeForceExperience",
@@ -180,7 +183,8 @@
     "ScoopApps": [
         {
             "AppId": "mob",
-            "Environments": "All"
+            "Environments": "All",
+            "Notes": "All scoop installers start writing at the top of the PS buffer"
         },
         {
             "AppId": "scrcpy",
@@ -205,18 +209,6 @@
         {
             "AppId": "sysinternals",
             "Environments": "All"
-        }
-    ],
-    "PowerShellAppPackages": [
-        {
-            "AppId": "Microsoft.Winget.Source",
-            "Environments": "All",
-            "Downloader": "GitHubAssetDownloader",
-            "DownloaderArgs": {
-                "User": "microsoft",
-                "Repo": "winget-cli",
-                "Extension": "*.msixbundle"
-            }
         }
     ],
     "Gitconfigs": [
