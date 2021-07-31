@@ -2,17 +2,6 @@ function InstallFollowup([string]$ProgramName, [scriptblock]$Followup) {
     ConfigFollowup "Finish $ProgramName Install" $Followup
 }
 
-Block "Configure scoop extras bucket" {
-    scoop bucket add extras
-} {
-    scoop bucket list | Select-String extras
-}
-
-Block "Configure scoop nonportable bucket" {
-    scoop bucket add nonportable
-} {
-    scoop bucket list | Select-String nonportable
-}
 
 # TODO: Ask Ben
 Block "Install VS Code" {

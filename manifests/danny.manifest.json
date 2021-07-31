@@ -180,6 +180,16 @@
             "Environments": "All"
         }
     ],
+    "ScoopBuckets": [
+        {
+            "AppId": "extras",
+            "Environments": "All"
+        },
+        {
+            "AppId": "nonportable",
+            "Environments": "All"
+        }
+    ],
     "ScoopApps": [
         {
             "AppId": "mob",

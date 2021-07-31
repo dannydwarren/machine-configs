@@ -44,6 +44,9 @@
       <None Update="TestManifests\manifest_gitconfigs_only.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="TestManifests\manifest_scoop_buckets_only.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

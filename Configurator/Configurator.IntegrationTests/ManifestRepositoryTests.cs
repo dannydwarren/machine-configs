@@ -36,6 +36,21 @@ namespace Configurator.IntegrationTests
         }
 
         [Fact]
+        public async Task When_parsing_scoop_buckets()
+        {
+            mockArgs.SetupGet(x => x.ManifestPath).Returns("./TestManifests/manifest_scoop_buckets_only.json");
+
+            Services.AddTransient(_ => mockArgs.Object);
+
+            var manifest = await BecauseAsync(() => ClassUnderTest.LoadAsync());
+
+            It("parses", () =>
+            {
+                manifest.ScoopBuckets.ShouldHaveSingleItem().AppId.ShouldBe("scoop-bucket-app-id");
+            });
+        }
+
+        [Fact]
         public async Task When_parsing_winget_apps()
         {
             mockArgs.SetupGet(x => x.ManifestPath).Returns("./TestManifests/manifest_winget_only.json");

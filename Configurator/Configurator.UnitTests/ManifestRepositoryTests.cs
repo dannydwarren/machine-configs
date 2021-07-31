@@ -24,6 +24,13 @@ namespace Configurator.UnitTests
                     new WingetApp {AppId = RandomString(), Environments = "Work"},
                     new WingetApp {AppId = RandomString(), Environments = "All"}
                 },
+                ScoopBuckets = new List<ScoopBucketApp>
+                {
+                    new ScoopBucketApp {AppId = RandomString(), Environments = "Personal"},
+                    new ScoopBucketApp {AppId = RandomString(), Environments = "Media"},
+                    new ScoopBucketApp {AppId = RandomString(), Environments = "Work"},
+                    new ScoopBucketApp {AppId = RandomString(), Environments = "All"}
+                },
                 ScoopApps = new List<ScoopApp>
                 {
                     new ScoopApp {AppId = RandomString(), Environments = "Personal"},
@@ -82,6 +89,12 @@ namespace Configurator.UnitTests
                 manifest.ScoopApps.Count.ShouldBe(3);
             });
 
+            It($"filters {nameof(manifest.ScoopBuckets)} by the specified environment", () =>
+            {
+                manifest.ScoopBuckets.ShouldAllBe(x => x.Environments != excludedEnvironment);
+                manifest.ScoopBuckets.Count.ShouldBe(3);
+            });
+
             It($"filters {nameof(manifest.NonPackageApps)} by the specified environment", () =>
             {
                 manifest.NonPackageApps.ShouldAllBe(x => x.Environments != excludedEnvironment);
@@ -123,6 +136,11 @@ namespace Configurator.UnitTests
             It($"includes all {nameof(manifest.ScoopApps)}", () =>
             {
                 manifest.ScoopApps.Count.ShouldBe(4);
+            });
+
+            It($"includes all {nameof(manifest.ScoopBuckets)}", () =>
+            {
+                manifest.ScoopBuckets.Count.ShouldBe(4);
             });
 
             It($"includes all {nameof(manifest.NonPackageApps)}", () =>
