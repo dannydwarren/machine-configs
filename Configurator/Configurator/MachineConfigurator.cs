@@ -53,11 +53,13 @@ namespace Configurator
 
             consoleLogger.Debug($"Loaded {manifest.PowerShellAppPackages.Count} {nameof(manifest.PowerShellAppPackages)}");
             consoleLogger.Debug($"Loaded {manifest.WingetApps.Count} {nameof(manifest.WingetApps)}");
+            consoleLogger.Debug($"Loaded {manifest.ScoopBuckets.Count} {nameof(manifest.ScoopBuckets)}");
             consoleLogger.Debug($"Loaded {manifest.ScoopApps.Count} {nameof(manifest.ScoopApps)}");
             consoleLogger.Debug($"Loaded {manifest.Gitconfigs.Count} {nameof(manifest.Gitconfigs)}");
 
             await InstallDownloadApps(manifest.PowerShellAppPackages);
             await InstallAppsAsync(manifest.WingetApps);
+            await InstallAppsAsync(manifest.ScoopBuckets);
             await InstallAppsAsync(manifest.ScoopApps);
             await InstallAppsAsync(manifest.Gitconfigs);
         }

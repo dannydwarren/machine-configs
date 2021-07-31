@@ -22,6 +22,11 @@ namespace Configurator.UnitTests
                     new PowerShellAppPackage {AppId = RandomString(), Environments = "Personal"},
                     new PowerShellAppPackage {AppId = RandomString(), Environments = "All"}
                 },
+                ScoopBuckets = new List<ScoopBucketApp>
+                {
+                    new ScoopBucketApp {AppId = RandomString(), Environments = "Personal"},
+                    new ScoopBucketApp {AppId = RandomString(), Environments = "All"}
+                },
                 ScoopApps = new List<ScoopApp>
                 {
                     new ScoopApp {AppId = RandomString(), Environments = "Personal"},
@@ -52,6 +57,12 @@ namespace Configurator.UnitTests
             {
                 GetMock<IDownloadAppInstaller>().Verify(x => x.InstallAsync(manifest.PowerShellAppPackages[0]));
                 GetMock<IDownloadAppInstaller>().Verify(x => x.InstallAsync(manifest.PowerShellAppPackages[1]));
+            });
+
+            It("installs scoop buckets", () =>
+            {
+                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(manifest.ScoopBuckets[0]));
+                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(manifest.ScoopBuckets[1]));
             });
 
             It("installs apps via scoop", () =>
