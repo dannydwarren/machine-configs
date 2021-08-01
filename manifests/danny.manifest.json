@@ -172,11 +172,11 @@
             "Environments": "All"
         },
         {
-            "AppId": "Microsoft.dotnet --version 3.1",
+            "AppId": "Microsoft.dotnet --version 3.1.410.15736",
             "Environments": "All"
         },
         {
-            "AppId": "Microsoft.dotnet --version 5",
+            "AppId": "Microsoft.dotnet",
             "Environments": "All"
         }
     ],
