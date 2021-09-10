@@ -1,0 +1,11 @@
+﻿{
+    "Apps": [
+        {
+            "Installer": "Script",
+            "AppId": "script-app-id",
+            "Environments": "Test",
+            "InstallScript": "install-script",
+            "VerificationScript": "verification-script"
+        }
+    ]
+}

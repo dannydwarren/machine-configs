@@ -1,0 +1,9 @@
+﻿{
+    "Apps": [
+        {
+            "Installer": "Winget",
+            "AppId": "winget-app-id",
+            "Environments": "Test"
+        }
+    ]
+}

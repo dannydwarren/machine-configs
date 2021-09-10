@@ -2,23 +2,6 @@ function InstallFollowup([string]$ProgramName, [scriptblock]$Followup) {
     ConfigFollowup "Finish $ProgramName Install" $Followup
 }
 
-
-# TODO: Ask Ben
-Block "Install VS Code" {
-    Download-File https://aka.ms/win32-x64-user-stable $env:tmp\VSCodeUserSetup-x64.exe
-    . $env:tmp\VSCodeUserSetup-x64.exe /SILENT /TASKS="associatewithfiles,addtopath" /LOG=$env:tmp\VSCodeInstallLog.txt
-    WaitWhile { !(Test-ProgramInstalled "Visual Studio Code") } "Waiting for VS Code to be installed"
-    $codeCmd = "$env:LocalAppData\Programs\Microsoft VS Code\bin\code.cmd"
-    Write-ManualStep "Turn on Settings Sync"
-    Write-ManualStep "`tReplace Local"
-    Write-ManualStep "Watch log with ctrl+shift+u"
-    Write-ManualStep "Show synced data"
-    Write-ManualStep "`tUpdate name of synced machine"
-    . $codeCmd
-} {
-    Test-ProgramInstalled "Microsoft Visual Studio Code (User)"
-}
-
 Block "Install Visual Studio" {
     # https://visualstudio.microsoft.com/downloads/
     $downloadUrl = (iwr "https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Professional&rel=16" -useb | sls "https://download\.visualstudio\.microsoft\.com/download/pr/.+?/vs_Professional.exe").Matches.Value

@@ -1,0 +1,9 @@
+﻿{
+    "Apps": [
+        {
+            "Installer": "Scoop",
+            "AppId": "scoop-app-id",
+            "Environments": "Test"
+        }
+    ]
+}

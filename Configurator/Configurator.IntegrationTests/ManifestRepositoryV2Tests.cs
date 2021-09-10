@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMoqCore;
+using Configurator.Apps;
 using Configurator.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
@@ -9,11 +10,11 @@ using Xunit;
 
 namespace Configurator.IntegrationTests
 {
-    public class ManifestRepositoryTests : IntegrationTestBase<ManifestRepository>
+    public class ManifestRepositoryV2Tests : IntegrationTestBase<ManifestRepositoryV2>
     {
         private readonly Mock<IArguments> mockArgs;
 
-        public ManifestRepositoryTests()
+        public ManifestRepositoryV2Tests()
         {
             var mocker = new AutoMoqer();
             mockArgs = mocker.GetMock<IArguments>();
@@ -23,7 +24,7 @@ namespace Configurator.IntegrationTests
         [Fact]
         public async Task When_parsing_scoop_apps()
         {
-            mockArgs.SetupGet(x => x.ManifestPath).Returns("./TestManifests/scoop-only_manifest.json");
+            mockArgs.SetupGet(x => x.ManifestPath).Returns("./TestManifests/scoop-only_manifest_v2.json");
 
             Services.AddTransient(_ => mockArgs.Object);
 
@@ -31,14 +32,15 @@ namespace Configurator.IntegrationTests
 
             It("parses", () =>
             {
-                manifest.ScoopApps.ShouldHaveSingleItem().AppId.ShouldBe("scoop-app-id");
+                manifest.Apps.ShouldHaveSingleItem()
+                    .ShouldBeOfType<ScoopApp>().AppId.ShouldBe("scoop-app-id");
             });
         }
 
         [Fact]
         public async Task When_parsing_scoop_buckets()
         {
-            mockArgs.SetupGet(x => x.ManifestPath).Returns("./TestManifests/scoop-buckets-only_manifest.json");
+            mockArgs.SetupGet(x => x.ManifestPath).Returns("./TestManifests/scoop-buckets-only_manifest_v2.json");
 
             Services.AddTransient(_ => mockArgs.Object);
 
@@ -46,14 +48,15 @@ namespace Configurator.IntegrationTests
 
             It("parses", () =>
             {
-                manifest.ScoopBuckets.ShouldHaveSingleItem().AppId.ShouldBe("scoop-bucket-app-id");
+                manifest.Apps.ShouldHaveSingleItem()
+                    .ShouldBeOfType<ScoopBucketApp>().AppId.ShouldBe("scoop-bucket-app-id");
             });
         }
 
         [Fact]
         public async Task When_parsing_winget_apps()
         {
-            mockArgs.SetupGet(x => x.ManifestPath).Returns("./TestManifests/winget-only_manifest.json");
+            mockArgs.SetupGet(x => x.ManifestPath).Returns("./TestManifests/winget-only_manifest_v2.json");
 
             Services.AddTransient(_ => mockArgs.Object);
 
@@ -61,14 +64,15 @@ namespace Configurator.IntegrationTests
 
             It("parses", () =>
             {
-                manifest.WingetApps.ShouldHaveSingleItem().AppId.ShouldBe("winget-app-id");
+                manifest.Apps.ShouldHaveSingleItem()
+                    .ShouldBeOfType<WingetApp>().AppId.ShouldBe("winget-app-id");
             });
         }
 
         [Fact]
         public async Task When_parsing_non_package_apps()
         {
-            mockArgs.SetupGet(x => x.ManifestPath).Returns("./TestManifests/non-package-only_manifest.json");
+            mockArgs.SetupGet(x => x.ManifestPath).Returns("./TestManifests/non-package-only_manifest_v2.json");
 
             Services.AddTransient(_ => mockArgs.Object);
 
@@ -76,14 +80,15 @@ namespace Configurator.IntegrationTests
 
             It("parses", () =>
             {
-                manifest.NonPackageApps.ShouldHaveSingleItem().AppId.ShouldBe("non-package-app-id");
+                manifest.Apps.ShouldHaveSingleItem()
+                    .ShouldBeOfType<NonPackageApp>().AppId.ShouldBe("non-package-app-id");
             });
         }
 
         [Fact]
         public async Task When_parsing_gitconfigs()
         {
-            mockArgs.SetupGet(x => x.ManifestPath).Returns("./TestManifests/gitconfigs-only_manifest.json");
+            mockArgs.SetupGet(x => x.ManifestPath).Returns("./TestManifests/gitconfigs-only_manifest_v2.json");
 
             Services.AddTransient(_ => mockArgs.Object);
 
@@ -91,14 +96,15 @@ namespace Configurator.IntegrationTests
 
             It("parses", () =>
             {
-                manifest.Gitconfigs.ShouldHaveSingleItem().AppId.ShouldBe("gitconfig-app-id");
+                manifest.Apps.ShouldHaveSingleItem()
+                    .ShouldBeOfType<GitconfigApp>().AppId.ShouldBe("gitconfig-app-id");
             });
         }
 
         [Fact]
         public async Task When_parsing_power_shell_app_packages()
         {
-            mockArgs.SetupGet(x => x.ManifestPath).Returns("./TestManifests/power-shell-app-package-only_manifest.json");
+            mockArgs.SetupGet(x => x.ManifestPath).Returns("./TestManifests/power-shell-app-package-only_manifest_v2.json");
 
             Services.AddTransient(_ => mockArgs.Object);
 
@@ -106,7 +112,8 @@ namespace Configurator.IntegrationTests
 
             It("parses", () =>
             {
-                manifest.PowerShellAppPackages.ShouldHaveSingleItem().ShouldSatisfyAllConditions(x =>
+                manifest.Apps.ShouldHaveSingleItem()
+                    .ShouldBeOfType<PowerShellAppPackage>().ShouldSatisfyAllConditions(x =>
                 {
                     x.AppId.ShouldBe("power-shell-app-package-app-id");
                     x.Downloader.ShouldBe("some-downloader");
@@ -114,5 +121,27 @@ namespace Configurator.IntegrationTests
                 });
             });
         }
+
+        [Fact]
+        public async Task When_parsing_scripts()
+        {
+            mockArgs.SetupGet(x => x.ManifestPath).Returns("./TestManifests/script-only_manifest_v2.json");
+
+            Services.AddTransient(_ => mockArgs.Object);
+
+            var manifest = await BecauseAsync(() => ClassUnderTest.LoadAsync());
+
+            It("parses", () =>
+            {
+                manifest.Apps.ShouldHaveSingleItem()
+                    .ShouldBeOfType<ScriptApp>().ShouldSatisfyAllConditions(x =>
+                    {
+                        x.AppId.ShouldBe("script-app-id");
+                        x.InstallScript.ShouldBe("install-script");
+                        x.VerificationScript.ShouldBe("verification-script");
+                    });
+            });
+        }
+
     }
 }

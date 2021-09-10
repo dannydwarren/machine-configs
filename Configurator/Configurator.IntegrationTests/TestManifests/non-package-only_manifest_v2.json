@@ -1,0 +1,9 @@
+﻿{
+    "Apps": [
+        {
+            "Installer": "NonPackageApp",
+            "AppId": "non-package-app-id",
+            "Environments": "Test"
+        }
+    ]
+}

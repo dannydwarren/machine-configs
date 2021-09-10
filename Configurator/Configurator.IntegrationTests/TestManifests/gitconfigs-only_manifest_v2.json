@@ -1,0 +1,9 @@
+﻿{
+    "Apps": [
+        {
+            "Installer": "Gitconfig",
+            "AppId": "gitconfig-app-id",
+            "Environments": "Test"
+        }
+    ]
+}

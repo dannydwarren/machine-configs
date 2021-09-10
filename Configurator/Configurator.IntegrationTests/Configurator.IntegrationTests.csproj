@@ -29,22 +29,43 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="TestManifests\manifest_scoop_only.json">
+      <None Update="TestManifests\scoop-only_manifest.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="TestManifests\manifest_winget_only.json">
+      <None Update="TestManifests\winget-only_manifest.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="TestManifests\manifest_non-package_only.json">
+      <None Update="TestManifests\non-package-only_manifest.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="TestManifests\manifest_power-shell-app-package_only.json">
+      <None Update="TestManifests\power-shell-app-package-only_manifest.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="TestManifests\manifest_gitconfigs_only.json">
+      <None Update="TestManifests\gitconfigs-only_manifest.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="TestManifests\manifest_scoop_buckets_only.json">
+      <None Update="TestManifests\scoop-buckets-only_manifest.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestManifests\gitconfigs-only_manifest_v2.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestManifests\non-package-only_manifest_v2.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestManifests\power-shell-app-package-only_manifest_v2.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestManifests\scoop-buckets-only_manifest_v2.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestManifests\scoop-only_manifest_v2.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestManifests\winget-only_manifest_v2.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestManifests\script-only_manifest_v2.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>
