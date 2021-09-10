@@ -22,11 +22,6 @@
             "Environments": "Work"
         },
         {
-            "AppId": "Blizzard.BattleNet",
-            "Environments": "Personal",
-            "Notes":"Installs the auto-updater which requires manual interaction to actually install Battle.NET"
-        },
-        {
             "AppId": "alcpu.CoreTemp",
             "Environments": "All"
         },
@@ -223,7 +218,8 @@
     ],
     "Gitconfigs": [
         {
-            "AppId": "C:\\src\\machine-configs\\git\\danny.gitconfig"
+            "AppId": "C:\\src\\machine-configs\\git\\danny.gitconfig",
+            "Environments": "All"
         }
     ],
     "NonPackageApps": [
@@ -254,6 +250,11 @@
         {
             "AppId": "Uplay#May be replaced with Ubisoft.Connect",
             "Environments": "Personal"
+        },
+        {
+            "AppId": "Blizzard.BattleNet",
+            "Environments": "Personal",
+            "Notes": "Installs the auto-updater which requires manual interaction to actually install Battle.NET"
         },
         {
             "AppId": "ZoomIt",
