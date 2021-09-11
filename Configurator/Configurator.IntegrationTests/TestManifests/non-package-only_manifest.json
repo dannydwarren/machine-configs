@@ -1,8 +1,0 @@
-﻿{
-    "NonPackageApps": [
-        {
-            "AppId": "non-package-app-id",
-            "Environments": "Test"
-        }
-    ]
-}

@@ -1,8 +1,0 @@
-﻿{
-    "ScoopBuckets": [
-        {
-            "AppId": "scoop-bucket-app-id",
-            "Environments": "Test"
-        }
-    ]
-}

@@ -29,24 +29,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="TestManifests\scoop-only_manifest.json">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Update="TestManifests\winget-only_manifest.json">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Update="TestManifests\non-package-only_manifest.json">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Update="TestManifests\power-shell-app-package-only_manifest.json">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Update="TestManifests\gitconfigs-only_manifest.json">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Update="TestManifests\scoop-buckets-only_manifest.json">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
       <None Update="TestManifests\gitconfigs-only_manifest_v2.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
