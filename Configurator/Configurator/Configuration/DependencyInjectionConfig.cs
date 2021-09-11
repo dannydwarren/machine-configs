@@ -1,5 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.Runtime.CompilerServices;
+using Microsoft.Extensions.DependencyInjection;
 
+[assembly: InternalsVisibleTo("Configurator.UnitTests")]
 namespace Configurator.Configuration
 {
     public static class DependencyInjectionConfig

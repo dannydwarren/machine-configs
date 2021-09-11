@@ -1,8 +1,8 @@
 ﻿{
     "Apps": [
         {
-            "Installer": "Gitconfig",
-            "AppId": "gitconfig-app-id",
+            "AppType": "Winget",
+            "AppId": "winget-app-id",
             "Environments": "Test"
         }
     ]

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Configurator.Apps;
 using Configurator.Configuration;
@@ -8,19 +9,19 @@ using Configurator.Utilities;
 
 namespace Configurator
 {
-    public interface IManifestRepositoryV2
+    public interface IManifestRepository
     {
-        Task<ManifestV2> LoadAsync();
+        Task<Manifest> LoadAsync();
     }
 
-    public class ManifestRepositoryV2 : IManifestRepositoryV2
+    public class ManifestRepository : IManifestRepository
     {
         private readonly IArguments arguments;
         private readonly IFileSystem fileSystem;
         private readonly IJsonSerializer jsonSerializer;
         private readonly IResourceDownloader resourceDownloader;
 
-        public ManifestRepositoryV2(IArguments arguments,
+        public ManifestRepository(IArguments arguments,
             IFileSystem fileSystem,
             IJsonSerializer jsonSerializer,
             IResourceDownloader resourceDownloader)
@@ -31,11 +32,11 @@ namespace Configurator
             this.resourceDownloader = resourceDownloader;
         }
 
-        public async Task<ManifestV2> LoadAsync()
+        public async Task<Manifest> LoadAsync()
         {
             Console.WriteLine($"ManifestPath: {arguments.ManifestPath}");
             var manifestJson = await ReadManifestAsync();
-            var manifest = jsonSerializer.Deserialize<ManifestV2Raw>(manifestJson)!;
+            var manifest = jsonSerializer.Deserialize<RawManifest>(manifestJson)!;
             var installables = manifest.Apps.Select(x =>
             {
                 var installable = jsonSerializer.Deserialize<Installable>(x.ToString()!);
@@ -45,7 +46,7 @@ namespace Configurator
             }).ToList();
             var installablesToInstall = installables.Where(IsForEnvironment).ToList();
 
-            return new ManifestV2
+            return new Manifest
             {
                 Apps = ParseApps(installablesToInstall)
             };
@@ -55,14 +56,14 @@ namespace Configurator
         {
             return installables.Select(x => (IApp)(x switch
             {
-                { Installer: Installer.Gitconfig } => jsonSerializer.Deserialize<GitconfigApp>(x.AppData.ToString()!),
-                { Installer: Installer.NonPackageApp } => jsonSerializer.Deserialize<NonPackageApp>(x.AppData.ToString()!),
-                { Installer: Installer.PowerShellAppPackage } => jsonSerializer.Deserialize<PowerShellAppPackage>(x.AppData.ToString()!),
-                { Installer: Installer.Scoop } => jsonSerializer.Deserialize<ScoopApp>(x.AppData.ToString()!),
-                { Installer: Installer.ScoopBucket } => jsonSerializer.Deserialize<ScoopBucketApp>(x.AppData.ToString()!),
-                { Installer: Installer.Script } => jsonSerializer.Deserialize<ScriptApp>(x.AppData.ToString()!),
-                { Installer: Installer.Winget } => jsonSerializer.Deserialize<WingetApp>(x.AppData.ToString()!),
-                _ => throw new Exception($"Installer type '{x.Installer}' not supported")
+                { AppType: AppType.Gitconfig } => jsonSerializer.Deserialize<GitconfigApp>(x.AppData.ToString()!),
+                { AppType: AppType.NonPackageApp } => jsonSerializer.Deserialize<NonPackageApp>(x.AppData.ToString()!),
+                { AppType: AppType.PowerShellAppPackage } => jsonSerializer.Deserialize<PowerShellAppPackage>(x.AppData.ToString()!),
+                { AppType: AppType.Scoop } => jsonSerializer.Deserialize<ScoopApp>(x.AppData.ToString()!),
+                { AppType: AppType.ScoopBucket } => jsonSerializer.Deserialize<ScoopBucketApp>(x.AppData.ToString()!),
+                { AppType: AppType.Script } => jsonSerializer.Deserialize<ScriptApp>(x.AppData.ToString()!),
+                { AppType: AppType.Winget } => jsonSerializer.Deserialize<WingetApp>(x.AppData.ToString()!),
+                _ => throw new Exception($"Installer type '{x.AppType}' not supported")
             })).ToList();
         }
 
@@ -84,11 +85,23 @@ namespace Configurator
             return httpManifestPath[(lastSlash + 1)..];
         }
 
-        private bool IsForEnvironment(IInstallable installable)
+        private bool IsForEnvironment(Installable installable)
         {
             return arguments.Environments.Any(x => x.ToLower() == "all")
                    || installable.Environments.ToLower().Contains("all")
                    || arguments.Environments.Any(x => installable.Environments.ToLower().Contains(x.ToLower()));
+        }
+
+        internal class RawManifest
+        {
+            public List<JsonElement> Apps { get; set; } = new List<JsonElement>();
+        }
+
+        internal class Installable
+        {
+            public AppType AppType { get; set; }
+            public string Environments { get; set; } = "";
+            public JsonElement AppData { get; set; }
         }
     }
 }

@@ -15,13 +15,13 @@ namespace Configurator
     public class MachineConfigurator : IMachineConfigurator
     {
         private readonly ISystemInitializer systemInitializer;
-        private readonly IManifestRepositoryV2 manifestRepository;
+        private readonly IManifestRepository manifestRepository;
         private readonly IAppInstaller appInstaller;
         private readonly IDownloadAppInstaller downloadAppInstaller;
         private readonly IConsoleLogger consoleLogger;
 
         public MachineConfigurator(ISystemInitializer systemInitializer,
-            IManifestRepositoryV2 manifestRepository,
+            IManifestRepository manifestRepository,
             IAppInstaller appInstaller,
             IDownloadAppInstaller downloadAppInstaller,
             IConsoleLogger consoleLogger)

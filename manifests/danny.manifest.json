@@ -1,262 +1,323 @@
 {
-    "WingetApps": [
+    "Apps": [
         {
+            "AppType": "Winget",
             "AppId": "Git.Git",
             "Environments": "All"
         },
         {
+            "AppType": "Winget",
             "AppId": "Microsoft.OfficeDeploymentTool",
             "Environments": "All"
         },
         {
+            "AppType": "Winget",
             "AppId": "Discord.Discord",
             "Environments": "All"
         },
         {
+            "AppType": "Winget",
             "AppId": "Microsoft.AzureDataStudio",
             "Environments": "Work",
             "Notes": "VerificationScript not working"
         },
         {
+            "AppType": "Winget",
             "AppId": "Microsoft.AzureCLI",
             "Environments": "Work"
         },
         {
+            "AppType": "Winget",
             "AppId": "alcpu.CoreTemp",
             "Environments": "All"
         },
         {
+            "AppType": "Winget",
             "AppId": "Corsair.iCUE",
             "Environments": "Personal"
         },
         {
+            "AppType": "Winget",
             "AppId": "CPUID.HWMonitor",
             "Environments": "All"
         },
         {
+            "AppType": "Winget",
             "AppId": "Docker.DockerDesktop",
             "Environments": "Work"
         },
         {
+            "AppType": "Winget",
             "AppId": "EpicGames.EpicGamesLauncher",
             "Environments": "Personal"
         },
         {
+            "AppType": "Winget",
             "AppId": "PointPlanck.FileBot",
             "Environments": "Personal"
         },
         {
+            "AppType": "Winget",
             "AppId": "Google.Chrome",
             "Environments": "All"
         },
         {
+            "AppType": "Winget",
             "AppId": "JetBrains.Rider",
             "Environments": "Work"
         },
         {
+            "AppType": "Winget",
             "AppId": "LogMeIn.LastPass",
             "Environments": "All"
         },
         {
+            "AppType": "Winget",
             "AppId": "Logitech.LGS",
             "Environments": "Personal"
         },
         {
+            "AppType": "Winget",
             "AppId": "Microsoft.EdgeDev",
             "Environments": "All"
         },
         {
+            "AppType": "Winget",
             "AppId": "Microsoft.OneDrive",
             "Environments": "Personal"
         },
         {
+            "AppType": "Winget",
             "AppId": "Microsoft.VisualStudioCode",
-            "Environments": "All"
+            "Args": "/TASKS=\"associatewithfiles\"",
+            "Environments": "All",
+            "ManualSteps": [
+                "'Turn on Settings Sync' -> Microsoft Account",
+                "Watch log with ctrl+shift+u",
+                "ctrl+shift+p 'Show synced data' -> Update name of synced machine"
+            ]
         },
         {
+            "AppType": "Winget",
             "AppId": "Microsoft.VisualStudio.2019.Professional",
+            "Args": "--passive --norestart --wait --includeRecommended --add Microsoft.VisualStudio.Workload.ManagedDesktop --add Microsoft.VisualStudio.Workload.NetWeb --add Microsoft.VisualStudio.Workload.NetCoreTools",
             "Environments": "Personal",
             "Notes": "Causes PC reboot"
         },
         {
+            "AppType": "Winget",
             "AppId": "Nvidia.GeForceExperience",
             "Environments": "Personal"
         },
         {
+            "AppType": "Winget",
             "AppId": "ElectronicArts.EADesktop",
             "Environments": "Personal"
         },
         {
+            "AppType": "Winget",
             "AppId": "plex.plexmediaserver",
             "Environments": "Media"
         },
         {
+            "AppType": "Winget",
             "AppId": "Postman.Postman",
             "Environments": "All"
         },
         {
+            "AppType": "Winget",
             "AppId": "CPUID.CPU-Z.AORUS",
             "Environments": "Personal"
         },
         {
+            "AppType": "Winget",
             "AppId": "SlackTechnologies.Slack",
             "Environments": "All"
         },
         {
+            "AppType": "Winget",
             "AppId": "Valve.Steam",
             "Environments": "Personal"
         },
         {
+            "AppType": "Winget",
             "AppId": "Doist.Todoist",
             "Environments": "All"
         },
         {
+            "AppType": "Winget",
             "AppId": "Canonical.Ubuntu",
             "Environments": "All"
         },
         {
+            "AppType": "Winget",
             "AppId": "Ubisoft.Connect",
             "Environments": "All"
         },
         {
+            "AppType": "Winget",
             "AppId": "VideoLAN.VLC",
             "Environments": "All"
         },
         {
+            "AppType": "Winget",
             "AppId": "Zoom.Zoom",
             "Environments": "All"
         },
         {
+            "AppType": "Winget",
             "AppId": "voidtools.Everything",
             "Environments": "All"
         },
         {
+            "AppType": "Winget",
             "AppId": "7zip.7zip",
             "Environments": "All"
         },
         {
+            "AppType": "Winget",
             "AppId": "AnyDeskSoftwareGmbH.AnyDesk",
             "Environments": "Work"
         },
         {
+            "AppType": "Winget",
             "AppId": "Microsoft.SQLServerManagementStudio",
             "Environments": "All"
         },
         {
+            "AppType": "Winget",
             "AppId": "Microsoft.WindowsTerminal",
             "Environments": "All"
         },
         {
+            "AppType": "Winget",
             "AppId": "Microsoft.AzureStorageEmulator",
             "Environments": "Work"
         },
         {
+            "AppType": "Winget",
             "AppId": "Microsoft.WindowsSDK",
             "Environments": "Personal"
         },
         {
+            "AppType": "Winget",
             "AppId": "JAMSoftware.TreeSizeFree",
             "Environments": "All"
         },
         {
+            "AppType": "Winget",
             "AppId": "Rufus.Rufus",
             "Environments": "All"
         },
         {
+            "AppType": "Winget",
             "AppId": "Twilio.Authy",
             "Environments": "All"
         },
         {
+            "AppType": "Winget",
             "AppId": "Microsoft.dotnet --version 3.1.410.15736",
             "Environments": "All"
         },
         {
+            "AppType": "Winget",
             "AppId": "Microsoft.dotnet",
             "Environments": "All"
-        }
-    ],
-    "ScoopBuckets": [
+        },
         {
+            "AppType": "ScoopBucket",
             "AppId": "extras",
             "Environments": "All"
         },
         {
+            "AppType": "ScoopBucket",
             "AppId": "nonportable",
             "Environments": "All"
-        }
-    ],
-    "ScoopApps": [
-        {
-            "AppId": "mob",
-            "Environments": "All",
-            "Notes": "All scoop installers start writing at the top of the PS buffer"
         },
         {
+            "AppType": "Scoop",
+            "AppId": "mob",
+            "Environments": "All",
+            "Notes": "All scoop AppTypes start writing at the top of the PS buffer"
+        },
+        {
+            "AppType": "Scoop",
             "AppId": "scrcpy",
             "Environments": "All"
         },
         {
+            "AppType": "Scoop",
             "AppId": "nvm",
             "Environments": "All"
         },
         {
+            "AppType": "Scoop",
             "AppId": "paint.net",
             "Environments": "All"
         },
         {
+            "AppType": "Scoop",
             "AppId": "baretail",
             "Environments": "All"
         },
         {
+            "AppType": "Scoop",
             "AppId": "terraform",
             "Environments": "Work"
         },
         {
+            "AppType": "Scoop",
             "AppId": "sysinternals",
             "Environments": "All"
-        }
-    ],
-    "Gitconfigs": [
+        },
         {
+            "AppType": "Gitconfig",
             "AppId": "C:\\src\\machine-configs\\git\\danny.gitconfig",
             "Environments": "All"
-        }
-    ],
-    "NonPackageApps": [
+        },
         {
+            "AppType": "Store",
             "AppId": "GospelLibrary",
             "Environments": "Personal"
         },
         {
+            "AppType": "Unknown",
             "AppId": "Origin#May be replaced with ElectronicArts.EADesktop",
             "Environments": "Personal"
         },
         {
+            "AppType": "Store",
             "AppId": "Pandora",
             "Environments": "All"
         },
         {
+            "AppType": "Unknown",
             "AppId": "RGBFusion",
             "Environments": "Personal"
         },
         {
+            "AppType": "Unknown",
             "AppId": "SyncToy2.1",
             "Environments": "Personal"
         },
         {
+            "AppType": "Unknown",
             "AppId": "TridentZLightingControl",
             "Environments": "Personal"
         },
         {
+            "AppType": "Unknown",
             "AppId": "Uplay#May be replaced with Ubisoft.Connect",
             "Environments": "Personal"
         },
         {
+            "AppType": "Unknown",
             "AppId": "Blizzard.BattleNet",
             "Environments": "Personal",
             "Notes": "Installs the auto-updater which requires manual interaction to actually install Battle.NET"
         },
         {
+            "AppType": "Unknown",
             "AppId": "ZoomIt",
             "Environments": "All"
         }

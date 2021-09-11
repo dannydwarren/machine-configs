@@ -13,15 +13,15 @@ using Xunit;
 
 namespace Configurator.UnitTests
 {
-    public class ManifestRepositoryV2Tests : UnitTestBase<ManifestRepositoryV2>
+    public class ManifestRepositoryTests : UnitTestBase<ManifestRepository>
     {
-        private readonly ManifestV2Raw loadedRawManifest;
-        private readonly List<Installable> installables;
-        private readonly ManifestV2 fullManifest;
+        private readonly ManifestRepository.RawManifest loadedRawRawManifest;
+        private readonly List<ManifestRepository.Installable> installables;
+        private readonly Manifest fullManifest;
 
-        public ManifestRepositoryV2Tests()
+        public ManifestRepositoryTests()
         {
-            loadedRawManifest = new ManifestV2Raw
+            loadedRawRawManifest = new ManifestRepository.RawManifest
             {
                Apps = new List<JsonElement>
                {
@@ -32,35 +32,35 @@ namespace Configurator.UnitTests
                }
             };
 
-            installables = new List<Installable>
+            installables = new List<ManifestRepository.Installable>
             {
-                new Installable
+                new ManifestRepository.Installable
                 {
-                    Installer = Installer.Script,
+                    AppType = AppType.Script,
                     Environments = "Personal".ToLower(),
                     AppData = JsonDocument.Parse(new MemoryStream(Encoding.UTF8.GetBytes(@"{""app"": 1}"))).RootElement
                 },
-                new Installable
+                new ManifestRepository.Installable
                 {
-                    Installer = Installer.Script,
+                    AppType = AppType.Script,
                     Environments = "Media",
                     AppData = JsonDocument.Parse(new MemoryStream(Encoding.UTF8.GetBytes(@"{""app"": 2}"))).RootElement
                 },
-                new Installable
+                new ManifestRepository.Installable
                 {
-                    Installer = Installer.Script,
+                    AppType = AppType.Script,
                     Environments = "Work",
                     AppData = JsonDocument.Parse(new MemoryStream(Encoding.UTF8.GetBytes(@"{""app"": 3}"))).RootElement
                 },
-                new Installable
+                new ManifestRepository.Installable
                 {
-                    Installer = Installer.Script,
+                    AppType = AppType.Script,
                     Environments = "All",
                     AppData = JsonDocument.Parse(new MemoryStream(Encoding.UTF8.GetBytes(@"{""app"": 4}"))).RootElement
                 }
             };
 
-            fullManifest = new ManifestV2
+            fullManifest = new Manifest
             {
                 Apps = new List<IApp>
                 {
@@ -82,12 +82,12 @@ namespace Configurator.UnitTests
             GetMock<IArguments>().SetupGet(x => x.ManifestPath).Returns(manifestPath);
             GetMock<IArguments>().SetupGet(x => x.Environments).Returns(specifiedEnvironment);
             GetMock<IFileSystem>().Setup(x => x.ReadAllTextAsync(manifestPath)).ReturnsAsync(manifestJson);
-            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ManifestV2Raw>(manifestJson)).Returns(loadedRawManifest);
+            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ManifestRepository.RawManifest>(manifestJson)).Returns(loadedRawRawManifest);
 
-            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<Installable>(loadedRawManifest.Apps[0].ToString()!)).Returns(installables[0]);
-            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<Installable>(loadedRawManifest.Apps[1].ToString()!)).Returns(installables[1]);
-            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<Installable>(loadedRawManifest.Apps[2].ToString()!)).Returns(installables[2]);
-            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<Installable>(loadedRawManifest.Apps[3].ToString()!)).Returns(installables[3]);
+            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ManifestRepository.Installable>(loadedRawRawManifest.Apps[0].ToString()!)).Returns(installables[0]);
+            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ManifestRepository.Installable>(loadedRawRawManifest.Apps[1].ToString()!)).Returns(installables[1]);
+            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ManifestRepository.Installable>(loadedRawRawManifest.Apps[2].ToString()!)).Returns(installables[2]);
+            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ManifestRepository.Installable>(loadedRawRawManifest.Apps[3].ToString()!)).Returns(installables[3]);
 
             GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ScriptApp>(installables[0].AppData.ToString()!)).Returns((ScriptApp)fullManifest.Apps[0]);
             GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ScriptApp>(installables[2].AppData.ToString()!)).Returns((ScriptApp)fullManifest.Apps[2]);
@@ -113,12 +113,12 @@ namespace Configurator.UnitTests
             GetMock<IArguments>().SetupGet(x => x.ManifestPath).Returns(manifestPath);
             GetMock<IArguments>().SetupGet(x => x.Environments).Returns(specifiedEnvironment);
             GetMock<IFileSystem>().Setup(x => x.ReadAllTextAsync(manifestPath)).ReturnsAsync(manifestJson);
-            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ManifestV2Raw>(manifestJson)).Returns(loadedRawManifest);
+            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ManifestRepository.RawManifest>(manifestJson)).Returns(loadedRawRawManifest);
 
-            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<Installable>(loadedRawManifest.Apps[0].ToString()!)).Returns(installables[0]);
-            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<Installable>(loadedRawManifest.Apps[1].ToString()!)).Returns(installables[1]);
-            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<Installable>(loadedRawManifest.Apps[2].ToString()!)).Returns(installables[2]);
-            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<Installable>(loadedRawManifest.Apps[3].ToString()!)).Returns(installables[3]);
+            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ManifestRepository.Installable>(loadedRawRawManifest.Apps[0].ToString()!)).Returns(installables[0]);
+            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ManifestRepository.Installable>(loadedRawRawManifest.Apps[1].ToString()!)).Returns(installables[1]);
+            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ManifestRepository.Installable>(loadedRawRawManifest.Apps[2].ToString()!)).Returns(installables[2]);
+            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ManifestRepository.Installable>(loadedRawRawManifest.Apps[3].ToString()!)).Returns(installables[3]);
 
             GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ScriptApp>(installables[0].AppData.ToString()!)).Returns((ScriptApp)fullManifest.Apps[0]);
             GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ScriptApp>(installables[1].AppData.ToString()!)).Returns((ScriptApp)fullManifest.Apps[1]);
@@ -144,8 +144,8 @@ namespace Configurator.UnitTests
             GetMock<IResourceDownloader>().Setup(x => x.DownloadAsync(httpManifestPath, manifestFilename))
                 .ReturnsAsync(downloadedManifestPath);
             GetMock<IFileSystem>().Setup(x => x.ReadAllTextAsync(downloadedManifestPath)).ReturnsAsync(manifestJson);
-            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ManifestV2Raw>(manifestJson)).Returns(loadedRawManifest);
-            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<Installable>(IsAny<string>())).Returns(installables[0]);
+            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ManifestRepository.RawManifest>(manifestJson)).Returns(loadedRawRawManifest);
+            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ManifestRepository.Installable>(IsAny<string>())).Returns(installables[0]);
             GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ScriptApp>(IsAny<string>())).Returns((ScriptApp)fullManifest.Apps[0]);
 
             var manifest = await BecauseAsync(() => ClassUnderTest.LoadAsync());

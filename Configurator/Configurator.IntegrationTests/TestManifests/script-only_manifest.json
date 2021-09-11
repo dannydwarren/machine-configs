@@ -1,7 +1,7 @@
 ﻿{
     "Apps": [
         {
-            "Installer": "Script",
+            "AppType": "Script",
             "AppId": "script-app-id",
             "Environments": "Test",
             "InstallScript": "install-script",

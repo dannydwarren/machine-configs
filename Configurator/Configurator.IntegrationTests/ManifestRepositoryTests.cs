@@ -10,11 +10,11 @@ using Xunit;
 
 namespace Configurator.IntegrationTests
 {
-    public class ManifestRepositoryV2Tests : IntegrationTestBase<ManifestRepositoryV2>
+    public class ManifestRepositoryTests : IntegrationTestBase<ManifestRepository>
     {
         private readonly Mock<IArguments> mockArgs;
 
-        public ManifestRepositoryV2Tests()
+        public ManifestRepositoryTests()
         {
             var mocker = new AutoMoqer();
             mockArgs = mocker.GetMock<IArguments>();
@@ -24,7 +24,7 @@ namespace Configurator.IntegrationTests
         [Fact]
         public async Task When_parsing_scoop_apps()
         {
-            mockArgs.SetupGet(x => x.ManifestPath).Returns("./TestManifests/scoop-only_manifest_v2.json");
+            mockArgs.SetupGet(x => x.ManifestPath).Returns("./TestManifests/scoop-only_manifest.json");
 
             Services.AddTransient(_ => mockArgs.Object);
 
@@ -40,7 +40,7 @@ namespace Configurator.IntegrationTests
         [Fact]
         public async Task When_parsing_scoop_buckets()
         {
-            mockArgs.SetupGet(x => x.ManifestPath).Returns("./TestManifests/scoop-buckets-only_manifest_v2.json");
+            mockArgs.SetupGet(x => x.ManifestPath).Returns("./TestManifests/scoop-buckets-only_manifest.json");
 
             Services.AddTransient(_ => mockArgs.Object);
 
@@ -56,7 +56,7 @@ namespace Configurator.IntegrationTests
         [Fact]
         public async Task When_parsing_winget_apps()
         {
-            mockArgs.SetupGet(x => x.ManifestPath).Returns("./TestManifests/winget-only_manifest_v2.json");
+            mockArgs.SetupGet(x => x.ManifestPath).Returns("./TestManifests/winget-only_manifest.json");
 
             Services.AddTransient(_ => mockArgs.Object);
 
@@ -72,7 +72,7 @@ namespace Configurator.IntegrationTests
         [Fact]
         public async Task When_parsing_non_package_apps()
         {
-            mockArgs.SetupGet(x => x.ManifestPath).Returns("./TestManifests/non-package-only_manifest_v2.json");
+            mockArgs.SetupGet(x => x.ManifestPath).Returns("./TestManifests/non-package-only_manifest.json");
 
             Services.AddTransient(_ => mockArgs.Object);
 
@@ -88,7 +88,7 @@ namespace Configurator.IntegrationTests
         [Fact]
         public async Task When_parsing_gitconfigs()
         {
-            mockArgs.SetupGet(x => x.ManifestPath).Returns("./TestManifests/gitconfigs-only_manifest_v2.json");
+            mockArgs.SetupGet(x => x.ManifestPath).Returns("./TestManifests/gitconfigs-only_manifest.json");
 
             Services.AddTransient(_ => mockArgs.Object);
 
@@ -104,7 +104,7 @@ namespace Configurator.IntegrationTests
         [Fact]
         public async Task When_parsing_power_shell_app_packages()
         {
-            mockArgs.SetupGet(x => x.ManifestPath).Returns("./TestManifests/power-shell-app-package-only_manifest_v2.json");
+            mockArgs.SetupGet(x => x.ManifestPath).Returns("./TestManifests/power-shell-app-package-only_manifest.json");
 
             Services.AddTransient(_ => mockArgs.Object);
 
@@ -125,7 +125,7 @@ namespace Configurator.IntegrationTests
         [Fact]
         public async Task When_parsing_scripts()
         {
-            mockArgs.SetupGet(x => x.ManifestPath).Returns("./TestManifests/script-only_manifest_v2.json");
+            mockArgs.SetupGet(x => x.ManifestPath).Returns("./TestManifests/script-only_manifest.json");
 
             Services.AddTransient(_ => mockArgs.Object);
 

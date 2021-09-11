@@ -1,8 +1,8 @@
 ﻿{
     "Apps": [
         {
-            "Installer": "Scoop",
-            "AppId": "scoop-app-id",
+            "AppType": "Gitconfig",
+            "AppId": "gitconfig-app-id",
             "Environments": "Test"
         }
     ]

@@ -1,7 +1,7 @@
 ﻿{
     "Apps": [
         {
-            "Installer": "PowerShellAppPackage",
+            "AppType": "PowerShellAppPackage",
             "AppId": "power-shell-app-package-app-id",
             "Environments": "Test",
             "Downloader": "some-downloader",

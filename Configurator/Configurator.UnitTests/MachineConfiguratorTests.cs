@@ -15,7 +15,7 @@ namespace Configurator.UnitTests
         [Fact]
         public async Task When_executing()
         {
-            var manifest = new ManifestV2
+            var manifest = new Manifest
             {
                 Apps = new List<IApp>
                 {
@@ -30,7 +30,7 @@ namespace Configurator.UnitTests
                 }
             };
 
-            GetMock<IManifestRepositoryV2>().Setup(x => x.LoadAsync()).ReturnsAsync(manifest);
+            GetMock<IManifestRepository>().Setup(x => x.LoadAsync()).ReturnsAsync(manifest);
 
             await BecauseAsync(() => ClassUnderTest.ExecuteAsync());
 
