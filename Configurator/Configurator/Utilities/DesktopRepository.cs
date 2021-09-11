@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Configurator.Utilities
@@ -14,17 +12,21 @@ namespace Configurator.Utilities
     public class DesktopRepository : IDesktopRepository
     {
         private readonly IFileSystem fileSystem;
+        private readonly ISpecialFolders specialFolders;
 
-        public DesktopRepository(IFileSystem fileSystem)
+        public DesktopRepository(IFileSystem fileSystem, ISpecialFolders specialFolders)
         {
             this.fileSystem = fileSystem;
+            this.specialFolders = specialFolders;
         }
 
         public List<string> LoadSystemEntries()
         {
-            var userDesktopSystemEntries = fileSystem.EnumerateFileSystemEntries(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
-            var commonDesktopSystemEntries = fileSystem.EnumerateFileSystemEntries(Environment.GetFolderPath(Environment.SpecialFolder.CommonDesktopDirectory));
-            return userDesktopSystemEntries.Union(commonDesktopSystemEntries).ToList();
+            return specialFolders.GetDesktopPaths()
+                .Select(fileSystem.EnumerateFileSystemEntries)
+                .SelectMany(x => x)
+                .Distinct()
+                .ToList();
         }
 
         public void DeletePaths(List<string> paths)

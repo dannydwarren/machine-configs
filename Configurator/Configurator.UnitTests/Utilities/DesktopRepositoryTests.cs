@@ -13,6 +13,10 @@ namespace Configurator.UnitTests.Utilities
         [Fact]
         public void When_loading_system_entries()
         {
+            var desktopPaths = new List<string> { RandomString(), RandomString() };
+
+            GetMock<ISpecialFolders>().Setup(x => x.GetDesktopPaths()).Returns(desktopPaths);
+
             var userDesktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             var commonDesktopPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonDesktopDirectory);
             var userDesktopSystemEntries = new List<string>
@@ -28,8 +32,8 @@ namespace Configurator.UnitTests.Utilities
             };
             var allDesktopsSystemEntries = userDesktopSystemEntries.Union(commonDesktopSystemEntries);
 
-            GetMock<IFileSystem>().Setup(x => x.EnumerateFileSystemEntries(userDesktopPath)).Returns(userDesktopSystemEntries);
-            GetMock<IFileSystem>().Setup(x => x.EnumerateFileSystemEntries(commonDesktopPath)).Returns(commonDesktopSystemEntries);
+            GetMock<IFileSystem>().Setup(x => x.EnumerateFileSystemEntries(desktopPaths[0])).Returns(userDesktopSystemEntries);
+            GetMock<IFileSystem>().Setup(x => x.EnumerateFileSystemEntries(desktopPaths[1])).Returns(commonDesktopSystemEntries);
 
             var filenames = Because(() => ClassUnderTest.LoadSystemEntries());
 
