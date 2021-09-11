@@ -15,13 +15,13 @@ namespace Configurator
     public class MachineConfigurator : IMachineConfigurator
     {
         private readonly ISystemInitializer systemInitializer;
-        private readonly IManifestRepository manifestRepository;
+        private readonly IManifestRepositoryV2 manifestRepository;
         private readonly IAppInstaller appInstaller;
         private readonly IDownloadAppInstaller downloadAppInstaller;
         private readonly IConsoleLogger consoleLogger;
 
         public MachineConfigurator(ISystemInitializer systemInitializer,
-            IManifestRepository manifestRepository,
+            IManifestRepositoryV2 manifestRepository,
             IAppInstaller appInstaller,
             IDownloadAppInstaller downloadAppInstaller,
             IConsoleLogger consoleLogger)
@@ -51,26 +51,9 @@ namespace Configurator
 
             var manifest = await manifestRepository.LoadAsync();
 
-            consoleLogger.Debug($"Loaded {manifest.PowerShellAppPackages.Count} {nameof(manifest.PowerShellAppPackages)}");
-            consoleLogger.Debug($"Loaded {manifest.WingetApps.Count} {nameof(manifest.WingetApps)}");
-            consoleLogger.Debug($"Loaded {manifest.ScoopBuckets.Count} {nameof(manifest.ScoopBuckets)}");
-            consoleLogger.Debug($"Loaded {manifest.ScoopApps.Count} {nameof(manifest.ScoopApps)}");
-            consoleLogger.Debug($"Loaded {manifest.Gitconfigs.Count} {nameof(manifest.Gitconfigs)}");
+            consoleLogger.Debug($"Loaded {manifest.Apps.Count} {nameof(manifest.Apps)}");
 
-            await InstallDownloadApps(manifest.PowerShellAppPackages);
-            await InstallAppsAsync(manifest.WingetApps);
-            await InstallAppsAsync(manifest.ScoopBuckets);
-            await InstallAppsAsync(manifest.ScoopApps);
-            await InstallAppsAsync(manifest.Gitconfigs);
-        }
-
-        private async Task InstallDownloadApps<TDownloadApp>(List<TDownloadApp> downloadApps)
-            where TDownloadApp : IDownloadApp
-        {
-            foreach (var downloadApp in downloadApps)
-            {
-                await downloadAppInstaller.InstallAsync(downloadApp);
-            }
+            await InstallAppsAsync(manifest.Apps);
         }
 
         private async Task InstallAppsAsync<TApp>(List<TApp> apps)
@@ -78,7 +61,14 @@ namespace Configurator
         {
             foreach (var app in apps)
             {
-                await appInstaller.InstallAsync(app);
+                if (app is IDownloadApp downloadApp)
+                {
+                    await downloadAppInstaller.InstallAsync(downloadApp);
+                }
+                else
+                {
+                    await appInstaller.InstallAsync(app);
+                }
             }
         }
     }

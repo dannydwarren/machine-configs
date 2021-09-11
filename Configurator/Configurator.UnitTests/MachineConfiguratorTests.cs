@@ -15,36 +15,22 @@ namespace Configurator.UnitTests
         [Fact]
         public async Task When_executing()
         {
-            var manifest = new Manifest
+            var manifest = new ManifestV2
             {
-                PowerShellAppPackages = new List<PowerShellAppPackage>
+                Apps = new List<IApp>
                 {
                     new PowerShellAppPackage {AppId = RandomString(), Environments = "Personal"},
-                    new PowerShellAppPackage {AppId = RandomString(), Environments = "All"}
-                },
-                ScoopBuckets = new List<ScoopBucketApp>
-                {
-                    new ScoopBucketApp {AppId = RandomString(), Environments = "Personal"},
-                    new ScoopBucketApp {AppId = RandomString(), Environments = "All"}
-                },
-                ScoopApps = new List<ScoopApp>
-                {
+                    new ScriptApp {AppId = RandomString(), Environments = "All"},
+                    new NonPackageApp {AppId = RandomString(), Environments = "All"},
+                    new ScoopBucketApp {AppId = RandomString(), Environments = "All"},
                     new ScoopApp {AppId = RandomString(), Environments = "Personal"},
-                    new ScoopApp {AppId = RandomString(), Environments = "All"}
-                },
-                WingetApps = new List<WingetApp>
-                {
                     new WingetApp {AppId = RandomString(), Environments = "Personal"},
-                    new WingetApp {AppId = RandomString(), Environments = "Personal"}
-                },
-                Gitconfigs = new List<GitconfigApp>
-                {
-                    new GitconfigApp {AppId = RandomString(), Environments = "Personal"},
-                    new GitconfigApp {AppId = RandomString(), Environments = "Personal"}
+                    new GitconfigApp {AppId = RandomString(), Environments = "All"},
+                    new WingetApp {AppId = RandomString(), Environments = "All"}
                 }
             };
 
-            GetMock<IManifestRepository>().Setup(x => x.LoadAsync()).ReturnsAsync(manifest);
+            GetMock<IManifestRepositoryV2>().Setup(x => x.LoadAsync()).ReturnsAsync(manifest);
 
             await BecauseAsync(() => ClassUnderTest.ExecuteAsync());
 
@@ -53,34 +39,16 @@ namespace Configurator.UnitTests
                 GetMock<ISystemInitializer>().Verify(x => x.InitializeAsync());
             });
 
-            It("installs PowerShell app packages", () =>
+            It("installs all apps", () =>
             {
-                GetMock<IDownloadAppInstaller>().Verify(x => x.InstallAsync(manifest.PowerShellAppPackages[0]));
-                GetMock<IDownloadAppInstaller>().Verify(x => x.InstallAsync(manifest.PowerShellAppPackages[1]));
-            });
-
-            It("installs scoop buckets", () =>
-            {
-                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(manifest.ScoopBuckets[0]));
-                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(manifest.ScoopBuckets[1]));
-            });
-
-            It("installs apps via scoop", () =>
-            {
-                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(manifest.ScoopApps[0]));
-                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(manifest.ScoopApps[1]));
-            });
-
-            It("installs gitconfigs", () =>
-            {
-                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(manifest.Gitconfigs[0]));
-                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(manifest.Gitconfigs[1]));
-            });
-
-            It("installs apps via winget", () =>
-            {
-                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(manifest.WingetApps[0]));
-                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(manifest.WingetApps[1]));
+                GetMock<IDownloadAppInstaller>().Verify(x => x.InstallAsync((IDownloadApp)manifest.Apps[0]));
+                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(manifest.Apps[1]));
+                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(manifest.Apps[2]));
+                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(manifest.Apps[3]));
+                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(manifest.Apps[4]));
+                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(manifest.Apps[5]));
+                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(manifest.Apps[6]));
+                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(manifest.Apps[7]));
             });
         }
 
