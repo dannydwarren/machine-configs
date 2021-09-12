@@ -28,7 +28,7 @@ jobs:
     - name: Test
       run: dotnet test --no-build --configuration Release --verbosity normal
     - name: Publish
-      run: dotnet publish --version-suffix "${APP_VERSION}" --configuration Release --output ./release
+      run: dotnet publish --no-restore /p:Version=${APP_VERSION} --configuration Release --output ./release
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
