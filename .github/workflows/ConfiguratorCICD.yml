@@ -1,9 +1,9 @@
 name: Publish Release
 
+on: workflow_dispatch
+
 env:
     APP_VERSION: 0.0.${{github.run_number}}
-
-on: workflow_dispatch
 
 jobs:
   build:
@@ -14,8 +14,8 @@ jobs:
         working-directory: ./Configurator
 
     steps:
-    - name: Echo Version
-      run: echo "${APP_VERSION}"
+    # - name: Echo Version
+    #   run: echo "${APP_VERSION}"
     - uses: actions/checkout@v2
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
