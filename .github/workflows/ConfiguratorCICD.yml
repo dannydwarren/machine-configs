@@ -16,7 +16,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Echo Version
-      run: echo "Version- ${APP_VERSION}"
+      run: echo "Version- $APP_VERSION"
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
@@ -28,14 +28,14 @@ jobs:
     - name: Test
       run: dotnet test --no-build --configuration Release --verbosity normal
     - name: Publish
-      run: "dotnet publish --no-restore /p:Version=${APP_VERSION} --configuration Release --output ./release"
+      run: "dotnet publish --no-restore /p:Version=$APP_VERSION --configuration Release --output ./release"
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       with:
-        tag_name: v${APP_VERSION}
-        release_name: Release v${APP_VERSION}
+        tag_name: v$APP_VERSION
+        release_name: Release v$APP_VERSION
         draft: false
         prerelease: false
