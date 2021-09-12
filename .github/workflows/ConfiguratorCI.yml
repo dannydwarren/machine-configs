@@ -3,8 +3,13 @@ name: CI Only
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'Configurator/**'
+      - '.github/workflows/ConfiguratorCI.yml'
   pull_request:
     branches: [ main ]
+      - 'Configurator/**'
+      - '.github/workflows/ConfiguratorCI.yml'
 
 jobs:
   build:
