@@ -1,0 +1,41 @@
+name: Publish Release
+
+env:
+    APP_VERSION: 0.0.${{github.run_number}}
+
+on: workflow_dispatch
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: ./Configurator
+
+    steps:
+    - name: Echo Version
+      run: echo "${APP_VERSION}"
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore --configuration Release
+    - name: Test
+      run: dotnet test --no-build --configuration Release --verbosity normal
+    - name: Publish
+      run: dotnet publish --version-suffix "${APP_VERSION}"" --configuration Release --output ./release
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: v${{ APP_VERSION }}
+        release_name: Release v${{ APP_VERSION }}
+        draft: false
+        prerelease: false

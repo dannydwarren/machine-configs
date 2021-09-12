@@ -7,6 +7,15 @@
         <nullable>enable</nullable>
 
         <NoWarn>1701;1702;1591</NoWarn>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <PackageId>Configurator</PackageId>
+        <Authors>Danny Warren</Authors>
+        <Company>Danny Warren</Company>
+        <Description>
+            Configurator is a command-line tool used to install and configure apps and settings on a new Windows install.
+        </Description>
 
         <PublishSingleFile>true</PublishSingleFile>
         <SelfContained>true</SelfContained>
@@ -31,6 +40,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\NonNuGetDependencies\Emmersion.Http\Emmersion.Http\Emmersion.Http.csproj" />
+        <ProjectReference Include="..\NonNuGetDependencies\Emmersion.Http\Emmersion.Http\Emmersion.Http.csproj" />
     </ItemGroup>
 </Project>
