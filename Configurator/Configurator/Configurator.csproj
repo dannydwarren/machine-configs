@@ -11,6 +11,7 @@
 
     <PropertyGroup>
         <PackageId>Configurator</PackageId>
+        <Version>0.0.0-dev</Version>
         <Authors>Danny Warren</Authors>
         <Company>Danny Warren</Company>
         <Description>
@@ -35,7 +36,7 @@
         <PackageReference Include="Microsoft.Management.Infrastructure" Version="2.0.0" />
         <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.0.6" />
         <PackageReference Include="Scrutor" Version="3.3.0" />
-        <PackageReference Include="System.CommandLine.DragonFruit" Version="0.3.0-alpha.21216.1" />
+        <PackageReference Include="System.CommandLine" Version="2.0.0-beta1.21308.1" />
         <PackageReference Include="System.Management.Automation" Version="7.0.6" />
     </ItemGroup>
 
