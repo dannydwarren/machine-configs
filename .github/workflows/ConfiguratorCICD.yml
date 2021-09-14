@@ -17,25 +17,25 @@ jobs:
     - uses: actions/checkout@v2
     - name: Echo Version
       run: echo "Version- ${{env.APP_VERSION}}"
-    # - name: Setup .NET
-    #   uses: actions/setup-dotnet@v1
-    #   with:
-    #     dotnet-version: 3.1.x
-    # - name: Restore dependencies
-    #   run: dotnet restore
-    # - name: Build
-    #   run: dotnet build --no-restore --configuration Release
-    # - name: Test
-    #   run: dotnet test --no-build --configuration Release --verbosity normal
-    # - name: Publish
-    #   run: "dotnet publish --no-restore /p:Version=${{env.APP_VERSION}} --configuration Release --output ./release"
-    # - name: Create Release
-    #   id: create_release
-    #   uses: actions/create-release@v1
-    #   env:
-    #     GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-    #   with:
-    #     tag_name: v${{env.APP_VERSION}}
-    #     release_name: Release v${{env.APP_VERSION}}
-    #     draft: false
-    #     prerelease: false
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore --configuration Release
+    - name: Test
+      run: dotnet test --no-build --configuration Release --verbosity normal
+    - name: Publish
+      run: "dotnet publish --no-restore /p:Version=${{env.APP_VERSION}} --configuration Release --output ./release"
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      with:
+        tag_name: v${{env.APP_VERSION}}
+        release_name: Release v${{env.APP_VERSION}}
+        draft: false
+        prerelease: false
