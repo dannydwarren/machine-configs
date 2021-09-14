@@ -18,6 +18,10 @@ jobs:
     - uses: actions/checkout@v2
     - name: Echo Version
       run: echo "Version- ${{env.APP_VERSION}}"
+    - name: Echo Release Path
+      run: echo "EnvPath- ${{env.RELEASE_PATH}}"
+    - name: Echo Release Path Raw
+      run: echo "CompositePath- ${{github.action_path}}/release"
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
@@ -44,9 +48,9 @@ jobs:
       id: upload-release-asset 
       uses: actions/upload-release-asset@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        upload_url: ${{steps.create_release.outputs.upload_url}}
         asset_path: ${{env.RELEASE_PATH}}/Configurator.exe
         asset_name: Configurator.exe
         asset_content_type: application/vnd.microsoft.portable-executable
