@@ -40,7 +40,7 @@ jobs:
         prerelease: false
         body: |
           Defaults:
-          --manifest-path=https://raw.githubusercontent.com/dannydwarren/machine-configs/main/manifests/manifest_test.json
+          --manifest-path=https://raw.githubusercontent.com/dannydwarren/machine-configs/main/manifests/test.manifest.json
           --environments=Test
     - name: Upload Release Asset
       id: upload-release-asset 

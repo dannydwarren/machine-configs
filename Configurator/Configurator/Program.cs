@@ -14,7 +14,6 @@ namespace Configurator
 {
     class Program
     {
-        // manifestPath: @"https://raw.githubusercontent.com/dannydwarren/machine-configs/main/manifests/danny.manifest.json",
         static async Task<int> Main(string[] args)
         {
             var rootCommand = new RootCommand
@@ -22,7 +21,7 @@ namespace Configurator
                 new Option<string>(
                     aliases: new[] { "--manifest-path", "-m" },
                     getDefaultValue: () =>
-                        "https://raw.githubusercontent.com/dannydwarren/machine-configs/main/manifests/manifest_test.json",
+                        "https://raw.githubusercontent.com/dannydwarren/machine-configs/main/manifests/test.manifest.json",
                     description: "Path (local or URL) to your manifest file."),
                 new Option<List<string>>(
                     aliases: new[] { "--environments", "-e" },
