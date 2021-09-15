@@ -5,7 +5,14 @@ namespace Configurator.Apps
         public string AppId { get; set; } = "";
         public string Environments { get; set; } = "";
 
-        public string InstallScript => $"scoop install {AppId}";
+        private string installArgs = "";
+        public string InstallArgs
+        {
+            get => installArgs;
+            set => installArgs = string.IsNullOrWhiteSpace(value) ? "" : $" {value}";
+        }
+
+        public string InstallScript => $"scoop install {AppId}{InstallArgs}";
         public string VerificationScript => $"(scoop export | Select-String {AppId}) -ne $null";
         public string UpgradeScript => $"scoop update {AppId}";
     }

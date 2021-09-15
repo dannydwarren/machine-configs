@@ -89,7 +89,7 @@
         {
             "AppType": "Winget",
             "AppId": "Microsoft.VisualStudioCode",
-            "Args": "/TASKS=\"associatewithfiles\"",
+            "InstallArgs": "/TASKS=\"associatewithfiles\"",
             "Environments": "All",
             "ManualSteps": [
                 "'Turn on Settings Sync' -> Microsoft Account",
@@ -100,7 +100,7 @@
         {
             "AppType": "Winget",
             "AppId": "Microsoft.VisualStudio.2019.Professional",
-            "Args": "--passive --norestart --wait --includeRecommended --add Microsoft.VisualStudio.Workload.ManagedDesktop --add Microsoft.VisualStudio.Workload.NetWeb --add Microsoft.VisualStudio.Workload.NetCoreTools",
+            "InstallArgs": "--passive --norestart --wait --includeRecommended --add Microsoft.VisualStudio.Workload.ManagedDesktop --add Microsoft.VisualStudio.Workload.NetWeb --add Microsoft.VisualStudio.Workload.NetCoreTools",
             "Environments": "Personal",
             "Notes": "Causes PC reboot"
         },
@@ -216,7 +216,8 @@
         },
         {
             "AppType": "Winget",
-            "AppId": "Microsoft.dotnet --version 3.1.410.15736",
+            "AppId": "Microsoft.dotnet",
+            "InstallArgs": "--version 3.1.410.15736",
             "Environments": "All"
         },
         {

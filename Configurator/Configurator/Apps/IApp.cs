@@ -5,6 +5,7 @@ namespace Configurator.Apps
     public interface IApp
     {
         string AppId { get; }
+        string? InstallArgs { get; }
         string Environments { get; }
         string InstallScript { get; }
         string? VerificationScript { get; }
