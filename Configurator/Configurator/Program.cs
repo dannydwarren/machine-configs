@@ -67,6 +67,14 @@ namespace Configurator
             var powerShell = services.GetRequiredService<IPowerShell>();
             var result = await powerShell.ExecuteAsync("$PSVersionTable.PSVersion.ToString()");
             logger.Debug($"PowerShell Version: {result.AsString}");
+
+            var args = services.GetRequiredService<IArguments>();
+            logger.Debug($@"{nameof(IArguments)}:
+{{
+  {nameof(args.ManifestPath)} = ""{args.ManifestPath}""
+  {nameof(args.Environments)} = ""{string.Join("|", args.Environments)}""
+  {nameof(args.DownloadsDir)} = ""{string.Join("|", args.DownloadsDir)}""
+}}");
         }
 
         private static ServiceProvider ConfigureServices(Arguments arguments)
