@@ -36,7 +36,7 @@ Test-CommandExists scoop"
 
         public async Task InstallAsync()
         {
-            await appInstaller.InstallAsync(ScoopCliScriptApp);
+            await appInstaller.InstallOrUpgradeAsync(ScoopCliScriptApp);
         }
     }
 }

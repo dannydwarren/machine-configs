@@ -8,7 +8,7 @@ namespace Configurator.Installers
 {
     public interface IAppInstaller
     {
-        Task InstallAsync(IApp app);
+        Task InstallOrUpgradeAsync(IApp app);
     }
 
     public class AppInstaller : IAppInstaller
@@ -24,19 +24,23 @@ namespace Configurator.Installers
             this.desktopRepository = desktopRepository;
         }
 
-        public async Task InstallAsync(IApp app)
+        public async Task InstallOrUpgradeAsync(IApp app)
         {
             consoleLogger.Info($"Installing '{app.AppId}'");
             var preInstallDesktopSystemEntries = desktopRepository.LoadSystemEntries();
 
-            if (app.VerificationScript != null)
-            {
-                await powerShell.ExecuteAsync(app.InstallScript, app.VerificationScript);
-            }
-            else
+            var preInstallVerificationResult = await VerifyAppAsync(app);
+
+            if (!preInstallVerificationResult)
             {
                 await powerShell.ExecuteAsync(app.InstallScript);
             }
+            else if (app.UpgradeScript != null)
+            {
+                await powerShell.ExecuteAsync(app.UpgradeScript);
+            }
+
+            await VerifyAppAsync(app);
 
             var postInstallDesktopSystemEntries = desktopRepository.LoadSystemEntries();
             var desktopSystemEntriesToDelete = postInstallDesktopSystemEntries.Except(preInstallDesktopSystemEntries).ToList();
@@ -46,6 +50,15 @@ namespace Configurator.Installers
             }
 
             consoleLogger.Result($"Installed '{app.AppId}'");
+        }
+
+        private async Task<bool> VerifyAppAsync(IApp app)
+        {
+            if (app.VerificationScript == null)
+                return false;
+
+            var verificationResult = await powerShell.ExecuteAsync(app.VerificationScript);
+            return verificationResult.AsBool ?? false;
         }
     }
 }

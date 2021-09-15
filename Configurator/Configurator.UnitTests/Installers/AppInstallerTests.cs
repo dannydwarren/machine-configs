@@ -5,6 +5,7 @@ using Configurator.Apps;
 using Configurator.Installers;
 using Configurator.PowerShell;
 using Configurator.Utilities;
+using Moq;
 using Xunit;
 
 namespace Configurator.UnitTests.Installers
@@ -19,6 +20,10 @@ namespace Configurator.UnitTests.Installers
                 AppId = RandomString(),
                 InstallScript = RandomString(),
                 VerificationScript = RandomString()
+            };
+            var verificationResultPreInstall = new PowerShellResult
+            {
+                AsString = "False"
             };
 
             var desktopSystemEntriesPreInstall = new List<string>
@@ -45,8 +50,9 @@ namespace Configurator.UnitTests.Installers
                 }
                 return desktopSystemEntriesPostInstall;
             });
+            GetMock<IPowerShell>().Setup(x => x.ExecuteAsync(app.VerificationScript)).ReturnsAsync(verificationResultPreInstall);
 
-            await BecauseAsync(() => ClassUnderTest.InstallAsync(app));
+            await BecauseAsync(() => ClassUnderTest.InstallOrUpgradeAsync(app));
 
             It("logs", () =>
             {
@@ -56,7 +62,8 @@ namespace Configurator.UnitTests.Installers
 
             It("runs the install script", () =>
             {
-                GetMock<IPowerShell>().Verify(x => x.ExecuteAsync(app.InstallScript, app.VerificationScript));
+                GetMock<IPowerShell>().Verify(x => x.ExecuteAsync(app.VerificationScript), Times.Exactly(2));
+                GetMock<IPowerShell>().Verify(x => x.ExecuteAsync(app.InstallScript));
             });
 
             It("deletes desktop shortcuts", () =>
@@ -75,6 +82,56 @@ namespace Configurator.UnitTests.Installers
                 VerificationScript = null
             };
 
+            GetMock<IDesktopRepository>().Setup(x => x.LoadSystemEntries()).Returns(new List<string>());
+
+            await BecauseAsync(() => ClassUnderTest.InstallOrUpgradeAsync(app));
+
+            It("runs the install script", () =>
+            {
+                GetMock<IPowerShell>().VerifyNever(x => x.ExecuteAsync(app.VerificationScript!));
+                GetMock<IPowerShell>().Verify(x => x.ExecuteAsync(app.InstallScript));
+            });
+        }
+
+        [Fact]
+        public async Task When_installing_and_nothing_was_added_to_the_desktop()
+        {
+            var app = new ScriptApp
+            {
+                AppId = RandomString(),
+                InstallScript = RandomString()
+            };
+
+            var desktopSystemEntries = new List<string>
+            {
+                RandomString(),
+            };
+
+            GetMock<IDesktopRepository>().Setup(x => x.LoadSystemEntries()).Returns(desktopSystemEntries);
+
+            await BecauseAsync(() => ClassUnderTest.InstallOrUpgradeAsync(app));
+
+            It("deletes desktop shortcuts", () =>
+            {
+                GetMock<IDesktopRepository>().VerifyNever(x => x.DeletePaths(IsAny<List<string>>()));
+            });
+        }
+
+        [Fact]
+        public async Task When_upgrading()
+        {
+            var app = new ScriptApp
+            {
+                AppId = RandomString(),
+                InstallScript = RandomString(),
+                VerificationScript = RandomString(),
+                UpgradeScript = RandomString()
+            };
+            var verificationResultPreInstall = new PowerShellResult
+            {
+                AsString = "True"
+            };
+
             var desktopSystemEntriesPreInstall = new List<string>
             {
                 RandomString(),
@@ -99,18 +156,14 @@ namespace Configurator.UnitTests.Installers
                 }
                 return desktopSystemEntriesPostInstall;
             });
+            GetMock<IPowerShell>().Setup(x => x.ExecuteAsync(app.VerificationScript)).ReturnsAsync(verificationResultPreInstall);
 
-            await BecauseAsync(() => ClassUnderTest.InstallAsync(app));
+            await BecauseAsync(() => ClassUnderTest.InstallOrUpgradeAsync(app));
 
-            It("logs", () =>
+            It("runs the upgrade script", () =>
             {
-                GetMock<IConsoleLogger>().Verify(x => x.Info($"Installing '{app.AppId}'"));
-                GetMock<IConsoleLogger>().Verify(x => x.Result($"Installed '{app.AppId}'"));
-            });
-
-            It("runs the install script", () =>
-            {
-                GetMock<IPowerShell>().Verify(x => x.ExecuteAsync(app.InstallScript));
+                GetMock<IPowerShell>().Verify(x => x.ExecuteAsync(app.VerificationScript), Times.Exactly(2));
+                GetMock<IPowerShell>().Verify(x => x.ExecuteAsync(app.UpgradeScript));
             });
 
             It("deletes desktop shortcuts", () =>
@@ -120,25 +173,30 @@ namespace Configurator.UnitTests.Installers
         }
 
         [Fact]
-        public async Task When_installing_and_nothing_was_added_to_the_desktop()
+        public async Task When_already_installed_and_no_upgrade_script_was_provided()
         {
-            var app = new WingetApp
+            var app = new ScriptApp
             {
-                AppId = RandomString()
+                AppId = RandomString(),
+                InstallScript = RandomString(),
+                VerificationScript = RandomString(),
+                UpgradeScript = null
+            };
+            var verificationResultPreInstall = new PowerShellResult
+            {
+                AsString = "True"
             };
 
-            var desktopSystemEntries = new List<string>
+            GetMock<IDesktopRepository>().Setup(x => x.LoadSystemEntries()).Returns(new List<string>());
+            GetMock<IPowerShell>().Setup(x => x.ExecuteAsync(app.VerificationScript)).ReturnsAsync(verificationResultPreInstall);
+
+            await BecauseAsync(() => ClassUnderTest.InstallOrUpgradeAsync(app));
+
+            It("does not install or upgrade", () =>
             {
-                RandomString(),
-            };
-
-            GetMock<IDesktopRepository>().Setup(x => x.LoadSystemEntries()).Returns(desktopSystemEntries);
-
-            await BecauseAsync(() => ClassUnderTest.InstallAsync(app));
-
-            It("deletes desktop shortcuts", () =>
-            {
-                GetMock<IDesktopRepository>().VerifyNever(x => x.DeletePaths(IsAny<List<string>>()));
+                GetMock<IPowerShell>().Verify(x => x.ExecuteAsync(app.VerificationScript), Times.Exactly(2));
+                GetMock<IPowerShell>().VerifyNever(x => x.ExecuteAsync(app.InstallScript));
+                GetMock<IPowerShell>().VerifyNever(x => x.ExecuteAsync(app.UpgradeScript!));
             });
         }
     }

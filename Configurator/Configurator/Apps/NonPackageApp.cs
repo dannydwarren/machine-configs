@@ -7,5 +7,6 @@ namespace Configurator.Apps
 
         public string InstallScript => $"./{AppId}_install.ps1";
         public string? VerificationScript => null;
+        public string? UpgradeScript => null;
     }
 }

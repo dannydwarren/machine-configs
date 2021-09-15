@@ -42,13 +42,13 @@ namespace Configurator.UnitTests
             It("installs all apps", () =>
             {
                 GetMock<IDownloadAppInstaller>().Verify(x => x.InstallAsync((IDownloadApp)manifest.Apps[0]));
-                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(manifest.Apps[1]));
-                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(manifest.Apps[2]));
-                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(manifest.Apps[3]));
-                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(manifest.Apps[4]));
-                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(manifest.Apps[5]));
-                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(manifest.Apps[6]));
-                GetMock<IAppInstaller>().Verify(x => x.InstallAsync(manifest.Apps[7]));
+                GetMock<IAppInstaller>().Verify(x => x.InstallOrUpgradeAsync(manifest.Apps[1]));
+                GetMock<IAppInstaller>().Verify(x => x.InstallOrUpgradeAsync(manifest.Apps[2]));
+                GetMock<IAppInstaller>().Verify(x => x.InstallOrUpgradeAsync(manifest.Apps[3]));
+                GetMock<IAppInstaller>().Verify(x => x.InstallOrUpgradeAsync(manifest.Apps[4]));
+                GetMock<IAppInstaller>().Verify(x => x.InstallOrUpgradeAsync(manifest.Apps[5]));
+                GetMock<IAppInstaller>().Verify(x => x.InstallOrUpgradeAsync(manifest.Apps[6]));
+                GetMock<IAppInstaller>().Verify(x => x.InstallOrUpgradeAsync(manifest.Apps[7]));
             });
         }
 

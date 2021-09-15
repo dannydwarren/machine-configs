@@ -7,5 +7,6 @@ namespace Configurator.Apps
 
         public string InstallScript => $"scoop install {AppId}";
         public string VerificationScript => $"(scoop export | Select-String {AppId}) -ne $null";
+        public string UpgradeScript => $"scoop update {AppId}";
     }
 }

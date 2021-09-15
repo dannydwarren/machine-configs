@@ -7,5 +7,6 @@ namespace Configurator.Apps
 
         public string InstallScript => $"winget install {AppId}";
         public string VerificationScript => $"(winget list | Select-String {AppId}) -ne $null";
+        public string UpgradeScript => $"winget upgrade {AppId}";
     }
 }

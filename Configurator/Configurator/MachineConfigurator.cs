@@ -67,7 +67,7 @@ namespace Configurator
                 }
                 else
                 {
-                    await appInstaller.InstallAsync(app);
+                    await appInstaller.InstallOrUpgradeAsync(app);
                 }
             }
         }

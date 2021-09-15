@@ -8,6 +8,7 @@ namespace Configurator.Apps
         string Environments { get; }
         string InstallScript { get; }
         string? VerificationScript { get; }
+        string? UpgradeScript { get; }
     }
 
     public interface IDownloadApp : IApp

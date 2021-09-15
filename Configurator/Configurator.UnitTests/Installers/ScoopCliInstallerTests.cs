@@ -12,7 +12,7 @@ namespace Configurator.UnitTests.Installers
         public async Task When_installing_scoop_cli()
         {
             IApp capturedApp = null!;
-            GetMock<IAppInstaller>().Setup(x => x.InstallAsync(IsAny<IApp>()))
+            GetMock<IAppInstaller>().Setup(x => x.InstallOrUpgradeAsync(IsAny<IApp>()))
                 .Callback<IApp>(app => capturedApp = app);
 
             await BecauseAsync(() => ClassUnderTest.InstallAsync());
