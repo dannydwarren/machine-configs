@@ -3,7 +3,6 @@ namespace Configurator.Apps
     public class WingetApp : IApp
     {
         public string AppId { get; set; } = "";
-        public string Environments { get; set; } = "";
 
         private string installArgs = "";
         public string InstallArgs

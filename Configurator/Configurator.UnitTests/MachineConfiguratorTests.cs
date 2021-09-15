@@ -19,14 +19,14 @@ namespace Configurator.UnitTests
             {
                 Apps = new List<IApp>
                 {
-                    new PowerShellAppPackage {AppId = RandomString(), Environments = "Personal"},
-                    new ScriptApp {AppId = RandomString(), Environments = "All"},
-                    new NonPackageApp {AppId = RandomString(), Environments = "All"},
-                    new ScoopBucketApp {AppId = RandomString(), Environments = "All"},
-                    new ScoopApp {AppId = RandomString(), Environments = "Personal"},
-                    new WingetApp {AppId = RandomString(), Environments = "Personal"},
-                    new GitconfigApp {AppId = RandomString(), Environments = "All"},
-                    new WingetApp {AppId = RandomString(), Environments = "All"}
+                    new PowerShellAppPackage {AppId = RandomString() },
+                    new ScriptApp {AppId = RandomString() },
+                    new NonPackageApp {AppId = RandomString() },
+                    new ScoopBucketApp {AppId = RandomString() },
+                    new ScoopApp {AppId = RandomString() },
+                    new WingetApp {AppId = RandomString() },
+                    new GitconfigApp {AppId = RandomString() },
+                    new WingetApp {AppId = RandomString() },
                 }
             };
 
