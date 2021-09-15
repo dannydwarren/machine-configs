@@ -5,6 +5,6 @@
         public string AppId { get; set; } = "";
         public string Environments { get; set; } = "";
         public string InstallScript { get; set; } = "";
-        public string? VerificationScript { get; set; } = null;
+        public string? VerificationScript { get; set; }
     }
 }

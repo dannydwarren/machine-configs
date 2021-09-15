@@ -9,7 +9,7 @@ namespace Configurator.Apps
         public string InstallScript => @"Import-Module appx -UseWindowsPowerShell
 Add-AppPackage";
         public string VerificationScript => $@"Import-Module appx -UseWindowsPowerShell
-Get-AppPackage -Name {AppId}";
+(Get-AppPackage -Name {AppId}) -ne $null";
         public string Downloader { get; set; } = "";
         public JsonElement DownloaderArgs { get; set; }
     }
