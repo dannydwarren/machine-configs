@@ -4,6 +4,12 @@
             "AppType": "Winget",
             "AppId": "winget-app-id",
             "Environments": "Test"
+        },
+        {
+            "AppType": "Winget",
+            "AppId": "winget-app-id-with-install-args",
+            "Environments": "Test",
+            "InstallArgs": "install-args"
         }
     ]
 }

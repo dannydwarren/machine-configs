@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMoqCore;
 using Configurator.Apps;
@@ -30,10 +31,24 @@ namespace Configurator.IntegrationTests
 
             var manifest = await BecauseAsync(() => ClassUnderTest.LoadAsync());
 
-            It("parses", () =>
+            It($"parses w/o {nameof(ScoopApp.InstallArgs)}", () =>
             {
-                manifest.Apps.ShouldHaveSingleItem()
-                    .ShouldBeOfType<ScoopApp>().AppId.ShouldBe("scoop-app-id");
+                manifest.Apps.First()
+                    .ShouldBeOfType<ScoopApp>().ShouldSatisfyAllConditions(x =>
+                    {
+                        x.AppId.ShouldBe("scoop-app-id");
+                        x.InstallArgs.ShouldBeEmpty();
+                    });
+            });
+
+            It($"parses with {nameof(ScoopApp.InstallArgs)}", () =>
+            {
+                manifest.Apps.Last()
+                    .ShouldBeOfType<ScoopApp>().ShouldSatisfyAllConditions(x =>
+                    {
+                        x.AppId.ShouldBe("scoop-app-id-with-install-args");
+                        x.InstallArgs.ShouldBe(" install-args");
+                    });
             });
         }
 
@@ -62,10 +77,24 @@ namespace Configurator.IntegrationTests
 
             var manifest = await BecauseAsync(() => ClassUnderTest.LoadAsync());
 
-            It("parses", () =>
+            It($"parses w/o {nameof(ScoopApp.InstallArgs)}", () =>
             {
-                manifest.Apps.ShouldHaveSingleItem()
-                    .ShouldBeOfType<WingetApp>().AppId.ShouldBe("winget-app-id");
+                manifest.Apps.First()
+                    .ShouldBeOfType<WingetApp>().ShouldSatisfyAllConditions(x =>
+                    {
+                        x.AppId.ShouldBe("winget-app-id");
+                        x.InstallArgs.ShouldBeEmpty();
+                    });
+            });
+
+            It($"parses with {nameof(ScoopApp.InstallArgs)}", () =>
+            {
+                manifest.Apps.Last()
+                    .ShouldBeOfType<WingetApp>().ShouldSatisfyAllConditions(x =>
+                    {
+                        x.AppId.ShouldBe("winget-app-id-with-install-args");
+                        x.InstallArgs.ShouldBe(" install-args");
+                    });
             });
         }
 
@@ -139,6 +168,7 @@ namespace Configurator.IntegrationTests
                         x.AppId.ShouldBe("script-app-id");
                         x.InstallScript.ShouldBe("install-script");
                         x.VerificationScript.ShouldBe("verification-script");
+                        x.UpgradeScript.ShouldBe("upgrade-script");
                     });
             });
         }

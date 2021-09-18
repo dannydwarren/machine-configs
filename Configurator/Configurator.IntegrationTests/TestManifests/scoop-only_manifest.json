@@ -4,6 +4,12 @@
             "AppType": "Scoop",
             "AppId": "scoop-app-id",
             "Environments": "Test"
+        },
+        {
+            "AppType": "Scoop",
+            "AppId": "scoop-app-id-with-install-args",
+            "Environments": "Test",
+            "InstallArgs": "install-args"
         }
     ]
 }
