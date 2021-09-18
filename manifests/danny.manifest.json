@@ -218,7 +218,8 @@
             "AppType": "Winget",
             "AppId": "Microsoft.dotnet",
             "InstallArgs": "--version 3.1.410.15736",
-            "Environments": "All"
+            "Environments": "All",
+            "PreventUpgrade": true
         },
         {
             "AppType": "Winget",
