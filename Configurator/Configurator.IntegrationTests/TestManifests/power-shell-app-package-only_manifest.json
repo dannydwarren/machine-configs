@@ -10,6 +10,18 @@
                 "Prop2": "prop-2",
                 "Prop3": "prop-3"
             }
+        },
+        {
+            "AppType": "PowerShellAppPackage",
+            "AppId": "power-shell-app-package-app-id-with-prevent-upgrade",
+            "Environments": "Test",
+            "Downloader": "some-downloader",
+            "DownloaderArgs": {
+                "Prop1": "prop-1",
+                "Prop2": "prop-2",
+                "Prop3": "prop-3"
+            },
+            "PreventUpgrade": true
         }
     ]
 }

@@ -10,6 +10,12 @@
             "AppId": "winget-app-id-with-install-args",
             "Environments": "Test",
             "InstallArgs": "install-args"
+        },
+        {
+            "AppType": "Winget",
+            "AppId": "winget-app-id-with-prevent-upgrade",
+            "Environments": "Test",
+            "PreventUpgrade": true
         }
     ]
 }

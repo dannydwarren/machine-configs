@@ -48,9 +48,11 @@ namespace Configurator.UnitTests.Installers
                     isPreInstall = false;
                     return desktopSystemEntriesPreInstall;
                 }
+
                 return desktopSystemEntriesPostInstall;
             });
-            GetMock<IPowerShell>().Setup(x => x.ExecuteAsync(app.VerificationScript)).ReturnsAsync(verificationResultPreInstall);
+            GetMock<IPowerShell>().Setup(x => x.ExecuteAsync(app.VerificationScript))
+                .ReturnsAsync(verificationResultPreInstall);
 
             await BecauseAsync(() => ClassUnderTest.InstallOrUpgradeAsync(app));
 
@@ -154,9 +156,11 @@ namespace Configurator.UnitTests.Installers
                     isPreInstall = false;
                     return desktopSystemEntriesPreInstall;
                 }
+
                 return desktopSystemEntriesPostInstall;
             });
-            GetMock<IPowerShell>().Setup(x => x.ExecuteAsync(app.VerificationScript)).ReturnsAsync(verificationResultPreInstall);
+            GetMock<IPowerShell>().Setup(x => x.ExecuteAsync(app.VerificationScript))
+                .ReturnsAsync(verificationResultPreInstall);
 
             await BecauseAsync(() => ClassUnderTest.InstallOrUpgradeAsync(app));
 
@@ -169,6 +173,35 @@ namespace Configurator.UnitTests.Installers
             It("deletes desktop shortcuts", () =>
             {
                 GetMock<IDesktopRepository>().Verify(x => x.DeletePaths(desktopSystemEntriesAddedDuringInstall));
+            });
+        }
+
+        [Fact]
+        public async Task When_preventing_upgrade()
+        {
+            var appMock = GetMock<IApp>();
+            appMock.SetupGet(x => x.AppId).Returns(RandomString());
+            appMock.SetupGet(x => x.InstallScript).Returns(RandomString());
+            appMock.SetupGet(x => x.VerificationScript).Returns(RandomString());
+            appMock.SetupGet(x => x.UpgradeScript).Returns(RandomString());
+            appMock.SetupGet(x => x.PreventUpgrade).Returns(true);
+            var app = appMock.Object;
+
+            var verificationResultPreInstall = new PowerShellResult
+            {
+                AsString = "True"
+            };
+
+            GetMock<IDesktopRepository>().Setup(x => x.LoadSystemEntries()).Returns(new List<string>());
+            GetMock<IPowerShell>().Setup(x => x.ExecuteAsync(app.VerificationScript))
+                .ReturnsAsync(verificationResultPreInstall);
+
+            await BecauseAsync(() => ClassUnderTest.InstallOrUpgradeAsync(app));
+
+            It("does not run the upgrade script", () =>
+            {
+                GetMock<IPowerShell>().Verify(x => x.ExecuteAsync(app.VerificationScript), Times.Exactly(1));
+                GetMock<IPowerShell>().VerifyNever(x => x.ExecuteAsync(app.UpgradeScript));
             });
         }
 
@@ -188,13 +221,14 @@ namespace Configurator.UnitTests.Installers
             };
 
             GetMock<IDesktopRepository>().Setup(x => x.LoadSystemEntries()).Returns(new List<string>());
-            GetMock<IPowerShell>().Setup(x => x.ExecuteAsync(app.VerificationScript)).ReturnsAsync(verificationResultPreInstall);
+            GetMock<IPowerShell>().Setup(x => x.ExecuteAsync(app.VerificationScript))
+                .ReturnsAsync(verificationResultPreInstall);
 
             await BecauseAsync(() => ClassUnderTest.InstallOrUpgradeAsync(app));
 
             It("does not install or upgrade", () =>
             {
-                GetMock<IPowerShell>().Verify(x => x.ExecuteAsync(app.VerificationScript), Times.Exactly(2));
+                GetMock<IPowerShell>().Verify(x => x.ExecuteAsync(app.VerificationScript), Times.Exactly(1));
                 GetMock<IPowerShell>().VerifyNever(x => x.ExecuteAsync(app.InstallScript));
                 GetMock<IPowerShell>().VerifyNever(x => x.ExecuteAsync(app.UpgradeScript!));
             });

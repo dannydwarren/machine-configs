@@ -6,6 +6,7 @@ namespace Configurator.Apps
     {
         string AppId { get; }
         string? InstallArgs { get; }
+        bool PreventUpgrade { get; }
         string InstallScript { get; }
         string? VerificationScript { get; }
         string? UpgradeScript { get; }

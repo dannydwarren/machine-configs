@@ -31,16 +31,13 @@ namespace Configurator.Installers
 
             var preInstallVerificationResult = await VerifyAppAsync(app);
 
-            if (!preInstallVerificationResult)
-            {
-                await powerShell.ExecuteAsync(app.InstallScript);
-            }
-            else if (app.UpgradeScript != null)
-            {
-                await powerShell.ExecuteAsync(app.UpgradeScript);
-            }
+            var actionScript = GetActionScript(app, preInstallVerificationResult);
 
-            await VerifyAppAsync(app);
+            if (!string.IsNullOrWhiteSpace(actionScript))
+            {
+                await powerShell.ExecuteAsync(actionScript);
+                await VerifyAppAsync(app);
+            }
 
             var postInstallDesktopSystemEntries = desktopRepository.LoadSystemEntries();
             var desktopSystemEntriesToDelete = postInstallDesktopSystemEntries.Except(preInstallDesktopSystemEntries).ToList();
@@ -50,6 +47,22 @@ namespace Configurator.Installers
             }
 
             consoleLogger.Result($"Installed '{app.AppId}'");
+        }
+
+        private static string GetActionScript(IApp app, bool preInstallVerificationResult)
+        {
+            var actionScript = "";
+
+            if (!preInstallVerificationResult)
+            {
+                actionScript = app.InstallScript;
+            }
+            else if (app.UpgradeScript != null && !app.PreventUpgrade)
+            {
+                actionScript = app.UpgradeScript;
+            }
+
+            return actionScript;
         }
 
         private async Task<bool> VerifyAppAsync(IApp app)

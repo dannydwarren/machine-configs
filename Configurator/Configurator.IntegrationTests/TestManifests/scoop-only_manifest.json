@@ -10,6 +10,12 @@
             "AppId": "scoop-app-id-with-install-args",
             "Environments": "Test",
             "InstallArgs": "install-args"
+        },
+        {
+            "AppType": "Scoop",
+            "AppId": "scoop-app-id-with-prevent-upgrade",
+            "Environments": "Test",
+            "PreventUpgrade": true
         }
     ]
 }

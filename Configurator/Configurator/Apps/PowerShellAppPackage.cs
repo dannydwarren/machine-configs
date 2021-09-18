@@ -6,6 +6,7 @@ namespace Configurator.Apps
     {
         public string AppId { get; set; } = "";
         public string? InstallArgs => null;
+        public bool PreventUpgrade { get; set; } = false;
 
         public string InstallScript => @"Import-Module appx -UseWindowsPowerShell
 Add-AppPackage";

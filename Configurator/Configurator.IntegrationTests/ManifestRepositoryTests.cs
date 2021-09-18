@@ -31,23 +31,34 @@ namespace Configurator.IntegrationTests
 
             var manifest = await BecauseAsync(() => ClassUnderTest.LoadAsync());
 
-            It($"parses w/o {nameof(ScoopApp.InstallArgs)}", () =>
+            It("parses required properties", () =>
             {
-                manifest.Apps.First()
+                manifest.Apps[0]
                     .ShouldBeOfType<ScoopApp>().ShouldSatisfyAllConditions(x =>
                     {
                         x.AppId.ShouldBe("scoop-app-id");
                         x.InstallArgs.ShouldBeEmpty();
+                        x.PreventUpgrade.ShouldBeFalse();
                     });
             });
 
             It($"parses with {nameof(ScoopApp.InstallArgs)}", () =>
             {
-                manifest.Apps.Last()
+                manifest.Apps[1]
                     .ShouldBeOfType<ScoopApp>().ShouldSatisfyAllConditions(x =>
                     {
                         x.AppId.ShouldBe("scoop-app-id-with-install-args");
                         x.InstallArgs.ShouldBe(" install-args");
+                    });
+            });
+
+            It($"parses with {nameof(ScoopApp.PreventUpgrade)}", () =>
+            {
+                manifest.Apps[2]
+                    .ShouldBeOfType<ScoopApp>().ShouldSatisfyAllConditions(x =>
+                    {
+                        x.AppId.ShouldBe("scoop-app-id-with-prevent-upgrade");
+                        x.PreventUpgrade.ShouldBeTrue();
                     });
             });
         }
@@ -61,7 +72,7 @@ namespace Configurator.IntegrationTests
 
             var manifest = await BecauseAsync(() => ClassUnderTest.LoadAsync());
 
-            It("parses", () =>
+            It("parses required properties", () =>
             {
                 manifest.Apps.ShouldHaveSingleItem()
                     .ShouldBeOfType<ScoopBucketApp>().AppId.ShouldBe("scoop-bucket-app-id");
@@ -77,9 +88,9 @@ namespace Configurator.IntegrationTests
 
             var manifest = await BecauseAsync(() => ClassUnderTest.LoadAsync());
 
-            It($"parses w/o {nameof(ScoopApp.InstallArgs)}", () =>
+            It("parses required properties", () =>
             {
-                manifest.Apps.First()
+                manifest.Apps[0]
                     .ShouldBeOfType<WingetApp>().ShouldSatisfyAllConditions(x =>
                     {
                         x.AppId.ShouldBe("winget-app-id");
@@ -87,13 +98,23 @@ namespace Configurator.IntegrationTests
                     });
             });
 
-            It($"parses with {nameof(ScoopApp.InstallArgs)}", () =>
+            It($"parses with {nameof(WingetApp.InstallArgs)}", () =>
             {
-                manifest.Apps.Last()
+                manifest.Apps[1]
                     .ShouldBeOfType<WingetApp>().ShouldSatisfyAllConditions(x =>
                     {
                         x.AppId.ShouldBe("winget-app-id-with-install-args");
                         x.InstallArgs.ShouldBe(" install-args");
+                    });
+            });
+
+            It($"parses with {nameof(WingetApp.PreventUpgrade)}", () =>
+            {
+                manifest.Apps[2]
+                    .ShouldBeOfType<WingetApp>().ShouldSatisfyAllConditions(x =>
+                    {
+                        x.AppId.ShouldBe("winget-app-id-with-prevent-upgrade");
+                        x.PreventUpgrade.ShouldBeTrue();
                     });
             });
         }
@@ -107,7 +128,7 @@ namespace Configurator.IntegrationTests
 
             var manifest = await BecauseAsync(() => ClassUnderTest.LoadAsync());
 
-            It("parses", () =>
+            It("parses required properties", () =>
             {
                 manifest.Apps.ShouldHaveSingleItem()
                     .ShouldBeOfType<NonPackageApp>().AppId.ShouldBe("non-package-app-id");
@@ -123,7 +144,7 @@ namespace Configurator.IntegrationTests
 
             var manifest = await BecauseAsync(() => ClassUnderTest.LoadAsync());
 
-            It("parses", () =>
+            It("parses required properties", () =>
             {
                 manifest.Apps.ShouldHaveSingleItem()
                     .ShouldBeOfType<GitconfigApp>().AppId.ShouldBe("gitconfig-app-id");
@@ -139,14 +160,27 @@ namespace Configurator.IntegrationTests
 
             var manifest = await BecauseAsync(() => ClassUnderTest.LoadAsync());
 
-            It("parses", () =>
+            It("parses required properties", () =>
             {
-                manifest.Apps.ShouldHaveSingleItem()
+                manifest.Apps.First()
                     .ShouldBeOfType<PowerShellAppPackage>().ShouldSatisfyAllConditions(x =>
                 {
                     x.AppId.ShouldBe("power-shell-app-package-app-id");
                     x.Downloader.ShouldBe("some-downloader");
                     x.DownloaderArgs.ToString().ShouldNotBeEmpty();
+                    x.PreventUpgrade.ShouldBeFalse();
+                });
+            });
+
+            It($"parses with {nameof(PowerShellAppPackage.PreventUpgrade)}", () =>
+            {
+                manifest.Apps.Last()
+                    .ShouldBeOfType<PowerShellAppPackage>().ShouldSatisfyAllConditions(x =>
+                {
+                    x.AppId.ShouldBe("power-shell-app-package-app-id-with-prevent-upgrade");
+                    x.Downloader.ShouldBe("some-downloader");
+                    x.DownloaderArgs.ToString().ShouldNotBeEmpty();
+                    x.PreventUpgrade.ShouldBe(true);
                 });
             });
         }
@@ -160,7 +194,7 @@ namespace Configurator.IntegrationTests
 
             var manifest = await BecauseAsync(() => ClassUnderTest.LoadAsync());
 
-            It("parses", () =>
+            It("parses required properties", () =>
             {
                 manifest.Apps.ShouldHaveSingleItem()
                     .ShouldBeOfType<ScriptApp>().ShouldSatisfyAllConditions(x =>
@@ -172,6 +206,5 @@ namespace Configurator.IntegrationTests
                     });
             });
         }
-
     }
 }

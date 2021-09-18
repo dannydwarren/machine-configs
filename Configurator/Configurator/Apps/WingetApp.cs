@@ -3,6 +3,7 @@ namespace Configurator.Apps
     public class WingetApp : IApp
     {
         public string AppId { get; set; } = "";
+        public bool PreventUpgrade { get; set; } = false;
 
         private string installArgs = "";
         public string InstallArgs

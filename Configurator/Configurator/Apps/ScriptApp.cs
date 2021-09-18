@@ -4,6 +4,7 @@
     {
         public string AppId { get; set; } = "";
         public string? InstallArgs => null;
+        public bool PreventUpgrade => false;
 
         public string InstallScript { get; set; } = "";
         public string? VerificationScript { get; set; }
