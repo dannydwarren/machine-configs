@@ -101,8 +101,7 @@
             "AppType": "Winget",
             "AppId": "Microsoft.VisualStudio.2019.Professional",
             "InstallArgs": "--passive --norestart --wait --includeRecommended --add Microsoft.VisualStudio.Workload.ManagedDesktop --add Microsoft.VisualStudio.Workload.NetWeb --add Microsoft.VisualStudio.Workload.NetCoreTools",
-            "Environments": "Personal",
-            "Notes": "Causes PC reboot"
+            "Environments": "Personal"
         },
         {
             "AppType": "Winget",
@@ -284,8 +283,9 @@
         },
         {
             "AppType": "Unknown",
-            "AppId": "Origin#May be replaced with ElectronicArts.EADesktop",
-            "Environments": "Personal"
+            "AppId": "Origin",
+            "Environments": "Personal",
+            "Notes": "May be replaced with ElectronicArts.EADesktop"
         },
         {
             "AppType": "Store",
@@ -309,14 +309,15 @@
         },
         {
             "AppType": "Unknown",
-            "AppId": "Uplay#May be replaced with Ubisoft.Connect",
-            "Environments": "Personal"
+            "AppId": "Uplay",
+            "Environments": "Personal",
+            "Notes": "May be replaced with Ubisoft.Connect"
         },
         {
             "AppType": "Unknown",
             "AppId": "Blizzard.BattleNet",
             "Environments": "Personal",
-            "Notes": "Installs the auto-updater which requires manual interaction to actually install Battle.NET"
+            "Notes": "BROKEN: Installs the auto-updater which requires manual interaction to actually install Battle.NET"
         },
         {
             "AppType": "Unknown",
