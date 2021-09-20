@@ -6,7 +6,7 @@
         <LangVersion>8.0</LangVersion>
         <nullable>enable</nullable>
 
-        <NoWarn>1701;1702;1591</NoWarn>
+        <NoWarn>1701;1702;1591;8618</NoWarn>
     </PropertyGroup>
 
     <PropertyGroup>
