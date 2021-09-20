@@ -9,5 +9,7 @@
         public string InstallScript => @$"git config --global --add include.path {AppId}";
         public string VerificationScript => @$"(git config --get-all --global include.path) -match ""{AppId.Replace(@"\", @"\\")}""";
         public string? UpgradeScript => null;
+
+        public AppConfiguration? Configuration => null;
     }
 }

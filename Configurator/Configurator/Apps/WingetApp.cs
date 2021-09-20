@@ -15,5 +15,6 @@ namespace Configurator.Apps
         public string InstallScript => $"winget install {AppId}{InstallArgs}";
         public string VerificationScript => $"(winget list | Select-String {AppId}) -ne $null";
         public string UpgradeScript => $"winget upgrade {AppId}";
+        public AppConfiguration Configuration { get; set; } = new AppConfiguration();
     }
 }

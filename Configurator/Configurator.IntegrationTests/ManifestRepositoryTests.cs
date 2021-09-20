@@ -39,6 +39,7 @@ namespace Configurator.IntegrationTests
                         x.AppId.ShouldBe("scoop-app-id");
                         x.InstallArgs.ShouldBeEmpty();
                         x.PreventUpgrade.ShouldBeFalse();
+                        x.Configuration.ShouldNotBeNull().RegistrySettings.ShouldBeEmpty();
                     });
             });
 
@@ -59,6 +60,22 @@ namespace Configurator.IntegrationTests
                     {
                         x.AppId.ShouldBe("scoop-app-id-with-prevent-upgrade");
                         x.PreventUpgrade.ShouldBeTrue();
+                    });
+            });
+
+            It($"parses with {nameof(ScoopApp.Configuration)}", () =>
+            {
+                manifest.Apps[3]
+                    .ShouldBeOfType<ScoopApp>().ShouldSatisfyAllConditions(x =>
+                    {
+                        x.AppId.ShouldBe("scoop-app-id-with-configuration");
+                        x.Configuration.RegistrySettings.ShouldHaveSingleItem()
+                            .ShouldSatisfyAllConditions(y =>
+                            {
+                                y.KeyName.ShouldBe("key-name-test");
+                                y.ValueName.ShouldBe("value-name-test");
+                                y.ValueData.ShouldBe("value-data-test");
+                            });
                     });
             });
         }
@@ -95,6 +112,8 @@ namespace Configurator.IntegrationTests
                     {
                         x.AppId.ShouldBe("winget-app-id");
                         x.InstallArgs.ShouldBeEmpty();
+                        x.PreventUpgrade.ShouldBeFalse();
+                        x.Configuration.ShouldNotBeNull().RegistrySettings.ShouldBeEmpty();
                     });
             });
 
@@ -115,6 +134,22 @@ namespace Configurator.IntegrationTests
                     {
                         x.AppId.ShouldBe("winget-app-id-with-prevent-upgrade");
                         x.PreventUpgrade.ShouldBeTrue();
+                    });
+            });
+
+            It($"parses with {nameof(WingetApp.Configuration)}", () =>
+            {
+                manifest.Apps[3]
+                    .ShouldBeOfType<WingetApp>().ShouldSatisfyAllConditions(x =>
+                    {
+                        x.AppId.ShouldBe("winget-app-id-with-configuration");
+                        x.Configuration.RegistrySettings.ShouldHaveSingleItem()
+                            .ShouldSatisfyAllConditions(y =>
+                            {
+                                y.KeyName.ShouldBe("key-name-test");
+                                y.ValueName.ShouldBe("value-name-test");
+                                y.ValueData.ShouldBe("value-data-test");
+                            });
                     });
             });
         }

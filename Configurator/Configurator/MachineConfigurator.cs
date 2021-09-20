@@ -18,18 +18,21 @@ namespace Configurator
         private readonly IManifestRepository manifestRepository;
         private readonly IAppInstaller appInstaller;
         private readonly IDownloadAppInstaller downloadAppInstaller;
+        private readonly IAppConfigurator appConfigurator;
         private readonly IConsoleLogger consoleLogger;
 
         public MachineConfigurator(ISystemInitializer systemInitializer,
             IManifestRepository manifestRepository,
             IAppInstaller appInstaller,
             IDownloadAppInstaller downloadAppInstaller,
+            IAppConfigurator appConfigurator,
             IConsoleLogger consoleLogger)
         {
             this.systemInitializer = systemInitializer;
             this.manifestRepository = manifestRepository;
             this.appInstaller = appInstaller;
             this.downloadAppInstaller = downloadAppInstaller;
+            this.appConfigurator = appConfigurator;
             this.consoleLogger = consoleLogger;
         }
 
@@ -69,6 +72,8 @@ namespace Configurator
                 {
                     await appInstaller.InstallOrUpgradeAsync(app);
                 }
+
+                appConfigurator.Configure(app);
             }
         }
     }

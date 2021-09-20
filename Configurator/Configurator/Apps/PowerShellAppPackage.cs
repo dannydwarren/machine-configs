@@ -15,6 +15,8 @@ Add-AppPackage";
         public string UpgradeScript => @"Import-Module appx -UseWindowsPowerShell
 Add-AppPackage";
 
+        public AppConfiguration? Configuration => null;
+
         public string Downloader { get; set; } = "";
         public JsonElement DownloaderArgs { get; set; }
     }

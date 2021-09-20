@@ -19,14 +19,14 @@ namespace Configurator.UnitTests
             {
                 Apps = new List<IApp>
                 {
-                    new PowerShellAppPackage {AppId = RandomString() },
-                    new ScriptApp {AppId = RandomString() },
-                    new NonPackageApp {AppId = RandomString() },
-                    new ScoopBucketApp {AppId = RandomString() },
-                    new ScoopApp {AppId = RandomString() },
-                    new WingetApp {AppId = RandomString() },
-                    new GitconfigApp {AppId = RandomString() },
-                    new WingetApp {AppId = RandomString() },
+                    new PowerShellAppPackage { AppId = RandomString() },
+                    new ScriptApp { AppId = RandomString() },
+                    new NonPackageApp { AppId = RandomString() },
+                    new ScoopBucketApp { AppId = RandomString() },
+                    new ScoopApp { AppId = RandomString() },
+                    new WingetApp { AppId = RandomString() },
+                    new GitconfigApp { AppId = RandomString() },
+                    new WingetApp { AppId = RandomString() },
                 }
             };
 
@@ -34,10 +34,7 @@ namespace Configurator.UnitTests
 
             await BecauseAsync(() => ClassUnderTest.ExecuteAsync());
 
-            It("initializes the system", () =>
-            {
-                GetMock<ISystemInitializer>().Verify(x => x.InitializeAsync());
-            });
+            It("initializes the system", () => { GetMock<ISystemInitializer>().Verify(x => x.InitializeAsync()); });
 
             It("installs all apps", () =>
             {
@@ -50,6 +47,18 @@ namespace Configurator.UnitTests
                 GetMock<IAppInstaller>().Verify(x => x.InstallOrUpgradeAsync(manifest.Apps[6]));
                 GetMock<IAppInstaller>().Verify(x => x.InstallOrUpgradeAsync(manifest.Apps[7]));
             });
+
+            It("configures all apps", () =>
+            {
+                GetMock<IAppConfigurator>().Verify(x => x.Configure(manifest.Apps[0]));
+                GetMock<IAppConfigurator>().Verify(x => x.Configure(manifest.Apps[1]));
+                GetMock<IAppConfigurator>().Verify(x => x.Configure(manifest.Apps[2]));
+                GetMock<IAppConfigurator>().Verify(x => x.Configure(manifest.Apps[3]));
+                GetMock<IAppConfigurator>().Verify(x => x.Configure(manifest.Apps[4]));
+                GetMock<IAppConfigurator>().Verify(x => x.Configure(manifest.Apps[5]));
+                GetMock<IAppConfigurator>().Verify(x => x.Configure(manifest.Apps[6]));
+                GetMock<IAppConfigurator>().Verify(x => x.Configure(manifest.Apps[7]));
+            });
         }
 
         [Fact]
@@ -61,10 +70,8 @@ namespace Configurator.UnitTests
 
             await BecauseAsync(() => ClassUnderTest.ExecuteAsync());
 
-            It("logs the exception as an error", () =>
-            {
-                GetMock<IConsoleLogger>().Setup(x => x.Error(exception.ToString()));
-            });
+            It("logs the exception as an error",
+                () => { GetMock<IConsoleLogger>().Setup(x => x.Error(exception.ToString())); });
         }
     }
 }

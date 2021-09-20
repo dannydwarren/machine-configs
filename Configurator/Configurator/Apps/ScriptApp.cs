@@ -9,5 +9,7 @@
         public string InstallScript { get; set; } = "";
         public string? VerificationScript { get; set; }
         public string? UpgradeScript { get; set; }
+
+        public AppConfiguration? Configuration => null;
     }
 }

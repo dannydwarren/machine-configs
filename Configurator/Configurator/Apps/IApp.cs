@@ -10,6 +10,7 @@ namespace Configurator.Apps
         string InstallScript { get; }
         string? VerificationScript { get; }
         string? UpgradeScript { get; }
+        AppConfiguration? Configuration { get; }
     }
 
     public interface IDownloadApp : IApp
