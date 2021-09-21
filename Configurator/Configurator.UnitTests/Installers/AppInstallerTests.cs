@@ -193,15 +193,15 @@ namespace Configurator.UnitTests.Installers
             };
 
             GetMock<IDesktopRepository>().Setup(x => x.LoadSystemEntries()).Returns(new List<string>());
-            GetMock<IPowerShell>().Setup(x => x.ExecuteAsync(app.VerificationScript))
+            GetMock<IPowerShell>().Setup(x => x.ExecuteAsync(app.VerificationScript!))
                 .ReturnsAsync(verificationResultPreInstall);
 
             await BecauseAsync(() => ClassUnderTest.InstallOrUpgradeAsync(app));
 
             It("does not run the upgrade script", () =>
             {
-                GetMock<IPowerShell>().Verify(x => x.ExecuteAsync(app.VerificationScript), Times.Exactly(1));
-                GetMock<IPowerShell>().VerifyNever(x => x.ExecuteAsync(app.UpgradeScript));
+                GetMock<IPowerShell>().Verify(x => x.ExecuteAsync(app.VerificationScript!), Times.Exactly(1));
+                GetMock<IPowerShell>().VerifyNever(x => x.ExecuteAsync(app.UpgradeScript!));
             });
         }
 
