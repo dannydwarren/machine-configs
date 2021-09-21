@@ -91,6 +91,15 @@
             "AppId": "Microsoft.VisualStudioCode",
             "InstallArgs": "/TASKS=\"associatewithfiles\"",
             "Environments": "All",
+            "Configuration": {
+                "RegistrySettings": [
+                    {
+                        "KeyName": "HKCU:\\Software\\Microsoft\\VisualStudio",
+                        "ValueName": "UseSolutionNavigatorGraphProvider",
+                        "ValueData": 0
+                    }
+                ]
+            },
             "ManualSteps": [
                 "'Turn on Settings Sync' -> Microsoft Account",
                 "Watch log with ctrl+shift+u",
