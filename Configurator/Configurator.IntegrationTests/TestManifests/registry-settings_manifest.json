@@ -1,0 +1,28 @@
+﻿{
+    "Apps": [
+        {
+            "AppType": "Winget",
+            "AppId": "registry-settings-app-id",
+            "Environments": "Test",
+            "Configuration": {
+                "RegistrySettings": [
+                    {
+                        "KeyName": "key-1",
+                        "ValueName": "string",
+                        "ValueData": "string-data"
+                    },
+                    {
+                        "KeyName": "key-2",
+                        "ValueName": "int",
+                        "ValueData": 42
+                    },
+                    {
+                        "KeyName": "key-3",
+                        "ValueName": "double",
+                        "ValueData": 4.2
+                    }
+                ]
+            }
+        }
+    ]
+}

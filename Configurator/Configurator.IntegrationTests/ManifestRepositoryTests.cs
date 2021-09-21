@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoMoqCore;
 using Configurator.Apps;
 using Configurator.Utilities;
+using Configurator.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using Shouldly;
@@ -238,6 +239,48 @@ namespace Configurator.IntegrationTests
                         x.InstallScript.ShouldBe("install-script");
                         x.VerificationScript.ShouldBe("verification-script");
                         x.UpgradeScript.ShouldBe("upgrade-script");
+                    });
+            });
+        }
+
+        [Fact]
+        public async Task When_parsing_registry_settings()
+        {
+            mockArgs.SetupGet(x => x.ManifestPath).Returns("./TestManifests/registry-settings_manifest.json");
+
+            Services.AddTransient(_ => mockArgs.Object);
+
+            var manifest = await BecauseAsync(() => ClassUnderTest.LoadAsync());
+
+            var registrySettings = manifest.Apps.Single().Configuration!.RegistrySettings;
+
+            It($"parses string {nameof(RegistrySetting.ValueData)}", () =>
+            {
+                registrySettings[0].ShouldSatisfyAllConditions(x =>
+                    {
+                        x.KeyName.ShouldBe("key-1");
+                        x.ValueName.ShouldBe("string");
+                        x.ValueData.ShouldBe("string-data");
+                    });
+            });
+
+            It($"parses int {nameof(RegistrySetting.ValueData)}", () =>
+            {
+                registrySettings[1].ShouldSatisfyAllConditions(x =>
+                    {
+                        x.KeyName.ShouldBe("key-2");
+                        x.ValueName.ShouldBe("int");
+                        x.ValueData.ShouldBeOfType<int>().ShouldBe(42);
+                    });
+            });
+
+            It($"parses double {nameof(RegistrySetting.ValueData)}", () =>
+            {
+                registrySettings[2].ShouldSatisfyAllConditions(x =>
+                    {
+                        x.KeyName.ShouldBe("key-3");
+                        x.ValueName.ShouldBe("double");
+                        x.ValueData.ShouldBeOfType<double>().ShouldBe(4.2);
                     });
             });
         }
