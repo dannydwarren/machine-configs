@@ -91,15 +91,6 @@
             "AppId": "Microsoft.VisualStudioCode",
             "InstallArgs": "/TASKS=\"associatewithfiles\"",
             "Environments": "All",
-            "Configuration": {
-                "RegistrySettings": [
-                    {
-                        "KeyName": "HKCU:\\Software\\Microsoft\\VisualStudio",
-                        "ValueName": "UseSolutionNavigatorGraphProvider",
-                        "ValueData": 0
-                    }
-                ]
-            },
             "ManualSteps": [
                 "'Turn on Settings Sync' -> Microsoft Account",
                 "Watch log with ctrl+shift+u",
@@ -110,7 +101,17 @@
             "AppType": "Winget",
             "AppId": "Microsoft.VisualStudio.2019.Professional",
             "InstallArgs": "--passive --norestart --wait --includeRecommended --add Microsoft.VisualStudio.Workload.ManagedDesktop --add Microsoft.VisualStudio.Workload.NetWeb --add Microsoft.VisualStudio.Workload.NetCoreTools",
-            "Environments": "Personal"
+            "Environments": "Personal",
+            "Configuration": {
+                "RegistrySettings": [
+                    {
+                        "Description": "Need to figure out the version to use for the key: Hides type and members tree under files",
+                        "KeyName": "HKCU:\\Software\\Microsoft\\VisualStudio\\<needversionhere>",
+                        "ValueName": "UseSolutionNavigatorGraphProvider",
+                        "ValueData": 0
+                    }
+                ]
+            }
         },
         {
             "AppType": "Winget",
