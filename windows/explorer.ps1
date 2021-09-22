@@ -1,4 +1,3 @@
-# TODO: Ask Ben
 Block "Home > Organize > Delete (options) > Show recycle confirmation = On" {
     Set-RegistryValue "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name ConfirmFileDelete -Value 1
 }
@@ -20,25 +19,18 @@ Block "View > Options > View > Advanced settings > Files and Folders > Hide fold
 Block "View > Options > View > Advanced settings > Files and Folders > Hide protected operating system files (Recommended) = Off" {
     Set-RegistryValue "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name ShowSuperHidden -Value 1
 } -RequiresReboot
-# TODO: Ask Ben
 Block "View > Options > View > Advanced settings > Files and Folders > Restore previous folder windows at logon = On" {
     Set-RegistryValue "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name PersistBrowsers -Value 1
 }
-# TODO: Ask Ben
 Block "View > Options > View > Advanced settings > Files and Folders > Show sync provider notifications = Off" {
     Set-RegistryValue "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name ShowSyncProviderNotifications -Value 0
 }
-# TODO: Ask Ben
 Block "View > Options > View > Advanced settings > Navigation pane > Expand to open folder = On" {
     Set-RegistryValue "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name NavPaneExpandToCurrentFolder -Value 1
 }
-# TODO: Ask Ben
 Block "View > Options > View > Advanced settings > Navigation pane > Show all folders = On" {
     Set-RegistryValue "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name NavPaneShowAllFolders -Value 1
 }
-# Block "Hide Quick access in Navigation pane" {
-#     Set-RegistryValue "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name HubMode -Value 1
-# }
 Block "Hide Libraries in Navigation pane" {
     Set-RegistryValue "HKCU:\Software\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}\ShellFolder" -Name Attributes -Value 0xb090010d
 } -RequiresReboot
@@ -50,8 +42,4 @@ Block "Internet Options > Advanced > Browsing > Use inline AutoComplete in File 
 }
 Block "Hide Folders Section in This PC" {
     & "$PSScriptRoot\Hide Folders Section in This PC.ps1"
-}
-# TODO: Ask Ben
-Block "shell:sendto VS Code" {
-    Create-Shortcut -Target "$env:LocalAppData\Programs\Microsoft VS Code\Code.exe" -Link "$((New-Object -ComObject WScript.Shell).SpecialFolders.Item("sendto"))\nCode.lnk"
 }

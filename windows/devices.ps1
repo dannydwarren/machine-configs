@@ -1,4 +1,4 @@
-# TODO: Ask Ben
+# TODO: Waits for printer dialog to close
 if (!(Configured $forHome) -and !(Configured $forTest)) {
     FirstRunBlock "Devices > Printers & scanners > Add a printer or scanner > The printer that I want isn't listed" {
         Write-ManualStep "Select a shared printer by name = \\{Server}\{Printer}"
@@ -6,7 +6,7 @@ if (!(Configured $forHome) -and !(Configured $forTest)) {
         WaitWhileProcess rundll32
     }
 }
-# TODO: Ask Ben for the URL that describes all the values or how he got the values, I suspect this will need to change for my prefs.
+# TODO: (https://docs.microsoft.com/en-us/windows-hardware/design/component-guidelines/touchpad-tuning-guidelines)
 Block "Devices > Touchpad > Taps > Press the lower right corner of the touchpad to right-click = Off" {
     Set-RegistryValue "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\PrecisionTouchPad" -Name RightClickZoneEnabled -Value 0
 } -RequiresReboot

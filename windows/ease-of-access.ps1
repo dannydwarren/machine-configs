@@ -10,11 +10,7 @@ Block "Ease of Access > Keyboard > Allow the shortcut key to start Toggle Keys =
 Block "Ease of Access > Keyboard > Allow the shortcut key to start Filter Keys = Off" {
     Set-RegistryValue "HKCU:\Control Panel\Accessibility\Keyboard Response" -Name Flags -Value 122
 } -RequiresReboot
-# TODO: Ask Ben
+# TODO: Turns on or off the underline for menu options when you press alt
 Block "Ease of Access > Keyboard > Underline access keys when available = On" {
     Set-RegistryValue "HKCU:\Control Panel\Accessibility\Keyboard Preference" -Name On -Value 1
-} -RequiresReboot
-# TODO: Ask Ben
-Block "Ease of Access > Keyboard > Use the PrtScn button to open screen snipping = On" {
-    Set-RegistryValue "HKCU:\Control Panel\Keyboard" -Name PrintScreenKeyForSnippingEnabled -Value 1
 } -RequiresReboot

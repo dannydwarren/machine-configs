@@ -2,7 +2,7 @@ Block "Personalization > Colors > Choose your color = Dark" {
     Set-RegistryValue "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name AppsUseLightTheme -Value 0
     Set-RegistryValue "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name SystemUsesLightTheme -Value 0
 }
-# TODO: Ask Ben
+# Look at these settings in registry and then use those values here
 Block "Personalization > Colors > Windows colors = Seafoam teal (4, 4)" {
     Set-RegistryValue "HKCU:\Software\Microsoft\Windows\DWM" -Name AccentColor -Value 4287070979
     Set-RegistryValue "HKCU:\Software\Microsoft\Windows\DWM" -Name ColorizationAfterglow -Value 3288564615

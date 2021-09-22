@@ -6,6 +6,8 @@ Block "Create generic file handler" {
     Set-RegistryValue "HKLM:\SOFTWARE\Classes\Ben.VSCode\shell\open\command" -Value """$env:LocalAppData\Programs\Microsoft VS Code\Code.exe"" ""%1"""
 }
 
+#TODO: Use associate pattern but with VSCode.* handlers
+#NOTE: consider icons
 function CreateFileHandlerBlock([string]$Handler, [string]$DisplayName, [string]$DefaultIcon, [string]$OpenCommand) {
     Block "Create file handler $Handler" {
         Set-RegistryValue "HKCU:\SOFTWARE\Classes\$Handler" -Value $DisplayName
@@ -55,7 +57,7 @@ AssociateFileBlock fsx VSCodeSourceFile
 AssociateFileBlock fs VSCodeSourceFile
 AssociateFileBlock java VSCodeSourceFile
 
-# TODO: Ask Ben
+# for handlers that already exist
 Block "Set .ahk Edit command to VS Code" {
     Set-RegistryValue "HKLM:\SOFTWARE\Classes\AutoHotkeyScript\Shell\Edit\Command" -Value "code.exe %1"
 }

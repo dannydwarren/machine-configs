@@ -25,7 +25,7 @@ if (!(Configured $forKids)) {
 }
 
 FirstRunBlock "Configure Mail" {
-    # TODO: Ask Ben
+    # Ben Ignores this because it doesn't seem to have all apps in there before either launching the app OR the app posts a notifications
     ConfigureNotifications Mail
 }
 

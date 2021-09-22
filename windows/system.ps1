@@ -15,7 +15,7 @@ if ((Configured $forWork) -and -not (Configured $forHome)) {
         powercfg /change standby-timeout-ac 60
     }
 }
-# TODO: Ask Ben
+# Don't sleep when plugged in
 Block "System > Power & sleep > Additional power settings > Choose what closing the lid does > When I close the lid (Plugged in) = Do nothing" {
     # https://docs.microsoft.com/en-us/windows-hardware/customize/power-settings/power-button-and-lid-settings-lid-switch-close-action
     powercfg /SetACValueIndex SCHEME_BALANCED SUB_BUTTONS LIDACTION 0

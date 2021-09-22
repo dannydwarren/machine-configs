@@ -11,7 +11,8 @@ WindowsFeatureBlock ".NET Framework 3.5 (includes .NET 2.0 and 3.0)" NetFx3
 
 WindowsFeatureBlock "Internet Information Services > Web Management Tools > IIS Management Console" IIS-ManagementConsole
 WindowsFeatureBlock "Internet Information Services > World Wide Web Services > Application Development Features > ASP.NET 4.x" IIS-ASPNET45
-# TODO: Ask Ben (What needs Hyper-V these days?)
+# (What needs Hyper-V these days?) - Maybe try having it disabled and use VMWare/VirtualBox?
+# Need to figure out if Docker with WSL 2 is OK w/o Hyper-V
 WindowsFeatureBlock "Hyper-V" Microsoft-Hyper-V
 WindowsFeatureBlock "Windows Subsystem for Linux" Microsoft-Windows-Subsystem-Linux
 WindowsFeatureBlock "Virtual Machine Platform" VirtualMachinePlatform # part of updating to WSL 2

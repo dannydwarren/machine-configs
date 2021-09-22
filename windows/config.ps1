@@ -16,7 +16,7 @@ FirstRunBlock "Add Microsoft account" {
     start ms-settings:yourinfo
     WaitWhileProcess SystemSettings
 }
-# TODO: Ask Ben
+
 FirstRunBlock "Configure OneDrive" {
     Write-ManualStep "Start OneDrive syncing"
     . "$env:LocalAppData\Microsoft\OneDrive\OneDrive.exe"
@@ -40,7 +40,7 @@ Block "Control Panel > System > Remote settings > Allow Remote Assistance connec
 & $PSScriptRoot\ease-of-access.ps1
 & $PSScriptRoot\windows-features.ps1
 
-# TODO: Ask Ben
+
 FirstRunBlock "Set sign-in options" {
     Write-ManualStep "Windows Hello"
     start ms-settings:signinoptions
