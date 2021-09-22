@@ -13,13 +13,8 @@
                     },
                     {
                         "KeyName": "key-2",
-                        "ValueName": "int",
+                        "ValueName": "uint",
                         "ValueData": 42
-                    },
-                    {
-                        "KeyName": "key-3",
-                        "ValueName": "double",
-                        "ValueData": 4.2
                     }
                 ]
             }

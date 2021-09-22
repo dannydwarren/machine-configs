@@ -269,18 +269,8 @@ namespace Configurator.IntegrationTests
                 registrySettings[1].ShouldSatisfyAllConditions(x =>
                     {
                         x.KeyName.ShouldBe("key-2");
-                        x.ValueName.ShouldBe("int");
-                        x.ValueData.ShouldBeOfType<int>().ShouldBe(42);
-                    });
-            });
-
-            It($"parses double {nameof(RegistrySetting.ValueData)}", () =>
-            {
-                registrySettings[2].ShouldSatisfyAllConditions(x =>
-                    {
-                        x.KeyName.ShouldBe("key-3");
-                        x.ValueName.ShouldBe("double");
-                        x.ValueData.ShouldBeOfType<double>().ShouldBe(4.2);
+                        x.ValueName.ShouldBe("uint");
+                        x.ValueData.ShouldBeOfType<uint>().ShouldBe((uint)42);
                     });
             });
         }

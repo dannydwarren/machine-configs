@@ -19,16 +19,9 @@ namespace Configurator.Windows
             return (reader.TokenType switch
             {
                 JsonTokenType.String => reader.GetString(),
-                JsonTokenType.Number => GetNumber(reader),
-                _ => throw new Exception($"{nameof(RegistrySetting)}.{nameof(RegistrySetting.ValueData)} only supports types: string, int32, and double")
+                JsonTokenType.Number => reader.GetUInt32(),
+                _ => throw new Exception($"{nameof(RegistrySetting)}.{nameof(RegistrySetting.ValueData)} only supports types: string and uint32")
             })!;
-        }
-
-        private static object GetNumber(Utf8JsonReader reader)
-        {
-            return reader.TryGetInt32(out var @int)
-                ? (object)@int
-                : reader.GetDouble();
         }
 
         public override void Write(Utf8JsonWriter writer, object obj, JsonSerializerOptions options)
