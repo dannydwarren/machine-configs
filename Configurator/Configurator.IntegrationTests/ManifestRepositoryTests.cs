@@ -232,13 +232,30 @@ namespace Configurator.IntegrationTests
 
             It("parses required properties", () =>
             {
-                manifest.Apps.ShouldHaveSingleItem()
+                manifest.Apps[0]
                     .ShouldBeOfType<ScriptApp>().ShouldSatisfyAllConditions(x =>
                     {
                         x.AppId.ShouldBe("script-app-id");
                         x.InstallScript.ShouldBe("install-script");
                         x.VerificationScript.ShouldBe("verification-script");
                         x.UpgradeScript.ShouldBe("upgrade-script");
+                        x.Configuration.ShouldBeNull();
+                    });
+            });
+
+            It($"parses with {nameof(ScriptApp.Configuration)}", () =>
+            {
+                manifest.Apps[1]
+                    .ShouldBeOfType<ScriptApp>().ShouldSatisfyAllConditions(x =>
+                    {
+                        x.AppId.ShouldBe("script-app-id-with-configuration");
+                        x.Configuration.ShouldNotBeNull().RegistrySettings.ShouldHaveSingleItem()
+                            .ShouldSatisfyAllConditions(y =>
+                            {
+                                y.KeyName.ShouldBe("key-name-test");
+                                y.ValueName.ShouldBe("value-name-test");
+                                y.ValueData.ShouldBe("value-data-test");
+                            });
                     });
             });
         }
