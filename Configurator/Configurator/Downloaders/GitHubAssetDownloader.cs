@@ -39,14 +39,14 @@ Write-Output ""{{ `""FileName`"": `""$fileName`"", `""Url`"": `""$downloadUrl`""
 
     public class GitHubAssetDownloaderArgs
     {
-        public string User { get; set; } = "";
-        public string Repo { get; set; } = "";
-        public string Extension { get; set; } = "";
+        public string User { get; set; }
+        public string Repo { get; set; }
+        public string Extension { get; set; }
     }
 
     public class GitHubAssetInfo
     {
-        public string Filename { get; set; } = "";
-        public string Url { get; set; } = "";
+        public string Filename { get; set; }
+        public string Url { get; set; }
     }
 }

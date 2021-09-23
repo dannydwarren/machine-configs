@@ -2,7 +2,7 @@ namespace Configurator.Apps
 {
     public class NonPackageApp : IApp
     {
-        public string AppId { get; set; } = "";
+        public string AppId { get; set; }
         public string? InstallArgs => null;
         public bool PreventUpgrade => false;
 

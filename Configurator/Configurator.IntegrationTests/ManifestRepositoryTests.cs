@@ -40,7 +40,7 @@ namespace Configurator.IntegrationTests
                         x.AppId.ShouldBe("scoop-app-id");
                         x.InstallArgs.ShouldBeEmpty();
                         x.PreventUpgrade.ShouldBeFalse();
-                        x.Configuration.ShouldNotBeNull().RegistrySettings.ShouldBeEmpty();
+                        x.Configuration.ShouldBeNull();
                     });
             });
 
@@ -114,7 +114,7 @@ namespace Configurator.IntegrationTests
                         x.AppId.ShouldBe("winget-app-id");
                         x.InstallArgs.ShouldBeEmpty();
                         x.PreventUpgrade.ShouldBeFalse();
-                        x.Configuration.ShouldNotBeNull().RegistrySettings.ShouldBeEmpty();
+                        x.Configuration.ShouldBeNull();
                     });
             });
 

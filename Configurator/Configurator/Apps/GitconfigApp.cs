@@ -2,7 +2,7 @@
 {
     public class GitconfigApp : IApp
     {
-        public string AppId { get; set; } = "";
+        public string AppId { get; set; }
         public string? InstallArgs => null;
         public bool PreventUpgrade => false;
 

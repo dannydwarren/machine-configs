@@ -100,7 +100,7 @@ namespace Configurator
         internal class Installable
         {
             public AppType AppType { get; set; }
-            public string Environments { get; set; } = "";
+            public string Environments { get; set; }
             public JsonElement AppData { get; set; }
         }
     }

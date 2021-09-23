@@ -4,9 +4,9 @@ namespace Configurator.Apps
 {
     public class PowerShellAppPackage : IDownloadApp
     {
-        public string AppId { get; set; } = "";
+        public string AppId { get; set; }
         public string? InstallArgs => null;
-        public bool PreventUpgrade { get; set; } = false;
+        public bool PreventUpgrade { get; set; }
 
         public string InstallScript => @"Import-Module appx -UseWindowsPowerShell
 Add-AppPackage";
@@ -17,7 +17,7 @@ Add-AppPackage";
 
         public AppConfiguration? Configuration => null;
 
-        public string Downloader { get; set; } = "";
+        public string Downloader { get; set; }
         public JsonElement DownloaderArgs { get; set; }
     }
 }

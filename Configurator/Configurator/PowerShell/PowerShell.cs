@@ -158,7 +158,7 @@ namespace Configurator.PowerShell
 
     public class PowerShellResult
     {
-        public string AsString { get; set; } = "";
+        public string AsString { get; set; }
         public bool? AsBool => bool.TryParse(AsString, out var result) ? result : (bool?)null;
     }
 }
