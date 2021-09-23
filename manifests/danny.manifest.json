@@ -20,6 +20,172 @@
             }
         },
         {
+            "AppType": "Script",
+            "AppId": "Configure Control Panel",
+            "Environments": "All",
+            "InstallScript": "Disable-NetFirewallRule -DisplayGroup \"Remote Assistance\"",
+            "Configuration": {
+                "RegistrySettings": [
+                    {
+                        "Description": "Control Panel > View by = Small icons",
+                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ControlPanel",
+                        "ValueName": "AllItemsIconView",
+                        "ValueData": 1
+                    },
+                    {
+                        "Description": "Control Panel > View by = Small icons",
+                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ControlPanel",
+                        "ValueName": "StartupPage",
+                        "ValueData": 1
+                    },
+                    {
+                        "Description": "Control Panel > System > Remote settings > Allow Remote Assistance connections to this computer = Off",
+                        "KeyName": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Remote Assistance",
+                        "ValueName": "fAllowToGetHelp",
+                        "ValueData": 0
+                    }
+                ]
+            }
+        },
+        {
+            "AppType": "Script",
+            "AppId": "Configure Desktop",
+            "Environments": "All",
+            "Configuration": {
+                "RegistrySettings": [
+                    {
+                        "Description": "Desktop > View > Small icons",
+                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\Shell\\Bags\\1\\Desktop",
+                        "ValueName": "IconSize",
+                        "ValueData": 32,
+                        "RequiresReboot": true
+                    }
+                ]
+            }
+        },
+        {
+            "AppType": "Script",
+            "AppId": "Configure Taskbar",
+            "Environments": "All",
+            "Configuration": {
+                "RegistrySettings": [
+                    {
+                        "Description": "Taskbar > Search = Hidden",
+                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Search",
+                        "ValueName": "SearchboxTaskbarMode",
+                        "ValueData": 0
+                    },
+                    {
+                        "Description": "Taskbar > News and interests = Turn off",
+                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Feeds",
+                        "ValueName": "ShellFeedsTaskbarViewMode",
+                        "ValueData": 2
+                    },
+                    {
+                        "Description": "Taskbar > Show Cortana button = Off",
+                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                        "ValueName": "ShowCortanaButton",
+                        "ValueData": 0
+                    },
+                    {
+                        "Description": "Taskbar > Show Windows Ink Workspace button = Off",
+                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\PenWorkspace",
+                        "ValueName": "PenWorkspaceButtonDesiredVisibility",
+                        "ValueData": 0
+                    }
+                ]
+            }
+        },
+        {
+            "AppType": "Script",
+            "AppId": "Configure Explorer",
+            "Environments": "All",
+            "Configuration": {
+                "RegistrySettings": [
+                    {
+                        "Description": "Home > Organize > Delete (options) > Show recycle confirmation = On",
+                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+                        "ValueName": "ConfirmFileDelete",
+                        "ValueData": 1
+                    },
+                    {
+                        "Description": "View > Options > General > Open File Explorer to = This PC",
+                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                        "ValueName": "LaunchTo",
+                        "ValueData": 1
+                    },
+                    {
+                        "Description": "View > Options > View > Advanced settings > Files and Folders > Hidden files and folders = Show hidden files, folders, and drives",
+                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                        "ValueName": "Hidden",
+                        "ValueData": 1
+                    },
+                    {
+                        "Description": "View > Options > View > Advanced settings > Files and Folders > Hide empty drives = Off",
+                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                        "ValueName": "HideDrivesWithNoMedia",
+                        "ValueData": 0
+                    },
+                    {
+                        "Description": "View > Options > View > Advanced settings > Files and Folders > Hide extensions for known file types = Off",
+                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                        "ValueName": "HideFileExt",
+                        "ValueData": 0
+                    },
+                    {
+                        "Description": "View > Options > View > Advanced settings > Files and Folders > Hide folder merge conflicts = Off",
+                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                        "ValueName": "HideMergeConflicts",
+                        "ValueData": 0
+                    },
+                    {
+                        "Description": "View > Options > View > Advanced settings > Files and Folders > Hide protected operating system files (Recommended) = Off",
+                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                        "ValueName": "ShowSuperHidden",
+                        "ValueData": 1,
+                        "RequiresReboot": true
+                    },
+                    {
+                        "Description": "View > Options > View > Advanced settings > Files and Folders > Restore previous folder windows at logon = On",
+                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                        "ValueName": "PersistBrowsers",
+                        "ValueData": 1
+                    },
+                    {
+                        "Description": "View > Options > View > Advanced settings > Files and Folders > Show sync provider notifications = Off",
+                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                        "ValueName": "ShowSyncProviderNotifications",
+                        "ValueData": 0
+                    },
+                    {
+                        "Description": "View > Options > View > Advanced settings > Navigation pane > Expand to open folder = On",
+                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                        "ValueName": "NavPaneExpandToCurrentFolder",
+                        "ValueData": 1
+                    },
+                    {
+                        "Description": "View > Options > View > Advanced settings > Navigation pane > Show all folders = On",
+                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                        "ValueName": "NavPaneShowAllFolders",
+                        "ValueData": 1
+                    },
+                    {
+                        "Description": "Hide Control Panel in Navigation pane",
+                        "KeyName": "HKCU:\\Software\\Classes\\CLSID\\{26EE0668-A00A-44D7-9371-BEB064C98683}\\ShellFolder",
+                        "ValueName": "Attributes",
+                        "ValueData": "0xa0900004",
+                        "RequiresReboot": true
+                    },
+                    {
+                        "Description": "Internet Options > Advanced > Browsing > Use inline AutoComplete in File Explorer and Run Dialog = On",
+                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoComplete",
+                        "ValueName": "Append Completion",
+                        "ValueData": "yes"
+                    }
+                ]
+            }
+        },
+        {
             "AppType": "Winget",
             "AppId": "Git.Git",
             "Environments": "All"
@@ -103,7 +269,13 @@
         {
             "AppType": "Winget",
             "AppId": "Microsoft.OneDrive",
-            "Environments": "Personal"
+            "Environments": "Personal",
+            "Configuration": {
+                "ManualSteps":[
+                    "Launch (example): . \"$env:LocalAppData\\Microsoft\\OneDrive\\OneDrive.exe\"",
+                    "Start OneDrive syncing"
+                ]
+            }
         },
         {
             "AppType": "Winget",

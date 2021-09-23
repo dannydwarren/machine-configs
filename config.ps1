@@ -50,11 +50,5 @@ Block "Backup Registry" {
 & $PSScriptRoot\powershell\config.ps1
 if (!$DryRun -and !$Run) { . $profile } # make profile available to scripts below
 
-Block "Git config" {
-    git config --global --add include.path $PSScriptRoot\git\danny.gitconfig
-} {
-    (git config --get-all --global include.path) -match "danny\.gitconfig"
-}
-
 & $PSScriptRoot\windows\config.ps1
 & $PSScriptRoot\install\install.ps1

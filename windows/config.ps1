@@ -15,20 +15,7 @@ FirstRunBlock "Add Microsoft account" {
     WaitWhileProcess SystemSettings
 }
 
-FirstRunBlock "Configure OneDrive" {
-    Write-ManualStep "Start OneDrive syncing"
-    . "$env:LocalAppData\Microsoft\OneDrive\OneDrive.exe"
-}
-Block "Control Panel > View by = Small icons" {
-    Set-RegistryValue "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel" -Name AllItemsIconView -Value 1
-    Set-RegistryValue "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel" -Name StartupPage -Value 1
-}
-Block "Control Panel > System > Remote settings > Allow Remote Assistance connections to this computer = Off" {
-    Set-RegistryValue "HKLM:\SYSTEM\CurrentControlSet\Control\Remote Assistance" -Name fAllowToGetHelp -Value 0
-    Disable-NetFirewallRule -DisplayGroup "Remote Assistance"
-}
-& $PSScriptRoot\desktop.ps1
-& $PSScriptRoot\explorer.ps1
+
 & $PSScriptRoot\file-handlers.ps1
 & $PSScriptRoot\system.ps1
 & $PSScriptRoot\devices.ps1
