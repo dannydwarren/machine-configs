@@ -1,6 +1,25 @@
 {
     "Apps": [
         {
+            "AppType": "Script",
+            "AppId": "Disable UAC",
+            "Environments": "All",
+            "Configuration": {
+                "RegistrySettings": [
+                    {
+                        "KeyName": "HKLM:\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                        "ValueName": "ConsentPromptBehaviorAdmin",
+                        "ValueData": 0
+                    },
+                    {
+                        "KeyName": "HKLM:\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                        "ValueName": "PromptOnSecureDesktop",
+                        "ValueData": 0
+                    }
+                ]
+            }
+        },
+        {
             "AppType": "Winget",
             "AppId": "Git.Git",
             "Environments": "All"
@@ -91,11 +110,13 @@
             "AppId": "Microsoft.VisualStudioCode",
             "InstallArgs": "/TASKS=\"associatewithfiles\"",
             "Environments": "All",
-            "ManualSteps": [
-                "'Turn on Settings Sync' -> Microsoft Account",
-                "Watch log with ctrl+shift+u",
-                "ctrl+shift+p 'Show synced data' -> Update name of synced machine"
-            ]
+            "Configuration":{
+                "ManualSteps": [
+                    "'Turn on Settings Sync' -> Microsoft Account",
+                    "Watch log with ctrl+shift+u",
+                    "ctrl+shift+p 'Show synced data' -> Update name of synced machine"
+                ]
+            }
         },
         {
             "AppType": "Winget",
@@ -181,7 +202,44 @@
         {
             "AppType": "Winget",
             "AppId": "7zip.7zip",
-            "Environments": "All"
+            "Environments": "All",
+            "Configuration": {
+                "RegistrySettings": [
+                    {
+                        "KeyName": "HKCU:\\SOFTWARE\\7-Zip\\FM",
+                        "ValueName": "ShowDots",
+                        "ValueData": 1
+                    },
+                    {
+                        "KeyName": "HKCU:\\SOFTWARE\\7-Zip\\FM",
+                        "ValueName": "ShowRealFileIcons",
+                        "ValueData": 1
+                    },
+                    {
+                        "KeyName": "HKCU:\\SOFTWARE\\7-Zip\\FM",
+                        "ValueName": "FullRow",
+                        "ValueData": 1
+                    },
+                    {
+                        "KeyName": "HKCU:\\SOFTWARE\\7-Zip\\FM",
+                        "ValueName": "ShowSystemMenu",
+                        "ValueData": 1
+                    }
+                ],
+                "ManualSteps": [
+                    "Launch App (scoop): . \"$(scoop prefix 7zip)\\7zFM.exe\"",
+                    "Tools >",
+                    "`tOptions >",
+                    "`t`t7-Zip >",
+                    "`t`t`tContext menu items > [only the following]",
+                    "`t`t`t`tOpen archive",
+                    "`t`t`t`tExtract Here",
+                    "`t`t`t`tExtract to <Folder>",
+                    "`t`t`t`tAdd to <Archive>.zip",
+                    "`t`t`t`tCRC SHA >",
+                    "Wait for the process to close (custom script): WaitWhileProcess 7zFM"
+                ]
+            }
         },
         {
             "AppType": "Winget",

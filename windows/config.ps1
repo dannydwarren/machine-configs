@@ -8,9 +8,7 @@ Block "Rename computer" {
 } {
     $env:ComputerName -notlike 'desktop-*' -and $env:ComputerName -notlike 'laptop-*'
 } -RequiresReboot
-Block "Disable UAC" {
-    & "$PSScriptRoot\Disable UAC.ps1"
-}
+
 FirstRunBlock "Add Microsoft account" {
     Write-ManualStep "Sign in with a Microsoft account instead"
     start ms-settings:yourinfo

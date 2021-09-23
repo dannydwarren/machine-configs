@@ -83,20 +83,3 @@ Block "Install Office" {
 
 InstallFromGitHubBlock benallred YouTubeToPlex
 
-FirstRunBlock "Configure 7-Zip" {
-    Set-RegistryValue "HKCU:\SOFTWARE\7-Zip\FM" -Name ShowDots -Value 1
-    Set-RegistryValue "HKCU:\SOFTWARE\7-Zip\FM" -Name ShowRealFileIcons -Value 1
-    Set-RegistryValue "HKCU:\SOFTWARE\7-Zip\FM" -Name FullRow -Value 1
-    Set-RegistryValue "HKCU:\SOFTWARE\7-Zip\FM" -Name ShowSystemMenu -Value 1
-    . "$(scoop prefix 7zip)\7zFM.exe"
-    Write-ManualStep "Tools >"
-    Write-ManualStep "`tOptions >"
-    Write-ManualStep "`t`t7-Zip >"
-    Write-ManualStep "`t`t`tContext menu items > [only the following]"
-    Write-ManualStep "`t`t`t`tOpen archive"
-    Write-ManualStep "`t`t`t`tExtract Here"
-    Write-ManualStep "`t`t`t`tExtract to <Folder>"
-    Write-ManualStep "`t`t`t`tAdd to <Archive>.zip"
-    Write-ManualStep "`t`t`t`tCRC SHA >"
-    WaitWhileProcess 7zFM
-}
