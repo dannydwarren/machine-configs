@@ -15,12 +15,12 @@ namespace Configurator.UnitTests.Installers
         [Fact]
         public async Task When_installing()
         {
-            var app = new ScriptApp
-            {
-                AppId = RandomString(),
-                InstallScript = RandomString(),
-                VerificationScript = RandomString()
-            };
+            var mockApp = GetMock<IApp>();
+            mockApp.SetupGet(x => x.AppId).Returns(RandomString());
+            mockApp.SetupGet(x => x.InstallScript).Returns(RandomString());
+            mockApp.SetupGet(x => x.VerificationScript).Returns(RandomString());
+            var app = mockApp.Object;
+
             var verificationResultPreInstall = new PowerShellResult
             {
                 AsString = "False"
@@ -51,7 +51,7 @@ namespace Configurator.UnitTests.Installers
 
                 return desktopSystemEntriesPostInstall;
             });
-            GetMock<IPowerShell>().Setup(x => x.ExecuteAsync(app.VerificationScript))
+            GetMock<IPowerShell>().Setup(x => x.ExecuteAsync(app.VerificationScript!))
                 .ReturnsAsync(verificationResultPreInstall);
 
             await BecauseAsync(() => ClassUnderTest.InstallOrUpgradeAsync(app));
@@ -64,7 +64,7 @@ namespace Configurator.UnitTests.Installers
 
             It("runs the install script", () =>
             {
-                GetMock<IPowerShell>().Verify(x => x.ExecuteAsync(app.VerificationScript), Times.Exactly(2));
+                GetMock<IPowerShell>().Verify(x => x.ExecuteAsync(app.VerificationScript!), Times.Exactly(2));
                 GetMock<IPowerShell>().Verify(x => x.ExecuteAsync(app.InstallScript));
             });
 
@@ -77,12 +77,11 @@ namespace Configurator.UnitTests.Installers
         [Fact]
         public async Task When_installing_and_no_verification_script_was_provided()
         {
-            var app = new ScriptApp
-            {
-                AppId = RandomString(),
-                InstallScript = RandomString(),
-                VerificationScript = null
-            };
+            var mockApp = GetMock<IApp>();
+            mockApp.SetupGet(x => x.AppId).Returns(RandomString());
+            mockApp.SetupGet(x => x.InstallScript).Returns(RandomString());
+            mockApp.SetupGet(x => x.VerificationScript).Returns((string)null!);
+            var app = mockApp.Object;
 
             GetMock<IDesktopRepository>().Setup(x => x.LoadSystemEntries()).Returns(new List<string>());
 
@@ -98,11 +97,10 @@ namespace Configurator.UnitTests.Installers
         [Fact]
         public async Task When_installing_and_nothing_was_added_to_the_desktop()
         {
-            var app = new ScriptApp
-            {
-                AppId = RandomString(),
-                InstallScript = RandomString()
-            };
+            var mockApp = GetMock<IApp>();
+            mockApp.SetupGet(x => x.AppId).Returns(RandomString());
+            mockApp.SetupGet(x => x.InstallScript).Returns(RandomString());
+            var app = mockApp.Object;
 
             var desktopSystemEntries = new List<string>
             {
@@ -122,13 +120,13 @@ namespace Configurator.UnitTests.Installers
         [Fact]
         public async Task When_upgrading()
         {
-            var app = new ScriptApp
-            {
-                AppId = RandomString(),
-                InstallScript = RandomString(),
-                VerificationScript = RandomString(),
-                UpgradeScript = RandomString()
-            };
+            var mockApp = GetMock<IApp>();
+            mockApp.SetupGet(x => x.AppId).Returns(RandomString());
+            mockApp.SetupGet(x => x.InstallScript).Returns(RandomString());
+            mockApp.SetupGet(x => x.VerificationScript).Returns(RandomString());
+            mockApp.SetupGet(x => x.UpgradeScript).Returns(RandomString());
+            var app = mockApp.Object;
+
             var verificationResultPreInstall = new PowerShellResult
             {
                 AsString = "True"
@@ -159,15 +157,15 @@ namespace Configurator.UnitTests.Installers
 
                 return desktopSystemEntriesPostInstall;
             });
-            GetMock<IPowerShell>().Setup(x => x.ExecuteAsync(app.VerificationScript))
+            GetMock<IPowerShell>().Setup(x => x.ExecuteAsync(app.VerificationScript!))
                 .ReturnsAsync(verificationResultPreInstall);
 
             await BecauseAsync(() => ClassUnderTest.InstallOrUpgradeAsync(app));
 
             It("runs the upgrade script", () =>
             {
-                GetMock<IPowerShell>().Verify(x => x.ExecuteAsync(app.VerificationScript), Times.Exactly(2));
-                GetMock<IPowerShell>().Verify(x => x.ExecuteAsync(app.UpgradeScript));
+                GetMock<IPowerShell>().Verify(x => x.ExecuteAsync(app.VerificationScript!), Times.Exactly(2));
+                GetMock<IPowerShell>().Verify(x => x.ExecuteAsync(app.UpgradeScript!));
             });
 
             It("deletes desktop shortcuts", () =>
@@ -179,13 +177,13 @@ namespace Configurator.UnitTests.Installers
         [Fact]
         public async Task When_preventing_upgrade()
         {
-            var appMock = GetMock<IApp>();
-            appMock.SetupGet(x => x.AppId).Returns(RandomString());
-            appMock.SetupGet(x => x.InstallScript).Returns(RandomString());
-            appMock.SetupGet(x => x.VerificationScript).Returns(RandomString());
-            appMock.SetupGet(x => x.UpgradeScript).Returns(RandomString());
-            appMock.SetupGet(x => x.PreventUpgrade).Returns(true);
-            var app = appMock.Object;
+            var mockApp = GetMock<IApp>();
+            mockApp.SetupGet(x => x.AppId).Returns(RandomString());
+            mockApp.SetupGet(x => x.InstallScript).Returns(RandomString());
+            mockApp.SetupGet(x => x.VerificationScript).Returns(RandomString());
+            mockApp.SetupGet(x => x.UpgradeScript).Returns(RandomString());
+            mockApp.SetupGet(x => x.PreventUpgrade).Returns(true);
+            var app = mockApp.Object;
 
             var verificationResultPreInstall = new PowerShellResult
             {
@@ -208,27 +206,27 @@ namespace Configurator.UnitTests.Installers
         [Fact]
         public async Task When_already_installed_and_no_upgrade_script_was_provided()
         {
-            var app = new ScriptApp
-            {
-                AppId = RandomString(),
-                InstallScript = RandomString(),
-                VerificationScript = RandomString(),
-                UpgradeScript = null
-            };
+            var mockApp = GetMock<IApp>();
+            mockApp.SetupGet(x => x.AppId).Returns(RandomString());
+            mockApp.SetupGet(x => x.InstallScript).Returns(RandomString());
+            mockApp.SetupGet(x => x.VerificationScript).Returns(RandomString());
+            mockApp.SetupGet(x => x.UpgradeScript).Returns((string)null!);
+            var app = mockApp.Object;
+          
             var verificationResultPreInstall = new PowerShellResult
             {
                 AsString = "True"
             };
 
             GetMock<IDesktopRepository>().Setup(x => x.LoadSystemEntries()).Returns(new List<string>());
-            GetMock<IPowerShell>().Setup(x => x.ExecuteAsync(app.VerificationScript))
+            GetMock<IPowerShell>().Setup(x => x.ExecuteAsync(app.VerificationScript!))
                 .ReturnsAsync(verificationResultPreInstall);
 
             await BecauseAsync(() => ClassUnderTest.InstallOrUpgradeAsync(app));
 
             It("does not install or upgrade", () =>
             {
-                GetMock<IPowerShell>().Verify(x => x.ExecuteAsync(app.VerificationScript), Times.Exactly(1));
+                GetMock<IPowerShell>().Verify(x => x.ExecuteAsync(app.VerificationScript!), Times.Exactly(1));
                 GetMock<IPowerShell>().VerifyNever(x => x.ExecuteAsync(app.InstallScript));
                 GetMock<IPowerShell>().VerifyNever(x => x.ExecuteAsync(app.UpgradeScript!));
             });

@@ -21,13 +21,13 @@ namespace Configurator.UnitTests.Installers
             var memoryStream = new MemoryStream(buffer);
             var downloaderArgsDoc = await JsonDocument.ParseAsync(memoryStream);
 
-            var appMock = GetMock<IDownloadApp>();
-            appMock.SetupGet(x => x.AppId).Returns(RandomString());
-            appMock.SetupGet(x => x.InstallScript).Returns(RandomString());
-            appMock.SetupGet(x => x.VerificationScript).Returns(RandomString());
-            appMock.SetupGet(x => x.Downloader).Returns(RandomString());
-            appMock.SetupGet(x => x.DownloaderArgs).Returns(downloaderArgsDoc.RootElement);
-            var app = appMock.Object;
+            var mockApp = GetMock<IDownloadApp>();
+            mockApp.SetupGet(x => x.AppId).Returns(RandomString());
+            mockApp.SetupGet(x => x.InstallScript).Returns(RandomString());
+            mockApp.SetupGet(x => x.VerificationScript).Returns(RandomString());
+            mockApp.SetupGet(x => x.Downloader).Returns(RandomString());
+            mockApp.SetupGet(x => x.DownloaderArgs).Returns(downloaderArgsDoc.RootElement);
+            var app = mockApp.Object;
 
             var downloadedFilePath = RandomString();
 
@@ -58,13 +58,13 @@ namespace Configurator.UnitTests.Installers
             var memoryStream = new MemoryStream(buffer);
             var downloaderArgsDoc = await JsonDocument.ParseAsync(memoryStream);
 
-            var appMock = GetMock<IDownloadApp>();
-            appMock.SetupGet(x => x.AppId).Returns(RandomString());
-            appMock.SetupGet(x => x.InstallScript).Returns(RandomString());
-            appMock.SetupGet(x => x.VerificationScript).Returns((string)null!);
-            appMock.SetupGet(x => x.Downloader).Returns(RandomString());
-            appMock.SetupGet(x => x.DownloaderArgs).Returns(downloaderArgsDoc.RootElement);
-            var app = appMock.Object;
+            var mockApp = GetMock<IDownloadApp>();
+            mockApp.SetupGet(x => x.AppId).Returns(RandomString());
+            mockApp.SetupGet(x => x.InstallScript).Returns(RandomString());
+            mockApp.SetupGet(x => x.VerificationScript).Returns((string)null!);
+            mockApp.SetupGet(x => x.Downloader).Returns(RandomString());
+            mockApp.SetupGet(x => x.DownloaderArgs).Returns(downloaderArgsDoc.RootElement);
+            var app = mockApp.Object;
 
             var downloadedFilePath = RandomString();
 
