@@ -280,7 +280,6 @@
         {
             "AppType": "Winget",
             "AppId": "Microsoft.VisualStudioCode",
-            "InstallArgs": "/TASKS=\"associatewithfiles\"",
             "Environments": "All",
             "Configuration": {
                 "RegistrySettings": [
@@ -297,67 +296,67 @@
                     {
                         "Description": "Handle .cs",
                         "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.cs",
-                        "ValueData": "VSCode.txt"
+                        "ValueData": "VSCode.cs"
                     },
                     {
                         "Description": "Handle .csx",
                         "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.csx",
-                        "ValueData": "VSCode.txt"
+                        "ValueData": "VSCode.csx"
                     },
                     {
                         "Description": "Handle .fs",
                         "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.fs",
-                        "ValueData": "VSCode.txt"
+                        "ValueData": "VSCode.fs"
                     },
                     {
                         "Description": "Handle .fsx",
                         "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.fsx",
-                        "ValueData": "VSCode.txt"
+                        "ValueData": "VSCode.fsx"
                     },
                     {
                         "Description": "Handle .DotSettings",
                         "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.DotSettings",
-                        "ValueData": "VSCode.txt"
+                        "ValueData": "VSCode.xml"
                     },
                     {
                         "Description": "Handle .java",
                         "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.java",
-                        "ValueData": "VSCode.txt"
+                        "ValueData": "VSCode.java"
                     },
                     {
                         "Description": "Handle .py",
                         "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.py",
-                        "ValueData": "VSCode.txt"
+                        "ValueData": "VSCode.py"
                     },
                     {
                         "Description": "Handle .json",
                         "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.json",
-                        "ValueData": "VSCode.txt"
+                        "ValueData": "VSCode.json"
                     },
                     {
                         "Description": "Handle .xml",
                         "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.xml",
-                        "ValueData": "VSCode.txt"
+                        "ValueData": "VSCode.xml"
                     },
                     {
                         "Description": "Handle .config",
                         "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.config",
-                        "ValueData": "VSCode.txt"
+                        "ValueData": "VSCode.config"
                     },
                     {
                         "Description": "Handle .ps1",
                         "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.ps1",
-                        "ValueData": "VSCode.txt"
+                        "ValueData": "VSCode.ps1"
                     },
                     {
                         "Description": "Handle .ini",
                         "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.ini",
-                        "ValueData": "VSCode.txt"
+                        "ValueData": "VSCode.ini"
                     },
                     {
                         "Description": "Handle .creds",
                         "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.creds",
-                        "ValueData": "VSCode.txt"
+                        "ValueData": "VSCode.json"
                     },
                     {
                         "Description": "Handle .pgpass",
