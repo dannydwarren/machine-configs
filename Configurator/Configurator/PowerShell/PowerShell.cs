@@ -59,6 +59,8 @@ namespace Configurator.PowerShell
 
         private async Task<PowerShellResult> ExecuteScriptAsync(string script)
         {
+            consoleLogger.Debug(script);
+
             var environmentReadyScript =
                 $@"$env:Path = [System.Environment]::GetEnvironmentVariable(""Path"",""Machine"") + "";"" + [System.Environment]::GetEnvironmentVariable(""Path"",""User"")
 {script}";
