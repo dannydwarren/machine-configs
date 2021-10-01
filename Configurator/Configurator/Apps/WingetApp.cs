@@ -12,7 +12,7 @@ namespace Configurator.Apps
             set => installArgs = string.IsNullOrWhiteSpace(value) ? "" : $" {value}";
         }
 
-        public string InstallScript => $"winget install {AppId}{InstallArgs}";
+        public string InstallScript => $"winget install -id {AppId}{InstallArgs}";
         public string VerificationScript => $"(winget list | Select-String {AppId}) -ne $null";
         public string UpgradeScript => $"winget upgrade {AppId}";
         public AppConfiguration Configuration { get; set; }
