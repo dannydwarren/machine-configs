@@ -7,12 +7,12 @@
             "Configuration": {
                 "RegistrySettings": [
                     {
-                        "KeyName": "HKLM:\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                        "KeyName": "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
                         "ValueName": "ConsentPromptBehaviorAdmin",
                         "ValueData": 0
                     },
                     {
-                        "KeyName": "HKLM:\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                        "KeyName": "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
                         "ValueName": "PromptOnSecureDesktop",
                         "ValueData": 0
                     }
@@ -28,19 +28,19 @@
                 "RegistrySettings": [
                     {
                         "Description": "Control Panel > View by = Small icons",
-                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ControlPanel",
+                        "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ControlPanel",
                         "ValueName": "AllItemsIconView",
                         "ValueData": 1
                     },
                     {
                         "Description": "Control Panel > View by = Small icons",
-                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ControlPanel",
+                        "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ControlPanel",
                         "ValueName": "StartupPage",
                         "ValueData": 1
                     },
                     {
                         "Description": "Control Panel > System > Remote settings > Allow Remote Assistance connections to this computer = Off",
-                        "KeyName": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Remote Assistance",
+                        "KeyName": "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Remote Assistance",
                         "ValueName": "fAllowToGetHelp",
                         "ValueData": 0
                     }
@@ -55,7 +55,7 @@
                 "RegistrySettings": [
                     {
                         "Description": "Desktop > View > Small icons",
-                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\Shell\\Bags\\1\\Desktop",
+                        "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\Shell\\Bags\\1\\Desktop",
                         "ValueName": "IconSize",
                         "ValueData": 32,
                         "RequiresReboot": true
@@ -71,25 +71,25 @@
                 "RegistrySettings": [
                     {
                         "Description": "Taskbar > Search = Hidden",
-                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Search",
+                        "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Search",
                         "ValueName": "SearchboxTaskbarMode",
                         "ValueData": 0
                     },
                     {
                         "Description": "Taskbar > News and interests = Turn off",
-                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Feeds",
+                        "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Feeds",
                         "ValueName": "ShellFeedsTaskbarViewMode",
                         "ValueData": 2
                     },
                     {
                         "Description": "Taskbar > Show Cortana button = Off",
-                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                        "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
                         "ValueName": "ShowCortanaButton",
                         "ValueData": 0
                     },
                     {
                         "Description": "Taskbar > Show Windows Ink Workspace button = Off",
-                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\PenWorkspace",
+                        "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\PenWorkspace",
                         "ValueName": "PenWorkspaceButtonDesiredVisibility",
                         "ValueData": 0
                     }
@@ -104,81 +104,81 @@
                 "RegistrySettings": [
                     {
                         "Description": "Home > Organize > Delete (options) > Show recycle confirmation = On",
-                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+                        "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
                         "ValueName": "ConfirmFileDelete",
                         "ValueData": 1
                     },
                     {
                         "Description": "View > Options > General > Open File Explorer to = This PC",
-                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                        "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
                         "ValueName": "LaunchTo",
                         "ValueData": 1
                     },
                     {
                         "Description": "View > Options > View > Advanced settings > Files and Folders > Hidden files and folders = Show hidden files, folders, and drives",
-                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                        "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
                         "ValueName": "Hidden",
                         "ValueData": 1
                     },
                     {
                         "Description": "View > Options > View > Advanced settings > Files and Folders > Hide empty drives = Off",
-                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                        "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
                         "ValueName": "HideDrivesWithNoMedia",
                         "ValueData": 0
                     },
                     {
                         "Description": "View > Options > View > Advanced settings > Files and Folders > Hide extensions for known file types = Off",
-                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                        "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
                         "ValueName": "HideFileExt",
                         "ValueData": 0
                     },
                     {
                         "Description": "View > Options > View > Advanced settings > Files and Folders > Hide folder merge conflicts = Off",
-                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                        "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
                         "ValueName": "HideMergeConflicts",
                         "ValueData": 0
                     },
                     {
                         "Description": "View > Options > View > Advanced settings > Files and Folders > Hide protected operating system files (Recommended) = Off",
-                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                        "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
                         "ValueName": "ShowSuperHidden",
                         "ValueData": 1,
                         "RequiresReboot": true
                     },
                     {
                         "Description": "View > Options > View > Advanced settings > Files and Folders > Restore previous folder windows at logon = On",
-                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                        "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
                         "ValueName": "PersistBrowsers",
                         "ValueData": 1
                     },
                     {
                         "Description": "View > Options > View > Advanced settings > Files and Folders > Show sync provider notifications = Off",
-                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                        "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
                         "ValueName": "ShowSyncProviderNotifications",
                         "ValueData": 0
                     },
                     {
                         "Description": "View > Options > View > Advanced settings > Navigation pane > Expand to open folder = On",
-                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                        "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
                         "ValueName": "NavPaneExpandToCurrentFolder",
                         "ValueData": 1
                     },
                     {
                         "Description": "View > Options > View > Advanced settings > Navigation pane > Show all folders = On",
-                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                        "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
                         "ValueName": "NavPaneShowAllFolders",
                         "ValueData": 1
                     },
                     {
                         "Description": "Hide Control Panel in Navigation pane",
-                        "KeyName": "HKCU:\\Software\\Classes\\CLSID\\{26EE0668-A00A-44D7-9371-BEB064C98683}\\ShellFolder",
+                        "KeyName": "HKEY_CURRENT_USER\\Software\\Classes\\CLSID\\{26EE0668-A00A-44D7-9371-BEB064C98683}\\ShellFolder",
                         "ValueName": "Attributes",
                         "ValueData": "0xa0900004",
                         "RequiresReboot": true
                     },
                     {
                         "Description": "Internet Options > Advanced > Browsing > Use inline AutoComplete in File Explorer and Run Dialog = On",
-                        "KeyName": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoComplete",
+                        "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoComplete",
                         "ValueName": "Append Completion",
                         "ValueData": "yes"
                     }
@@ -286,142 +286,142 @@
                 "RegistrySettings": [
                     {
                         "Description": "Handle .txt",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.txt",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.txt",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .text",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.text",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.text",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .cs",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.cs",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.cs",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .csx",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.csx",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.csx",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .fs",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.fs",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.fs",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .fsx",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.fsx",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.fsx",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .DotSettings",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.DotSettings",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.DotSettings",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .java",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.java",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.java",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .py",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.py",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.py",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .json",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.json",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.json",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .xml",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.xml",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.xml",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .config",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.config",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.config",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .ps1",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.ps1",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.ps1",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .ini",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.ini",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.ini",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .creds",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.creds",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.creds",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .pgpass",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.pgpass",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.pgpass",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .yarnrc",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.yarnrc",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.yarnrc",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .nvmrc",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.nvmrc",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.nvmrc",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .log",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.log",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.log",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .log1",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.log1",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.log1",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .log2",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.log2",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.log2",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .log3",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.log3",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.log3",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .log4",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.log4",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.log4",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .log5",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.log5",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.log5",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .log6",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.log6",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.log6",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .log7",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.log7",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.log7",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .log8",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.log8",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.log8",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .log9",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.log9",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.log9",
                         "ValueData": "VSCode.txt"
                     }
                 ],
@@ -441,7 +441,7 @@
                 "RegistrySettings": [
                     {
                         "Description": "Need to figure out the version to use for the key: Hides type and members tree under files",
-                        "KeyName": "HKCU:\\Software\\Microsoft\\VisualStudio\\<needversionhere>",
+                        "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\VisualStudio\\<needversionhere>",
                         "ValueName": "UseSolutionNavigatorGraphProvider",
                         "ValueData": 0
                     }
@@ -520,22 +520,22 @@
             "Configuration": {
                 "RegistrySettings": [
                     {
-                        "KeyName": "HKCU:\\SOFTWARE\\7-Zip\\FM",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\7-Zip\\FM",
                         "ValueName": "ShowDots",
                         "ValueData": 1
                     },
                     {
-                        "KeyName": "HKCU:\\SOFTWARE\\7-Zip\\FM",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\7-Zip\\FM",
                         "ValueName": "ShowRealFileIcons",
                         "ValueData": 1
                     },
                     {
-                        "KeyName": "HKCU:\\SOFTWARE\\7-Zip\\FM",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\7-Zip\\FM",
                         "ValueName": "FullRow",
                         "ValueData": 1
                     },
                     {
-                        "KeyName": "HKCU:\\SOFTWARE\\7-Zip\\FM",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\7-Zip\\FM",
                         "ValueName": "ShowSystemMenu",
                         "ValueData": 1
                     }

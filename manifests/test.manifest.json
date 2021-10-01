@@ -9,142 +9,142 @@
                 "RegistrySettings": [
                     {
                         "Description": "Handle .txt",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.txt",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.txt",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .text",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.text",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.text",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .cs",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.cs",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.cs",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .csx",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.csx",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.csx",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .fs",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.fs",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.fs",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .fsx",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.fsx",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.fsx",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .DotSettings",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.DotSettings",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.DotSettings",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .java",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.java",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.java",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .py",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.py",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.py",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .json",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.json",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.json",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .xml",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.xml",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.xml",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .config",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.config",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.config",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .ps1",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.ps1",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.ps1",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .ini",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.ini",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.ini",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .creds",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.creds",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.creds",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .pgpass",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.pgpass",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.pgpass",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .yarnrc",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.yarnrc",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.yarnrc",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .nvmrc",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.nvmrc",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.nvmrc",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .log",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.log",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.log",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .log1",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.log1",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.log1",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .log2",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.log2",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.log2",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .log3",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.log3",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.log3",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .log4",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.log4",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.log4",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .log5",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.log5",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.log5",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .log6",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.log6",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.log6",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .log7",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.log7",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.log7",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .log8",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.log8",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.log8",
                         "ValueData": "VSCode.txt"
                     },
                     {
                         "Description": "Handle .log9",
-                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.log9",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.log9",
                         "ValueData": "VSCode.txt"
                     }
                 ],
