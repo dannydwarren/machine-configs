@@ -271,7 +271,7 @@
             "AppId": "Microsoft.OneDrive",
             "Environments": "Personal",
             "Configuration": {
-                "ManualSteps":[
+                "ManualSteps": [
                     "Launch (example): . \"$env:LocalAppData\\Microsoft\\OneDrive\\OneDrive.exe\"",
                     "Start OneDrive syncing"
                 ]
@@ -282,7 +282,149 @@
             "AppId": "Microsoft.VisualStudioCode",
             "InstallArgs": "/TASKS=\"associatewithfiles\"",
             "Environments": "All",
-            "Configuration":{
+            "Configuration": {
+                "RegistrySettings": [
+                    {
+                        "Description": "Handle .txt",
+                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.txt",
+                        "ValueData": "VSCode.txt"
+                    },
+                    {
+                        "Description": "Handle .text",
+                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.text",
+                        "ValueData": "VSCode.txt"
+                    },
+                    {
+                        "Description": "Handle .cs",
+                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.cs",
+                        "ValueData": "VSCode.txt"
+                    },
+                    {
+                        "Description": "Handle .csx",
+                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.csx",
+                        "ValueData": "VSCode.txt"
+                    },
+                    {
+                        "Description": "Handle .fs",
+                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.fs",
+                        "ValueData": "VSCode.txt"
+                    },
+                    {
+                        "Description": "Handle .fsx",
+                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.fsx",
+                        "ValueData": "VSCode.txt"
+                    },
+                    {
+                        "Description": "Handle .DotSettings",
+                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.DotSettings",
+                        "ValueData": "VSCode.txt"
+                    },
+                    {
+                        "Description": "Handle .java",
+                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.java",
+                        "ValueData": "VSCode.txt"
+                    },
+                    {
+                        "Description": "Handle .py",
+                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.py",
+                        "ValueData": "VSCode.txt"
+                    },
+                    {
+                        "Description": "Handle .json",
+                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.json",
+                        "ValueData": "VSCode.txt"
+                    },
+                    {
+                        "Description": "Handle .xml",
+                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.xml",
+                        "ValueData": "VSCode.txt"
+                    },
+                    {
+                        "Description": "Handle .config",
+                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.config",
+                        "ValueData": "VSCode.txt"
+                    },
+                    {
+                        "Description": "Handle .ps1",
+                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.ps1",
+                        "ValueData": "VSCode.txt"
+                    },
+                    {
+                        "Description": "Handle .ini",
+                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.ini",
+                        "ValueData": "VSCode.txt"
+                    },
+                    {
+                        "Description": "Handle .creds",
+                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.creds",
+                        "ValueData": "VSCode.txt"
+                    },
+                    {
+                        "Description": "Handle .pgpass",
+                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.pgpass",
+                        "ValueData": "VSCode.txt"
+                    },
+                    {
+                        "Description": "Handle .yarnrc",
+                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.yarnrc",
+                        "ValueData": "VSCode.txt"
+                    },
+                    {
+                        "Description": "Handle .nvmrc",
+                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.nvmrc",
+                        "ValueData": "VSCode.txt"
+                    },
+                    {
+                        "Description": "Handle .log",
+                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.log",
+                        "ValueData": "VSCode.txt"
+                    },
+                    {
+                        "Description": "Handle .log1",
+                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.log1",
+                        "ValueData": "VSCode.txt"
+                    },
+                    {
+                        "Description": "Handle .log2",
+                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.log2",
+                        "ValueData": "VSCode.txt"
+                    },
+                    {
+                        "Description": "Handle .log3",
+                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.log3",
+                        "ValueData": "VSCode.txt"
+                    },
+                    {
+                        "Description": "Handle .log4",
+                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.log4",
+                        "ValueData": "VSCode.txt"
+                    },
+                    {
+                        "Description": "Handle .log5",
+                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.log5",
+                        "ValueData": "VSCode.txt"
+                    },
+                    {
+                        "Description": "Handle .log6",
+                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.log6",
+                        "ValueData": "VSCode.txt"
+                    },
+                    {
+                        "Description": "Handle .log7",
+                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.log7",
+                        "ValueData": "VSCode.txt"
+                    },
+                    {
+                        "Description": "Handle .log8",
+                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.log8",
+                        "ValueData": "VSCode.txt"
+                    },
+                    {
+                        "Description": "Handle .log9",
+                        "KeyName": "HKCU:\\SOFTWARE\\Classes\\.log9",
+                        "ValueData": "VSCode.txt"
+                    }
+                ],
                 "ManualSteps": [
                     "'Turn on Settings Sync' -> Microsoft Account",
                     "Watch log with ctrl+shift+u",

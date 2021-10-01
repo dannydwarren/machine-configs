@@ -29,34 +29,6 @@ function 7ZipFileBlock([string]$Extension, [int]$IconIndex) {
     AssociateFileBlock $Extension $handler
 }
 
-AssociateFileBlock txt VSCodeSourceFile
-AssociateFileBlock log VSCodeSourceFile
-AssociateFileBlock log1 VSCodeSourceFile
-AssociateFileBlock log2 VSCodeSourceFile
-AssociateFileBlock log3 VSCodeSourceFile
-AssociateFileBlock log4 VSCodeSourceFile
-AssociateFileBlock log5 VSCodeSourceFile
-AssociateFileBlock log6 VSCodeSourceFile
-AssociateFileBlock log7 VSCodeSourceFile
-AssociateFileBlock log8 VSCodeSourceFile
-AssociateFileBlock log9 VSCodeSourceFile
-AssociateFileBlock log10 VSCodeSourceFile
-AssociateFileBlock ps1 VSCodeSourceFile
-AssociateFileBlock ini VSCodeSourceFile
-AssociateFileBlock json VSCodeSourceFile
-AssociateFileBlock xml VSCodeSourceFile
-AssociateFileBlock config VSCodeSourceFile
-AssociateFileBlock DotSettings VSCodeSourceFile
-AssociateFileBlock creds VSCodeSourceFile
-AssociateFileBlock pgpass VSCodeSourceFile
-AssociateFileBlock yarnrc VSCodeSourceFile
-AssociateFileBlock nvmrc VSCodeSourceFile
-AssociateFileBlock csx VSCodeSourceFile
-AssociateFileBlock cs VSCodeSourceFile
-AssociateFileBlock fsx VSCodeSourceFile
-AssociateFileBlock fs VSCodeSourceFile
-AssociateFileBlock java VSCodeSourceFile
-
 # for handlers that already exist
 Block "Set .ahk Edit command to VS Code" {
     Set-RegistryValue "HKLM:\SOFTWARE\Classes\AutoHotkeyScript\Shell\Edit\Command" -Value "code.exe %1"
