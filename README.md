@@ -2,12 +2,15 @@
 
 ```powershell
 Set-ExecutionPolicy RemoteSigned -Force
-iwr -useb get.scoop.sh | iex
-scoop install git-with-openssh
-git clone https://github.com/dannydwarren/machine-configs.git C:\src\machine-configs
-Invoke-Expression "& { $(Invoke-RestMethod 'https://aka.ms/install-powershell.ps1') } -UseMSI -Quiet"
-start pwsh "-NoExit", "-WindowStyle", "Maximized", "-File", "C:\src\machine-configs\config.ps1"
+Invoke-Command {
+    $asset = (iwr -useb https://api.github.com/repos/dannydwarren/machine-configs/releases/latest | ConvertFrom-Json).assets | ? { $_.name -like "*.exe" }
+    $downloadUrl = $asset | select -exp browser_download_url
+    iwr ($downloadUrl) -OutFile "$HOME\Downloads\Configurator.exe"
+}
+
+."$HOME\Downloads\Configurator.exe" --manifest-file "https://raw.githubusercontent.com/dannydwarren/machine-configs/main/manifests/danny.manifest.json" --environments "Personal"
 ```
+
 
 # Non-NuGet Dependencies
 
