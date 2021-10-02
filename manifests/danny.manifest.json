@@ -658,7 +658,7 @@
             "Environments": "All"
         },
         {
-            "AppType": "Store",
+            "AppType": "Unknown",
             "AppId": "GospelLibrary",
             "Environments": "Personal"
         },
@@ -669,7 +669,7 @@
             "Notes": "May be replaced with ElectronicArts.EADesktop"
         },
         {
-            "AppType": "Store",
+            "AppType": "Unknown",
             "AppId": "Pandora",
             "Environments": "All"
         },
