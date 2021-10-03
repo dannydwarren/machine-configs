@@ -13,7 +13,7 @@ namespace Configurator.Apps
         }
 
         public string InstallScript => $"winget install --id {AppId} --accept-package-agreements -h{InstallArgs}";
-        public string VerificationScript => $"(winget list | Select-String {AppId}) -ne $null";
+        public string VerificationScript => $"(winget list --id {AppId} | Select-String {AppId}) -ne $null";
         public string UpgradeScript => $"winget upgrade --id {AppId} --accept-package-agreements -h{InstallArgs}";
         public AppConfiguration Configuration { get; set; }
     }
