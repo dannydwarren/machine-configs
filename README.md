@@ -8,7 +8,7 @@ Invoke-Command {
     iwr ($downloadUrl) -OutFile "$HOME\Downloads\Configurator.exe"
 }
 
-."$HOME\Downloads\Configurator.exe" --manifest-file "https://raw.githubusercontent.com/dannydwarren/machine-configs/main/manifests/danny.manifest.json" --environments "Personal"
+."$HOME\Downloads\Configurator.exe" --manifest-path "https://raw.githubusercontent.com/dannydwarren/machine-configs/main/manifests/danny.manifest.json" --environments "Personal"
 ```
 
 
