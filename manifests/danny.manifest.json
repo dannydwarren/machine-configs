@@ -23,7 +23,7 @@
             "AppType": "Script",
             "AppId": "Configure Control Panel",
             "Environments": "All",
-            "InstallScript": "Disable-NetFirewallRule -DisplayGroup \"Remote Assistance\"",
+            "InstallScript": "Import-Module NetSecurity -UseWindowsPowerShell\nDisable-NetFirewallRule -DisplayGroup \"Remote Assistance\"",
             "Configuration": {
                 "RegistrySettings": [
                     {
@@ -219,7 +219,7 @@
         {
             "AppType": "Winget",
             "AppId": "Corsair.iCUE",
-            "Environments": "Personal"
+            "Environments": "LiquidCooling"
         },
         {
             "AppType": "Winget",
@@ -229,7 +229,7 @@
         {
             "AppType": "Winget",
             "AppId": "Docker.DockerDesktop",
-            "Environments": "Work"
+            "Environments": "All"
         },
         {
             "AppType": "Winget",
@@ -577,7 +577,7 @@
         {
             "AppType": "Winget",
             "AppId": "Microsoft.WindowsSDK",
-            "Environments": "Personal"
+            "Environments": "AdvancedDev"
         },
         {
             "AppType": "Winget",
