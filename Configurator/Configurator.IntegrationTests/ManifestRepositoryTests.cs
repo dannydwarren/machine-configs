@@ -124,7 +124,7 @@ namespace Configurator.IntegrationTests
                     .ShouldBeOfType<WingetApp>().ShouldSatisfyAllConditions(x =>
                     {
                         x.AppId.ShouldBe("winget-app-id-with-install-args");
-                        x.InstallArgs.ShouldBe(" install-args");
+                        x.InstallArgs.ShouldBe(" --override install-args");
                     });
             });
 

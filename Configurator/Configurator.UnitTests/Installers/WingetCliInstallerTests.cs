@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Configurator.Apps;
 using Configurator.Installers;
+using Configurator.PowerShell;
 using Shouldly;
 using Xunit;
 
@@ -20,6 +21,11 @@ namespace Configurator.UnitTests.Installers
             It("installs", () =>
             {
                 capturedDownloadApp.ShouldBe(WingetCliInstaller.WingetCliApp);
+            });
+
+            It("accepts all source agreements", () =>
+            {
+                GetMock<IPowerShell>().Verify(x => x.ExecuteAsync("winget list winget --accept-source-agreements"));
             });
         }
     }

@@ -9,12 +9,12 @@ namespace Configurator.Apps
         public string InstallArgs
         {
             get => installArgs;
-            set => installArgs = string.IsNullOrWhiteSpace(value) ? "" : $" {value}";
+            set => installArgs = string.IsNullOrWhiteSpace(value) ? "" : $" --override {value}";
         }
 
-        public string InstallScript => $"winget install --id {AppId}{InstallArgs}";
+        public string InstallScript => $"winget install --id {AppId} --accept-package-agreements -h{InstallArgs}";
         public string VerificationScript => $"(winget list | Select-String {AppId}) -ne $null";
-        public string UpgradeScript => $"winget upgrade {AppId}";
+        public string UpgradeScript => $"winget upgrade --id {AppId} --accept-package-agreements -h{InstallArgs}";
         public AppConfiguration Configuration { get; set; }
     }
 }

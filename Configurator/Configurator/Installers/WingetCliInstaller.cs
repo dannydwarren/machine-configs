@@ -4,6 +4,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Configurator.Apps;
 using Configurator.Downloaders;
+using Configurator.PowerShell;
 
 namespace Configurator.Installers
 {
@@ -15,6 +16,7 @@ namespace Configurator.Installers
     public class WingetCliInstaller : IWingetCliInstaller
     {
         private readonly IDownloadAppInstaller downloadAppInstaller;
+        private readonly IPowerShell powerShell;
 
         public static readonly PowerShellAppPackage WingetCliApp = new PowerShellAppPackage
         {
@@ -27,14 +29,16 @@ namespace Configurator.Installers
 }"))).RootElement
         };
 
-        public WingetCliInstaller(IDownloadAppInstaller downloadAppInstaller)
+        public WingetCliInstaller(IDownloadAppInstaller downloadAppInstaller, IPowerShell powerShell)
         {
             this.downloadAppInstaller = downloadAppInstaller;
+            this.powerShell = powerShell;
         }
 
         public async Task InstallAsync()
         {
             await downloadAppInstaller.InstallAsync(WingetCliApp);
+            await powerShell.ExecuteAsync("winget list winget --accept-source-agreements");
         }
     }
 }
