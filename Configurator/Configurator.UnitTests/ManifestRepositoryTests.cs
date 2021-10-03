@@ -16,7 +16,7 @@ namespace Configurator.UnitTests
     {
         private readonly ManifestRepository.RawManifest loadedRawRawManifest;
         private readonly List<ManifestRepository.Installable> installables;
-        private readonly Manifest fullManifest;
+        private readonly List<ScriptApp> knownScriptApps;
 
         public ManifestRepositoryTests()
         {
@@ -27,7 +27,8 @@ namespace Configurator.UnitTests
                    JsonDocument.Parse(new MemoryStream(Encoding.UTF8.GetBytes(@"{""installable"": 1}"))).RootElement,
                    JsonDocument.Parse(new MemoryStream(Encoding.UTF8.GetBytes(@"{""installable"": 2}"))).RootElement,
                    JsonDocument.Parse(new MemoryStream(Encoding.UTF8.GetBytes(@"{""installable"": 3}"))).RootElement,
-                   JsonDocument.Parse(new MemoryStream(Encoding.UTF8.GetBytes(@"{""installable"": 4}"))).RootElement
+                   JsonDocument.Parse(new MemoryStream(Encoding.UTF8.GetBytes(@"{""installable"": 4}"))).RootElement,
+                   JsonDocument.Parse(new MemoryStream(Encoding.UTF8.GetBytes(@"{""installable"": 5}"))).RootElement,
                }
             };
 
@@ -56,18 +57,21 @@ namespace Configurator.UnitTests
                     AppType = AppType.Script,
                     Environments = "All",
                     AppData = JsonDocument.Parse(new MemoryStream(Encoding.UTF8.GetBytes(@"{""app"": 4}"))).RootElement
+                },
+                new ManifestRepository.Installable
+                {
+                    AppType = AppType.Unknown,
+                    Environments = "All",
+                    AppData = JsonDocument.Parse(new MemoryStream(Encoding.UTF8.GetBytes(@"{""app"": 5}"))).RootElement
                 }
             };
 
-            fullManifest = new Manifest
+            knownScriptApps = new List<ScriptApp>
             {
-                Apps = new List<IApp>
-                {
-                    new ScriptApp { AppId = RandomString() },
-                    new ScriptApp { AppId = RandomString() },
-                    new ScriptApp { AppId = RandomString() },
-                    new ScriptApp { AppId = RandomString() }
-                }
+                new ScriptApp { AppId = RandomString() },
+                new ScriptApp { AppId = RandomString() },
+                new ScriptApp { AppId = RandomString() },
+                new ScriptApp { AppId = RandomString() }
             };
         }
 
@@ -87,14 +91,15 @@ namespace Configurator.UnitTests
             GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ManifestRepository.Installable>(loadedRawRawManifest.Apps[1].ToString()!)).Returns(installables[1]);
             GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ManifestRepository.Installable>(loadedRawRawManifest.Apps[2].ToString()!)).Returns(installables[2]);
             GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ManifestRepository.Installable>(loadedRawRawManifest.Apps[3].ToString()!)).Returns(installables[3]);
+            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ManifestRepository.Installable>(loadedRawRawManifest.Apps[4].ToString()!)).Returns(installables[4]);
 
-            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ScriptApp>(installables[0].AppData.ToString()!)).Returns((ScriptApp)fullManifest.Apps[0]);
-            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ScriptApp>(installables[2].AppData.ToString()!)).Returns((ScriptApp)fullManifest.Apps[2]);
-            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ScriptApp>(installables[3].AppData.ToString()!)).Returns((ScriptApp)fullManifest.Apps[3]);
+            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ScriptApp>(installables[0].AppData.ToString()!)).Returns(knownScriptApps[0]);
+            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ScriptApp>(installables[2].AppData.ToString()!)).Returns(knownScriptApps[2]);
+            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ScriptApp>(installables[3].AppData.ToString()!)).Returns(knownScriptApps[3]);
 
             var manifest = await BecauseAsync(() => ClassUnderTest.LoadAsync());
 
-            It("filters apps by the specified environment", () =>
+            It("filters known apps by the specified environment", () =>
             {
                 GetMock<IJsonSerializer>().VerifyNever(x => x.Deserialize<ScriptApp>(installables[1].AppData.ToString()!));
 
@@ -118,15 +123,21 @@ namespace Configurator.UnitTests
             GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ManifestRepository.Installable>(loadedRawRawManifest.Apps[1].ToString()!)).Returns(installables[1]);
             GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ManifestRepository.Installable>(loadedRawRawManifest.Apps[2].ToString()!)).Returns(installables[2]);
             GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ManifestRepository.Installable>(loadedRawRawManifest.Apps[3].ToString()!)).Returns(installables[3]);
+            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ManifestRepository.Installable>(loadedRawRawManifest.Apps[4].ToString()!)).Returns(installables[4]);
 
-            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ScriptApp>(installables[0].AppData.ToString()!)).Returns((ScriptApp)fullManifest.Apps[0]);
-            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ScriptApp>(installables[1].AppData.ToString()!)).Returns((ScriptApp)fullManifest.Apps[1]);
-            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ScriptApp>(installables[2].AppData.ToString()!)).Returns((ScriptApp)fullManifest.Apps[2]);
-            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ScriptApp>(installables[3].AppData.ToString()!)).Returns((ScriptApp)fullManifest.Apps[3]);
+            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ScriptApp>(installables[0].AppData.ToString()!)).Returns(knownScriptApps[0]);
+            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ScriptApp>(installables[1].AppData.ToString()!)).Returns(knownScriptApps[1]);
+            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ScriptApp>(installables[2].AppData.ToString()!)).Returns(knownScriptApps[2]);
+            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ScriptApp>(installables[3].AppData.ToString()!)).Returns(knownScriptApps[3]);
 
             var manifest = await BecauseAsync(() => ClassUnderTest.LoadAsync());
 
-            It("includes all apps", () => { manifest.Apps.Count.ShouldBe(4); });
+            It("includes all known apps", () => { manifest.Apps.Count.ShouldBe(4); });
+
+            It("excludes unknown apps", () =>
+            {
+                GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ScriptApp>(installables[4].AppData.ToString()!));
+            });
         }
 
         [Fact]
@@ -145,7 +156,7 @@ namespace Configurator.UnitTests
             GetMock<IFileSystem>().Setup(x => x.ReadAllTextAsync(downloadedManifestPath)).ReturnsAsync(manifestJson);
             GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ManifestRepository.RawManifest>(manifestJson)).Returns(loadedRawRawManifest);
             GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ManifestRepository.Installable>(IsAny<string>())).Returns(installables[0]);
-            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ScriptApp>(IsAny<string>())).Returns((ScriptApp)fullManifest.Apps[0]);
+            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ScriptApp>(IsAny<string>())).Returns(knownScriptApps[0]);
 
             var manifest = await BecauseAsync(() => ClassUnderTest.LoadAsync());
 

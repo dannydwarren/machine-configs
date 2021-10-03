@@ -63,8 +63,8 @@ namespace Configurator
                 { AppType: AppType.ScoopBucket } => jsonSerializer.Deserialize<ScoopBucketApp>(x.AppData.ToString()!),
                 { AppType: AppType.Script } => jsonSerializer.Deserialize<ScriptApp>(x.AppData.ToString()!),
                 { AppType: AppType.Winget } => jsonSerializer.Deserialize<WingetApp>(x.AppData.ToString()!),
-                _ => throw new Exception($"Installer type '{x.AppType}' not supported")
-            })).ToList();
+                _ => null!
+            })).Where(x => x != null).ToList()!;
         }
 
         private async Task<string> ReadManifestAsync()
