@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 
 [assembly: InternalsVisibleTo("Configurator.UnitTests")]
+[assembly: InternalsVisibleTo("Configurator.IntegrationTests")]
 namespace Configurator.Configuration
 {
     public static class DependencyInjectionConfig

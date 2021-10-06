@@ -9,6 +9,7 @@ using Configurator.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 using Configurator.PowerShell;
+using Configurator.Windows;
 
 namespace Configurator
 {
@@ -83,6 +84,9 @@ namespace Configurator
             DependencyInjectionConfig.ConfigureServices(serviceCollection);
             serviceCollection.AddSingleton<IArguments>(arguments);
             var serviceProvider = serviceCollection.BuildServiceProvider();
+
+            RegistrySettingValueDataConverter.Tokenizer = serviceProvider.GetRequiredService<ITokenizer>();
+            
             return serviceProvider;
         }
     }

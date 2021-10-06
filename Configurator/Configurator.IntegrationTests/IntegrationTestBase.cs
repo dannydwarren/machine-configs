@@ -3,6 +3,8 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Configurator.IntegrationTests.Configuration;
+using Configurator.Utilities;
+using Configurator.Windows;
 
 namespace Configurator.IntegrationTests
 {
@@ -65,6 +67,8 @@ namespace Configurator.IntegrationTests
                 if (classUnderTest == null)
                 {
                     serviceProvider = Services.BuildServiceProvider();
+                    RegistrySettingValueDataConverter.Tokenizer = serviceProvider.GetRequiredService<ITokenizer>();
+
                     classUnderTest = serviceProvider.GetService<TClassUnderTest>()!;
                 }
 

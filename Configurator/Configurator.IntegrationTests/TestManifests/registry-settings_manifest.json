@@ -13,6 +13,11 @@
                     },
                     {
                         "KeyName": "key-2",
+                        "ValueName": "string",
+                        "ValueData": "{{env:ProgramFiles}}\\string-data"
+                    },
+                    {
+                        "KeyName": "key-3",
                         "ValueName": "uint",
                         "ValueData": 42
                     }
