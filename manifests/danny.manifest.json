@@ -284,6 +284,26 @@
             "Configuration": {
                 "RegistrySettings": [
                     {
+                        "Description": "Handle Extensionless",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\VSCode.Extensionless",
+                        "ValueData": "Extensionless"
+                    },
+                    {
+                        "Description": "Handle Extensionless",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\VSCode.Extensionless\\DefaultIcon",
+                        "ValueData": "%SystemRoot%\\system32\\shell32.dll,271"
+                    },
+                    {
+                        "Description": "Handle Extensionless",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\VSCode.Extensionless\\shell\\open\\command",
+                        "ValueData": "\"%LOCALAPPDATA%\\Programs\\Microsoft VS Code\\Code.exe\" \"%1\""
+                    },
+                    {
+                        "Description": "Handle Extensionless",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.",
+                        "ValueData": "VSCode.Extensionless"
+                    },
+                    {
                         "Description": "Handle .txt",
                         "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.txt",
                         "ValueData": "VSCode.txt"
@@ -372,6 +392,11 @@
                         "Description": "Handle .nvmrc",
                         "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.nvmrc",
                         "ValueData": "VSCode.txt"
+                    },
+                    {
+                        "Description": "Handle .nuspec",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.nuspec",
+                        "ValueData": "VSCode.xml"
                     },
                     {
                         "Description": "Handle .log",
@@ -537,6 +562,134 @@
                         "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\7-Zip\\FM",
                         "ValueName": "ShowSystemMenu",
                         "ValueData": 1
+                    },
+                    {
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.7z",
+                        "ValueData": "7z Archive"
+                    },
+                    {
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.7z\\DefaultIcon",
+                        "ValueData": "C:\\Program Files\\7-Zip\\7z.dll,0"
+                    },
+                    {
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.7z\\shell\\open\\command",
+                        "ValueData": "\"C:\\Program Files\\7-Zip\\7zFM.exe\" \"%1\""
+                    },
+                    {
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.7z",
+                        "ValueData": "7-Zip.7z"
+                    },
+                    {
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.zip",
+                        "ValueData": "zip Archive"
+                    },
+                    {
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.zip\\DefaultIcon",
+                        "ValueData": "C:\\Program Files\\7-Zip\\7z.dll,1"
+                    },
+                    {
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.zip\\shell\\open\\command",
+                        "ValueData": "\"C:\\Program Files\\7-Zip\\7zFM.exe\" \"%1\""
+                    },
+                    {
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.zip",
+                        "ValueData": "7-Zip.zip"
+                    },
+                    {
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.rar",
+                        "ValueData": "rar Archive"
+                    },
+                    {
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.rar\\DefaultIcon",
+                        "ValueData": "C:\\Program Files\\7-Zip\\7z.dll,3"
+                    },
+                    {
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.rar\\shell\\open\\command",
+                        "ValueData": "\"C:\\Program Files\\7-Zip\\7zFM.exe\" \"%1\""
+                    },
+                    {
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.rar",
+                        "ValueData": "7-Zip.rar"
+                    },
+                    {
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.cab",
+                        "ValueData": "cab Archive"
+                    },
+                    {
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.cab\\DefaultIcon",
+                        "ValueData": "C:\\Program Files\\7-Zip\\7z.dll,7"
+                    },
+                    {
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.cab\\shell\\open\\command",
+                        "ValueData": "\"C:\\Program Files\\7-Zip\\7zFM.exe\" \"%1\""
+                    },
+                    {
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.cab",
+                        "ValueData": "7-Zip.cab"
+                    },
+                    {
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.tar",
+                        "ValueData": "tar Archive"
+                    },
+                    {
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.tar\\DefaultIcon",
+                        "ValueData": "C:\\Program Files\\7-Zip\\7z.dll,13"
+                    },
+                    {
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.tar\\shell\\open\\command",
+                        "ValueData": "\"C:\\Program Files\\7-Zip\\7zFM.exe\" \"%1\""
+                    },
+                    {
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.tar",
+                        "ValueData": "7-Zip.tar"
+                    },
+                    {
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.gz",
+                        "ValueData": "gz Archive"
+                    },
+                    {
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.gz\\DefaultIcon",
+                        "ValueData": "C:\\Program Files\\7-Zip\\7z.dll,14"
+                    },
+                    {
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.gz\\shell\\open\\command",
+                        "ValueData": "\"C:\\Program Files\\7-Zip\\7zFM.exe\" \"%1\""
+                    },
+                    {
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.gz",
+                        "ValueData": "7-Zip.gz"
+                    },
+                    {
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.gzip",
+                        "ValueData": "gzip Archive"
+                    },
+                    {
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.gzip\\DefaultIcon",
+                        "ValueData": "C:\\Program Files\\7-Zip\\7z.dll,14"
+                    },
+                    {
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.gzip\\shell\\open\\command",
+                        "ValueData": "\"C:\\Program Files\\7-Zip\\7zFM.exe\" \"%1\""
+                    },
+                    {
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.gzip",
+                        "ValueData": "7-Zip.gzip"
+                    },
+                    {
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.nupkg",
+                        "ValueData": "nupkg Archive"
+                    },
+                    {
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.nupkg\\DefaultIcon",
+                        "ValueData": "C:\\Program Files\\7-Zip\\7z.dll,1"
+                    },
+                    {
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.nupkg\\shell\\open\\command",
+                        "ValueData": "\"C:\\Program Files\\7-Zip\\7zFM.exe\" \"%1\""
+                    },
+                    {
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.nupkg",
+                        "ValueData": "7-Zip.nupkg"
                     }
                 ],
                 "ManualSteps": [

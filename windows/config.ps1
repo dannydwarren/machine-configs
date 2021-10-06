@@ -16,7 +16,6 @@ FirstRunBlock "Add Microsoft account" {
 }
 
 
-& $PSScriptRoot\file-handlers.ps1
 & $PSScriptRoot\system.ps1
 & $PSScriptRoot\devices.ps1
 & $PSScriptRoot\personalization.ps1
