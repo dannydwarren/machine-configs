@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using System;
+using Microsoft.Win32;
 
 namespace Configurator.Windows
 {
@@ -17,7 +18,14 @@ namespace Configurator.Windows
 
         public void SetValue(string keyName, string valueName, object value)
         {
-            Registry.SetValue(keyName, valueName, value);
+            var registryValueKind = value.GetType() switch
+            {
+                { } x when x == typeof(uint) => RegistryValueKind.DWord,
+                { } x when x == typeof(string) => RegistryValueKind.String,
+                _ => throw new Exception($"{nameof(RegistrySetting)}.{nameof(RegistrySetting.ValueData)} only supports types: string and uint32")
+            };
+
+            Registry.SetValue(keyName, valueName, value, registryValueKind);
         }
     }
 }
