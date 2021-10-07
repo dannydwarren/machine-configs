@@ -186,6 +186,26 @@
             }
         },
         {
+            "AppType": "Script",
+            "AppId": "System > Power & sleep > Screen > On battery power, turn off after = 10 minutes",
+            "InstallScript": "powercfg /change monitor-timeout-dc 10"
+        },
+        {
+            "AppType": "Script",
+            "AppId": "System > Power & sleep > Screen > When plugged in, turn off after = 20 minutes",
+            "InstallScript": "powercfg /change monitor-timeout-ac 20"
+        },
+        {
+            "AppType": "Script",
+            "AppId": "System > Power & sleep > Sleep > On battery power, PC goes to sleep after = 20 minutes",
+            "InstallScript": "powercfg /change standby-timeout-dc 20"
+        },
+        {
+            "AppType": "Script",
+            "AppId": "System > Power & sleep > Sleep > When plugged in, PC goes to sleep after = Never",
+            "InstallScript": "powercfg /change standby-timeout-ac 0"
+        },
+        {
             "AppType": "Winget",
             "AppId": "Git.Git",
             "Environments": "All"

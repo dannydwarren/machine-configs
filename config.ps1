@@ -50,5 +50,18 @@ Block "Backup Registry" {
 & $PSScriptRoot\powershell\config.ps1
 if (!$DryRun -and !$Run) { . $profile } # make profile available to scripts below
 
+
+Block "Rename computer" {
+    Write-ManualStep
+    # TODO: append YYMMDD
+    Rename-Computer -NewName (Read-Host "Set computer name to")
+} {
+    $env:ComputerName -notlike 'desktop-*' -and $env:ComputerName -notlike 'laptop-*'
+} -RequiresReboot
+
+Block "System > Multitasking > Alt + Tab > Pressing Alt + Tab shows = Open windows only" {
+    Set-RegistryValue "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" MultiTaskingAltTabFilter 3
+} -RequiresReboot
+
 & $PSScriptRoot\windows\config.ps1
 & $PSScriptRoot\install\install.ps1
