@@ -188,22 +188,93 @@
         {
             "AppType": "Script",
             "AppId": "System > Power & sleep > Screen > On battery power, turn off after = 10 minutes",
-            "InstallScript": "powercfg /change monitor-timeout-dc 10"
+            "InstallScript": "powercfg /change monitor-timeout-dc 10",
+            "Environments": "All"
         },
         {
             "AppType": "Script",
             "AppId": "System > Power & sleep > Screen > When plugged in, turn off after = 20 minutes",
-            "InstallScript": "powercfg /change monitor-timeout-ac 20"
+            "InstallScript": "powercfg /change monitor-timeout-ac 20",
+            "Environments": "All"
         },
         {
             "AppType": "Script",
             "AppId": "System > Power & sleep > Sleep > On battery power, PC goes to sleep after = 20 minutes",
-            "InstallScript": "powercfg /change standby-timeout-dc 20"
+            "InstallScript": "powercfg /change standby-timeout-dc 20",
+            "Environments": "All"
         },
         {
             "AppType": "Script",
             "AppId": "System > Power & sleep > Sleep > When plugged in, PC goes to sleep after = Never",
-            "InstallScript": "powercfg /change standby-timeout-ac 0"
+            "InstallScript": "powercfg /change standby-timeout-ac 0",
+            "Environments": "All"
+        },
+        {
+            "AppType": "Script",
+            "AppId": "Touch Pad Settings",
+            "Environments": "All",
+            "Notes": "Documentation: https://docs.microsoft.com/en-us/windows-hardware/design/component-guidelines/touchpad-tuning-guidelines",
+            "Configuration": {
+                "RegistrySettings": [
+                    {
+                        "Description": "Devices > Touchpad > Change the cursor speed = 8",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\PrecisionTouchPad",
+                        "ValueName": "CursorSpeed",
+                        "ValueData": 16
+                    },
+                    {
+                        "Description": "Devices > Touchpad > Taps > Tap with a single finger to single-click = Off",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\PrecisionTouchPad",
+                        "ValueName": "TapsEnabled",
+                        "ValueData": 0
+                    },
+                    {
+                        "Description": "Devices > Touchpad > Taps > Tap with two fingers to right-click = Off",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\PrecisionTouchPad",
+                        "ValueName": "TwoFingerTapEnabled",
+                        "ValueData": 0
+                    },
+                    {
+                        "Description": "Devices > Touchpad > Taps > Tap twice and drag to multi-select = Off",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\PrecisionTouchPad",
+                        "ValueName": "TapAndDrag",
+                        "ValueData": 0
+                    },
+                    {
+                        "Description": "Devices > Touchpad > Taps > Press the lower right corner of the touchpad to right-click = Off",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\PrecisionTouchPad",
+                        "ValueName": "RightClickZoneEnabled",
+                        "ValueData": 0,
+                        "RequiresReboot": true
+                    },
+                    {
+                        "Description": "Devices > Touchpad > Three-finger gestures > Swipes = Switch desktops and show desktop",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\PrecisionTouchPad",
+                        "ValueName": "ThreeFingerSlideEnabled",
+                        "ValueData": 2
+                    },
+                    {
+                        "Description": "Devices > Touchpad > Three-finger gestures > Taps = Middle mouse button",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\PrecisionTouchPad",
+                        "ValueName": "ThreeFingerTapEnabled",
+                        "ValueData": 4,
+                        "RequiresReboot": true
+                    },
+                    {
+                        "Description": "Devices > Touchpad > Four-finger gestures > Swipes = Switch desktops and show desktop",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\PrecisionTouchPad",
+                        "ValueName": "FourFingerSlideEnabled",
+                        "ValueData": 2
+                    },
+                    {
+                        "Description": "Devices > Touchpad > Four-finger gestures > Taps = Middle mouse button",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\PrecisionTouchPad",
+                        "ValueName": "FourFingerTapEnabled",
+                        "ValueData": 4,
+                        "RequiresReboot": true
+                    }
+                ]
+            }
         },
         {
             "AppType": "Winget",

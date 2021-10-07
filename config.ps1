@@ -63,5 +63,14 @@ Block "System > Multitasking > Alt + Tab > Pressing Alt + Tab shows = Open windo
     Set-RegistryValue "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" MultiTaskingAltTabFilter 3
 } -RequiresReboot
 
+# NOTE: Waits for printer dialog to close - Ben said this has not been working well lately...
+if (!(Configured $forHome) -and !(Configured $forTest)) {
+    FirstRunBlock "Devices > Printers & scanners > Add a printer or scanner > The printer that I want isn't listed" {
+        Write-ManualStep "Select a shared printer by name = \\{Server}\{Printer}"
+        rundll32 printui.dll PrintUIEntry /im
+        WaitWhileProcess rundll32
+    }
+}
+
 & $PSScriptRoot\windows\config.ps1
 & $PSScriptRoot\install\install.ps1
