@@ -391,6 +391,48 @@
             }
         },
         {
+            "AppType": "Script",
+            "AppId": "Ease of Access Settings",
+            "Configuration":{
+                "RegistrySettings":[
+                    {
+                        "Description": "Ease of Access > Narrator > Allow the shortcut key to start Narrator = Off",
+                        "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Narrator\\NoRoam",
+                        "ValueName": "WinEnterLaunchEnabled",
+                        "ValueData": 0
+                    },
+                    {
+                        "Description": "Ease of Access > Keyboard > Allow the shortcut key to start Sticky Keys = Off",
+                        "KeyName": "HKEY_CURRENT_USER\\Control Panel\\Accessibility\\StickyKeys",
+                        "ValueName": "Flags",
+                        "ValueData": 506,
+                        "RequiresReboot": true
+                    },
+                    {
+                        "Description": "Ease of Access > Keyboard > Allow the shortcut key to start Toggle Keys = Off",
+                        "KeyName": "HKEY_CURRENT_USER\\Control Panel\\Accessibility\\ToggleKeys",
+                        "ValueName": "Flags",
+                        "ValueData": 58,
+                        "RequiresReboot": true
+                    },
+                    {
+                        "Description": "Ease of Access > Keyboard > Allow the shortcut key to start Filter Keys = Off",
+                        "KeyName": "HKEY_CURRENT_USER\\Control Panel\\Accessibility\\Keyboard Response",
+                        "ValueName": "Flags",
+                        "ValueData": 122,
+                        "RequiresReboot": true
+                    },
+                    {
+                        "Description": "Ease of Access > Keyboard > Underline access keys when available = On",
+                        "KeyName": "HKEY_CURRENT_USER\\Control Panel\\Accessibility\\Keyboard Preference",
+                        "ValueName": "On",
+                        "ValueData": 1,
+                        "RequiresReboot": true
+                    }
+                ]
+            }
+        },
+        {
             "AppType": "Winget",
             "AppId": "Git.Git",
             "Environments": "All"
