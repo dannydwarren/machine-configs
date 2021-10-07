@@ -1,5 +1,4 @@
 & $PSScriptRoot\apps.ps1
-& $PSScriptRoot\time-and-language.ps1
 & $PSScriptRoot\windows-features.ps1
 
 
