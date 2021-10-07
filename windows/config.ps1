@@ -1,4 +1,3 @@
-& $PSScriptRoot\personalization.ps1
 & $PSScriptRoot\apps.ps1
 & $PSScriptRoot\time-and-language.ps1
 & $PSScriptRoot\ease-of-access.ps1
