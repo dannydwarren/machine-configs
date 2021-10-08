@@ -7,6 +7,26 @@
             "Configuration": {
                 "RegistrySettings": [
                     {
+                        "Description": "Handle Extensionless",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\VSCode.Extensionless",
+                        "ValueData": "Extensionless"
+                    },
+                    {
+                        "Description": "Handle Extensionless",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\VSCode.Extensionless\\DefaultIcon",
+                        "ValueData": "%SystemRoot%\\system32\\shell32.dll,271"
+                    },
+                    {
+                        "Description": "Handle Extensionless",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\VSCode.Extensionless\\shell\\open\\command",
+                        "ValueData": "\"{{env:LOCALAPPDATA}}\\Programs\\Microsoft VS Code\\Code.exe\" \"%1\""
+                    },
+                    {
+                        "Description": "Handle Extensionless",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.",
+                        "ValueData": "VSCode.Extensionless"
+                    },
+                    {
                         "Description": "Handle .txt",
                         "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.txt",
                         "ValueData": "VSCode.txt"
@@ -95,6 +115,11 @@
                         "Description": "Handle .nvmrc",
                         "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.nvmrc",
                         "ValueData": "VSCode.txt"
+                    },
+                    {
+                        "Description": "Handle .nuspec",
+                        "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.nuspec",
+                        "ValueData": "VSCode.xml"
                     },
                     {
                         "Description": "Handle .log",
