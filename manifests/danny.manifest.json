@@ -393,8 +393,8 @@
         {
             "AppType": "Script",
             "AppId": "Ease of Access Settings",
-            "Configuration":{
-                "RegistrySettings":[
+            "Configuration": {
+                "RegistrySettings": [
                     {
                         "Description": "Ease of Access > Narrator > Allow the shortcut key to start Narrator = Off",
                         "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Narrator\\NoRoam",
@@ -437,8 +437,8 @@
             "AppId": "Time Settings",
             "InstallScript": "Set-TimeZone \"Mountain Standard Time\"",
             "Notes": "Time & Language > Date & time > Time zone = (UTC-07:00) Mountain Time (US & Canada)",
-            "Configuration":{
-                "RegistrySettings":[
+            "Configuration": {
+                "RegistrySettings": [
                     {
                         "Description": "Enable UTC Clock",
                         "KeyName": "HKEY_CURRENT_USER\\Control Panel\\TimeDate\\AdditionalClocks\\1",
@@ -813,6 +813,19 @@
             "Environments": "All"
         },
         {
+            "AppType": "Script",
+            "AppId": "voidtools.Everything post install > Add to 'PATH' variable",
+            "Environments": "All",
+            "InstallScript": "$oldpath = (Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Session Manager\\Environment' -Name PATH).path\n$newpath = \"$oldpath;$env:ProgramFiles\\Everything\"\nSet-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Session Manager\\Environment' -Name PATH -Value $newpath"
+        },
+        {
+            "AppType": "Script",
+            "AppId": "voidtools.Everything post install > Configuration settings",
+            "Notes": "A refreshed 'Path' variable is required. This is accomplished by running as a separate app.",
+            "Environments": "All",
+            "InstallScript": "everything -install-run-on-system-startup\neverything -startup"
+        },
+        {
             "AppType": "Winget",
             "AppId": "7zip.7zip",
             "Environments": "All",
@@ -1058,6 +1071,13 @@
         {
             "AppType": "Scoop",
             "AppId": "nvm",
+            "Environments": "All"
+        },
+        {
+            "AppType": "Script",
+            "AppId": "nvm post install script",
+            "Notes": "A refreshed 'Path' variable is required. This is accomplished by running as a separate app.",
+            "InstallScript": "nvm install lts\nnvm use (nvm list)",
             "Environments": "All"
         },
         {
