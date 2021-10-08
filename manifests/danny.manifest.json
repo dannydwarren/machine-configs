@@ -393,6 +393,7 @@
         {
             "AppType": "Script",
             "AppId": "Ease of Access Settings",
+            "Environments": "All",
             "Configuration": {
                 "RegistrySettings": [
                     {
@@ -435,6 +436,7 @@
         {
             "AppType": "Script",
             "AppId": "Time Settings",
+            "Environments": "All",
             "InstallScript": "Set-TimeZone \"Mountain Standard Time\"",
             "Notes": "Time & Language > Date & time > Time zone = (UTC-07:00) Mountain Time (US & Canada)",
             "Configuration": {
