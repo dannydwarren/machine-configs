@@ -6,7 +6,7 @@ Set-ExecutionPolicy RemoteSigned -Force
 Invoke-Command {
     $asset = (iwr -useb https://api.github.com/repos/dannydwarren/machine-configs/releases/latest | ConvertFrom-Json).assets | ? { $_.name -like "*.exe" }
     $downloadUrl = $asset | select -exp browser_download_url
-    iwr ($downloadUrl) -OutFile "$HOME\Downloads\Configurator.exe"
+    Start-BitsTransfer -Source $downloadUrl -Destination "$HOME\Downloads\Configurator.exe"
 }
 $downloadDuration = $bootstrapStopwatch.Elapsed
 Write-Output "Download duration: $($downloadDuration)"
