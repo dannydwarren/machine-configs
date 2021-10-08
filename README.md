@@ -1,14 +1,19 @@
 ﻿# machine-configs
 
 ```powershell
+$bootstrapDuration = [Diagnostics.Stopwatch]::StartNew()
 Set-ExecutionPolicy RemoteSigned -Force
 Invoke-Command {
     $asset = (iwr -useb https://api.github.com/repos/dannydwarren/machine-configs/releases/latest | ConvertFrom-Json).assets | ? { $_.name -like "*.exe" }
     $downloadUrl = $asset | select -exp browser_download_url
     iwr ($downloadUrl) -OutFile "$HOME\Downloads\Configurator.exe"
 }
+$downloadDuration = $bootstrapDuration.Elapsed
 
+$bootstrapDuration.Restart()
 ."$HOME\Downloads\Configurator.exe" --manifest-path "https://raw.githubusercontent.com/dannydwarren/machine-configs/main/manifests/danny.manifest.json" --environments "Personal"
+Write-Output "Download duration: $($downloadDuration)"
+Write-Output "Configurator duration: $($bootstrapDuration.Elapsed)"
 ```
 
 
