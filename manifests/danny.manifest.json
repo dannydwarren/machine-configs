@@ -805,7 +805,62 @@
         {
             "AppType": "Winget",
             "AppId": "Zoom.Zoom",
-            "Environments": "All"
+            "Notes": "https://support.zoom.us/hc/en-us/articles/360039100051-Group-Policy-Options-for-the-Windows-Desktop-Client-and-Zoom-Rooms#h_e5b756c6-5e06-4a22-ad78-f19922a6e94f",
+            "Environments": "All",
+            "Configuration":{
+                "RegistrySettings":[
+                    {
+                        "KeyName": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Zoom\\Zoom Meetings\\General",
+                        "ValueName": "AlwaysShowMeetingControls",
+                        "ValueData": 1
+                    },
+                    {
+                        "KeyName": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Zoom\\Zoom Meetings\\General",
+                        "ValueName": "EnableRemindMeetingTime",
+                        "ValueData": 1
+                    },
+                    {
+                        "KeyName": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Zoom\\Zoom Meetings\\General",
+                        "ValueName": "MuteWhenLockScreen",
+                        "ValueData": 1
+                    },
+                    {
+                        "KeyName": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Zoom\\Zoom Meetings\\General",
+                        "ValueName": "TurnOffVideoCameraOnJoin",
+                        "ValueData": 1
+                    },
+                    {
+                        "KeyName": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Zoom\\Zoom Meetings\\General",
+                        "ValueName": "SetUseSystemDefaultMicForVOIP",
+                        "ValueData": 1
+                    },
+                    {
+                        "KeyName": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Zoom\\Zoom Meetings\\General",
+                        "ValueName": "SetUseSystemDefaultSpeakerForVOIP",
+                        "ValueData": 1
+                    },
+                    {
+                        "KeyName": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Zoom\\Zoom Meetings\\General",
+                        "ValueName": "AlwaysShowMeetingControls",
+                        "ValueData": 1
+                    },
+                    {
+                        "KeyName": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Zoom\\Zoom Meetings\\General",
+                        "ValueName": "AutoJoinVoIP",
+                        "ValueData": 1
+                    },
+                    {
+                        "KeyName": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Zoom\\Zoom Meetings\\General",
+                        "ValueName": "MuteVoIPWhenJoinMeeting",
+                        "ValueData": 1
+                    },
+                    {
+                        "KeyName": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Zoom\\Zoom Meetings\\General",
+                        "ValueName": "EnterFullScreenWhenViewingSharedScreen",
+                        "ValueData": 1
+                    }
+                ]
+            }
         },
         {
             "AppType": "Winget",
