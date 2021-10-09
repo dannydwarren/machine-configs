@@ -1,4 +1,6 @@
-﻿using Configurator.Apps;
+﻿using System;
+using Configurator.Apps;
+using Configurator.Utilities;
 using Configurator.Windows;
 
 namespace Configurator.Installers
@@ -11,10 +13,12 @@ namespace Configurator.Installers
     public class AppConfigurator : IAppConfigurator
     {
         private readonly IRegistryRepository registryRepository;
+        private readonly IConsoleLogger logger;
 
-        public AppConfigurator(IRegistryRepository registryRepository)
+        public AppConfigurator(IRegistryRepository registryRepository, IConsoleLogger logger)
         {
             this.registryRepository = registryRepository;
+            this.logger = logger;
         }
 
         public void Configure(IApp app)
@@ -23,7 +27,17 @@ namespace Configurator.Installers
                 return;
 
             app.Configuration.RegistrySettings.ForEach(setting =>
-                registryRepository.SetValue(setting.KeyName, setting.ValueName, setting.ValueData));
+            {
+                try
+                {
+                    registryRepository.SetValue(setting.KeyName, setting.ValueName, setting.ValueData);
+                }
+                catch (Exception e)
+                {
+                    logger.Error($"Error setting value in registry >> {nameof(setting.KeyName)}: {setting.KeyName}; {nameof(setting.ValueName)}: {setting.ValueName}", e);
+                    throw;
+                }
+            });
         }
     }
 }

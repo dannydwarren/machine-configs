@@ -9,6 +9,7 @@ namespace Configurator.Utilities
         void Info(string message);
         void Warn(string message);
         void Error(string message);
+        void Error(string message, Exception exception);
         void Progress(string message);
         void Result(string message);
     }
@@ -44,6 +45,12 @@ namespace Configurator.Utilities
             Write("ERROR", message);
             Console.ForegroundColor = ConsoleColor.White;
         }
+
+        public void Error(string message, Exception exception)
+        {
+            Error($"{message}\n{exception}");
+        }
+
         public void Progress(string message)
         {
             Console.ForegroundColor = ConsoleColor.Blue;
