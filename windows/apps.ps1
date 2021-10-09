@@ -16,19 +16,6 @@ FirstRunBlock "Configure OneNote" {
     WaitWhileProcess onenoteim
 }
 
-if (!(Configured $forKids)) {
-    FirstRunBlock "Connect phone" {
-        Write-ManualStep "Connect phone"
-        start ms-phone:
-        ConfigureNotifications "Messages (via Your Phone)"
-    }
-}
-
-FirstRunBlock "Configure Mail" {
-    # Ben Ignores this because it doesn't seem to have all apps in there before either launching the app OR the app posts a notifications
-    ConfigureNotifications Mail
-}
-
 UninstallBlock Microsoft.BingWeather
 UninstallBlock Microsoft.GetHelp
 UninstallBlock Microsoft.Getstarted # Tips

@@ -675,7 +675,8 @@
         {
             "AppType": "Winget",
             "AppId": "Corsair.iCUE",
-            "Environments": "LiquidCooling"
+            "Environments": "LiquidCooling",
+            "Notes": "Need a way to backup and restore settings"
         },
         {
             "AppType": "Winget",
@@ -715,7 +716,8 @@
         {
             "AppType": "Winget",
             "AppId": "Logitech.LGS",
-            "Environments": "Personal"
+            "Environments": "Personal",
+            "Notes": "Need a way to backup and restore settings"
         },
         {
             "AppType": "Winget",
@@ -777,7 +779,15 @@
         {
             "AppType": "Winget",
             "AppId": "SlackTechnologies.Slack",
-            "Environments": "All"
+            "Environments": "All",
+            "Configuration":{
+                "ManualSteps":[
+                    "Configure notifications",
+                    "start ms-settings:notifications",
+                    "`tShow notifications in action center = Off",
+                    "`tClose settings when done"
+                ]
+            }
         },
         {
             "AppType": "Winget",
@@ -1191,7 +1201,8 @@
         {
             "AppType": "Unknown",
             "AppId": "TridentZLightingControl",
-            "Environments": "Personal"
+            "Environments": "Personal",
+            "Notes": "Need a way to backup and restore settings"
         },
         {
             "AppType": "Unknown",
