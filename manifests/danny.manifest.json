@@ -696,7 +696,8 @@
         {
             "AppType": "Winget",
             "AppId": "PointPlanck.FileBot",
-            "Environments": "Personal"
+            "Environments": "Personal",
+            "Notes": "Need to figure out how to register"
         },
         {
             "AppType": "Winget",
@@ -706,7 +707,8 @@
         {
             "AppType": "Winget",
             "AppId": "JetBrains.Rider",
-            "Environments": "Work"
+            "Environments": "Work",
+            "Notes": "Need to figure out how to register"
         },
         {
             "AppType": "Winget",
@@ -764,7 +766,8 @@
         {
             "AppType": "Winget",
             "AppId": "plex.plexmediaserver",
-            "Environments": "Media"
+            "Environments": "Media",
+            "Notes": "Need a way to backup and restore settings and database"
         },
         {
             "AppType": "Winget",
