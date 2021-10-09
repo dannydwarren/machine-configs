@@ -1,4 +1,5 @@
 ﻿using System;
+using Configurator.Utilities;
 using Microsoft.Win32;
 
 namespace Configurator.Windows
@@ -11,9 +12,28 @@ namespace Configurator.Windows
 
     public class RegistryRepository : IRegistryRepository
     {
+        private readonly IConsoleLogger logger;
+
+        public RegistryRepository(IConsoleLogger logger)
+        {
+            this.logger = logger;
+        }
+
         public string GetValue(string keyName, string valueName)
         {
-            return Registry.GetValue(keyName, valueName, "").ToString()!;
+            var value = Registry.GetValue(keyName, valueName, "");
+
+            if (value is int intValue)
+            {
+                value = BitConverter.ToUInt32(BitConverter.GetBytes(intValue), 0);
+            }
+
+            if (value is long longValue)
+            {
+                value = BitConverter.ToUInt64(BitConverter.GetBytes(longValue), 0);
+            }
+
+            return value!.ToString()!;
         }
 
         public void SetValue(string keyName, string valueName, object value)
@@ -22,10 +42,26 @@ namespace Configurator.Windows
             {
                 { } x when x == typeof(uint) => RegistryValueKind.DWord,
                 { } x when x == typeof(string) => RegistryValueKind.String,
-                _ => throw new Exception($"{nameof(RegistrySetting)}.{nameof(RegistrySetting.ValueData)} only supports types: string and uint32")
+                _ => throw new Exception(
+                    $"{nameof(RegistrySetting)}.{nameof(RegistrySetting.ValueData)} only supports types: string and uint32")
             };
 
-            Registry.SetValue(keyName, valueName, value, registryValueKind);
+            if (value is uint)
+            {
+                value = unchecked((int)(uint)value);
+            }
+
+            try
+            {
+                Registry.SetValue(keyName, valueName, value, registryValueKind);
+            }
+            catch (Exception e)
+            {
+                logger.Error(
+                    $"Error setting value in registry >> {nameof(keyName)}: {keyName}; {nameof(valueName)}: {valueName}; {nameof(RegistryValueKind)}: {registryValueKind}",
+                    e);
+                throw;
+            }
         }
     }
 }

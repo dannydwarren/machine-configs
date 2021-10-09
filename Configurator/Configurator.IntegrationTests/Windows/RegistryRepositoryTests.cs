@@ -23,7 +23,7 @@ namespace Configurator.IntegrationTests.Windows
         {
             var keyName = $@"HKEY_CURRENT_USER\SOFTWARE\{nameof(Configurator)}.{nameof(RegistryRepositoryTests)}";
             var valueName = nameof(When_setting_the_value_of_a_registry_key);
-            var expectedValue = $"Time of test: {DateTimeOffset.Now:yyyy-MM-dd hh:mm:ss:fffff}";
+            var expectedValue = $"Time of test: {DateTimeOffset.Now:O}";
 
             Because(() => ClassUnderTest.SetValue(keyName, valueName, expectedValue));
 
@@ -32,6 +32,23 @@ namespace Configurator.IntegrationTests.Windows
             It("retrieves the value", () =>
             {
                 actualValue.ShouldBe(expectedValue);
+            });
+        }
+
+        [Fact]
+        public void When_setting_the_value_of_a_registry_key_with_a_uint_larger_then_int()
+        {
+            var keyName = $@"HKEY_CURRENT_USER\SOFTWARE\{nameof(Configurator)}.{nameof(RegistryRepositoryTests)}";
+            var valueName = $"{nameof(When_setting_the_value_of_a_registry_key_with_a_uint_larger_then_int)}_at_{DateTimeOffset.Now:O}";
+            uint expectedValue = 4285226065;
+
+            Because(() => ClassUnderTest.SetValue(keyName, valueName, expectedValue));
+
+            var actualValue = ClassUnderTest.GetValue(keyName, valueName);
+
+            It("retrieves the value", () =>
+            {
+                actualValue.ShouldBe(expectedValue.ToString());
             });
         }
     }
