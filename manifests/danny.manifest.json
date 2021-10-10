@@ -648,7 +648,8 @@
         },
         {
             "AppType": "Winget",
-            "AppId": "Microsoft.OfficeDeploymentTool",
+            "AppId": "Microsoft.Office",
+            "InstallArgs": "\"/configure https://raw.githubusercontent.com/dannydwarren/machine-configs/main/manifests/OfficeConfiguration.xml\"",
             "Environments": "All"
         },
         {
