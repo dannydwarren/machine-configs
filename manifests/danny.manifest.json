@@ -650,7 +650,12 @@
             "AppType": "Winget",
             "AppId": "Microsoft.Office",
             "InstallArgs": "\"/configure https://raw.githubusercontent.com/dannydwarren/machine-configs/main/manifests/OfficeConfiguration.xml\"",
-            "Environments": "All"
+            "Environments": "All",
+            "Configuration":{
+                "ManualSteps":[
+                    "Launch -> Login to register"
+                ]
+            }
         },
         {
             "AppType": "Winget",
@@ -677,7 +682,11 @@
             "AppType": "Winget",
             "AppId": "Corsair.iCUE",
             "Environments": "LiquidCooling",
-            "Notes": "Need a way to backup and restore settings"
+            "Configuration":{
+                "ManualSteps":[
+                    "Need a way to backup and restore settings"
+                ]
+            }
         },
         {
             "AppType": "Winget",
@@ -698,7 +707,11 @@
             "AppType": "Winget",
             "AppId": "PointPlanck.FileBot",
             "Environments": "Personal",
-            "Notes": "Need to figure out how to register"
+            "Configuration":{
+                "ManualSteps":[
+                    "Launch -> Register"
+                ]
+            }
         },
         {
             "AppType": "Winget",
@@ -709,7 +722,11 @@
             "AppType": "Winget",
             "AppId": "JetBrains.Rider",
             "Environments": "Work",
-            "Notes": "Need to figure out how to register"
+            "Configuration":{
+                "ManualSteps":[
+                    "Launch -> Register"
+                ]
+            }
         },
         {
             "AppType": "Winget",
@@ -720,8 +737,12 @@
             "AppType": "Winget",
             "AppId": "Logitech.LGS",
             "Environments": "Personal",
-            "Notes": "Need a way to backup and restore settings"
-        },
+            "Configuration":{
+                "ManualSteps":[
+                    "Need a way to backup and restore settings"
+                ]
+            }
+       },
         {
             "AppType": "Winget",
             "AppId": "Microsoft.EdgeDev",
@@ -768,7 +789,11 @@
             "AppType": "Winget",
             "AppId": "plex.plexmediaserver",
             "Environments": "Media",
-            "Notes": "Need a way to backup and restore settings and database"
+            "Configuration":{
+                "ManualSteps":[
+                    "Need a way to backup and restore settings"
+                ]
+            }
         },
         {
             "AppType": "Winget",
@@ -1206,7 +1231,11 @@
             "AppType": "Unknown",
             "AppId": "TridentZLightingControl",
             "Environments": "Personal",
-            "Notes": "Need a way to backup and restore settings"
+            "Configuration":{
+                "ManualSteps":[
+                    "Need a way to backup and restore settings"
+                ]
+            }
         },
         {
             "AppType": "Unknown",
