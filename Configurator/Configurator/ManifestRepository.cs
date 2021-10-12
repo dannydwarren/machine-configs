@@ -59,6 +59,7 @@ namespace Configurator
                 { AppType: AppType.Gitconfig } => jsonSerializer.Deserialize<GitconfigApp>(x.AppData.ToString()!),
                 { AppType: AppType.NonPackageApp } => jsonSerializer.Deserialize<NonPackageApp>(x.AppData.ToString()!),
                 { AppType: AppType.PowerShellAppPackage } => jsonSerializer.Deserialize<PowerShellAppPackage>(x.AppData.ToString()!),
+                { AppType: AppType.PowerShellModule } => jsonSerializer.Deserialize<PowerShellModuleApp>(x.AppData.ToString()!),
                 { AppType: AppType.Scoop } => jsonSerializer.Deserialize<ScoopApp>(x.AppData.ToString()!),
                 { AppType: AppType.ScoopBucket } => jsonSerializer.Deserialize<ScoopBucketApp>(x.AppData.ToString()!),
                 { AppType: AppType.Script } => jsonSerializer.Deserialize<ScriptApp>(x.AppData.ToString()!),

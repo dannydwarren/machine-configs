@@ -5,6 +5,7 @@
         Unknown,
         Script,
         PowerShellAppPackage,
+        PowerShellModule,
         Winget,
         Scoop,
         ScoopBucket,

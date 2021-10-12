@@ -156,6 +156,64 @@ namespace Configurator.IntegrationTests
         }
 
         [Fact]
+        public async Task When_parsing_power_shell_module_apps()
+        {
+            mockArgs.SetupGet(x => x.ManifestPath).Returns("./TestManifests/power-shell-module-only_manifest.json");
+
+            Services.AddTransient(_ => mockArgs.Object);
+
+            var manifest = await BecauseAsync(() => ClassUnderTest.LoadAsync());
+
+            It("parses required properties", () =>
+            {
+                manifest.Apps[0]
+                    .ShouldBeOfType<PowerShellModuleApp>().ShouldSatisfyAllConditions(x =>
+                    {
+                        x.AppId.ShouldBe("power-shell-module-app-id");
+                        x.InstallArgs.ShouldBeEmpty();
+                        x.PreventUpgrade.ShouldBeFalse();
+                        x.Configuration.ShouldBeNull();
+                    });
+            });
+
+            It($"parses with {nameof(PowerShellModuleApp.InstallArgs)}", () =>
+            {
+                manifest.Apps[1]
+                    .ShouldBeOfType<PowerShellModuleApp>().ShouldSatisfyAllConditions(x =>
+                    {
+                        x.AppId.ShouldBe("power-shell-module-app-id-with-install-args");
+                        x.InstallArgs.ShouldBe(" install-args");
+                    });
+            });
+
+            It($"parses with {nameof(PowerShellModuleApp.PreventUpgrade)}", () =>
+            {
+                manifest.Apps[2]
+                    .ShouldBeOfType<PowerShellModuleApp>().ShouldSatisfyAllConditions(x =>
+                    {
+                        x.AppId.ShouldBe("power-shell-module-app-id-with-prevent-upgrade");
+                        x.PreventUpgrade.ShouldBeTrue();
+                    });
+            });
+
+            It($"parses with {nameof(PowerShellModuleApp.Configuration)}", () =>
+            {
+                manifest.Apps[3]
+                    .ShouldBeOfType<PowerShellModuleApp>().ShouldSatisfyAllConditions(x =>
+                    {
+                        x.AppId.ShouldBe("power-shell-module-app-id-with-configuration");
+                        x.Configuration.RegistrySettings.ShouldHaveSingleItem()
+                            .ShouldSatisfyAllConditions(y =>
+                            {
+                                y.KeyName.ShouldBe("key-name-test");
+                                y.ValueName.ShouldBe("value-name-test");
+                                y.ValueData.ShouldBe("value-data-test");
+                            });
+                    });
+            });
+        }
+
+        [Fact]
         public async Task When_parsing_non_package_apps()
         {
             mockArgs.SetupGet(x => x.ManifestPath).Returns("./TestManifests/non-package-only_manifest.json");
