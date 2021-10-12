@@ -910,6 +910,12 @@
         },
         {
             "AppType": "Script",
+            "AppId": "voidtools.Everything Everything.ini",
+            "Environments": "All",
+            "InstallScript": "Import-Module BitsTransfer -UseWindowsPowerShell\nStart-BitsTransfer -Source \"https://raw.githubusercontent.com/dannydwarren/machine-configs/main/manifests/Everything.ini\" -Destination \"$env:ProgramFiles\\Everything\\Everything.ini\""
+        },
+        {
+            "AppType": "Script",
             "AppId": "voidtools.Everything post install > Add to 'PATH' variable",
             "Environments": "All",
             "InstallScript": "$oldpath = (Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Session Manager\\Environment' -Name PATH).path\n$newpath = \"$oldpath;$env:ProgramFiles\\Everything\"\nSet-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Session Manager\\Environment' -Name PATH -Value $newpath"
