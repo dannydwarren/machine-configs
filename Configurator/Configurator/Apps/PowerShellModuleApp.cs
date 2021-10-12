@@ -12,9 +12,9 @@ namespace Configurator.Apps
             set => installArgs = string.IsNullOrWhiteSpace(value) ? "" : $" {value}";
         }
 
-        public string InstallScript => $"Install-Module -Name {AppId}{InstallArgs}";
+        public string InstallScript => $"Import-Module PowerShellGet -UseWindowsPowerShell\nInstall-Module -Name {AppId}{InstallArgs}";
         public string VerificationScript => $"(Get-Module -ListAvailable {AppId}) -ne $null";
-        public string UpgradeScript => $"Update-Module -Name {AppId}{InstallArgs}";
+        public string UpgradeScript => $"Import-Module PowerShellGet -UseWindowsPowerShell\nUpdate-Module -Name {AppId}{InstallArgs}";
         public AppConfiguration Configuration { get; set; }
     }
 }

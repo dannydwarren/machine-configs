@@ -643,8 +643,25 @@
         },
         {
             "AppType": "Winget",
+            "AppId": "Microsoft.PowerShell",
+            "Environments": "All"
+        },
+        {
+            "AppType": "Winget",
             "AppId": "Git.Git",
             "Environments": "All"
+        },
+        {
+            "AppType": "Script",
+            "AppId": "Install NuGet Provider for PowerShellGet and Register Default PSRepository",
+            "Environments": "All",
+            "InstallScript": "Import-Module PackageManagement -UseWindowsPowerShell\nInstall-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force\nImport-Module PowerShellGet -UseWindowsPowerShell\nRegister-PSRepository -Default"
+        },
+        {
+            "AppType": "PowerShellModule",
+            "AppId": "posh-git",
+            "Environments": "All",
+            "InstallArgs": "-Force\nAdd-PoshGitToProfile -AllHosts"
         },
         {
             "AppType": "Winget",
