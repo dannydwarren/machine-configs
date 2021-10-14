@@ -124,7 +124,7 @@ Write-Progress -Activity 'Hello World' -Status '2 Complete' -PercentComplete 100
         [Fact]
         public async Task When_executing()
         {
-            var script = @"Import-Module posh-git -Force";
+            var script = @"Write-Output ""Hello World""";
 
             var output = await BecauseAsync(() => ClassUnderTest.ExecuteAsync(script));
 
