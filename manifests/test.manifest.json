@@ -178,6 +178,18 @@
                     "ctrl+shift+p 'Show synced data' -> Update name of synced machine"
                 ]
             }
+        },
+        {
+            "AppType": "PowerShellModule",
+            "AppId": "oh-my-posh",
+            "Environments": "All",
+            "InstallArgs": "-Scope CurrentUser -AllowPrerelease -Force"
+        },
+        {
+            "AppType": "PowerShellModule",
+            "AppId": "BurntToast",
+            "Environments": "All",
+            "InstallArgs": "-Force"
         }
     ]
 }

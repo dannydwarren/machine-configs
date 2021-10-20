@@ -664,6 +664,18 @@
             "InstallArgs": "-Force\nAdd-PoshGitToProfile -AllHosts"
         },
         {
+            "AppType": "PowerShellModule",
+            "AppId": "oh-my-posh",
+            "Environments": "All",
+            "InstallArgs": "-Scope CurrentUser -AllowPrerelease -Force"
+        },
+        {
+            "AppType": "PowerShellModule",
+            "AppId": "BurntToast",
+            "Environments": "All",
+            "InstallArgs": "-Force"
+        },
+        {
             "AppType": "Winget",
             "AppId": "Microsoft.Office",
             "InstallArgs": "\"/configure https://raw.githubusercontent.com/dannydwarren/machine-configs/main/manifests/OfficeConfiguration.xml\"",
