@@ -1,7 +1,3 @@
-Block "PowerShell Transcripts" {
-    mkdir "$backupDir\PowerShell Transcripts" -ErrorAction Ignore
-}
-
 Block "Configure profile.ps1" {
     Add-Content -Path $profile -Value "`n. $PSScriptRoot\profile.ps1"
 } {

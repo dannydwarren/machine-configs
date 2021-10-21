@@ -6,8 +6,8 @@ param([switch]$DryRun, [switch]$SkipBackup, [string]$Run)
 . $PSScriptRoot\config-functions.ps1
 
 # TODO: store in profile
-$backupDir = 'C:\ConfigurationBackup'
-mkdir $backupDir -ErrorAction Ignore
+$backupNoSync = 'C:\ConfigurationBackup'
+mkdir $backupNoSync -ErrorAction Ignore
 
 Block "Configure for" {
     $configureForOptions = {

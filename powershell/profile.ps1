@@ -1,19 +1,16 @@
-$OneDrive = "$env:UserProfile\OneDrive"
-$git = "C:\BenLocal\git"
+# TODO: REVIEW BELOW and migrate to /manifests/profile.ps1
 
-$tmp = "C:\BenLocal\ToDelete\$(Get-Date -Format "yyyyMM")"
-
-Set-Alias gh Get-Help
-
-Import-Module Appx -UseWindowsPowerShell
-Copy-Item $PSScriptRoot\settings.json "$env:LocalAppData\Packages\$((Get-AppxPackage -Name Microsoft.WindowsTerminal).PackageFamilyName)\LocalState\settings.json"
+function Update-WindowsTerminalSettings() {
+    Import-Module Appx -UseWindowsPowerShell
+    Copy-Item $PSScriptRoot\settings.json "$env:LocalAppData\Packages\$((Get-AppxPackage -Name Microsoft.WindowsTerminal).PackageFamilyName)\LocalState\settings.json"
+}
 
 function Test-IsAdmin() {
     ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 }
 
 function Run-AsAdmin([Parameter(Mandatory)][string]$FilePath) {
-    Start-Process pwsh -Verb RunAs -ArgumentList "-File `"$FilePath`""
+    Start-Process wt -Verb RunAs -ArgumentList "-w run-as-admin pwsh -File `"$FilePath`""
 }
 
 function Create-Shortcut([Parameter(Mandatory)][string]$Target, [Parameter(Mandatory)][string]$Link, [string]$Arguments) {
@@ -30,11 +27,16 @@ function Create-RunOnce([Parameter(Mandatory)][string]$Description, [Parameter(M
 }
 
 function Create-FileRunOnce([Parameter(Mandatory)][string]$Description, [Parameter(Mandatory)][string]$FilePath) {
-    Create-RunOnce $Description "pwsh -Command `"Run-AsAdmin '$FilePath'`""
+    Create-RunOnce $Description "$((Get-Command wt).Source) -w run-once pwsh -Command `"Run-AsAdmin '$FilePath'`""
 }
 
 function Get-TimestampForFileName() {
     (Get-Date -Format o) -replace ":", "_"
+}
+
+function Get-SafeFileName([Parameter(Mandatory)][string]$FileName) {
+    $invalidFileNameChars = [Regex]::Escape([IO.Path]::GetInvalidFileNameChars() -join "")
+    $FileName -replace "[$invalidFileNameChars]", ""
 }
 
 function Set-RegistryValue([Parameter(Mandatory)][string]$Path, [string]$Name = "(Default)", [Parameter(Mandatory)][object]$Value) {
@@ -42,6 +44,11 @@ function Set-RegistryValue([Parameter(Mandatory)][string]$Path, [string]$Name = 
         New-Item $Path -Force | Out-Null
     }
     Set-ItemProperty $Path -Name $Name -Value $Value
+}
+
+function Set-EnvironmentVariable([Parameter(Mandatory)][string]$Variable, [string]$Value) {
+    [Environment]::SetEnvironmentVariable($Variable, $Value, "User")
+    [Environment]::SetEnvironmentVariable($Variable, $Value, "Process")
 }
 
 function Get-ProgramsInstalled() {
@@ -62,11 +69,24 @@ function SecureRead-Host([string]$Prompt) {
     return $string
 }
 
-function Download-File([Parameter(Mandatory)][string]$Uri, [Parameter(Mandatory)][string]$OutFile) {
+function Download-File([Parameter(Mandatory)][string]$Uri, [Parameter(Mandatory)][string]$OutFile, [switch]$AutoDetermineExtension) {
     $savedProgressPreference = $ProgressPreference
     $ProgressPreference = "SilentlyContinue"
+    if ($AutoDetermineExtension) {
+        $contentType = (Invoke-WebRequest $Uri -Method Head).Headers["Content-Type"]
+        $ext = switch ($contentType) {
+            "image/jpeg" { ".jpg" }
+            "image/png" { ".png" }
+            Default { throw "Unknown content type `"$contentType`"" }
+        }
+        $OutFile += $ext
+    }
     Write-Host "Downloading $Uri`n`tto $OutFile"
-    Invoke-WebRequest $Uri -OutFile $OutFile
+    $downloadFolder = Split-Path $OutFile
+    if (!(Test-Path $downloadFolder)) {
+        New-Item $downloadFolder -ItemType Directory -Force | Out-Null
+    }
+    Invoke-WebRequest $Uri -OutFile $OutFile -MaximumRetryCount 3 -RetryIntervalSec 30
     $ProgressPreference = $savedProgressPreference
 }
 
@@ -80,6 +100,17 @@ function AddNuGetSource([Parameter(Mandatory)][string]$Name, [Parameter(Mandator
         $nugetConfigXml.configuration.packageSources.AppendChild($newPackageSource)
         $nugetConfigXml.Save($nugetConfigPath)
     }
+}
+
+function Find-RepoRoot() {
+    $repoRoot = Get-Location
+    while (!(Test-Path $repoRoot\.git)) {
+        if ($repoRoot -like "*:\") {
+            throw "No git repo found between $pwd and $repoRoot"
+        }
+        $repoRoot = Resolve-Path "$repoRoot\.."
+    }
+    return $repoRoot
 }
 
 function GitAudit() {
@@ -97,7 +128,7 @@ function GitAudit() {
         }
         popd
     }
-    (Get-ChildItem $git) +
+    (Get-ChildItem $src) +
     (Get-ChildItem C:\Work | Get-ChildItem) |
     % { CheckDir $_.FullName }
 }
@@ -110,6 +141,61 @@ function ReallyUpdate-Module([Parameter(Mandatory)][string]$Name) {
     select -Skip 1 |
     % { Uninstall-Module $Name -RequiredVersion $_.Version }
 }
+
+function winget-manifest([Parameter(Mandatory)][string]$AppId) {
+    $shardLetter = $AppId.ToLower()[0]
+    $path = $AppId -replace "\.", "/"
+    $version = (winget show $AppId | sls "(?<=Version: ).*").Matches.Value
+    $manifestUrl = "https://raw.githubusercontent.com/microsoft/winget-pkgs/master/manifests/$shardLetter/$path/$version/$AppId.installer.yaml"
+    Write-Output "Fetching from $manifestUrl"
+    try {
+        $response = iwr $manifestUrl
+    }
+    catch {
+        $manifestUrl = "https://raw.githubusercontent.com/microsoft/winget-pkgs/master/manifests/$shardLetter/$path/$version/$AppId.yaml"
+        Write-Output "Fetching from $manifestUrl"
+        $response = iwr $manifestUrl
+    }
+    Write-Output $response.Content
+}
+
+Register-ArgumentCompleter -Native -CommandName .\config.ps1 -ScriptBlock {
+    param($wordToComplete, $commandAst, $cursorPosition)
+    if ((Get-Location).Path -ne "$src\configs") {
+        return
+    }
+
+    dir $src\configs *.ps1 -Recurse |
+    sls "Block `"(.+?)`"" |
+    % { "`"$($_.Matches.Groups[1].Value)`"" } |
+    ? { $_ -like "*$wordToComplete*" } |
+    sort |
+    % {
+        [System.Management.Automation.CompletionResult]::new($_, $_, 'ParameterValue', $_)
+    }
+}
+
+function tmpfor([Parameter(Mandatory)][string]$For) {
+    "$tmpToDelete\$($For)_$(Get-TimestampForFileName)"
+}
+
+function togh([Parameter(Mandatory)][string]$FilePath, [int]$BeginLine, [int]$EndLine) {
+    if ($FilePath -notmatch "C:\\Work\\(?<org>[^\\]+)\\(?<repo>[^\\]+)") {
+        Write-Error "Could not match path"
+    }
+
+    pushd $Matches[0]
+    $permalinkCommit = git rev-parse --short head
+    popd
+
+    $url = ($FilePath.Replace($Matches[0], "https://github.com/$($Matches["org"])/$($Matches["repo"])/blob/$permalinkCommit") -replace "\\", "/") `
+        + ($BeginLine -gt 0 ? "#L$BeginLine" + ($EndLine -gt 0 ? "-L$EndLine" : "") : "")
+
+    Set-Clipboard $url
+    Write-Host "$url`n`tadded to clipboard"
+}
+
+. $PSScriptRoot\one-liners.ps1
 
 $transcriptDir = "C:\BenLocal\PowerShell Transcripts"
 Get-ChildItem "$transcriptDir\*.log" | ? { !(sls -Path $_ -Pattern "Command start time:" -SimpleMatch -Quiet) } | rm -ErrorAction SilentlyContinue
