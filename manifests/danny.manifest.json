@@ -1,6 +1,25 @@
 {
     "Apps": [
         {
+            "AppType": "Script",
+            "AppId": "Disable UAC",
+            "Environments": "All",
+            "Configuration": {
+                "RegistrySettings": [
+                    {
+                        "KeyName": "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                        "ValueName": "ConsentPromptBehaviorAdmin",
+                        "ValueData": 0
+                    },
+                    {
+                        "KeyName": "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                        "ValueName": "PromptOnSecureDesktop",
+                        "ValueData": 0
+                    }
+                ]
+            }
+        },
+        {
             "AppType": "Winget",
             "AppId": "Microsoft.VisualStudioCode",
             "Environments": "All",
@@ -180,23 +199,38 @@
             }
         },
         {
+            "AppType": "Winget",
+            "AppId": "Microsoft.PowerShell",
+            "Environments": "All"
+        },
+        {
+            "AppType": "Winget",
+            "AppId": "Git.Git",
+            "Environments": "All"
+        },
+        {
             "AppType": "Script",
-            "AppId": "Disable UAC",
+            "AppId": "Install NuGet Provider for PowerShellGet and Register Default PSRepository",
             "Environments": "All",
-            "Configuration": {
-                "RegistrySettings": [
-                    {
-                        "KeyName": "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
-                        "ValueName": "ConsentPromptBehaviorAdmin",
-                        "ValueData": 0
-                    },
-                    {
-                        "KeyName": "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
-                        "ValueName": "PromptOnSecureDesktop",
-                        "ValueData": 0
-                    }
-                ]
-            }
+            "InstallScript": "Import-Module PackageManagement -UseWindowsPowerShell\nInstall-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force\nImport-Module PowerShellGet -UseWindowsPowerShell\nRegister-PSRepository -Default"
+        },
+        {
+            "AppType": "PowerShellModule",
+            "AppId": "posh-git",
+            "Environments": "All",
+            "InstallArgs": "-Force\nAdd-PoshGitToProfile -AllHosts"
+        },
+        {
+            "AppType": "PowerShellModule",
+            "AppId": "oh-my-posh",
+            "Environments": "All",
+            "InstallArgs": "-Scope CurrentUser -Force"
+        },
+        {
+            "AppType": "PowerShellModule",
+            "AppId": "BurntToast",
+            "Environments": "All",
+            "InstallArgs": "-Force"
         },
         {
             "AppType": "Script",
@@ -643,45 +677,11 @@
         },
         {
             "AppType": "Winget",
-            "AppId": "Microsoft.PowerShell",
-            "Environments": "All"
-        },
-        {
-            "AppType": "Winget",
-            "AppId": "Git.Git",
-            "Environments": "All"
-        },
-        {
-            "AppType": "Script",
-            "AppId": "Install NuGet Provider for PowerShellGet and Register Default PSRepository",
-            "Environments": "All",
-            "InstallScript": "Import-Module PackageManagement -UseWindowsPowerShell\nInstall-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force\nImport-Module PowerShellGet -UseWindowsPowerShell\nRegister-PSRepository -Default"
-        },
-        {
-            "AppType": "PowerShellModule",
-            "AppId": "posh-git",
-            "Environments": "All",
-            "InstallArgs": "-Force\nAdd-PoshGitToProfile -AllHosts"
-        },
-        {
-            "AppType": "PowerShellModule",
-            "AppId": "oh-my-posh",
-            "Environments": "All",
-            "InstallArgs": "-Scope CurrentUser -AllowPrerelease -Force"
-        },
-        {
-            "AppType": "PowerShellModule",
-            "AppId": "BurntToast",
-            "Environments": "All",
-            "InstallArgs": "-Force"
-        },
-        {
-            "AppType": "Winget",
             "AppId": "Microsoft.Office",
             "InstallArgs": "\"/configure https://raw.githubusercontent.com/dannydwarren/machine-configs/main/manifests/OfficeConfiguration.xml\"",
             "Environments": "All",
-            "Configuration":{
-                "ManualSteps":[
+            "Configuration": {
+                "ManualSteps": [
                     "Launch -> Login to register"
                 ]
             }
@@ -711,8 +711,8 @@
             "AppType": "Winget",
             "AppId": "Corsair.iCUE",
             "Environments": "LiquidCooling",
-            "Configuration":{
-                "ManualSteps":[
+            "Configuration": {
+                "ManualSteps": [
                     "Need a way to backup and restore settings"
                 ]
             }
@@ -736,8 +736,8 @@
             "AppType": "Winget",
             "AppId": "PointPlanck.FileBot",
             "Environments": "Personal",
-            "Configuration":{
-                "ManualSteps":[
+            "Configuration": {
+                "ManualSteps": [
                     "Launch -> Register"
                 ]
             }
@@ -751,8 +751,8 @@
             "AppType": "Winget",
             "AppId": "JetBrains.Rider",
             "Environments": "Work",
-            "Configuration":{
-                "ManualSteps":[
+            "Configuration": {
+                "ManualSteps": [
                     "Launch -> Register"
                 ]
             }
@@ -766,12 +766,12 @@
             "AppType": "Winget",
             "AppId": "Logitech.LGS",
             "Environments": "Personal",
-            "Configuration":{
-                "ManualSteps":[
+            "Configuration": {
+                "ManualSteps": [
                     "Need a way to backup and restore settings"
                 ]
             }
-       },
+        },
         {
             "AppType": "Winget",
             "AppId": "Microsoft.EdgeDev",
@@ -818,8 +818,8 @@
             "AppType": "Winget",
             "AppId": "plex.plexmediaserver",
             "Environments": "Media",
-            "Configuration":{
-                "ManualSteps":[
+            "Configuration": {
+                "ManualSteps": [
                     "Need a way to backup and restore settings"
                 ]
             }
@@ -838,8 +838,8 @@
             "AppType": "Winget",
             "AppId": "SlackTechnologies.Slack",
             "Environments": "All",
-            "Configuration":{
-                "ManualSteps":[
+            "Configuration": {
+                "ManualSteps": [
                     "Configure notifications",
                     "start ms-settings:notifications",
                     "`tShow notifications in action center = Off",
@@ -877,8 +877,8 @@
             "AppId": "Zoom.Zoom",
             "Notes": "https://support.zoom.us/hc/en-us/articles/360039100051-Group-Policy-Options-for-the-Windows-Desktop-Client-and-Zoom-Rooms#h_e5b756c6-5e06-4a22-ad78-f19922a6e94f",
             "Environments": "All",
-            "Configuration":{
-                "RegistrySettings":[
+            "Configuration": {
+                "RegistrySettings": [
                     {
                         "KeyName": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Zoom\\Zoom Meetings\\General",
                         "ValueName": "AlwaysShowMeetingControls",
@@ -1266,8 +1266,8 @@
             "AppType": "Unknown",
             "AppId": "TridentZLightingControl",
             "Environments": "Personal",
-            "Configuration":{
-                "ManualSteps":[
+            "Configuration": {
+                "ManualSteps": [
                     "Need a way to backup and restore settings"
                 ]
             }
