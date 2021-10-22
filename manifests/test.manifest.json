@@ -2,8 +2,16 @@
     "Apps": [
         {
             "AppType": "Script",
-            "InstallScript": "iwr -useb https://raw.githubusercontent.com/dannydwarren/machine-configs/main/manifests/profile.ps1 -outfile \"c:\\machine-configuration\\profile.ps1\"\nAdd-Content -Path $profile -Value \"`n. \"c:\\machine-configuration\\profile.ps1\"\"",
+            "AppId": "Download profile.ps1",
+            "InstallScript": "iwr -useb https://raw.githubusercontent.com/dannydwarren/machine-configs/main/manifests/profile.ps1 -outfile c:\\machine-configuration\\profile.ps1",
             "Environments": "All"
+        },
+        {
+            "AppType": "Script",
+            "AppId": "Use downloaded profile.ps1",
+            "InstallScript": "Add-Content -Path $profile -Value \"`n. c:\\machine-configuration\\profile.ps1\"",
+            "Environments": "All",
+            "VerificationScript": "$src -ne $null -and $src -ne ''"
         },
         {
             "AppType": "Script",
