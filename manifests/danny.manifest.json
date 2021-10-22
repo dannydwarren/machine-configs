@@ -2,6 +2,19 @@
     "Apps": [
         {
             "AppType": "Script",
+            "AppId": "Download profile.ps1",
+            "InstallScript": "mkdir c:\\machine-configuration -ErrorAction Ignore\niwr -useb https://raw.githubusercontent.com/dannydwarren/machine-configs/main/manifests/profile.ps1 -outfile c:\\machine-configuration\\profile.ps1",
+            "Environments": "All"
+        },
+        {
+            "AppType": "Script",
+            "AppId": "Use downloaded profile.ps1",
+            "InstallScript": "Add-Content -Path $profile -Value \"`n. c:\\machine-configuration\\profile.ps1\"",
+            "Environments": "All",
+            "VerificationScript": "$src -ne $null -and $src -ne ''"
+        },
+        {
+            "AppType": "Script",
             "AppId": "Disable UAC",
             "Environments": "All",
             "Configuration": {
@@ -201,6 +214,11 @@
         {
             "AppType": "Winget",
             "AppId": "Microsoft.PowerShell",
+            "Environments": "All"
+        },
+        {
+            "AppType": "Winget",
+            "AppId": "Microsoft.WindowsTerminal",
             "Environments": "All"
         },
         {
@@ -1134,11 +1152,6 @@
         {
             "AppType": "Winget",
             "AppId": "Microsoft.SQLServerManagementStudio",
-            "Environments": "All"
-        },
-        {
-            "AppType": "Winget",
-            "AppId": "Microsoft.WindowsTerminal",
             "Environments": "All"
         },
         {
