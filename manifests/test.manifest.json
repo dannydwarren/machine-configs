@@ -3,7 +3,7 @@
         {
             "AppType": "Script",
             "AppId": "Download profile.ps1",
-            "InstallScript": "iwr -useb https://raw.githubusercontent.com/dannydwarren/machine-configs/main/manifests/profile.ps1 -outfile c:\\machine-configuration\\profile.ps1",
+            "InstallScript": "mkdir c:\\machine-configuration -ErrorAction Ignore\niwr -useb https://raw.githubusercontent.com/dannydwarren/machine-configs/main/manifests/profile.ps1 -outfile c:\\machine-configuration\\profile.ps1",
             "Environments": "All"
         },
         {
