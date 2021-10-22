@@ -11,7 +11,7 @@
             "AppId": "Use downloaded profile.ps1",
             "InstallScript": "Add-Content -Path $profile -Value \"`n. c:\\machine-configuration\\profile.ps1\"",
             "Environments": "All",
-            "VerificationScript": "$src -ne $null -and $src -ne ''"
+            "VerificationScript": "(Get-Content -Path $profile) -contains \". c:\\machine-configuration\\profile.ps1\""
         },
         {
             "AppType": "Script",
