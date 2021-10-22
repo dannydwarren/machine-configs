@@ -3,6 +3,11 @@
 ```powershell
 $bootstrapStopwatch = [Diagnostics.Stopwatch]::StartNew()
 Set-ExecutionPolicy RemoteSigned -Force
+
+Write-Output "Initializing profile at: $profile"
+mkdir ([System.IO.Path]::GetDirectoryName($profile)) -ErrorAction Ignore
+New-Item -Path $profile -ItemType "file"
+
 Invoke-Command {
     $asset = (iwr -useb https://api.github.com/repos/dannydwarren/machine-configs/releases/latest | ConvertFrom-Json).assets | ? { $_.name -like "*.exe" }
     $downloadUrl = $asset | select -exp browser_download_url
