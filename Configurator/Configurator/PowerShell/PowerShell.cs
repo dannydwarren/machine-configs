@@ -1,5 +1,6 @@
 ﻿using Configurator.Utilities;
 using System;
+using System.IO;
 using System.Linq;
 using System.Management.Automation.Runspaces;
 using System.Threading.Tasks;
@@ -61,8 +62,16 @@ namespace Configurator.PowerShell
         {
             consoleLogger.Debug(script);
 
-            var environmentReadyScript =
-                $@"$env:Path = [System.Environment]::GetEnvironmentVariable(""Path"",""Machine"") + "";"" + [System.Environment]::GetEnvironmentVariable(""Path"",""User"")
+            var documentsFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            var currentUserCurrentHostProfile = Path.Combine(documentsFolder, "WindowsPowerShell\\Microsoft.PowerShell_profile.ps1");
+
+            var environmentReadyScript = $@"
+$env:Path = [System.Environment]::GetEnvironmentVariable(""Path"",""Machine"") + "";"" + [System.Environment]::GetEnvironmentVariable(""Path"",""User"")
+
+if ($profile -eq $null -or $profile -eq '') {{
+  $global:profile = ""{currentUserCurrentHostProfile}""
+}}
+
 {script}";
 
             powershell.AddScript(environmentReadyScript);
@@ -127,7 +136,8 @@ namespace Configurator.PowerShell
         {
             var data = powershell.Streams.Progress[e.Index];
 
-            consoleLogger.Progress($"{data.Activity} -> Status: {data.StatusDescription}; PercentComplete: {data.PercentComplete}");
+            consoleLogger.Progress(
+                $"{data.Activity} -> Status: {data.StatusDescription}; PercentComplete: {data.PercentComplete}");
         }
 
         protected virtual void Dispose(bool disposing)
@@ -146,7 +156,7 @@ namespace Configurator.PowerShell
                 powershell.Streams.Warning.DataAdded -= WarningDataAdded;
                 powershell.Streams.Error.DataAdded -= ErrorDataAdded;
                 powershell.Streams.Progress.DataAdded -= ProgressDataAdded;
-                
+
                 disposedValue = true;
             }
         }

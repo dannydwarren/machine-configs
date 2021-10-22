@@ -198,5 +198,18 @@ Write-Information ""testVar=$testVar""";
                 output.AsBool.ShouldBeNull();
             });
         }
+
+        [Fact]
+        public async Task When_executing_a_script_PS_profile_variable_is_populated()
+        {
+            var script = @"Write-Information ""Profile path: $profile""";
+
+            await BecauseAsync(() => ClassUnderTest.ExecuteAsync(script));
+
+            It("has $profile populated", () =>
+            {
+                mockConsoleLogger.Verify(x => x.Info(Moq.It.Is<string>(y => y.EndsWith("profile.ps1"))), Times.Exactly(1));
+            });
+        }
     }
 }
