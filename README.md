@@ -6,7 +6,7 @@ Set-ExecutionPolicy RemoteSigned -Force
 
 Write-Output "Initializing profile at: $profile"
 mkdir ([System.IO.Path]::GetDirectoryName($profile)) -ErrorAction Ignore
-New-Item -Path $profile -ItemType "file"
+New-Item -Path $profile -ItemType "file" -ErrorAction Ignore
 
 Invoke-Command {
     $asset = (iwr -useb https://api.github.com/repos/dannydwarren/machine-configs/releases/latest | ConvertFrom-Json).assets | ? { $_.name -like "*.exe" }
