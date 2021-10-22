@@ -1,6 +1,30 @@
 {
     "Apps": [
         {
+            "AppType": "Script",
+            "InstallScript": "Invoke-WebRequest -uri https://raw.githubusercontent.com/dannydwarren/machine-configs/main/manifests/profile.ps1 -destination \"c:\\machine-configuration\\profile.ps1\"\nAdd-Content -Path $profile -Value \"`n. \"c:\\machine-configuration\\profile.ps1\"\"",
+            "Environments": "All"
+        },
+        {
+            "AppType": "Script",
+            "AppId": "Disable UAC",
+            "Environments": "All",
+            "Configuration": {
+                "RegistrySettings": [
+                    {
+                        "KeyName": "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                        "ValueName": "ConsentPromptBehaviorAdmin",
+                        "ValueData": 0
+                    },
+                    {
+                        "KeyName": "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                        "ValueName": "PromptOnSecureDesktop",
+                        "ValueData": 0
+                    }
+                ]
+            }
+        },
+        {
             "AppType": "Winget",
             "AppId": "Microsoft.VisualStudioCode",
             "Environments": "All",
@@ -180,10 +204,37 @@
             }
         },
         {
+            "AppType": "Winget",
+            "AppId": "Microsoft.PowerShell",
+            "Environments": "All"
+        },
+        {
+            "AppType": "Winget",
+            "AppId": "Microsoft.WindowsTerminal",
+            "Environments": "All"
+        },
+        {
+            "AppType": "Winget",
+            "AppId": "Git.Git",
+            "Environments": "All"
+        },
+        {
+            "AppType": "Script",
+            "AppId": "Install NuGet Provider for PowerShellGet and Register Default PSRepository",
+            "Environments": "All",
+            "InstallScript": "Import-Module PackageManagement -UseWindowsPowerShell\nInstall-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force\nImport-Module PowerShellGet -UseWindowsPowerShell\nRegister-PSRepository -Default"
+        },
+        {
+            "AppType": "PowerShellModule",
+            "AppId": "posh-git",
+            "Environments": "All",
+            "InstallArgs": "-Force\nAdd-PoshGitToProfile -AllHosts"
+        },
+        {
             "AppType": "PowerShellModule",
             "AppId": "oh-my-posh",
             "Environments": "All",
-            "InstallArgs": "-Scope CurrentUser -AllowPrerelease -Force"
+            "InstallArgs": "-Scope CurrentUser -Force"
         },
         {
             "AppType": "PowerShellModule",
