@@ -2,7 +2,7 @@
     "Apps": [
         {
             "AppType": "Script",
-            "InstallScript": "Invoke-WebRequest -uri https://raw.githubusercontent.com/dannydwarren/machine-configs/main/manifests/profile.ps1 -destination \"c:\\machine-configuration\\profile.ps1\"\nAdd-Content -Path $profile -Value \"`n. \"c:\\machine-configuration\\profile.ps1\"\"",
+            "InstallScript": "iwr -useb https://raw.githubusercontent.com/dannydwarren/machine-configs/main/manifests/profile.ps1 -outfile \"c:\\machine-configuration\\profile.ps1\"\nAdd-Content -Path $profile -Value \"`n. \"c:\\machine-configuration\\profile.ps1\"\"",
             "Environments": "All"
         },
         {
