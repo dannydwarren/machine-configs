@@ -1301,6 +1301,11 @@
             "AppType": "Unknown",
             "AppId": "ZoomIt",
             "Environments": "All"
+        },
+        {
+            "AppType": "Scoop",
+            "AppId": "hugo",
+            "Environments": "Emmersion"
         }
     ]
 }
