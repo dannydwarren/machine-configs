@@ -1306,6 +1306,23 @@
             "AppType": "Scoop",
             "AppId": "hugo",
             "Environments": "Emmersion"
+        },
+        {
+            "AppType": "Script",
+            "AppId": "Azurite",
+            "Environments": "Emmersion",
+            "InstallScript": "npm install -g azurite"
+        },
+        {
+            "AppType": "ScoopBucket",
+            "AppId": "stripe https://github.com/stripe/scoop-stripe-cli.git",
+            "Environments": "Emmersion",
+            "Notes": "Consider supporting InstallArgs for Scoop Buckets so the git url can be there instead of the AppId"
+        },
+        {
+            "AppType": "Scoop",
+            "AppId": "stripe",
+            "Environments": "Emmersion"
         }
     ]
 }
