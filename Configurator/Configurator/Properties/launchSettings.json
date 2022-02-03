@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Configurator": {
+      "commandName": "Project",
+      "commandLineArgs": "-m \"C:\\src\\machine-configs\\manifests\\test.manifest.json\" -e \"All\"",
+      "workingDirectory": "C:\\src\\machine-configs\\Configurator\\Configurator\\bin\\Debug\\net6.0-windows\\win10-x64"
+    }
+  }
+}
