@@ -236,13 +236,23 @@
             "AppType": "PowerShellModule",
             "AppId": "posh-git",
             "Environments": "All",
-            "InstallArgs": "-Force\nAdd-PoshGitToProfile -AllHosts"
+            "InstallArgs": "-Force\nAdd-PoshGitToProfile -AllHosts",
+            "Configuration": {
+                "ManualSteps": [
+                    "Still need to customize"
+                ]
+            }
         },
         {
             "AppType": "PowerShellModule",
             "AppId": "oh-my-posh",
             "Environments": "All",
-            "InstallArgs": "-Scope CurrentUser -Force"
+            "InstallArgs": "-Scope CurrentUser -Force",
+            "Configuration": {
+                "ManualSteps": [
+                    "Still need to customize"
+                ]
+            }
         },
         {
             "AppType": "PowerShellModule",
@@ -711,12 +721,6 @@
         },
         {
             "AppType": "Winget",
-            "AppId": "Microsoft.AzureDataStudio",
-            "Environments": "Work",
-            "Notes": "VerificationScript not working"
-        },
-        {
-            "AppType": "Winget",
             "AppId": "Microsoft.AzureCLI",
             "Environments": "Work"
         },
@@ -743,7 +747,12 @@
         {
             "AppType": "Winget",
             "AppId": "Docker.DockerDesktop",
-            "Environments": "All"
+            "Environments": "All",
+            "Configuration": {
+                "ManualSteps": [
+                    "Still need to customize"
+                ]
+            }
         },
         {
             "AppType": "Winget",
@@ -763,7 +772,12 @@
         {
             "AppType": "Winget",
             "AppId": "Google.Chrome",
-            "Environments": "All"
+            "Environments": "All",
+            "Configuration": {
+                "ManualSteps": [
+                    "Launch -> Signin"
+                ]
+            }
         },
         {
             "AppType": "Winget",
@@ -771,7 +785,8 @@
             "Environments": "Work",
             "Configuration": {
                 "ManualSteps": [
-                    "Launch -> Register"
+                    "Launch -> Register",
+                    "Need a way to backup and restore settings"
                 ]
             }
         },
@@ -793,7 +808,12 @@
         {
             "AppType": "Winget",
             "AppId": "Microsoft.EdgeDev",
-            "Environments": "All"
+            "Environments": "All",
+            "Configuration": {
+                "ManualSteps": [
+                    "Launch -> Signin"
+                ]
+            }
         },
         {
             "AppType": "Winget",
@@ -1295,7 +1315,7 @@
             "AppType": "Unknown",
             "AppId": "Blizzard.BattleNet",
             "Environments": "Personal",
-            "Notes": "BROKEN: Installs the auto-updater which requires manual interaction to actually install Battle.NET"
+            "Notes": "Need to find how to install this now that Winget is no longer supported"
         },
         {
             "AppType": "Unknown",
