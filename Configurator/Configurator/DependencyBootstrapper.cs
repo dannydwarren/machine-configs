@@ -11,7 +11,12 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Configurator
 {
-    public class DependencyBootstrapper
+    public interface IDependencyBootstrapper
+    {
+        Task<IServiceProvider> InitializeAsync(string? manifestPath = null, List<string>? environments = null, string? downloadsDir = null);
+    }
+
+    public class DependencyBootstrapper : IDependencyBootstrapper
     {
         private readonly IServiceCollection serviceCollection;
 
@@ -20,9 +25,9 @@ namespace Configurator
             this.serviceCollection = serviceCollection;
         }
 
-        public async Task<IServiceProvider> InitializeAsync()
+        public async Task<IServiceProvider> InitializeAsync(string? manifestPath = null, List<string>? environments = null, string? downloadsDir = null)
         {
-            var serviceProvider = InitializeServiceProvider();
+            var serviceProvider = InitializeServiceProvider(manifestPath, environments, downloadsDir);
             InitializeStaticDependencies(serviceProvider);
 
             await WriteDependencyDebugInfo(serviceProvider);

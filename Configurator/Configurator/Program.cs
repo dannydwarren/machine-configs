@@ -3,19 +3,14 @@ using System.Collections.Generic;
 using System.CommandLine;
 using System.CommandLine.Invocation;
 using System.Linq;
-using System.Reflection;
-using Configurator.Configuration;
-using Configurator.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
-using Configurator.PowerShell;
-using Configurator.Windows;
 
 namespace Configurator
 {
-    class Program
+    internal class Program
     {
-        static async Task<int> Main(string[] args)
+        internal static async Task<int> Main(string[] args)
         {
             var rootCommand = new RootCommand
             {
@@ -35,22 +30,13 @@ namespace Configurator
 
             rootCommand.Description = "Configurator";
 
-            rootCommand.Handler = CommandHandler.Create<string, List<string>>(Run);
-
-            return await rootCommand.InvokeAsync(args);
-        }
-
-        private static async Task Run(string manifestPath, List<string> environments)
-        {
             var serviceCollection = new ServiceCollection();
             var dependencyBootstrapper = new DependencyBootstrapper(serviceCollection);
-            var services = await dependencyBootstrapper.InitializeAsync();
+            var cli = new Cli(dependencyBootstrapper);
 
-            var config = services.GetRequiredService<IMachineConfigurator>();
+            rootCommand.Handler = CommandHandler.Create<string, List<string>, string>(cli.RunConfiguratorAsync);
 
-            await config.ExecuteAsync();
-
-            await ((IAsyncDisposable)services).DisposeAsync();
+            return await rootCommand.InvokeAsync(args);
         }
     }
 }
