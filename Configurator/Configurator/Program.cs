@@ -42,52 +42,15 @@ namespace Configurator
 
         private static async Task Run(string manifestPath, List<string> environments)
         {
-            var services = ConfigureServices(new Arguments(
-                manifestPath: manifestPath,
-                environments: environments
-            ));
-
-            await WriteInitialDebugInfo(services);
+            var serviceCollection = new ServiceCollection();
+            var dependencyBootstrapper = new DependencyBootstrapper(serviceCollection);
+            var services = await dependencyBootstrapper.InitializeAsync();
 
             var config = services.GetRequiredService<IMachineConfigurator>();
 
             await config.ExecuteAsync();
 
-            await services.DisposeAsync();
-        }
-
-        private static async Task WriteInitialDebugInfo(ServiceProvider services)
-        {
-            var logger = services.GetRequiredService<IConsoleLogger>();
-
-            var version = (Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly())
-                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()!
-                .InformationalVersion;
-            logger.Debug($"{nameof(Configurator)} version: {version}");
-
-            var powerShell = services.GetRequiredService<IPowerShell>();
-            var result = await powerShell.ExecuteAsync("$PSVersionTable.PSVersion.ToString()");
-            logger.Debug($"PowerShell Version: {result.AsString}");
-
-            var args = services.GetRequiredService<IArguments>();
-            logger.Debug($@"{nameof(IArguments)}:
-{{
-  {nameof(args.ManifestPath)} = ""{args.ManifestPath}""
-  {nameof(args.Environments)} = ""{string.Join("|", args.Environments)}""
-  {nameof(args.DownloadsDir)} = ""{string.Join("|", args.DownloadsDir)}""
-}}");
-        }
-
-        private static ServiceProvider ConfigureServices(Arguments arguments)
-        {
-            var serviceCollection = new ServiceCollection();
-            DependencyInjectionConfig.ConfigureServices(serviceCollection);
-            serviceCollection.AddSingleton<IArguments>(arguments);
-            var serviceProvider = serviceCollection.BuildServiceProvider();
-
-            RegistrySettingValueDataConverter.Tokenizer = serviceProvider.GetRequiredService<ITokenizer>();
-            
-            return serviceProvider;
+            await ((IAsyncDisposable)services).DisposeAsync();
         }
     }
 }

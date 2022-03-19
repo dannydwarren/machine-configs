@@ -56,7 +56,7 @@ namespace Configurator.IntegrationTests
         public void Dispose()
         {
             Engine.Dispose();
-            serviceProvider!.Dispose();
+            serviceProvider?.Dispose();
         }
 
         private TClassUnderTest? classUnderTest;
