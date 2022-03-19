@@ -48,10 +48,14 @@
 	caa = commit --amend --reset-author --no-edit
 	cc = commit -c
 	# WIP
-	wipcommit = !git add -A && git commit -m WIP
-    wc = wipcommit
-	wipresume = "!if [ \"$(git log -1 --pretty=format:%B)\" == \"WIP\" ]; then git reset HEAD~1; else echo 'The last commit was not \"WIP\"'; fi"
-    wr = wipresume
+	commitwip = !git add -A && git commit -m WIP
+	wipcommit = commitwip
+	cw = commitwip
+	wc = commitwip
+	resumewip = "!if [ \"$(git log -1 --pretty=format:%B)\" == \"WIP\" ]; then git reset HEAD~1; else echo 'The last commit was not \"WIP\"'; fi"
+    wipresume = resumewip
+	rw = resumewip
+	wr = resumewip
 	# DIFF
 	d = difftool
 	diffall = "!f() { for filename in $(git diff --name-only $*); do git difftool $* $filename & done }; f"
