@@ -39,6 +39,10 @@ namespace Configurator
                         aliases: new[] { "--downloads-dir", "-dl" },
                         getDefaultValue: () => Arguments.Default.DownloadsDir
                         // description: "Path (local or URL) to your manifest file."
+                    ),
+                    new Option<string>(
+                        aliases: new[] { "--single-app", "-app" }
+                        // description: "Specify the single app to install."
                     )
                 };
 
@@ -46,14 +50,14 @@ namespace Configurator
 
                 var cli = new Cli(dependencyBootstrapper);
 
-                rootCommand.Handler = CommandHandler.Create<string, List<string>, string>(cli.RunConfiguratorAsync);
+                rootCommand.Handler = CommandHandler.Create<string, List<string>, string, string>(cli.RunConfiguratorAsync);
 
                 return await rootCommand.InvokeAsync(args);
         }
 
-        private async Task RunConfiguratorAsync(string manifestPath, List<string> environments, string downloadsDir)
+        private async Task RunConfiguratorAsync(string manifestPath, List<string> environments, string downloadsDir, string? singleApp)
         {
-            var arguments = new Arguments(manifestPath, environments, downloadsDir);
+            var arguments = new Arguments(manifestPath, environments, downloadsDir, singleApp);
 
             var services = await dependencyBootstrapper.InitializeAsync(arguments);
             var configurator = services.GetRequiredService<IMachineConfigurator>();
