@@ -41,8 +41,8 @@ namespace Configurator
                         // description: "Path (local or URL) to your manifest file."
                     ),
                     new Option<string>(
-                        aliases: new[] { "--single-app", "-app" }
-                        // description: "Specify the single app to install."
+                        aliases: new[] { "--single-app-id", "-app" }
+                        // description: "Specify the single app to install. When present the environments arg is ignored."
                     )
                 };
 
@@ -55,9 +55,9 @@ namespace Configurator
                 return await rootCommand.InvokeAsync(args);
         }
 
-        private async Task RunConfiguratorAsync(string manifestPath, List<string> environments, string downloadsDir, string? singleApp)
+        private async Task RunConfiguratorAsync(string manifestPath, List<string> environments, string downloadsDir, string? singleAppId)
         {
-            var arguments = new Arguments(manifestPath, environments, downloadsDir, singleApp);
+            var arguments = new Arguments(manifestPath, environments, downloadsDir, singleAppId);
 
             var services = await dependencyBootstrapper.InitializeAsync(arguments);
             var configurator = services.GetRequiredService<IMachineConfigurator>();

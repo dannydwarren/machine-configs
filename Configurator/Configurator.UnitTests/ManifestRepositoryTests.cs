@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -36,30 +37,35 @@ namespace Configurator.UnitTests
             {
                 new ManifestRepository.Installable
                 {
+                    AppId = RandomString(),
                     AppType = AppType.Script,
                     Environments = "Personal".ToLower(),
                     AppData = JsonDocument.Parse(new MemoryStream(Encoding.UTF8.GetBytes(@"{""app"": 1}"))).RootElement
                 },
                 new ManifestRepository.Installable
                 {
+                    AppId = RandomString(),
                     AppType = AppType.Script,
                     Environments = "Media",
                     AppData = JsonDocument.Parse(new MemoryStream(Encoding.UTF8.GetBytes(@"{""app"": 2}"))).RootElement
                 },
                 new ManifestRepository.Installable
                 {
+                    AppId = RandomString(),
                     AppType = AppType.Script,
                     Environments = "Work",
                     AppData = JsonDocument.Parse(new MemoryStream(Encoding.UTF8.GetBytes(@"{""app"": 3}"))).RootElement
                 },
                 new ManifestRepository.Installable
                 {
+                    AppId = RandomString(),
                     AppType = AppType.Script,
                     Environments = "All",
                     AppData = JsonDocument.Parse(new MemoryStream(Encoding.UTF8.GetBytes(@"{""app"": 4}"))).RootElement
                 },
                 new ManifestRepository.Installable
                 {
+                    AppId = RandomString(),
                     AppType = AppType.Unknown,
                     Environments = "All",
                     AppData = JsonDocument.Parse(new MemoryStream(Encoding.UTF8.GetBytes(@"{""app"": 5}"))).RootElement
@@ -68,10 +74,10 @@ namespace Configurator.UnitTests
 
             knownScriptApps = new List<ScriptApp>
             {
-                new ScriptApp { AppId = RandomString() },
-                new ScriptApp { AppId = RandomString() },
-                new ScriptApp { AppId = RandomString() },
-                new ScriptApp { AppId = RandomString() }
+                new ScriptApp { AppId = installables[0].AppId },
+                new ScriptApp { AppId = installables[1].AppId },
+                new ScriptApp { AppId = installables[2].AppId },
+                new ScriptApp { AppId = installables[3].AppId },
             };
         }
 
@@ -136,7 +142,7 @@ namespace Configurator.UnitTests
 
             It("excludes unknown apps", () =>
             {
-                GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ScriptApp>(installables[4].AppData.ToString()!));
+                GetMock<IJsonSerializer>().VerifyNever(x => x.Deserialize<ScriptApp>(installables[4].AppData.ToString()!));
             });
         }
 
@@ -161,6 +167,39 @@ namespace Configurator.UnitTests
             var manifest = await BecauseAsync(() => ClassUnderTest.LoadAsync());
 
             It("builds the manifest", () => { manifest.ShouldNotBeNull().Apps.ShouldNotBeEmpty(); });
+        }
+
+        [Fact]
+        public async Task When_loading_a_single_app()
+        {
+            var manifestPath = RandomString();
+            var manifestJson = RandomString();
+            var specifiedEnvironment = new List<string> { "Personal", "Work" };
+            var expectedSingleAppId = knownScriptApps.Last().AppId;
+
+            GetMock<IArguments>().SetupGet(x => x.ManifestPath).Returns(manifestPath);
+            GetMock<IArguments>().SetupGet(x => x.Environments).Returns(specifiedEnvironment);
+            GetMock<IArguments>().SetupGet(x => x.SingleAppId).Returns(expectedSingleAppId);
+
+            GetMock<IFileSystem>().Setup(x => x.ReadAllTextAsync(manifestPath)).ReturnsAsync(manifestJson);
+            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ManifestRepository.RawManifest>(manifestJson)).Returns(loadedRawRawManifest);
+
+            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ManifestRepository.Installable>(loadedRawRawManifest.Apps[0].ToString()!)).Returns(installables[0]);
+            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ManifestRepository.Installable>(loadedRawRawManifest.Apps[1].ToString()!)).Returns(installables[1]);
+            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ManifestRepository.Installable>(loadedRawRawManifest.Apps[2].ToString()!)).Returns(installables[2]);
+            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ManifestRepository.Installable>(loadedRawRawManifest.Apps[3].ToString()!)).Returns(installables[3]);
+            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ManifestRepository.Installable>(loadedRawRawManifest.Apps[4].ToString()!)).Returns(installables[4]);
+
+            GetMock<IJsonSerializer>().Setup(x => x.Deserialize<ScriptApp>(installables[3].AppData.ToString()!)).Returns(knownScriptApps[3]);
+
+            var manifest = await BecauseAsync(() => ClassUnderTest.LoadAsync());
+
+            It("only includes the single app in the manifest", () =>
+            {
+                GetMock<IJsonSerializer>().Verify(x => x.Deserialize<ScriptApp>(IsAny<string>()), Times.Once);
+
+                manifest.Apps.ShouldHaveSingleItem().AppId.ShouldBe(expectedSingleAppId);
+            });
         }
     }
 }

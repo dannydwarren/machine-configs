@@ -9,7 +9,7 @@ namespace Configurator.Utilities
         string ManifestPath { get; }
         List<string> Environments { get; }
         string DownloadsDir { get; }
-        string? SingleApp { get; }
+        string? SingleAppId { get; }
     }
 
     public class Arguments : IArguments
@@ -28,17 +28,17 @@ namespace Configurator.Utilities
         public Arguments(string manifestPath,
             List<string> environments,
             string downloadsDir,
-            string? singleApp = null)
+            string? singleAppId = null)
         {
             ManifestPath = manifestPath;
             Environments = environments;
             DownloadsDir = downloadsDir;
-            SingleApp = singleApp;
+            SingleAppId = singleAppId;
         }
 
         public string ManifestPath { get; }
         public List<string> Environments { get; }
         public string DownloadsDir { get; }
-        public string? SingleApp { get; }
+        public string? SingleAppId { get; }
     }
 }

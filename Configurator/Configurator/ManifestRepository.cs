@@ -44,7 +44,7 @@ namespace Configurator
 
                 return installable;
             }).ToList();
-            var installablesToInstall = installables.Where(IsForEnvironment).ToList();
+            var installablesToInstall = installables.Where(IsIncluded).ToList();
 
             return new Manifest
             {
@@ -86,6 +86,13 @@ namespace Configurator
             return httpManifestPath[(lastSlash + 1)..];
         }
 
+        private bool IsIncluded(Installable installable)
+        {
+            return arguments.SingleAppId != null
+                ? installable.AppId == arguments.SingleAppId
+                : IsForEnvironment(installable);
+        }
+
         private bool IsForEnvironment(Installable installable)
         {
             return arguments.Environments.Any(x => x.ToLower() == "all")
@@ -100,6 +107,7 @@ namespace Configurator
 
         internal class Installable
         {
+            public string AppId { get; set; }
             public AppType AppType { get; set; }
             public string Environments { get; set; }
             public JsonElement AppData { get; set; }

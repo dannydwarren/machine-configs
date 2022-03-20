@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Configurator.Utilities;
 using Configurator.Windows;
 using Microsoft.Extensions.DependencyInjection;

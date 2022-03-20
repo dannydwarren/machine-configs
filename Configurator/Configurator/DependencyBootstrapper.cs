@@ -70,7 +70,8 @@ namespace Configurator
 {{
   {nameof(args.ManifestPath)} = ""{args.ManifestPath}""
   {nameof(args.Environments)} = ""{string.Join("|", args.Environments)}""
-  {nameof(args.DownloadsDir)} = ""{string.Join("|", args.DownloadsDir)}""
+  {nameof(args.DownloadsDir)} = ""{args.DownloadsDir}""
+  {nameof(args.SingleAppId)} = ""{args.SingleAppId}""
 }}");
         }
     }

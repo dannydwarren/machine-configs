@@ -148,7 +148,7 @@ namespace Configurator.UnitTests
         }
 
         [Theory]
-        [InlineData("--single-app")]
+        [InlineData("--single-app-id")]
         [InlineData("-app")]
         public async Task When_launching_with_target_app_commandline_args(string alias)
         {
@@ -168,7 +168,7 @@ namespace Configurator.UnitTests
             var result = await BecauseAsync(() => ClassUnderTest.LaunchAsync(commandlineArgs));
 
             It("populates arguments correctly",
-                () => capturedArguments.ShouldNotBeNull().SingleApp.ShouldBe(commandlineArgs[1]));
+                () => capturedArguments.ShouldNotBeNull().SingleAppId.ShouldBe(commandlineArgs[1]));
 
             It("returns a success result", () => result.ShouldBe(0));
         }
