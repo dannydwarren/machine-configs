@@ -13,13 +13,24 @@ namespace Configurator.Utilities
 
     public class Arguments : IArguments
     {
+        public static Arguments Default { get; }
+
+        static Arguments()
+        {
+            Default = new Arguments(
+                manifestPath: "https://raw.githubusercontent.com/dannydwarren/machine-configs/main/manifests/test.manifest.json",
+                environments: new List<string> { "test" },
+                downloadsDir: Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads"));
+        }
+
+
         public Arguments(string manifestPath,
             List<string> environments,
             string? downloadsDir = null)
         {
             ManifestPath = manifestPath;
             Environments = environments;
-            DownloadsDir = downloadsDir ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
+            DownloadsDir = downloadsDir ?? Default.DownloadsDir;
         }
 
         public string ManifestPath { get; }
