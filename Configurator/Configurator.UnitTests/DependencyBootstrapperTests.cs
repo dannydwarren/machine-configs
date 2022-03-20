@@ -25,7 +25,7 @@ namespace Configurator.UnitTests
                     }
                 });
 
-            var serviceProvider = Because(() => ClassUnderTest.InitializeServiceProvider());
+            var serviceProvider = Because(() => ClassUnderTest.InitializeServiceProvider(Arguments.Default));
 
             It("configures dependencies", () =>
             {
@@ -35,81 +35,7 @@ namespace Configurator.UnitTests
 
             It("uses default args", () =>
             {
-                capturedArgs.ShouldNotBeNull().ShouldSatisfyAllConditions(x =>
-                {
-                    x.ManifestPath.ShouldBe("https://raw.githubusercontent.com/dannydwarren/machine-configs/main/manifests/test.manifest.json");
-                    x.Environments.ShouldBe(new List<string> { "test" });
-                    x.DownloadsDir.ShouldBe(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads"));
-                });
-            });
-        }
-
-        [Fact]
-        public void When_initializing_service_provider_with_custom_manifest()
-        {
-            string expectedManifest = RandomString();
-
-            IArguments? capturedArgs = null;
-            GetMock<IServiceCollection>().Setup(x => x.Add(IsAny<ServiceDescriptor>()))
-                .Callback<ServiceDescriptor>(serviceDescriptor =>
-                {
-                    if (serviceDescriptor.ImplementationInstance is IArguments arguments)
-                    {
-                        capturedArgs = arguments;
-                    }
-                });
-
-            Because(() => ClassUnderTest.InitializeServiceProvider(manifestPath: expectedManifest));
-
-            It("uses the specified manifest", () =>
-            {
-                capturedArgs.ShouldNotBeNull().ManifestPath.ShouldBe(expectedManifest);
-            });
-        }
-
-        [Fact]
-        public void When_initializing_service_provider_with_custom_environments()
-        {
-            var expectedEnvironments = new List<string> { RandomString(), RandomString() };
-
-            IArguments? capturedArgs = null;
-            GetMock<IServiceCollection>().Setup(x => x.Add(IsAny<ServiceDescriptor>()))
-                .Callback<ServiceDescriptor>(serviceDescriptor =>
-                {
-                    if (serviceDescriptor.ImplementationInstance is IArguments arguments)
-                    {
-                        capturedArgs = arguments;
-                    }
-                });
-
-            Because(() => ClassUnderTest.InitializeServiceProvider(environments: expectedEnvironments));
-
-            It("uses the specified manifest", () =>
-            {
-                capturedArgs.ShouldNotBeNull().Environments.ShouldBe(expectedEnvironments);
-            });
-        }
-
-        [Fact]
-        public void When_initializing_service_provider_with_custom_downloadsDir()
-        {
-            string expectedDownloadsDir = RandomString();
-
-            IArguments? capturedArgs = null;
-            GetMock<IServiceCollection>().Setup(x => x.Add(IsAny<ServiceDescriptor>()))
-                .Callback<ServiceDescriptor>(serviceDescriptor =>
-                {
-                    if (serviceDescriptor.ImplementationInstance is IArguments arguments)
-                    {
-                        capturedArgs = arguments;
-                    }
-                });
-
-            Because(() => ClassUnderTest.InitializeServiceProvider(downloadsDir: expectedDownloadsDir));
-
-            It("uses the specified manifest", () =>
-            {
-                capturedArgs.ShouldNotBeNull().DownloadsDir.ShouldBe(expectedDownloadsDir);
+                capturedArgs.ShouldBe(Arguments.Default);
             });
         }
 

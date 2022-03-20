@@ -22,33 +22,16 @@ namespace Configurator.IntegrationTests
         [Fact]
         public async Task When_initializing_with_no_args()
         {
-            var services = await BecauseAsync(() => ClassUnderTest.InitializeAsync());
+            var services = await BecauseAsync(() => ClassUnderTest.InitializeAsync(Arguments.Default));
 
-            It("initializes all dependencies", () =>
+            It("initializes arguments", () =>
             {
-                services.ShouldNotBeNull();
-
-                RegistrySettingValueDataConverter.Tokenizer.ShouldNotBeNull();
+                services.ShouldNotBeNull().GetRequiredService<IArguments>().ShouldBe(Arguments.Default);
             });
-        }
 
-        [Fact]
-        public async Task When_initializing_with_custom_args()
-        {
-            var expectedManifestPath = RandomString();
-            var expectedEnvironments = new List<string> { RandomString() };
-            var expectedDownloadsDir = RandomString();
-
-            var services = await BecauseAsync(() => ClassUnderTest.InitializeAsync(expectedManifestPath, expectedEnvironments, expectedDownloadsDir));
-
-            It("initializes arguments with custom args", () =>
+            It("initializes static dependencies", () =>
             {
-                services.ShouldNotBeNull().GetRequiredService<IArguments>().ShouldSatisfyAllConditions(x =>
-                {
-                    x.ManifestPath.ShouldBe(expectedManifestPath);
-                    x.Environments.ShouldBe(expectedEnvironments);
-                    x.DownloadsDir.ShouldBe(expectedDownloadsDir);
-                });
+                RegistrySettingValueDataConverter.Tokenizer.ShouldNotBeNull();
             });
         }
     }

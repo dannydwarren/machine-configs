@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
 using Configurator.Configuration;
@@ -13,7 +11,7 @@ namespace Configurator
 {
     public interface IDependencyBootstrapper
     {
-        Task<IServiceProvider> InitializeAsync(string? manifestPath = null, List<string>? environments = null, string? downloadsDir = null);
+        Task<IServiceProvider> InitializeAsync(IArguments arguments);
     }
 
     public class DependencyBootstrapper : IDependencyBootstrapper
@@ -25,9 +23,9 @@ namespace Configurator
             this.serviceCollection = serviceCollection;
         }
 
-        public async Task<IServiceProvider> InitializeAsync(string? manifestPath = null, List<string>? environments = null, string? downloadsDir = null)
+        public async Task<IServiceProvider> InitializeAsync(IArguments arguments)
         {
-            var serviceProvider = InitializeServiceProvider(manifestPath, environments, downloadsDir);
+            var serviceProvider = InitializeServiceProvider(arguments);
             InitializeStaticDependencies(serviceProvider);
 
             await WriteDependencyDebugInfo(serviceProvider);
@@ -38,15 +36,10 @@ namespace Configurator
         /// <summary>
         /// Not for public consumption! Only exposed for unit testing!
         /// </summary>
-        internal ServiceProvider InitializeServiceProvider(string? manifestPath = null, List<string>? environments = null, string? downloadsDir = null)
+        internal ServiceProvider InitializeServiceProvider(IArguments arguments)
         {
-            var arguments = new Arguments(
-                manifestPath: manifestPath ?? "https://raw.githubusercontent.com/dannydwarren/machine-configs/main/manifests/test.manifest.json",
-                environments: environments ?? new List<string>{ "test" },
-                downloadsDir: downloadsDir ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads"));
-
             DependencyInjectionConfig.ConfigureServices(serviceCollection);
-            serviceCollection.AddSingleton<IArguments>(arguments);
+            serviceCollection.AddSingleton(arguments);
 
             return serviceCollection.BuildServiceProvider();
         }

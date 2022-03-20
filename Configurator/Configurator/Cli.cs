@@ -51,9 +51,11 @@ namespace Configurator
                 return await rootCommand.InvokeAsync(args);
         }
 
-        public async Task RunConfiguratorAsync(string? manifestPath = null, List<string>? environments = null, string? downloadsDir = null)
+        private async Task RunConfiguratorAsync(string manifestPath, List<string> environments, string downloadsDir)
         {
-            var services = await dependencyBootstrapper.InitializeAsync(manifestPath, environments, downloadsDir);
+            var arguments = new Arguments(manifestPath, environments, downloadsDir);
+
+            var services = await dependencyBootstrapper.InitializeAsync(arguments);
             var configurator = services.GetRequiredService<IMachineConfigurator>();
 
             await configurator.ExecuteAsync();

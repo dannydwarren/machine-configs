@@ -19,9 +19,21 @@ namespace Configurator.UnitTests
             serviceProviderMock.Setup(x => x.GetService(typeof(IMachineConfigurator)))
                 .Returns(machineConfiguratorMock.Object);
 
-            GetMock<IDependencyBootstrapper>().Setup(x => x.InitializeAsync(Arguments.Default.ManifestPath, IsSequenceEqual(Arguments.Default.Environments), Arguments.Default.DownloadsDir)).ReturnsAsync(serviceProviderMock.Object);
+            IArguments? capturedArguments = null;
+            GetMock<IDependencyBootstrapper>().Setup(x => x.InitializeAsync(IsAny<IArguments>()))
+                .Callback<IArguments>(arguments => capturedArguments = arguments)
+                .ReturnsAsync(serviceProviderMock.Object);
 
             var result = await BecauseAsync(() => ClassUnderTest.LaunchAsync());
+
+            It("populates arguments correctly", () =>
+            {
+                capturedArguments.ShouldNotBeNull().ShouldSatisfyAllConditions(x => {
+                    x.ManifestPath.ShouldBe(Arguments.Default.ManifestPath);
+                    x.Environments.ShouldBe(Arguments.Default.Environments);
+                    x.DownloadsDir.ShouldBe(Arguments.Default.DownloadsDir);
+                });
+            });
 
             It("runs machine configurator",
                 () => { machineConfiguratorMock.Verify(x => x.ExecuteAsync(), Times.Once); });
@@ -40,9 +52,21 @@ namespace Configurator.UnitTests
 
             var commandlineArgs = new[] { "--manifest-path", RandomString() };
 
-            GetMock<IDependencyBootstrapper>().Setup(x => x.InitializeAsync(commandlineArgs[1], IsAny<List<string>>(), IsAny<string>())).ReturnsAsync(serviceProviderMock.Object);
+            IArguments? capturedArguments = null;
+            GetMock<IDependencyBootstrapper>().Setup(x => x.InitializeAsync(IsAny<IArguments>()))
+                .Callback<IArguments>(arguments => capturedArguments = arguments)
+                .ReturnsAsync(serviceProviderMock.Object);
 
             var result = await BecauseAsync(() => ClassUnderTest.LaunchAsync(commandlineArgs));
+
+            It("populates arguments correctly", () =>
+            {
+                capturedArguments.ShouldNotBeNull().ShouldSatisfyAllConditions(x => {
+                    x.ManifestPath.ShouldBe(commandlineArgs[1]);
+                    x.Environments.ShouldBe(Arguments.Default.Environments);
+                    x.DownloadsDir.ShouldBe(Arguments.Default.DownloadsDir);
+                });
+            });
 
             It("returns a success result", () => result.ShouldBe(0));
         }
@@ -58,9 +82,21 @@ namespace Configurator.UnitTests
 
             var commandlineArgs = new[] { "-m", RandomString() };
 
-            GetMock<IDependencyBootstrapper>().Setup(x => x.InitializeAsync(commandlineArgs[1], IsAny<List<string>>(), IsAny<string>())).ReturnsAsync(serviceProviderMock.Object);
+            IArguments? capturedArguments = null;
+            GetMock<IDependencyBootstrapper>().Setup(x => x.InitializeAsync(IsAny<IArguments>()))
+                .Callback<IArguments>(arguments => capturedArguments = arguments)
+                .ReturnsAsync(serviceProviderMock.Object);
 
             var result = await BecauseAsync(() => ClassUnderTest.LaunchAsync(commandlineArgs));
+
+            It("populates arguments correctly", () =>
+            {
+                capturedArguments.ShouldNotBeNull().ShouldSatisfyAllConditions(x => {
+                    x.ManifestPath.ShouldBe(commandlineArgs[1]);
+                    x.Environments.ShouldBe(Arguments.Default.Environments);
+                    x.DownloadsDir.ShouldBe(Arguments.Default.DownloadsDir);
+                });
+            });
 
             It("returns a success result", () => result.ShouldBe(0));
         }
@@ -76,9 +112,21 @@ namespace Configurator.UnitTests
 
             var commandlineArgs = new[] { "--environments", RandomString() };
 
-            GetMock<IDependencyBootstrapper>().Setup(x => x.InitializeAsync(IsAny<string>(), IsSequenceEqual(new List<string>{commandlineArgs[1]}), IsAny<string>())).ReturnsAsync(serviceProviderMock.Object);
+            IArguments? capturedArguments = null;
+            GetMock<IDependencyBootstrapper>().Setup(x => x.InitializeAsync(IsAny<IArguments>()))
+                .Callback<IArguments>(arguments => capturedArguments = arguments)
+                .ReturnsAsync(serviceProviderMock.Object);
 
             var result = await BecauseAsync(() => ClassUnderTest.LaunchAsync(commandlineArgs));
+
+            It("populates arguments correctly", () =>
+            {
+                capturedArguments.ShouldNotBeNull().ShouldSatisfyAllConditions(x => {
+                    x.ManifestPath.ShouldBe(Arguments.Default.ManifestPath);
+                    x.Environments.ShouldBe(new List<string>{commandlineArgs[1]});
+                    x.DownloadsDir.ShouldBe(Arguments.Default.DownloadsDir);
+                });
+            });
 
             It("returns a success result", () => result.ShouldBe(0));
         }
@@ -94,9 +142,21 @@ namespace Configurator.UnitTests
 
             var commandlineArgs = new[] { "-e", RandomString() };
 
-            GetMock<IDependencyBootstrapper>().Setup(x => x.InitializeAsync(IsAny<string>(), IsSequenceEqual(new List<string>{commandlineArgs[1]}), IsAny<string>())).ReturnsAsync(serviceProviderMock.Object);
+            IArguments? capturedArguments = null;
+            GetMock<IDependencyBootstrapper>().Setup(x => x.InitializeAsync(IsAny<IArguments>()))
+                .Callback<IArguments>(arguments => capturedArguments = arguments)
+                .ReturnsAsync(serviceProviderMock.Object);
 
             var result = await BecauseAsync(() => ClassUnderTest.LaunchAsync(commandlineArgs));
+
+            It("populates arguments correctly", () =>
+            {
+                capturedArguments.ShouldNotBeNull().ShouldSatisfyAllConditions(x => {
+                    x.ManifestPath.ShouldBe(Arguments.Default.ManifestPath);
+                    x.Environments.ShouldBe(new List<string>{commandlineArgs[1]});
+                    x.DownloadsDir.ShouldBe(Arguments.Default.DownloadsDir);
+                });
+            });
 
             It("returns a success result", () => result.ShouldBe(0));
         }
@@ -114,9 +174,21 @@ namespace Configurator.UnitTests
             var env2 = RandomString();
             var commandlineArgs = new[] { "--environments", $"{env1}|{env2}" };
 
-            GetMock<IDependencyBootstrapper>().Setup(x => x.InitializeAsync(IsAny<string>(), IsSequenceEqual(new List<string>{env1, env2}), IsAny<string>())).ReturnsAsync(serviceProviderMock.Object);
+            IArguments? capturedArguments = null;
+            GetMock<IDependencyBootstrapper>().Setup(x => x.InitializeAsync(IsAny<IArguments>()))
+                .Callback<IArguments>(arguments => capturedArguments = arguments)
+                .ReturnsAsync(serviceProviderMock.Object);
 
             var result = await BecauseAsync(() => ClassUnderTest.LaunchAsync(commandlineArgs));
+
+            It("populates arguments correctly", () =>
+            {
+                capturedArguments.ShouldNotBeNull().ShouldSatisfyAllConditions(x => {
+                    x.ManifestPath.ShouldBe(Arguments.Default.ManifestPath);
+                    x.Environments.ShouldBe(new List<string>{env1, env2});
+                    x.DownloadsDir.ShouldBe(Arguments.Default.DownloadsDir);
+                });
+            });
 
             It("returns a success result", () => result.ShouldBe(0));
         }
@@ -132,9 +204,21 @@ namespace Configurator.UnitTests
 
             var commandlineArgs = new[] { "--downloads-dir", RandomString() };
 
-            GetMock<IDependencyBootstrapper>().Setup(x => x.InitializeAsync(IsAny<string>(), IsAny<List<string>>(), commandlineArgs[1])).ReturnsAsync(serviceProviderMock.Object);
+            IArguments? capturedArguments = null;
+            GetMock<IDependencyBootstrapper>().Setup(x => x.InitializeAsync(IsAny<IArguments>()))
+                .Callback<IArguments>(arguments => capturedArguments = arguments)
+                .ReturnsAsync(serviceProviderMock.Object);
 
             var result = await BecauseAsync(() => ClassUnderTest.LaunchAsync(commandlineArgs));
+
+            It("populates arguments correctly", () =>
+            {
+                capturedArguments.ShouldNotBeNull().ShouldSatisfyAllConditions(x => {
+                    x.ManifestPath.ShouldBe(Arguments.Default.ManifestPath);
+                    x.Environments.ShouldBe(Arguments.Default.Environments);
+                    x.DownloadsDir.ShouldBe(commandlineArgs[1]);
+                });
+            });
 
             It("returns a success result", () => result.ShouldBe(0));
         }
@@ -150,49 +234,23 @@ namespace Configurator.UnitTests
 
             var commandlineArgs = new[] { "-dl", RandomString() };
 
-            GetMock<IDependencyBootstrapper>().Setup(x => x.InitializeAsync(IsAny<string>(), IsAny<List<string>>(), commandlineArgs[1])).ReturnsAsync(serviceProviderMock.Object);
+            IArguments? capturedArguments = null;
+            GetMock<IDependencyBootstrapper>().Setup(x => x.InitializeAsync(IsAny<IArguments>()))
+                .Callback<IArguments>(arguments => capturedArguments = arguments)
+                .ReturnsAsync(serviceProviderMock.Object);
 
             var result = await BecauseAsync(() => ClassUnderTest.LaunchAsync(commandlineArgs));
 
+            It("populates arguments correctly", () =>
+            {
+                capturedArguments.ShouldNotBeNull().ShouldSatisfyAllConditions(x => {
+                    x.ManifestPath.ShouldBe(Arguments.Default.ManifestPath);
+                    x.Environments.ShouldBe(Arguments.Default.Environments);
+                    x.DownloadsDir.ShouldBe(commandlineArgs[1]);
+                });
+            });
+
             It("returns a success result", () => result.ShouldBe(0));
-        }
-
-        [Fact]
-        public async Task When_running_configurator_with_no_commandline_args()
-        {
-            var machineConfiguratorMock = GetMock<IMachineConfigurator>();
-
-            var serviceProviderMock = GetMock<IServiceProvider>();
-            serviceProviderMock.Setup(x => x.GetService(typeof(IMachineConfigurator)))
-                .Returns(machineConfiguratorMock.Object);
-
-            GetMock<IDependencyBootstrapper>().Setup(x => x.InitializeAsync(IsAny<string>(), IsAny<List<string>>(), IsAny<string>())).ReturnsAsync(serviceProviderMock.Object);
-
-            await BecauseAsync(() => ClassUnderTest.RunConfiguratorAsync());
-
-            It("runs machine configurator",
-                () => { machineConfiguratorMock.Verify(x => x.ExecuteAsync(), Times.Once); });
-        }
-
-        [Fact]
-        public async Task When_running_configurator_with_custom_commandline_args()
-        {
-            var machineConfiguratorMock = GetMock<IMachineConfigurator>();
-
-            var serviceProviderMock = GetMock<IServiceProvider>();
-            serviceProviderMock.Setup(x => x.GetService(typeof(IMachineConfigurator)))
-                .Returns(machineConfiguratorMock.Object);
-
-            var manifestPath = RandomString();
-            var environments = new List<string> { RandomString() };
-            var downloadsDir = RandomString();
-
-            GetMock<IDependencyBootstrapper>().Setup(x => x.InitializeAsync(manifestPath, environments, downloadsDir)).ReturnsAsync(serviceProviderMock.Object);
-
-            await BecauseAsync(() => ClassUnderTest.RunConfiguratorAsync(manifestPath, environments, downloadsDir));
-
-            It("runs machine configurator",
-                () => { machineConfiguratorMock.Verify(x => x.ExecuteAsync(), Times.Once); });
         }
     }
 }

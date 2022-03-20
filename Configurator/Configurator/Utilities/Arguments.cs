@@ -26,11 +26,11 @@ namespace Configurator.Utilities
 
         public Arguments(string manifestPath,
             List<string> environments,
-            string? downloadsDir = null)
+            string downloadsDir)
         {
             ManifestPath = manifestPath;
             Environments = environments;
-            DownloadsDir = downloadsDir ?? Default.DownloadsDir;
+            DownloadsDir = downloadsDir;
         }
 
         public string ManifestPath { get; }
