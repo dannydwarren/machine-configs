@@ -33,6 +33,7 @@ namespace Configurator.UnitTests
                     x.ManifestPath.ShouldBe(Arguments.Default.ManifestPath);
                     x.Environments.ShouldBe(Arguments.Default.Environments);
                     x.DownloadsDir.ShouldBe(Arguments.Default.DownloadsDir);
+                    x.SingleAppId.ShouldBeNull();
                 });
             });
 

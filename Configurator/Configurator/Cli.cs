@@ -53,7 +53,9 @@ namespace Configurator
 
         private async Task RunConfiguratorAsync(string manifestPath, List<string> environments, string downloadsDir, string? singleAppId)
         {
-            var arguments = new Arguments(manifestPath, environments, downloadsDir, singleAppId);
+            var singleAppIdCoalesced = string.IsNullOrWhiteSpace(singleAppId) ? null : singleAppId;
+            
+            var arguments = new Arguments(manifestPath, environments, downloadsDir, singleAppIdCoalesced);
 
             var services = await dependencyBootstrapper.InitializeAsync(arguments);
             var configurator = services.GetRequiredService<IMachineConfigurator>();
