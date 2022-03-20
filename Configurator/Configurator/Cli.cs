@@ -24,26 +24,22 @@ namespace Configurator
                 {
                     new Option<string>(
                         aliases: new[] { "--manifest-path", "-m" },
-                        getDefaultValue: () => Arguments.Default.ManifestPath
-                        // description: "Path (local or URL) to your manifest file."
-                        ),
+                        getDefaultValue: () => Arguments.Default.ManifestPath,
+                        description: "Path (local or URL) to your manifest file."),
                     new Option<List<string>>(
                         aliases: new[] { "--environments", "-e" },
                         parseArgument: x =>
                             x.Tokens.FirstOrDefault()?.Value.Split("|", StringSplitOptions.RemoveEmptyEntries).ToList()
                                 ?? Arguments.Default.Environments,
-                        isDefault: true
-                        // description: "Pipe separated list of environments to target in the manifest."
-                        ),
+                        isDefault: true,
+                        description: "Pipe separated list of environments to target in the manifest."),
                     new Option<string>(
                         aliases: new[] { "--downloads-dir", "-dl" },
-                        getDefaultValue: () => Arguments.Default.DownloadsDir
-                        // description: "Path (local or URL) to your manifest file."
-                    ),
+                        getDefaultValue: () => Arguments.Default.DownloadsDir,
+                        description: "Local path to use for downloads."),
                     new Option<string>(
-                        aliases: new[] { "--single-app-id", "-app" }
-                        // description: "Specify the single app to install. When present the environments arg is ignored."
-                    )
+                        aliases: new[] { "--single-app-id", "-app" },
+                        description: "The single app to install by Id. When present the environments arg is ignored.")
                 };
 
                 rootCommand.Description = "Configurator";
