@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.CommandLine;
-using System.CommandLine.Invocation;
+using System.CommandLine.Parsing;
 using System.Linq;
 using System.Threading.Tasks;
 using Configurator.Utilities;
@@ -20,41 +20,44 @@ namespace Configurator
 
         public async Task<int> LaunchAsync(params string[] args)
         {
-                var rootCommand = new RootCommand
-                {
-                    new Option<string>(
-                        aliases: new[] { "--manifest-path", "-m" },
-                        getDefaultValue: () => Arguments.Default.ManifestPath,
-                        description: "Path (local or URL) to your manifest file."),
-                    new Option<List<string>>(
-                        aliases: new[] { "--environments", "-e" },
-                        parseArgument: x =>
-                            x.Tokens.FirstOrDefault()?.Value.Split("|", StringSplitOptions.RemoveEmptyEntries).ToList()
-                                ?? Arguments.Default.Environments,
-                        isDefault: true,
-                        description: "Pipe separated list of environments to target in the manifest."),
-                    new Option<string>(
-                        aliases: new[] { "--downloads-dir", "-dl" },
-                        getDefaultValue: () => Arguments.Default.DownloadsDir,
-                        description: "Local path to use for downloads."),
-                    new Option<string>(
-                        aliases: new[] { "--single-app-id", "-app" },
-                        description: "The single app to install by Id. When present the environments arg is ignored.")
-                };
+            var manifestPath = new Option<string>(
+                aliases: new[] { "--manifest-path", "-m" },
+                getDefaultValue: () => Arguments.Default.ManifestPath,
+                description: "Path (local or URL) to your manifest file.");
+            var environments = new Option<List<string>>(
+                aliases: new[] { "--environments", "-e" },
+                parseArgument: x =>
+                    x.Tokens.Select(y => new Token?(y)).FirstOrDefault()?.Value
+                        .Split("|", StringSplitOptions.RemoveEmptyEntries).ToList()
+                    ?? Arguments.Default.Environments,
+                isDefault: true,
+                description: "Pipe separated list of environments to target in the manifest.");
+            var downloadsDir = new Option<string>(
+                aliases: new[] { "--downloads-dir", "-dl" },
+                getDefaultValue: () => Arguments.Default.DownloadsDir,
+                description: "Local path to use for downloads.");
+            var singleApp = new Option<string>(
+                aliases: new[] { "--single-app-id", "-app" },
+                description: "The single app to install by Id. When present the environments arg is ignored.");
+            var rootCommand = new RootCommand("Configurator")
+            {
+                manifestPath,
+                environments,
+                downloadsDir,
+                singleApp
+            };
 
-                rootCommand.Description = "Configurator";
+            rootCommand.SetHandler<string, List<string>, string, string>(RunConfiguratorAsync,
+                manifestPath, environments, downloadsDir, singleApp);
 
-                var cli = new Cli(dependencyBootstrapper);
-
-                rootCommand.Handler = CommandHandler.Create<string, List<string>, string, string>(cli.RunConfiguratorAsync);
-
-                return await rootCommand.InvokeAsync(args);
+            return await rootCommand.InvokeAsync(args);
         }
 
-        private async Task RunConfiguratorAsync(string manifestPath, List<string> environments, string downloadsDir, string? singleAppId)
+        private async Task RunConfiguratorAsync(string manifestPath, List<string> environments, string downloadsDir,
+            string? singleAppId)
         {
             var singleAppIdCoalesced = string.IsNullOrWhiteSpace(singleAppId) ? null : singleAppId;
-            
+
             var arguments = new Arguments(manifestPath, environments, downloadsDir, singleAppIdCoalesced);
 
             var services = await dependencyBootstrapper.InitializeAsync(arguments);
