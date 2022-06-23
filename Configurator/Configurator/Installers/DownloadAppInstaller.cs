@@ -32,17 +32,15 @@ namespace Configurator.Installers
 
             IDownloader downloader = downloaderFactory.GetDownloader(app.Downloader);
 
-            var downloadedFilePath = await downloader.DownloadAsync(app.DownloaderArgs.ToString()!);
-
-            var installScript = $"{app.InstallScript} {downloadedFilePath}";
+            app.DownloadedFilePath = await downloader.DownloadAsync(app.DownloaderArgs.ToString()!);
 
             if (app.VerificationScript == null)
             {
-                await powerShell.ExecuteAsync(installScript);
+                await powerShell.ExecuteAsync(app.InstallScript);
             }
             else
             {
-                await powerShell.ExecuteAsync(installScript, app.VerificationScript);
+                await powerShell.ExecuteAsync(app.InstallScript, app.VerificationScript);
             }
 
             consoleLogger.Result($"Installed '{app.AppId}'");

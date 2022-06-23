@@ -16,6 +16,7 @@ namespace Configurator.Apps
     public interface IDownloadApp : IApp
     {
         string Downloader { get; }
+        string DownloadedFilePath { get; set; }
         JsonElement DownloaderArgs { get; }
     }
 }

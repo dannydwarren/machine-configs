@@ -1343,6 +1343,20 @@
             "AppType": "Scoop",
             "AppId": "stripe",
             "Environments": "Emmersion"
+        },
+        {
+            "AppType": "Scoop",
+            "AppId": "steamcmd",
+            "Environments": "ArkServer"
+        },
+        {
+            "AppType": "VisualStudioExtension",
+            "AppId": "Gweltaz27.IHateRegions",
+            "Environments": "Personal",
+            "DownloaderArgs": {
+                "Publisher": "Gweltaz27",
+                "ExtensionName": "IHateRegions"
+            }
         }
     ]
 }

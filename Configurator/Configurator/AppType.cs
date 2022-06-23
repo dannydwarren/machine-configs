@@ -10,6 +10,7 @@
         Scoop,
         ScoopBucket,
         Gitconfig,
-        NonPackageApp
+        NonPackageApp,
+        VisualStudioExtension
     }
 }

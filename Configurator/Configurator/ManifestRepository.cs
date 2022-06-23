@@ -34,7 +34,6 @@ namespace Configurator
 
         public async Task<Manifest> LoadAsync()
         {
-            Console.WriteLine($"ManifestPath: {arguments.ManifestPath}");
             var manifestJson = await ReadManifestAsync();
             var manifest = jsonSerializer.Deserialize<RawManifest>(manifestJson)!;
             var installables = manifest.Apps.Select(x =>
@@ -63,6 +62,7 @@ namespace Configurator
                 { AppType: AppType.Scoop } => jsonSerializer.Deserialize<ScoopApp>(x.AppData.ToString()!),
                 { AppType: AppType.ScoopBucket } => jsonSerializer.Deserialize<ScoopBucketApp>(x.AppData.ToString()!),
                 { AppType: AppType.Script } => jsonSerializer.Deserialize<ScriptApp>(x.AppData.ToString()!),
+                { AppType: AppType.VisualStudioExtension } => jsonSerializer.Deserialize<VisualStudioExtensionApp>(x.AppData.ToString()!),
                 { AppType: AppType.Winget } => jsonSerializer.Deserialize<WingetApp>(x.AppData.ToString()!),
                 _ => null!
             })).Where(x => x != null).ToList()!;

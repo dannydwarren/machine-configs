@@ -45,9 +45,14 @@ namespace Configurator.UnitTests.Installers
                 GetMock<IConsoleLogger>().Verify(x => x.Result($"Installed '{app.AppId}'"));
             });
 
+            It($"sets {nameof(IDownloadApp)}.{nameof(IDownloadApp.DownloadedFilePath)}", () =>
+            {
+                mockApp.VerifySet(x => x.DownloadedFilePath = downloadedFilePath);
+            });
+
             It("installs and verifies", () =>
             {
-                GetMock<IPowerShell>().Verify(x => x.ExecuteAsync($"{app.InstallScript} {downloadedFilePath}", app.VerificationScript!));
+                GetMock<IPowerShell>().Verify(x => x.ExecuteAsync($"{app.InstallScript}", app.VerificationScript!));
             });
         }
 
@@ -76,15 +81,9 @@ namespace Configurator.UnitTests.Installers
 
             await BecauseAsync(() => ClassUnderTest.InstallAsync(app));
 
-            It("logs", () =>
-            {
-                GetMock<IConsoleLogger>().Verify(x => x.Info($"Installing '{app.AppId}'"));
-                GetMock<IConsoleLogger>().Verify(x => x.Result($"Installed '{app.AppId}'"));
-            });
-
             It("installs", () =>
             {
-                GetMock<IPowerShell>().Verify(x => x.ExecuteAsync($"{app.InstallScript} {downloadedFilePath}"));
+                GetMock<IPowerShell>().Verify(x => x.ExecuteAsync($"{app.InstallScript}"));
             });
         }
     }

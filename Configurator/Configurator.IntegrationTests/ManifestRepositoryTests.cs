@@ -359,5 +359,26 @@ namespace Configurator.IntegrationTests
                     });
             });
         }
+
+        [Fact]
+        public async Task When_parsing_visual_studio_extension_apps()
+        {
+            mockArgs.SetupGet(x => x.ManifestPath).Returns("./TestManifests/visual-studio-extension-only_manifest.json");
+
+            Services.AddTransient(_ => mockArgs.Object);
+
+            var manifest = await BecauseAsync(() => ClassUnderTest.LoadAsync());
+
+            It("parses required properties", () =>
+            {
+                manifest.Apps[0]
+                    .ShouldBeOfType<VisualStudioExtensionApp>().ShouldSatisfyAllConditions(x =>
+                    {
+                        x.AppId.ShouldBe("visual-studio-extension-app-id");
+                        x.DownloaderArgs.GetProperty("Publisher").GetString().ShouldBe("publisher-1");
+                        x.DownloaderArgs.GetProperty("ExtensionName").GetString().ShouldBe("extension-name-1");
+                    });
+            });
+        }
     }
 }
