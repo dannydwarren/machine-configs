@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.CommandLine;
 using System.Threading.Tasks;
 using Configurator.Utilities;
 using Moq;
@@ -170,6 +171,25 @@ namespace Configurator.UnitTests
 
             It("populates arguments correctly",
                 () => capturedArguments.ShouldNotBeNull().SingleAppId.ShouldBe(commandlineArgs[1]));
+
+            It("returns a success result", () => result.ShouldBe(0));
+        }
+        
+        [Fact]
+        public async Task When_backing_up()
+        {
+            var machineConfiguratorMock = GetMock<IMachineConfigurator>();
+
+            var serviceProviderMock = GetMock<IServiceProvider>();
+            serviceProviderMock.Setup(x => x.GetService(typeof(IMachineConfigurator)))
+                .Returns(machineConfiguratorMock.Object);
+
+            var commandlineArgs = new[] { "backup" };
+
+            var result = await BecauseAsync(() => ClassUnderTest.LaunchAsync(commandlineArgs));
+
+            It("activates the backup command",
+                () => GetMock<IConsoleLogger>().Verify(x=> x.Debug("start backup")));
 
             It("returns a success result", () => result.ShouldBe(0));
         }
