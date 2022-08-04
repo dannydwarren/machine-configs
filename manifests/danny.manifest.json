@@ -797,7 +797,27 @@
         },
         {
             "AppType": "Winget",
+            "AppId": "OBSProject.OBSStudio",
+            "Environments": "Personal",
+            "Configuration": {
+                "ManualSteps": [
+                    "Need a way to backup and restore settings"
+                ]
+            }
+        },
+        {
+            "AppType": "Winget",
             "AppId": "Logitech.LGS",
+            "Environments": "Personal",
+            "Configuration": {
+                "ManualSteps": [
+                    "Need a way to backup and restore settings"
+                ]
+            }
+        },
+        {
+            "AppType": "Winget",
+            "AppId": "Logitech.GHUB",
             "Environments": "Personal",
             "Configuration": {
                 "ManualSteps": [
