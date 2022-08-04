@@ -12,10 +12,12 @@ namespace Configurator
     public class Cli
     {
         private readonly IDependencyBootstrapper dependencyBootstrapper;
+        private readonly IConsoleLogger consoleLogger;
 
-        public Cli(IDependencyBootstrapper dependencyBootstrapper)
+        public Cli(IDependencyBootstrapper dependencyBootstrapper, IConsoleLogger consoleLogger)
         {
             this.dependencyBootstrapper = dependencyBootstrapper;
+            this.consoleLogger = consoleLogger;
         }
 
         public async Task<int> LaunchAsync(params string[] args)
@@ -39,17 +41,23 @@ namespace Configurator
             var singleApp = new Option<string>(
                 aliases: new[] { "--single-app-id", "-app" },
                 description: "The single app to install by Id. When present the environments arg is ignored.");
+
+            var backupCommand = new Command("backup", "Backup app configurations etc. for use on the next machine.");
+            
             var rootCommand = new RootCommand("Configurator")
             {
                 manifestPath,
                 environments,
                 downloadsDir,
-                singleApp
+                singleApp,
+                backupCommand
             };
 
             rootCommand.SetHandler<string, List<string>, string, string>(RunConfiguratorAsync,
                 manifestPath, environments, downloadsDir, singleApp);
 
+            backupCommand.SetHandler(() => consoleLogger.Debug("Support for backing up apps is in progress..."));
+            
             return await rootCommand.InvokeAsync(args);
         }
 
