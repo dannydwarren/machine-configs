@@ -1,7 +1,5 @@
 [user]
 	name = Danny Warren
-[credential]
-	helper = manager
 [core]
 	editor = code --wait --new-window
 # Not supported by the mob tool as of 2021-04-29
