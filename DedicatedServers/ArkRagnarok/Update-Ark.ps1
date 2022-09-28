@@ -1,0 +1,1 @@
+Update-SteamApp -AppId 376030 -Path "C:\ArkDedicatedServer"
