@@ -1221,14 +1221,13 @@
         },
         {
             "AppType": "Winget",
-            "AppId": "Microsoft.dotnet",
-            "InstallArgs": "\"\" --version 3.1.410.15736",
+            "AppId": "Microsoft.DotNet.SDK.3_1",
             "Environments": "All",
             "PreventUpgrade": true
         },
         {
             "AppType": "Winget",
-            "AppId": "Microsoft.dotnet",
+            "AppId": "Microsoft.DotNet.SDK.6",
             "Environments": "All"
         },
         {
