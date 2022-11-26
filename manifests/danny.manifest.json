@@ -230,13 +230,13 @@
             "AppType": "Script",
             "AppId": "Install NuGet Provider for PowerShellGet and Register Default PSRepository",
             "Environments": "All",
-            "InstallScript": "Import-Module PackageManagement -UseWindowsPowerShell\nInstall-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force\nImport-Module PowerShellGet -UseWindowsPowerShell\nRegister-PSRepository -Default"
+            "InstallScript": "Import-Module PackageManagement -UseWindowsPowerShell;Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force;Import-Module PowerShellGet -UseWindowsPowerShell;Register-PSRepository -Default"
         },
         {
             "AppType": "PowerShellModule",
             "AppId": "posh-git",
             "Environments": "All",
-            "InstallArgs": "-Force\nAdd-PoshGitToProfile -AllHosts",
+            "InstallArgs": "-Force;Add-PoshGitToProfile -AllHosts",
             "Configuration": {
                 "ManualSteps": [
                     "Still need to customize"
@@ -264,7 +264,7 @@
             "AppType": "Script",
             "AppId": "Configure Control Panel",
             "Environments": "All",
-            "InstallScript": "Import-Module NetSecurity -UseWindowsPowerShell\nDisable-NetFirewallRule -DisplayGroup \"Remote Assistance\"",
+            "InstallScript": "Import-Module NetSecurity -UseWindowsPowerShell;Disable-NetFirewallRule -DisplayGroup \"Remote Assistance\"",
             "Configuration": {
                 "RegistrySettings": [
                     {
@@ -999,20 +999,20 @@
             "AppType": "Script",
             "AppId": "voidtools.Everything Everything.ini",
             "Environments": "All",
-            "InstallScript": "Import-Module BitsTransfer -UseWindowsPowerShell\nStart-BitsTransfer -Source \"https://raw.githubusercontent.com/dannydwarren/machine-configs/main/manifests/Everything.ini\" -Destination \"$env:ProgramFiles\\Everything\\Everything.ini\""
+            "InstallScript": "Import-Module BitsTransfer -UseWindowsPowerShell;Start-BitsTransfer -Source \"https://raw.githubusercontent.com/dannydwarren/machine-configs/main/manifests/Everything.ini\" -Destination \"$env:ProgramFiles\\Everything\\Everything.ini\""
         },
         {
             "AppType": "Script",
             "AppId": "voidtools.Everything post install > Add to 'PATH' variable",
             "Environments": "All",
-            "InstallScript": "$oldpath = (Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Session Manager\\Environment' -Name PATH).path\n$newpath = \"$oldpath;$env:ProgramFiles\\Everything\"\nSet-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Session Manager\\Environment' -Name PATH -Value $newpath"
+            "InstallScript": "$oldpath = (Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Session Manager\\Environment' -Name PATH).path;$newpath = \"$oldpath;$env:ProgramFiles\\Everything\";Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Session Manager\\Environment' -Name PATH -Value $newpath"
         },
         {
             "AppType": "Script",
             "AppId": "voidtools.Everything post install > Configuration settings",
             "Notes": "A refreshed 'Path' variable is required. This is accomplished by running as a separate app.",
             "Environments": "All",
-            "InstallScript": "everything -install-run-on-system-startup\neverything -startup"
+            "InstallScript": "everything -install-run-on-system-startup;everything -startup"
         },
         {
             "AppType": "Winget",
@@ -1260,7 +1260,7 @@
             "AppType": "Script",
             "AppId": "nvm post install script",
             "Notes": "A refreshed 'Path' variable is required. This is accomplished by running as a separate app.",
-            "InstallScript": "nvm install lts\nnvm use (nvm list)",
+            "InstallScript": "nvm install lts;nvm use (nvm list)",
             "Environments": "All"
         },
         {
