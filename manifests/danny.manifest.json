@@ -792,12 +792,6 @@
         },
         {
             "AppType": "Winget",
-            "AppId": "LogMeIn.LastPass",
-            "Environments": "All",
-            "Notes": "TODO: Requires elevated permissions to install"
-        },
-        {
-            "AppType": "Winget",
             "AppId": "OBSProject.OBSStudio",
             "Environments": "Personal",
             "Configuration": {
