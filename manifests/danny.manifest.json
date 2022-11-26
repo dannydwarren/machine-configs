@@ -8,8 +8,8 @@
         },
         {
             "AppType": "Script",
-            "AppId": "Use downloaded profile.ps1",
-            "InstallScript": "Add-Content -Path $profile -Value \"`n. c:\\machine-configuration\\profile.ps1\"",
+            "AppId": "Use downloaded profile.ps1 in currently running PowerShell",
+            "InstallScript": "New-Item -Path $profile -ItemType File -ErrorAction Ignore;Add-Content -Path $profile -Value \"`n. c:\\machine-configuration\\profile.ps1\"",
             "Environments": "All",
             "VerificationScript": "(Get-Content -Path $profile) -contains \". c:\\machine-configuration\\profile.ps1\""
         },
