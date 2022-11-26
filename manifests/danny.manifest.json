@@ -726,7 +726,7 @@
         },
         {
             "AppType": "Winget",
-            "AppId": "alcpu.CoreTemp",
+            "AppId": "ALCPU.CoreTemp",
             "Environments": "All"
         },
         {
@@ -793,7 +793,8 @@
         {
             "AppType": "Winget",
             "AppId": "LogMeIn.LastPass",
-            "Environments": "All"
+            "Environments": "All",
+            "Notes": "TODO: Requires elevated permissions to install"
         },
         {
             "AppType": "Winget",
@@ -827,7 +828,7 @@
         },
         {
             "AppType": "Winget",
-            "AppId": "Microsoft.EdgeDev",
+            "AppId": "Microsoft.Edge.Dev",
             "Environments": "All",
             "Configuration": {
                 "ManualSteps": [
@@ -1186,11 +1187,6 @@
         },
         {
             "AppType": "Winget",
-            "AppId": "AnyDeskSoftwareGmbH.AnyDesk",
-            "Environments": "Work"
-        },
-        {
-            "AppType": "Winget",
             "AppId": "Microsoft.SQLServerManagementStudio",
             "Environments": "All"
         },
@@ -1206,7 +1202,7 @@
         },
         {
             "AppType": "Winget",
-            "AppId": "JAMSoftware.TreeSizeFree",
+            "AppId": "JAMSoftware.TreeSize.Free",
             "Environments": "All"
         },
         {
