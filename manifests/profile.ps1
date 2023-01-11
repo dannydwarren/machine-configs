@@ -27,9 +27,15 @@ function setLocationToSrc() {
 }
 setLocationToSrc
 
-$env:POSH_GIT_ENABLED = $true
-oh-my-posh init pwsh --config c:\src\machine-configs\powershell\ben.omp.json | Invoke-Expression
-Enable-PoshLineError
+function applyTheme() {
+    $env:POSH_GIT_ENABLED = $true
+    oh-my-posh init pwsh --config c:\src\machine-configs\powershell\ben.omp.json | Invoke-Expression
+    Enable-PoshLineError
+}
+
+if ($PSVersionTable.PSVersion.Major -gt 5) {
+    applyTheme
+}
 
 Set-Alias -Name tf -Value terraform.exe
 Set-Alias -Name android -Value scrcpy
