@@ -245,17 +245,6 @@
         },
         {
             "AppType": "PowerShellModule",
-            "AppId": "oh-my-posh",
-            "Environments": "All",
-            "InstallArgs": "-Scope CurrentUser -Force",
-            "Configuration": {
-                "ManualSteps": [
-                    "Still need to customize"
-                ]
-            }
-        },
-        {
-            "AppType": "PowerShellModule",
             "AppId": "BurntToast",
             "Environments": "All",
             "InstallArgs": "-Force"
@@ -1375,6 +1364,17 @@
         {
             "AppType": "Scoop",
             "AppId": "CascadiaCode-NF",
+            "Environments": "All"
+        },
+        {
+            "AppType": "Winget",
+            "AppId": "JanDeDobbeleer.OhMyPosh",
+            "Environments": "All"
+        },
+        {
+            "AppType": "Script",
+            "AppId": "Oh My Posh config",
+            "InstallScript": "$env:POSH_GIT_ENABLED = $true;oh-my-posh init pwsh --config c:\\src\\machine-configs\\powershell\\ben.omp.json | Invoke-Expression;Enable-PoshLineError",
             "Environments": "All"
         }
     ]
