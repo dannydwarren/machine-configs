@@ -21,8 +21,7 @@ mkdir $transcripts -ErrorAction Ignore
 $InformationPreference = 'Continue'
 
 function setLocationToSrc() {
-    $currentLocation = Get-Location
-    if (($currentLocation -like '*system32*') -or ($currentLocation -like '*users*')) {
+    if (($PSScriptRoot -like '*system32*') -or ($PSScriptRoot -like '*danny*')) {
         Set-Location $src
     }
 }
