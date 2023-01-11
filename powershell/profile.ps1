@@ -1,5 +1,24 @@
 # TODO: REVIEW BELOW and migrate to /manifests/profile.ps1
 
+# profile timing start
+$psLoadDurations += @{ name = 'Ben'; path = $PSCommandPath; stopwatch = [Diagnostics.Stopwatch]::StartNew() }
+# profile timing end
+
+$benProfileDurations = @()
+$benProfileStopwatch = [Diagnostics.Stopwatch]::StartNew()
+function TimeBenProfile([string]$Description) {
+    $script:benProfileDurations += @{
+        desc         = "Ben:$Description"
+        totalTilNow  = $benProfileStopwatch.ElapsedMilliseconds
+        milliseconds = $benProfileStopwatch.ElapsedMilliseconds - ($benProfileDurations.Length ? $benProfileDurations[-1].totalTilNow : 0)
+    }
+}
+
+$OneDrive = "$env:UserProfile\OneDrive"
+$git = "C:\BenLocal\git"
+
+$tmp = "C:\BenLocal\ToDelete\$(Get-Date -Format "yyyyMM")"
+
 function Update-WindowsTerminalSettings() {
     Import-Module Appx -UseWindowsPowerShell
     Copy-Item $PSScriptRoot\settings.json "$env:LocalAppData\Packages\$((Get-AppxPackage -Name Microsoft.WindowsTerminal).PackageFamilyName)\LocalState\settings.json"
@@ -9,11 +28,19 @@ function Test-IsAdmin() {
     ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 }
 
-function Run-AsAdmin([Parameter(Mandatory)][string]$FilePath) {
+function Start-AsAdmin([Parameter(Mandatory)][string]$FilePath) {
     Start-Process wt -Verb RunAs -ArgumentList "-w run-as-admin pwsh -File `"$FilePath`""
 }
 
-function Create-Shortcut([Parameter(Mandatory)][string]$Target, [Parameter(Mandatory)][string]$Link, [string]$Arguments) {
+function Get-FunctionContents([Parameter(Mandatory)][string]$FunctionName) {
+    Get-Command $FunctionName | select -exp ScriptBlock
+}
+
+function New-Shortcut([Parameter(Mandatory)][string]$Target, [Parameter(Mandatory)][string]$Link, [string]$Arguments) {
+    $dir = Split-Path $Link
+    if (!(Test-Path $dir)) {
+        New-Item $dir -ItemType Directory -Force | Out-Null
+    }
     $shortcut = (New-Object -ComObject WScript.Shell).CreateShortcut($Link)
     $shortcut.TargetPath = $Target
     $shortcut.WorkingDirectory = Split-Path $Target
@@ -21,13 +48,13 @@ function Create-Shortcut([Parameter(Mandatory)][string]$Target, [Parameter(Manda
     $shortcut.Save()
 }
 
-function Create-RunOnce([Parameter(Mandatory)][string]$Description, [Parameter(Mandatory)][string]$Command) {
+function New-RunOnce([Parameter(Mandatory)][string]$Description, [Parameter(Mandatory)][string]$Command) {
     # https://docs.microsoft.com/en-us/windows/win32/setupapi/run-and-runonce-registry-keys
     Set-RegistryValue "HKCU:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name $Description -Value $Command
 }
 
-function Create-FileRunOnce([Parameter(Mandatory)][string]$Description, [Parameter(Mandatory)][string]$FilePath) {
-    Create-RunOnce $Description "$((Get-Command wt).Source) -w run-once pwsh -Command `"Run-AsAdmin '$FilePath'`""
+function New-FileRunOnce([Parameter(Mandatory)][string]$Description, [Parameter(Mandatory)][string]$FilePath) {
+    New-RunOnce $Description "$((Get-Command wt).Source) -w run-once pwsh -Command `"Start-AsAdmin '$FilePath'`""
 }
 
 function Get-TimestampForFileName() {
@@ -37,6 +64,14 @@ function Get-TimestampForFileName() {
 function Get-SafeFileName([Parameter(Mandatory)][string]$FileName) {
     $invalidFileNameChars = [Regex]::Escape([IO.Path]::GetInvalidFileNameChars() -join "")
     $FileName -replace "[$invalidFileNameChars]", ""
+}
+
+function Copy-Item2([Parameter(Mandatory)][string[]]$Path, [string]$Destination) {
+    $destinationDir = Split-Path $Destination
+    if (!(Test-Path $destinationDir)) {
+        New-Item $destinationDir -ItemType Directory -Force | Out-Null
+    }
+    Copy-Item $Path $Destination
 }
 
 function Set-RegistryValue([Parameter(Mandatory)][string]$Path, [string]$Name = "(Default)", [Parameter(Mandatory)][object]$Value) {
@@ -90,18 +125,6 @@ function Download-File([Parameter(Mandatory)][string]$Uri, [Parameter(Mandatory)
     $ProgressPreference = $savedProgressPreference
 }
 
-function AddNuGetSource([Parameter(Mandatory)][string]$Name, [Parameter(Mandatory)][string]$Path) {
-    $nugetConfigPath = "$env:AppData\NuGet\nuget.config"
-    if (!(Select-String $Path $nugetConfigPath)) {
-        [xml]$nugetConfigXml = Get-Content $nugetConfigPath
-        $newPackageSource = $nugetConfigXml.CreateElement("add")
-        $newPackageSource.SetAttribute("key", $Name)
-        $newPackageSource.SetAttribute("value", $Path)
-        $nugetConfigXml.configuration.packageSources.AppendChild($newPackageSource)
-        $nugetConfigXml.Save($nugetConfigPath)
-    }
-}
-
 function Find-RepoRoot() {
     $repoRoot = Get-Location
     while (!(Test-Path $repoRoot\.git)) {
@@ -113,33 +136,70 @@ function Find-RepoRoot() {
     return $repoRoot
 }
 
-function GitAudit() {
+function GitAudit([switch]$ReturnSuccess) {
+    $script:GitAudit_success = $true
     function CheckDir($dir) {
-        pushd $dir
         if (Test-Path (Join-Path $dir .git)) {
+            pushd $dir
             $unsynced = git unsynced
             $status = git status --porcelain
             if ($unsynced -or $status) {
-                Write-Output (New-Object System.String -ArgumentList ('*', 100))
+                $script:GitAudit_success = $false
+                Write-Host ('*' * 100)
                 Write-Host $dir -ForegroundColor Red
-                git unsynced
-                git status --porcelain
+                git unsynced | Write-Host
+                git status --porcelain | Write-Host
             }
+            popd
         }
-        popd
+        elseif (Test-Path $dir -PathType Container) {
+            $script:GitAudit_success = $false
+            Write-Host $dir -ForegroundColor Red
+            Write-Host "`tNot in source control"
+        }
     }
-    (Get-ChildItem $src) +
-    (Get-ChildItem C:\Work | Get-ChildItem) |
+    (Get-ChildItem $git) +
+    (Get-ChildItem C:\Work -ErrorAction Ignore | Get-ChildItem) |
     % { CheckDir $_.FullName }
+    if ($ReturnSuccess) {
+        return $script:GitAudit_success
+    }
 }
 
 function ReallyUpdate-Module([Parameter(Mandatory)][string]$Name) {
     Update-Module $Name -Force
 
+    Remove-Module $Name
+    Import-Module $Name
+
     Get-Module $Name -ListAvailable |
     sort Version -Descending |
     select -Skip 1 |
     % { Uninstall-Module $Name -RequiredVersion $_.Version }
+}
+
+function dotnet-really-clean() {
+    if (!(Get-ChildItem *.sln)) {
+        Write-Error "Not a dotnet project"
+        return
+    }
+
+    Write-Output "Clearing NuGet caches"
+    dotnet nuget locals all --clear | % { Write-Output "`t$_" }
+
+    Write-Output "Removing ``packages`` directory"
+    Remove-Item packages -Recurse -Force -ErrorAction Ignore
+
+    Write-Output "Removing ``TestResults`` directory"
+    Remove-Item TestResults -Recurse -Force -ErrorAction Ignore
+
+    Write-Output "Removing ``bin`` and ``obj`` directories"
+    Get-ChildItem bin, obj -Directory -Recurse |
+    sort |
+    % {
+        Write-Output "`t$(Resolve-Path $_ -Relative)"
+        Remove-Item $_ -Recurse -Force
+    }
 }
 
 function winget-manifest([Parameter(Mandatory)][string]$AppId) {
@@ -159,13 +219,48 @@ function winget-manifest([Parameter(Mandatory)][string]$AppId) {
     Write-Output $response.Content
 }
 
+function tmpfor([Parameter(Mandatory)][string]$For, [switch]$Go) {
+    $dir = "$tmp\$($For)_$(Get-TimestampForFileName)"
+    if ($Go) {
+        mkdir $dir | Out-Null
+        pushd $dir
+    }
+    else {
+        return $dir
+    }
+}
+
+function togh([Parameter(Mandatory)][string]$FilePath, [int]$BeginLine, [int]$EndLine) {
+    pushd (Split-Path $FilePath)
+    $remote = (git config remote.origin.url) -replace "\.git", ""
+    $permalinkCommit = git rev-parse --short head
+    $relativePath = git ls-files --full-name $FilePath
+    popd
+
+    $url = "$remote/blob/$permalinkCommit/$relativePath" `
+        + ($BeginLine -gt 0 ? "#L$BeginLine" + ($EndLine -gt 0 ? "-L$EndLine" : "") : "")
+    $url = $url -replace " ", "%20"
+
+    Set-Clipboard $url
+    Write-Host "$url`n`tadded to clipboard"
+}
+
+function awslocal-configure() {
+    aws configure --profile awslocal set aws_access_key_id not-null
+    aws configure --profile awslocal set aws_secret_access_key not-null
+}
+
+function awslocal([Parameter(ValueFromRemainingArguments = $true)]$Rest) {
+    aws --profile awslocal --endpoint-url=http://localhost:4566 --region us-east-1 $Rest
+}
+
 Register-ArgumentCompleter -Native -CommandName .\config.ps1 -ScriptBlock {
     param($wordToComplete, $commandAst, $cursorPosition)
-    if ((Get-Location).Path -ne "$src\configs") {
+    if ((Get-Location).Path -ne "$git\configs") {
         return
     }
 
-    dir $src\configs *.ps1 -Recurse |
+    dir $git\configs *.ps1 -Recurse |
     sls "Block `"(.+?)`"" |
     % { "`"$($_.Matches.Groups[1].Value)`"" } |
     ? { $_ -like "*$wordToComplete*" } |
@@ -175,31 +270,31 @@ Register-ArgumentCompleter -Native -CommandName .\config.ps1 -ScriptBlock {
     }
 }
 
-function tmpfor([Parameter(Mandatory)][string]$For) {
-    "$tmpToDelete\$($For)_$(Get-TimestampForFileName)"
-}
-
-function togh([Parameter(Mandatory)][string]$FilePath, [int]$BeginLine, [int]$EndLine) {
-    if ($FilePath -notmatch "C:\\Work\\(?<org>[^\\]+)\\(?<repo>[^\\]+)") {
-        Write-Error "Could not match path"
-    }
-
-    pushd $Matches[0]
-    $permalinkCommit = git rev-parse --short head
-    popd
-
-    $url = ($FilePath.Replace($Matches[0], "https://github.com/$($Matches["org"])/$($Matches["repo"])/blob/$permalinkCommit") -replace "\\", "/") `
-        + ($BeginLine -gt 0 ? "#L$BeginLine" + ($EndLine -gt 0 ? "-L$EndLine" : "") : "")
-
-    Set-Clipboard $url
-    Write-Host "$url`n`tadded to clipboard"
-}
+TimeBenProfile "Functions"
 
 . $PSScriptRoot\one-liners.ps1
+TimeBenProfile "One-Liners"
+. $PSScriptRoot\PSReadLine.ps1
+TimeBenProfile "PSReadLine"
+
+$env:POSH_GIT_ENABLED = $true
+oh-my-posh init pwsh --config $PSScriptRoot\ben.omp.json | Invoke-Expression
+Enable-PoshLineError
+TimeBenProfile "OMP"
 
 $transcriptDir = "C:\BenLocal\PowerShell Transcripts"
-Get-ChildItem "$transcriptDir\*.log" | ? { !(sls -Path $_ -Pattern "Command start time:" -SimpleMatch -Quiet) } | rm -ErrorAction SilentlyContinue
 $Transcript = "$transcriptDir\$(Get-TimestampForFileName).log"
 Start-Transcript $Transcript -NoClobber -IncludeInvocationHeader
+TimeBenProfile "Transcript"
 
-Set-PoshPrompt $PSScriptRoot\ben.omp.json
+($benProfileDurations `
+| select desc, milliseconds `
+| Format-Table desc, @{ Label = "elapsed"; Expression = { "$([int]$_.milliseconds)ms" }; Alignment = "Right" } -HideTableHeaders `
+| Out-String
+).Trim()
+
+# profile timing start
+$currentDuration = ($psLoadDurations | ? { $_.name -eq 'Ben' })
+$currentDuration.stopwatch.Stop()
+$currentDuration.elapsed = $currentDuration.stopwatch.Elapsed
+# profile timing end
