@@ -1366,6 +1366,16 @@
                 "Publisher": "Gweltaz27",
                 "ExtensionName": "IHateRegions"
             }
+        },
+        {
+            "AppType": "ScoopBucket",
+            "AppId": "nerd-fonts",
+            "Environments": "All"
+        },
+        {
+            "AppType": "Scoop",
+            "AppId": "CascadiaCode-NF",
+            "Environments": "All"
         }
     ]
 }
