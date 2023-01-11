@@ -11,7 +11,7 @@
             "AppId": "Use downloaded profile.ps1 in currently running PowerShell",
             "InstallScript": "New-Item -Path $profile -ItemType File -ErrorAction Ignore;Add-Content -Path $profile -Value \"`n. c:\\machine-configuration\\profile.ps1\"",
             "Environments": "All",
-            "VerificationScript": "(Get-Content -Path $profile) -contains \". c:\\machine-configuration\\profile.ps1\""
+            "VerificationScript": "(Test-Path $profile) -and (Select-String \"$($PSScriptRoot -replace \"\\\", \"\\\")\\profile.ps1\" $profile) # <original> is regex, <substitute> is PS string"
         },
         {
             "AppType": "Script",
@@ -1369,12 +1369,6 @@
         {
             "AppType": "Winget",
             "AppId": "JanDeDobbeleer.OhMyPosh",
-            "Environments": "All"
-        },
-        {
-            "AppType": "Script",
-            "AppId": "Oh My Posh config",
-            "InstallScript": "$env:POSH_GIT_ENABLED = $true;oh-my-posh init pwsh --config c:\\src\\machine-configs\\powershell\\ben.omp.json | Invoke-Expression;Enable-PoshLineError",
             "Environments": "All"
         }
     ]

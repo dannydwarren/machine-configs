@@ -27,7 +27,9 @@ function setLocationToSrc() {
 }
 setLocationToSrc
 
-try { $null = gcm pshazz -ea stop; pshazz init 'default' } catch { }
+$env:POSH_GIT_ENABLED = $true
+oh-my-posh init pwsh --config c:\src\machine-configs\powershell\ben.omp.json | Invoke-Expression
+Enable-PoshLineError
 
 Set-Alias -Name tf -Value terraform.exe
 Set-Alias -Name android -Value scrcpy
