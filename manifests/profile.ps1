@@ -40,6 +40,7 @@ if ($PSVersionTable.PSVersion.Major -gt 5) {
 Set-Alias -Name tf -Value terraform.exe
 Set-Alias -Name android -Value scrcpy
 
+# TODO: Run this as nightly job
 function clear-clipboard {
     Restart-Service -Name "cbdhsvc*" -force
 }
