@@ -213,17 +213,7 @@
         },
         {
             "AppType": "Winget",
-            "AppId": "Microsoft.PowerShell",
-            "Environments": "All"
-        },
-        {
-            "AppType": "Winget",
             "AppId": "Microsoft.WindowsTerminal",
-            "Environments": "All"
-        },
-        {
-            "AppType": "Winget",
-            "AppId": "Git.Git",
             "Environments": "All"
         },
         {
