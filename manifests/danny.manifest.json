@@ -712,6 +712,7 @@
             "AppType": "Winget",
             "AppId": "Corsair.iCUE",
             "Environments": "LiquidCooling",
+            "PreventUpgrade": true,
             "Configuration": {
                 "ManualSteps": [
                     "Need a way to backup and restore settings"
