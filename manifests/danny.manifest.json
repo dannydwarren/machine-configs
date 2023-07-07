@@ -1361,6 +1361,11 @@
             "AppType": "Winget",
             "AppId": "JanDeDobbeleer.OhMyPosh",
             "Environments": "All"
+        },
+        {
+            "AppType": "Winget",
+            "AppId": "Yarn.Yarn",
+            "Environments": "All"
         }
     ]
 }

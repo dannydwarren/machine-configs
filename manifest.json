@@ -1,1 +1,7 @@
-{"apps":["Microsoft.WindowsTerminal","CPUID.HWMonitor"]}
+{
+  "apps": [
+    "Microsoft.WindowsTerminal",
+    "CPUID.HWMonitor",
+    "Yarn.Yarn"
+  ]
+}
