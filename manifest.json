@@ -2,6 +2,8 @@
   "apps": [
     "Microsoft.WindowsTerminal",
     "CPUID.HWMonitor",
-    "Yarn.Yarn"
+    "Yarn.Yarn",
+    "uvncbvba.UltraVnc",
+    "Microsoft.DotNet.SDK.6"
   ]
 }
