@@ -1,0 +1,57 @@
+{
+  "AppType": "Script",
+  "AppId": "Desktop Settings",
+  "Environments": "All",
+  "Configuration": {
+      "RegistrySettings": [
+          {
+              "Description": "Personalization > Lock screen > Get fun facts, tips, and more from Windows and Cortana on your lock screen = Off",
+              "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+              "ValueName": "RotatingLockScreenOverlayEnabled",
+              "ValueData": 0
+          },
+          {
+              "Description": "Personalization > Lock screen > Screen saver settings > Screen saver = (None)",
+              "KeyName": "HKEY_CURRENT_USER\\Control Panel\\Desktop",
+              "ValueName": "SCRNSAVE.EXE",
+              "ValueData": ""
+          },
+          {
+              "Description": "Personalization > Lock screen > Screen saver settings > Wait = 120 minutes",
+              "KeyName": "HKEY_CURRENT_USER\\Control Panel\\Desktop",
+              "ValueName": "ScreenSaveTimeOut",
+              "ValueData": 7200
+          },
+          {
+              "Description": "Personalization > Lock screen > Screen saver settings > On resume, display logon screen = On",
+              "KeyName": "HKEY_CURRENT_USER\\Control Panel\\Desktop",
+              "ValueName": "ScreenSaverIsSecure",
+              "ValueData": 1
+          },
+          {
+              "Description": "Personalization > Start > Show most used apps = Off",
+              "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+              "ValueName": "NoStartMenuMFUprogramsList",
+              "ValueData": 1
+          },
+          {
+              "Description": "Personalization > Start > Show suggestions occasionally in Start = Off",
+              "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+              "ValueName": "SubscribedContent-338388Enabled",
+              "ValueData": 0
+          },
+          {
+              "Description": "Personalization > Taskbar > Lock the taskbar = On",
+              "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+              "ValueName": "TaskbarSizeMove",
+              "ValueData": 0
+          },
+          {
+              "Description": "Personalization > Taskbar > Use small taskbar buttons = On",
+              "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+              "ValueName": "TaskbarSmallIcons",
+              "ValueData": 1
+          }
+      ]
+  }
+}

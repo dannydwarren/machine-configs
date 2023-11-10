@@ -1,0 +1,10 @@
+{
+  "AppType": "Winget",
+  "AppId": "Google.Chrome",
+  "Environments": "All",
+  "Configuration": {
+      "ManualSteps": [
+          "Launch -> Signin"
+      ]
+  }
+}

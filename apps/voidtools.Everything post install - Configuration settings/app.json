@@ -1,0 +1,7 @@
+{
+  "AppType": "Script",
+  "AppId": "voidtools.Everything post install - Configuration settings",
+  "Notes": "A refreshed 'Path' variable is required. This is accomplished by running as a separate app.",
+  "Environments": "All",
+  "InstallScript": "everything -install-run-on-system-startup;everything -startup"
+}

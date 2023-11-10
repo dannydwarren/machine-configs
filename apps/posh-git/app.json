@@ -1,0 +1,11 @@
+{
+  "AppType": "PowerShellModule",
+  "AppId": "posh-git",
+  "Environments": "All",
+  "InstallArgs": "-Force;Add-PoshGitToProfile -AllHosts",
+  "Configuration": {
+      "ManualSteps": [
+          "Still need to customize"
+      ]
+  }
+}

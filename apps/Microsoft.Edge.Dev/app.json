@@ -1,0 +1,10 @@
+{
+  "AppType": "Winget",
+  "AppId": "Microsoft.Edge.Dev",
+  "Environments": "All",
+  "Configuration": {
+      "ManualSteps": [
+          "Launch -> Signin"
+      ]
+  }
+}

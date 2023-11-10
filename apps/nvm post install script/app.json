@@ -1,0 +1,7 @@
+{
+  "AppType": "Script",
+  "AppId": "nvm post install script",
+  "Notes": "A refreshed 'Path' variable is required. This is accomplished by running as a separate app.",
+  "InstallScript": "nvm install lts;nvm use (nvm list)",
+  "Environments": "All"
+}

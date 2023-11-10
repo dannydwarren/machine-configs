@@ -1,0 +1,5 @@
+{
+  "appId": "plex.plexmediaserver",
+  "appType": "winget",
+  "environments": "Media"
+}

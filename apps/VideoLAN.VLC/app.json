@@ -1,5 +1,5 @@
 {
-  "appId": "CPUID.HWMonitor",
+  "appId": "VideoLAN.VLC",
   "appType": "winget",
   "environments": "All"
 }

@@ -1,0 +1,6 @@
+{
+  "AppType": "PowerShellModule",
+  "AppId": "BurntToast",
+  "Environments": "All",
+  "InstallArgs": "-Force"
+}

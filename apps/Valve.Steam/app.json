@@ -1,0 +1,5 @@
+{
+  "appId": "Valve.Steam",
+  "appType": "winget",
+  "environments": "Personal"
+}

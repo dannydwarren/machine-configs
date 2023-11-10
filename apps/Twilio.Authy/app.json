@@ -1,5 +1,5 @@
 {
-  "appId": "CPUID.HWMonitor",
+  "appId": "Twilio.Authy",
   "appType": "winget",
   "environments": "All"
 }

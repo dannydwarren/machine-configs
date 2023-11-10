@@ -1,0 +1,10 @@
+{
+  "AppType": "Winget",
+  "AppId": "PointPlanck.FileBot",
+  "Environments": "Personal",
+  "Configuration": {
+      "ManualSteps": [
+          "Launch -> Register"
+      ]
+  }
+}

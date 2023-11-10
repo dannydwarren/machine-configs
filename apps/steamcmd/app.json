@@ -1,0 +1,5 @@
+{
+  "appId": "steamcmd",
+  "appType": "scoop",
+  "environments": "ArkServer"
+}

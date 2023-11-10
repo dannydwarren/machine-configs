@@ -1,0 +1,19 @@
+{
+  "AppType": "Script",
+  "AppId": "Disable UAC",
+  "Environments": "All",
+  "Configuration": {
+      "RegistrySettings": [
+          {
+              "KeyName": "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+              "ValueName": "ConsentPromptBehaviorAdmin",
+              "ValueData": 0
+          },
+          {
+              "KeyName": "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+              "ValueName": "PromptOnSecureDesktop",
+              "ValueData": 0
+          }
+      ]
+  }
+}

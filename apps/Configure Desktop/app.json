@@ -1,0 +1,16 @@
+{
+  "AppType": "Script",
+  "AppId": "Configure Desktop",
+  "Environments": "All",
+  "Configuration": {
+      "RegistrySettings": [
+          {
+              "Description": "Desktop > View > Small icons",
+              "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\Shell\\Bags\\1\\Desktop",
+              "ValueName": "IconSize",
+              "ValueData": 32,
+              "RequiresReboot": true
+          }
+      ]
+  }
+}

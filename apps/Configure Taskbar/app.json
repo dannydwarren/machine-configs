@@ -1,0 +1,33 @@
+{
+  "AppType": "Script",
+  "AppId": "Configure Taskbar",
+  "Environments": "All",
+  "Configuration": {
+      "RegistrySettings": [
+          {
+              "Description": "Taskbar > Search = Hidden",
+              "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Search",
+              "ValueName": "SearchboxTaskbarMode",
+              "ValueData": 0
+          },
+          {
+              "Description": "Taskbar > News and interests = Turn off",
+              "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Feeds",
+              "ValueName": "ShellFeedsTaskbarViewMode",
+              "ValueData": 2
+          },
+          {
+              "Description": "Taskbar > Show Cortana button = Off",
+              "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+              "ValueName": "ShowCortanaButton",
+              "ValueData": 0
+          },
+          {
+              "Description": "Taskbar > Show Windows Ink Workspace button = Off",
+              "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\PenWorkspace",
+              "ValueName": "PenWorkspaceButtonDesiredVisibility",
+              "ValueData": 0
+          }
+      ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "AppType": "Winget",
+  "AppId": "Microsoft.VisualStudio.2019.Professional",
+  "InstallArgs": "\"--passive --norestart --wait --includeRecommended --add Microsoft.VisualStudio.Workload.ManagedDesktop --add Microsoft.VisualStudio.Workload.NetWeb --add Microsoft.VisualStudio.Workload.NetCoreTools\"",
+  "Environments": "Personal",
+  "Configuration": {
+      "RegistrySettings": [
+          {
+              "Description": "Need to figure out the version to use for the key: Hides type and members tree under files",
+              "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\VisualStudio\\<needversionhere>",
+              "ValueName": "UseSolutionNavigatorGraphProvider",
+              "ValueData": 0
+          }
+      ]
+  }
+}

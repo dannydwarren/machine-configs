@@ -1,0 +1,6 @@
+{
+  "AppType": "Winget",
+  "AppId": "Microsoft.DotNet.SDK.3_1",
+  "Environments": "All",
+  "PreventUpgrade": true
+}

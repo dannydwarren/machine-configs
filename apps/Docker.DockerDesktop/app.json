@@ -1,0 +1,10 @@
+{
+  "AppType": "Winget",
+  "AppId": "Docker.DockerDesktop",
+  "Environments": "All",
+  "Configuration": {
+      "ManualSteps": [
+          "Still need to customize"
+      ]
+  }
+}

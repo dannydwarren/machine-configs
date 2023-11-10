@@ -1,0 +1,11 @@
+{
+  "AppType": "Winget",
+  "AppId": "Microsoft.OneDrive",
+  "Environments": "Personal",
+  "Configuration": {
+      "ManualSteps": [
+          "Launch (example): . \"$env:LocalAppData\\Microsoft\\OneDrive\\OneDrive.exe\"",
+          "Start OneDrive syncing"
+      ]
+  }
+}

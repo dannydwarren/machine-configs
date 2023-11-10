@@ -1,0 +1,6 @@
+{
+  "AppType": "Script",
+  "AppId": "System - Power & sleep - Screen - On battery power, turn off after = 10 minutes",
+  "InstallScript": "powercfg /change monitor-timeout-dc 10",
+  "Environments": "All"
+}

@@ -1,0 +1,13 @@
+{
+  "AppType": "Winget",
+  "AppId": "SlackTechnologies.Slack",
+  "Environments": "All",
+  "Configuration": {
+      "ManualSteps": [
+          "Configure notifications",
+          "start ms-settings:notifications",
+          "`tShow notifications in action center = Off",
+          "`tClose settings when done"
+      ]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "AppType": "VisualStudioExtension",
+  "AppId": "Gweltaz27.IHateRegions",
+  "Environments": "Personal",
+  "DownloaderArgs": {
+      "Publisher": "Gweltaz27",
+      "ExtensionName": "IHateRegions"
+  }
+}

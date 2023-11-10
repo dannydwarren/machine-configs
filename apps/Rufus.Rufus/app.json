@@ -1,5 +1,5 @@
 {
-  "appId": "CPUID.HWMonitor",
+  "appId": "Rufus.Rufus",
   "appType": "winget",
   "environments": "All"
 }

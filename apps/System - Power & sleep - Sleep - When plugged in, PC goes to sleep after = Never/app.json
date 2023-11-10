@@ -1,0 +1,6 @@
+{
+  "AppType": "Script",
+  "AppId": "System - Power & sleep - Sleep - When plugged in, PC goes to sleep after = Never",
+  "InstallScript": "powercfg /change standby-timeout-ac 0",
+  "Environments": "All"
+}

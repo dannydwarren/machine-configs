@@ -1,0 +1,10 @@
+{
+  "AppType": "Winget",
+  "AppId": "OBSProject.OBSStudio",
+  "Environments": "Personal",
+  "Configuration": {
+      "ManualSteps": [
+          "Need a way to backup and restore settings"
+      ]
+  }
+}

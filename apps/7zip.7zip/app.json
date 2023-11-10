@@ -1,0 +1,170 @@
+{
+  "AppType": "Winget",
+  "AppId": "7zip.7zip",
+  "Environments": "All",
+  "Configuration": {
+      "RegistrySettings": [
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\7-Zip\\FM",
+              "ValueName": "ShowDots",
+              "ValueData": 1
+          },
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\7-Zip\\FM",
+              "ValueName": "ShowRealFileIcons",
+              "ValueData": 1
+          },
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\7-Zip\\FM",
+              "ValueName": "FullRow",
+              "ValueData": 1
+          },
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\7-Zip\\FM",
+              "ValueName": "ShowSystemMenu",
+              "ValueData": 1
+          },
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.7z",
+              "ValueData": "7z Archive"
+          },
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.7z\\DefaultIcon",
+              "ValueData": "{{env:ProgramFiles}}\\7-Zip\\7z.dll,0"
+          },
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.7z\\shell\\open\\command",
+              "ValueData": "\"{{env:ProgramFiles}}\\7-Zip\\7zFM.exe\" \"%1\""
+          },
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.7z",
+              "ValueData": "7-Zip.7z"
+          },
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.zip",
+              "ValueData": "zip Archive"
+          },
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.zip\\DefaultIcon",
+              "ValueData": "{{env:ProgramFiles}}\\7-Zip\\7z.dll,1"
+          },
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.zip\\shell\\open\\command",
+              "ValueData": "\"{{env:ProgramFiles}}\\7-Zip\\7zFM.exe\" \"%1\""
+          },
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.zip",
+              "ValueData": "7-Zip.zip"
+          },
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.rar",
+              "ValueData": "rar Archive"
+          },
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.rar\\DefaultIcon",
+              "ValueData": "{{env:ProgramFiles}}\\7-Zip\\7z.dll,3"
+          },
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.rar\\shell\\open\\command",
+              "ValueData": "\"{{env:ProgramFiles}}\\7-Zip\\7zFM.exe\" \"%1\""
+          },
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.rar",
+              "ValueData": "7-Zip.rar"
+          },
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.cab",
+              "ValueData": "cab Archive"
+          },
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.cab\\DefaultIcon",
+              "ValueData": "{{env:ProgramFiles}}\\7-Zip\\7z.dll,7"
+          },
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.cab\\shell\\open\\command",
+              "ValueData": "\"{{env:ProgramFiles}}\\7-Zip\\7zFM.exe\" \"%1\""
+          },
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.cab",
+              "ValueData": "7-Zip.cab"
+          },
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.tar",
+              "ValueData": "tar Archive"
+          },
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.tar\\DefaultIcon",
+              "ValueData": "{{env:ProgramFiles}}\\7-Zip\\7z.dll,13"
+          },
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.tar\\shell\\open\\command",
+              "ValueData": "\"{{env:ProgramFiles}}\\7-Zip\\7zFM.exe\" \"%1\""
+          },
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.tar",
+              "ValueData": "7-Zip.tar"
+          },
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.gz",
+              "ValueData": "gz Archive"
+          },
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.gz\\DefaultIcon",
+              "ValueData": "{{env:ProgramFiles}}\\7-Zip\\7z.dll,14"
+          },
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.gz\\shell\\open\\command",
+              "ValueData": "\"{{env:ProgramFiles}}\\7-Zip\\7zFM.exe\" \"%1\""
+          },
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.gz",
+              "ValueData": "7-Zip.gz"
+          },
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.gzip",
+              "ValueData": "gzip Archive"
+          },
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.gzip\\DefaultIcon",
+              "ValueData": "{{env:ProgramFiles}}\\7-Zip\\7z.dll,14"
+          },
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.gzip\\shell\\open\\command",
+              "ValueData": "\"{{env:ProgramFiles}}\\7-Zip\\7zFM.exe\" \"%1\""
+          },
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.gzip",
+              "ValueData": "7-Zip.gzip"
+          },
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.nupkg",
+              "ValueData": "nupkg Archive"
+          },
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.nupkg\\DefaultIcon",
+              "ValueData": "{{env:ProgramFiles}}\\7-Zip\\7z.dll,1"
+          },
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\7-Zip.nupkg\\shell\\open\\command",
+              "ValueData": "\"{{env:ProgramFiles}}\\7-Zip\\7zFM.exe\" \"%1\""
+          },
+          {
+              "KeyName": "HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.nupkg",
+              "ValueData": "7-Zip.nupkg"
+          }
+      ],
+      "ManualSteps": [
+          "Launch App (scoop): . \"$(scoop prefix 7zip)\\7zFM.exe\"",
+          "Tools >",
+          "`tOptions >",
+          "`t`t7-Zip >",
+          "`t`t`tContext menu items > [only the following]",
+          "`t`t`t`tOpen archive",
+          "`t`t`t`tExtract Here",
+          "`t`t`t`tExtract to <Folder>",
+          "`t`t`t`tAdd to <Archive>.zip",
+          "`t`t`t`tCRC SHA >",
+          "Wait for the process to close (custom script): WaitWhileProcess 7zFM"
+      ]
+  }
+}

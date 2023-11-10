@@ -1,0 +1,6 @@
+{
+  "AppType": "Script",
+  "AppId": "System - Power & sleep - Sleep - On battery power, PC goes to sleep after = 20 minutes",
+  "InstallScript": "powercfg /change standby-timeout-dc 20",
+  "Environments": "All"
+}

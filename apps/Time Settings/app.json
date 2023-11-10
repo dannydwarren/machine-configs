@@ -1,0 +1,29 @@
+{
+  "AppType": "Script",
+  "AppId": "Time Settings",
+  "Environments": "All",
+  "InstallScript": "Set-TimeZone \"Mountain Standard Time\"",
+  "Notes": "Time & Language > Date & time > Time zone = (UTC-07:00) Mountain Time (US & Canada)",
+  "Configuration": {
+      "RegistrySettings": [
+          {
+              "Description": "Enable UTC Clock",
+              "KeyName": "HKEY_CURRENT_USER\\Control Panel\\TimeDate\\AdditionalClocks\\1",
+              "ValueName": "Enable",
+              "ValueData": 1
+          },
+          {
+              "Description": "UTC Clock Name",
+              "KeyName": "HKEY_CURRENT_USER\\Control Panel\\TimeDate\\AdditionalClocks\\1",
+              "ValueName": "DisplayName",
+              "ValueData": "UTC"
+          },
+          {
+              "Description": "UTC Clock Timezone",
+              "KeyName": "HKEY_CURRENT_USER\\Control Panel\\TimeDate\\AdditionalClocks\\1",
+              "ValueName": "TzRegKeyName",
+              "ValueData": "UTC"
+          }
+      ]
+  }
+}

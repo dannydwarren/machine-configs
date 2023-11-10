@@ -1,5 +1,5 @@
 {
-  "appId": "CPUID.HWMonitor",
+  "appId": "Canonical.Ubuntu",
   "appType": "winget",
   "environments": "All"
 }

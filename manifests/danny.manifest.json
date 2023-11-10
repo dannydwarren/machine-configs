@@ -407,25 +407,25 @@
         },
         {
             "AppType": "Script",
-            "AppId": "System > Power & sleep > Screen > On battery power, turn off after = 10 minutes",
+            "AppId": "System - Power & sleep - Screen - On battery power, turn off after = 10 minutes",
             "InstallScript": "powercfg /change monitor-timeout-dc 10",
             "Environments": "All"
         },
         {
             "AppType": "Script",
-            "AppId": "System > Power & sleep > Screen > When plugged in, turn off after = 20 minutes",
+            "AppId": "System - Power & sleep - Screen - When plugged in, turn off after = 20 minutes",
             "InstallScript": "powercfg /change monitor-timeout-ac 20",
             "Environments": "All"
         },
         {
             "AppType": "Script",
-            "AppId": "System > Power & sleep > Sleep > On battery power, PC goes to sleep after = 20 minutes",
+            "AppId": "System - Power & sleep - Sleep - On battery power, PC goes to sleep after = 20 minutes",
             "InstallScript": "powercfg /change standby-timeout-dc 20",
             "Environments": "All"
         },
         {
             "AppType": "Script",
-            "AppId": "System > Power & sleep > Sleep > When plugged in, PC goes to sleep after = Never",
+            "AppId": "System - Power & sleep - Sleep - When plugged in, PC goes to sleep after = Never",
             "InstallScript": "powercfg /change standby-timeout-ac 0",
             "Environments": "All"
         },
@@ -700,11 +700,6 @@
         },
         {
             "AppType": "Winget",
-            "AppId": "Microsoft.AzureCLI",
-            "Environments": "Work"
-        },
-        {
-            "AppType": "Winget",
             "AppId": "ALCPU.CoreTemp",
             "Environments": "All"
         },
@@ -756,17 +751,6 @@
             "Configuration": {
                 "ManualSteps": [
                     "Launch -> Signin"
-                ]
-            }
-        },
-        {
-            "AppType": "Winget",
-            "AppId": "JetBrains.Rider",
-            "Environments": "Work",
-            "Configuration": {
-                "ManualSteps": [
-                    "Launch -> Register",
-                    "Need a way to backup and restore settings"
                 ]
             }
         },
@@ -978,13 +962,13 @@
         },
         {
             "AppType": "Script",
-            "AppId": "voidtools.Everything post install > Add to 'PATH' variable",
+            "AppId": "voidtools.Everything post install - Add to 'PATH' variable",
             "Environments": "All",
             "InstallScript": "$oldpath = (Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Session Manager\\Environment' -Name PATH).path;$newpath = \"$oldpath;$env:ProgramFiles\\Everything\";Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Session Manager\\Environment' -Name PATH -Value $newpath"
         },
         {
             "AppType": "Script",
-            "AppId": "voidtools.Everything post install > Configuration settings",
+            "AppId": "voidtools.Everything post install - Configuration settings",
             "Notes": "A refreshed 'Path' variable is required. This is accomplished by running as a separate app.",
             "Environments": "All",
             "InstallScript": "everything -install-run-on-system-startup;everything -startup"
@@ -1161,11 +1145,6 @@
         },
         {
             "AppType": "Winget",
-            "AppId": "Microsoft.SQLServerManagementStudio",
-            "Environments": "All"
-        },
-        {
-            "AppType": "Winget",
             "AppId": "Microsoft.AzureStorageEmulator",
             "Environments": "Work"
         },
@@ -1310,28 +1289,6 @@
             "AppType": "Unknown",
             "AppId": "ZoomIt",
             "Environments": "All"
-        },
-        {
-            "AppType": "Scoop",
-            "AppId": "hugo",
-            "Environments": "Emmersion"
-        },
-        {
-            "AppType": "Script",
-            "AppId": "Azurite",
-            "Environments": "Emmersion",
-            "InstallScript": "npm install -g azurite"
-        },
-        {
-            "AppType": "ScoopBucket",
-            "AppId": "stripe https://github.com/stripe/scoop-stripe-cli.git",
-            "Environments": "Emmersion",
-            "Notes": "Consider supporting InstallArgs for Scoop Buckets so the git url can be there instead of the AppId"
-        },
-        {
-            "AppType": "Scoop",
-            "AppId": "stripe",
-            "Environments": "Emmersion"
         },
         {
             "AppType": "Scoop",

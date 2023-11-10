@@ -1,0 +1,28 @@
+{
+  "AppType": "Script",
+  "AppId": "Configure Control Panel",
+  "Environments": "All",
+  "InstallScript": "Import-Module NetSecurity -UseWindowsPowerShell;Disable-NetFirewallRule -DisplayGroup \"Remote Assistance\"",
+  "Configuration": {
+      "RegistrySettings": [
+          {
+              "Description": "Control Panel > View by = Small icons",
+              "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ControlPanel",
+              "ValueName": "AllItemsIconView",
+              "ValueData": 1
+          },
+          {
+              "Description": "Control Panel > View by = Small icons",
+              "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ControlPanel",
+              "ValueName": "StartupPage",
+              "ValueData": 1
+          },
+          {
+              "Description": "Control Panel > System > Remote settings > Allow Remote Assistance connections to this computer = Off",
+              "KeyName": "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Remote Assistance",
+              "ValueName": "fAllowToGetHelp",
+              "ValueData": 0
+          }
+      ]
+  }
+}

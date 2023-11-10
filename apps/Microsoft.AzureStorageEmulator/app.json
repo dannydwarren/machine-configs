@@ -1,0 +1,5 @@
+{
+  "appId": "Microsoft.AzureStorageEmulator",
+  "appType": "winget",
+  "environments": "Azure"
+}

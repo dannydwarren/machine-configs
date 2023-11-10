@@ -1,1 +1,5 @@
-{"appId":"Yarn.Yarn","appType":"winget","environments":"All"}
+{
+  "appId": "Yarn.Yarn",
+  "appType": "winget",
+  "environments": "All"
+}
