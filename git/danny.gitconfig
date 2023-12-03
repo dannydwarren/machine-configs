@@ -1,3 +1,5 @@
+[danny]
+	difftool = VSCode
 [user]
 	name = Danny Warren
 [core]
@@ -16,16 +18,14 @@
 	rebase = true
 [fetch]
 	prune = true
-[diff]
-	tool = vscode
-[merge]
-	tool = vscode
 [difftool]
 	prompt = false
-[difftool "vscode"]
+[mergetool]
+	keepBackup = false
+[difftool "VSCode"]
 	cmd = code --wait --diff $LOCAL $REMOTE
-[mergetool "vscode"]
-	cmd = code --wait $MERGED
+[mergetool "VSCode"]
+	cmd = code --wait --merge $LOCAL $REMOTE $BASE $MERGED
 [alias]
 	# LOG
 	logf = log -10 --topo-order --date=format:'%Y-%m-%d %H:%M:%S' --pretty=format:'%C(cyan)%h%Creset   %C(black bold)%ad%Creset   %C(green)%<(12)%an%Creset %s'
