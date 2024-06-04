@@ -1,5 +1,6 @@
 {
   "appId": "voidtools.Everything",
   "appType": "winget",
-  "environments": "All"
+  "environments": "All",
+  "PreventUpgrade": true
 }
