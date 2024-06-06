@@ -1,0 +1,1 @@
+(Test-Path $profile) -and (Select-String "$($PSScriptRoot)\profile.ps1" $profile -SimpleMatch)

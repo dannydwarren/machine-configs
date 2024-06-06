@@ -1,7 +1,6 @@
 {
   "apps": [
-    "Download profile.ps1",
-    "Use downloaded profile.ps1 in currently running PowerShell",
+    "profile.ps1",
     "Disable UAC",
     "Microsoft.VisualStudioCode",
     "Microsoft.WindowsTerminal",
