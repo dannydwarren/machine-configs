@@ -1,7 +1,7 @@
 {
   "AppType": "Winget",
   "AppId": "Corsair.iCUE",
-  "Environments": "LiquidCooling",
+  "Environments": "Moebius",
   "PreventUpgrade": true,
   "Configuration": {
       "ManualSteps": [

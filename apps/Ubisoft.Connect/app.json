@@ -1,5 +1,5 @@
 {
   "appId": "Ubisoft.Connect",
   "appType": "winget",
-  "environments": "All"
+  "environments": "Gaming"
 }

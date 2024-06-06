@@ -1,5 +1,5 @@
 {
   "appId": "scrcpy",
   "appType": "scoop",
-  "environments": "All"
+  "environments": "Personal"
 }

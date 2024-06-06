@@ -1,5 +1,5 @@
 {
   "appId": "Microsoft.WindowsTerminal",
   "appType": "winget",
-  "environments": "All"
+  "environments": "Win10"
 }

@@ -1,5 +1,5 @@
 {
   "appId": "Rufus.Rufus",
   "appType": "winget",
-  "environments": "All"
+  "environments": "Personal"
 }

@@ -1,6 +1,5 @@
 {
-  "AppType": "Script",
+  "AppType": "PowerShell",
   "AppId": "System - Power & sleep - Screen - When plugged in, turn off after = 20 minutes",
-  "InstallScript": "powercfg /change monitor-timeout-ac 20",
   "Environments": "All"
 }

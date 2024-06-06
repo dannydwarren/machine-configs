@@ -1,6 +1,5 @@
 {
-  "AppType": "Script",
+  "AppType": "PowerShell",
   "AppId": "voidtools.Everything Everything.ini",
-  "Environments": "All",
-  "InstallScript": "Import-Module BitsTransfer -UseWindowsPowerShell;Start-BitsTransfer -Source \"https://raw.githubusercontent.com/dannydwarren/machine-configs/main/manifests/Everything.ini\" -Destination \"$env:ProgramFiles\\Everything\\Everything.ini\""
+  "Environments": "All"
 }

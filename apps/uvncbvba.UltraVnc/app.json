@@ -1,1 +1,5 @@
-{"appId":"uvncbvba.UltraVnc","appType":"winget","environments":"All"}
+{
+    "appId":"uvncbvba.UltraVnc",
+    "appType":"winget",
+    "environments":"RemoteMac"
+}

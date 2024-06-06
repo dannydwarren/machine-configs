@@ -1,0 +1,1 @@
+powercfg /change standby-timeout-dc 20

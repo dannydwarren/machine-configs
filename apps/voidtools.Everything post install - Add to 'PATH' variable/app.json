@@ -1,6 +1,0 @@
-{
-  "AppType": "Script",
-  "AppId": "voidtools.Everything post install - Add to 'PATH' variable",
-  "Environments": "All",
-  "InstallScript": "$oldpath = (Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Session Manager\\Environment' -Name PATH).path;$newpath = \"$oldpath;$env:ProgramFiles\\Everything\";Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Session Manager\\Environment' -Name PATH -Value $newpath"
-}
