@@ -6,4 +6,5 @@ Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Co
 
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 
+# Seems like this call sometimes freezes up. Will move this app to be last for now so a freeze up won't affect other apps.
 everything -install-run-on-system-startup;everything -startup

@@ -44,8 +44,6 @@
     "Ubisoft.Connect",
     "VideoLAN.VLC",
     "Zoom.Zoom",
-    "voidtools.Everything",
-    "voidtools.Everything Everything.ini",
     "7zip.7zip",
     "Microsoft.AzureStorageEmulator",
     "Microsoft.WindowsSDK",
@@ -70,6 +68,8 @@
     "CascadiaCode-NF",
     "JanDeDobbeleer.OhMyPosh",
     "Yarn.Yarn",
-    "uvncbvba.UltraVnc"
+    "uvncbvba.UltraVnc",
+    "voidtools.Everything",
+    "voidtools.Everything Everything.ini"
   ]
 }
