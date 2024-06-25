@@ -1,5 +1,5 @@
 {
   "AppType": "PowerShell",
-  "AppId": "Download profile.ps1",
+  "AppId": "Danny PowerShell Profile",
   "Environments": "All"
 }

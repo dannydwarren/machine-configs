@@ -1,6 +1,6 @@
 {
   "apps": [
-    "profile.ps1",
+    "Danny PowerShell Profile",
     "Disable UAC",
     "Microsoft.VisualStudioCode",
     "Microsoft.WindowsTerminal",

@@ -21,7 +21,7 @@ mkdir $transcripts -ErrorAction Ignore
 $InformationPreference = 'Continue'
 
 function setLocationToSrc() {
-    if (($PSScriptRoot -like '*system32*') -or ($PSScriptRoot -like '*danny*')) {
+    if (($Pwd -like '*system32*') -or ($Pwd -like '*danny*')) {
         Set-Location $src
     }
 }
@@ -43,4 +43,10 @@ Set-Alias -Name android -Value scrcpy
 # TODO: Run this as nightly job
 function clear-clipboard {
     Restart-Service -Name "cbdhsvc*" -force
+}
+
+function clone-repo($repositoryOrganization, $repositoryName){
+    if(![System.IO.File]::Exists("$src\$repositoryName")){
+        git clone "https://github.com/$repositoryOrganization/$repositoryName.git"
+    }
 }
