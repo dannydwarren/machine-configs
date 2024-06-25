@@ -1,0 +1,6 @@
+{
+    "appId": "JetBrains.Toolbox",
+    "appType": "winget",
+    "environments": "JobNimbus",
+    "preventUpgrade": true
+}
