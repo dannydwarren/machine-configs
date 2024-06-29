@@ -1,0 +1,7 @@
+{
+    "appType": "GitRepo",
+    "appId": "git.dannydwarren.configurator",
+    "installArgs": "https://github.com/dannydwarren/configurator.git",
+    "preventUpgrade": true,
+    "environments": "Personal|JobNimbus"
+}

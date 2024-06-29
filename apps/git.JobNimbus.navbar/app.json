@@ -1,0 +1,7 @@
+{
+    "appType": "GitRepo",
+    "appId": "git.JobNimbus.navbar",
+    "installArgs": "https://github.com/JobNimbus/navbar.git",
+    "preventUpgrade": true,
+    "environments": "JobNimbus"
+}

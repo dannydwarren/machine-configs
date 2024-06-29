@@ -72,6 +72,22 @@
     "AgileBits.1Password",
     "voidtools.Everything",
     "voidtools.Everything Everything.ini",
-    "JetBrains.Toolbox"
+    "JetBrains.Toolbox",
+    "git.dannydwarren.configurator",
+    "git.JobNimbus.webappui",
+    "git.JobNimbus.webappnew",
+    "git.JobNimbus.gazelleAutomation",
+    "git.JobNimbus.web-root",
+    "git.JobNimbus.web-state",
+    "git.JobNimbus.settings-frontend",
+    "git.JobNimbus.jobs-frontend",
+    "git.JobNimbus.navbar",
+    "git.JobNimbus.tiered-pricing-backend",
+    "git.JobNimbus.web1-single-spa-application",
+    "git.JobNimbus.jncore",
+    "git.JobNimbus.boards-frontend",
+    "git.JobNimbus.parcels-frontend-react",
+    "git.JobNimbus.job-field-settings-frontend",
+    "git.JobNimbus.sales-settings-backend"
     ]
 }
