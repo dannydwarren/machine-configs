@@ -88,10 +88,10 @@
     "git.JobNimbus.boards-frontend",
     "git.JobNimbus.parcels-frontend-react",
     "git.JobNimbus.job-field-settings-frontend",
-    "git.JobNimbus.sales-settings-backend"
+    "git.JobNimbus.sales-settings-backend",
+    "Spotify.Spotify"
   ],
   "todo": [
-    "Spotify",
     "nvm install lts and use lts",
     "JobNimbus .npmrc (secure) - maybe empty with prompt? [npm config edit]",
     "Pritunl"

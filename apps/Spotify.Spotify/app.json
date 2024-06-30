@@ -1,0 +1,5 @@
+{
+  "appId": "Spotify.Spotify",
+  "appType": "winget",
+  "environments": "All"
+}
