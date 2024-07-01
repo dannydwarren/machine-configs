@@ -94,6 +94,7 @@
   "todo": [
     "nvm install lts and use lts",
     "JobNimbus .npmrc (secure) - maybe empty with prompt? [npm config edit]",
-    "Pritunl"
+    "Pritunl",
+    "Defender Exclusion List"
   ]
 }
