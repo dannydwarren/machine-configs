@@ -89,6 +89,7 @@
     "git.JobNimbus.parcels-frontend-react",
     "git.JobNimbus.job-field-settings-frontend",
     "git.JobNimbus.sales-settings-backend",
+    "git.JobNimbus.jobs-custom-fields-backend",
     "Spotify.Spotify"
   ],
   "todo": [
