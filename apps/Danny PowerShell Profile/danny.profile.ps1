@@ -50,3 +50,8 @@ function clone-repo($repositoryOrganization, $repositoryName){
         git clone "https://github.com/$repositoryOrganization/$repositoryName.git"
     }
 }
+
+#OPTIONS: dev-phoenix
+function setAwsProfile($awsProfile){
+  aws s3 ls --profile $awsProfile
+}

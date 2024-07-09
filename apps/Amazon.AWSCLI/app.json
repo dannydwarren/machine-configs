@@ -1,0 +1,5 @@
+{
+  "appId": "Amazon.AWSCLI",
+  "appType": "winget",
+  "environments": "JobNimbus"
+}
