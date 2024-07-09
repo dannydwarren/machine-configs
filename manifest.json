@@ -99,6 +99,7 @@
     "nvm install lts and use lts",
     "JobNimbus .npmrc (secure) - maybe empty with prompt? [npm config edit]",
     "Pritunl",
-    "Defender Exclusion List"
+    "Defender Exclusion List",
+    "jnlocal install and add to path"
   ]
 }
