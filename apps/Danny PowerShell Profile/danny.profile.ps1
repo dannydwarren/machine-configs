@@ -45,16 +45,22 @@ function clear-clipboard {
     Restart-Service -Name "cbdhsvc*" -force
 }
 
-function clone-repo($repositoryOrganization, $repositoryName){
-    if(![System.IO.File]::Exists("$src\$repositoryName")){
+function clone-repo($repositoryOrganization, $repositoryName) {
+    if (![System.IO.File]::Exists("$src\$repositoryName")) {
         git clone "https://github.com/$repositoryOrganization/$repositoryName.git"
     }
 }
 
 #OPTIONS: dev-phoenix
-function setAwsProfile($awsProfile){
-  aws s3 ls --profile $awsProfile
+function setAwsProfile($awsProfile) {
+    aws s3 ls --profile $awsProfile
+    setJnLocalEnv $awsProfile
 }
-function loginAws($awsProfile){
-  aws sso login --profile $awsProfile
+function loginAws($awsProfile) {
+    aws sso login --profile $awsProfile
+    setJnLocalEnv $awsProfile
+}
+function setJnLocalEnv($awsProfile){
+    $env:AWS_PROFILE = $awsProfile
+    $env:AWS_REGION = (aws configure get region --profile $env:AWS_PROFILE)
 }
