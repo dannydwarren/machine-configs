@@ -1,0 +1,6 @@
+{
+  "appId": "EnableVirtualization",
+  "appType": "powerShell",
+  "preventUpgrade": true,
+  "environments": "JobNimbus"
+}
