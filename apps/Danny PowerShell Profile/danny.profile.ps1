@@ -64,3 +64,7 @@ function setJnLocalEnv($awsProfile){
     $env:AWS_PROFILE = $awsProfile
     $env:AWS_REGION = (aws configure get region --profile $env:AWS_PROFILE)
 }
+function generateApi2Env(){
+    jnlocal dotenv --source taskdef webapp-api2-dev -o "$src\webappnew\future\api\.env" -w "$HOME\JobNimbus\local-overrides.json"
+}
+
