@@ -55,3 +55,6 @@ function clone-repo($repositoryOrganization, $repositoryName){
 function setAwsProfile($awsProfile){
   aws s3 ls --profile $awsProfile
 }
+function loginAws($awsProfile){
+  aws sso login --profile $awsProfile
+}
