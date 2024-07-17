@@ -62,12 +62,21 @@ function loginAws($awsProfile) {
 }
 function setJnLocalEnv($awsProfile) {
   $env:AWS_PROFILE = $awsProfile
+  Write-Host "Profile set to: $env:AWS_PROFILE"
   $env:AWS_REGION = (aws configure get region --profile $env:AWS_PROFILE)
+  Write-Host "Region set to: $env:AWS_REGION"
 }
 function generateLocalEnv() {
+  Write-Host "Profile set to: $env:AWS_PROFILE"
+  Write-Host "Region set to: $env:AWS_REGION"
+  
   #to find something aws ecs list-task-definitions | select-string "the thing"
+  runJnLocal webapp-api2-dev "$src\webappnew\future\api\.env"
+  runJnLocal jncore-nodeapi-dev "$src\webappnew\NodeServer\.env"
+}
+function runJnLocal($taskDef, $outputFilePath) {
   $overridePath = "$HOME\JobNimbus\local-overrides.json"
   jnlocal dotenv --source taskdef webapp-api2-dev -o "$src\webappnew\future\api\.env" -w $overridePath
-  jnlocal dotenv --source taskdef jncore-nodeapi-dev -o "$src\webappnew\NodeServer\.env" -w $overridePath
+  Write-Host "Secrets stored for $taskDef in $outputFilePath"
 }
 
