@@ -1,0 +1,7 @@
+{
+  "appId": "git.JobNimbus.dev-metrics",
+  "appType": "gitRepo",
+  "installArgs": "https://github.com/JobNimbus/dev-metrics.git",
+  "preventUpgrade": true,
+  "environments": "JobNimbus"
+}
