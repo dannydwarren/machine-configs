@@ -79,7 +79,7 @@
     "git.JobNimbus.gazelleAutomation",
     "git.JobNimbus.web-root",
     "git.JobNimbus.web-state",
-    "git.JobNimbus.settings-frontend",
+    "git.JobNimbus.tiered-pricing-frontend",
     "git.JobNimbus.jobs-frontend",
     "git.JobNimbus.navbar",
     "git.JobNimbus.tiered-pricing-backend",
