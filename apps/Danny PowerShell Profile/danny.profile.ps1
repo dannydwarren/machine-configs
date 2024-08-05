@@ -73,10 +73,11 @@ function generateLocalEnv() {
   #to find something aws ecs list-task-definitions | select-string "the thing"
   runJnLocal webapp-api2-dev "$src\webappnew\future\api\.env"
   runJnLocal jncore-nodeapi-dev "$src\webappnew\NodeServer\.env"
+  runJnLocal webapp-worker-dev "$src\webappnew\Future\Worker\.env"
 }
 function runJnLocal($taskDef, $outputFilePath) {
   $overridePath = "$HOME\JobNimbus\local-overrides.json"
-  jnlocal dotenv --source taskdef webapp-api2-dev -o "$src\webappnew\future\api\.env" -w $overridePath
+  jnlocal dotenv --source taskdef $taskDef -o $outputFilePath -w $overridePath
   Write-Host "Secrets stored for $taskDef in $outputFilePath"
 }
 
