@@ -74,6 +74,7 @@ function generateLocalEnv() {
   runJnLocal webapp-api2-dev "$src\webappnew\future\api\.env"
   runJnLocal jncore-nodeapi-dev "$src\webappnew\NodeServer\.env"
   runJnLocal webapp-worker-dev "$src\webappnew\Future\Worker\.env"
+  runJnLocal jobs-custom-fields-backend-dev "$src\jobs-custom-fields-backend\.env"
 }
 function runJnLocal($taskDef, $outputFilePath) {
   $overridePath = "$HOME\JobNimbus\local-overrides.json"
