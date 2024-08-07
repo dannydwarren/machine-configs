@@ -82,3 +82,6 @@ function runJnLocal($taskDef, $outputFilePath) {
   Write-Host "Secrets stored for $taskDef in $outputFilePath"
 }
 
+function createBranch($ticketNumber, $branchName) {
+  git cob "danny/${ticketNumber}_${branchName}"
+}
