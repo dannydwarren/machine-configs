@@ -1,0 +1,5 @@
+{
+  "appId": "Microsoft.DotNet.SDK.8",
+  "appType": "winget",
+  "environments": "All"
+}
