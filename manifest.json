@@ -1,11 +1,12 @@
 {
   "apps": [
+    "JanDeDobbeleer.OhMyPosh",
+    "posh-git",
     "Danny PowerShell Profile",
     "Disable UAC",
     "Microsoft.VisualStudioCode",
     "Microsoft.WindowsTerminal",
     "Install NuGet Provider for PowerShellGet and Register Default PSRepository",
-    "posh-git",
     "BurntToast",
     "Configure Control Panel",
     "Configure Desktop",
@@ -66,7 +67,6 @@
     "Gweltaz27.IHateRegions",
     "nerd-fonts",
     "CascadiaCode-NF",
-    "JanDeDobbeleer.OhMyPosh",
     "Yarn.Yarn",
     "uvncbvba.UltraVnc",
     "AgileBits.1Password",
