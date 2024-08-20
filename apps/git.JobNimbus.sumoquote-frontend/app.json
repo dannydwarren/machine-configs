@@ -1,0 +1,7 @@
+{
+    "appType": "GitRepo",
+    "appId": "git.JobNimbus.sumoquote-frontend",
+    "installArgs": "https://github.com/JobNimbus/sumoquote-frontend.git",
+    "preventUpgrade": true,
+    "environments": "JobNimbus"
+}

@@ -92,6 +92,7 @@
     "git.JobNimbus.jobs-custom-fields-backend",
     "git.JobNimbus.jnlocal",
     "git.JobNimbus.dev-metrics",
+    "git.JobNimbus.sumoquote-frontend",
     "EnableVirtualization",
     "Spotify.Spotify",
     "Amazon.AWSCLI",
