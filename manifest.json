@@ -1,10 +1,10 @@
 {
   "apps": [
+    "Disable UAC",
+    "Microsoft.VisualStudioCode",
     "JanDeDobbeleer.OhMyPosh",
     "posh-git",
     "Danny PowerShell Profile",
-    "Disable UAC",
-    "Microsoft.VisualStudioCode",
     "Microsoft.WindowsTerminal",
     "Install NuGet Provider for PowerShellGet and Register Default PSRepository",
     "BurntToast",
