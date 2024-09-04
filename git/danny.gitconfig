@@ -4,6 +4,8 @@
 	name = Danny Warren
 [core]
 	editor = code --wait --new-window
+[safe]
+	directory = *
 # Not supported by the mob tool as of 2021-04-29
 # [status]
 # 	short = true
