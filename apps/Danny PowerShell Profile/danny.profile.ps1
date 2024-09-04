@@ -51,6 +51,7 @@ function clone-repo($repositoryOrganization, $repositoryName) {
   }
 }
 
+#First Time Setup: https://jobnimbus.atlassian.net/wiki/spaces/DEV/pages/2054684772/Setup+AWS+CLI
 #OPTIONS: dev-phoenix
 function setAwsProfile($awsProfile) {
   aws s3 ls --profile $awsProfile
