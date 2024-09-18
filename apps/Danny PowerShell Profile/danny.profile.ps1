@@ -86,3 +86,8 @@ function runJnLocal($taskDef, $outputFilePath) {
 function createBranch($ticketNumber, $branchName) {
   git cob "danny/${ticketNumber}_${branchName}"
 }
+
+function test-jncore(){
+  $env:env = "dev"
+  yarn mocha --ui bdd -R spec -t 5000 '{,!(node_modules)/**}/*.spec.js'
+}
