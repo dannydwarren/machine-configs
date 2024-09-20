@@ -1,0 +1,7 @@
+{
+  "appId": "git.JobNimbus.ops-jenkins-jobs",
+  "appType": "gitRepo",
+  "installArgs": "https://github.com/JobNimbus/ops-jenkins-jobs.git",
+  "preventUpgrade": true,
+  "environments": "JobNimbus"
+}
