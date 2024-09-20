@@ -1,7 +1,0 @@
-{
-  "appId": "git.JobNimbus.jobs-custom-fields-backend",
-  "appType": "gitRepo",
-  "installArgs": "https://github.com/JobNimbus/jobs-custom-fields-backend.git",
-  "preventUpgrade": true,
-  "environments": "JobNimbus"
-}
