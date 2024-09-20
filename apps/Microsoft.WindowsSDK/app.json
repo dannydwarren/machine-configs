@@ -1,5 +1,5 @@
 {
   "appId": "Microsoft.WindowsSDK",
   "appType": "winget",
-  "environments": "AdvancedDev"
+  "environments": "Advanced"
 }
