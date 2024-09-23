@@ -98,7 +98,8 @@
     "EnableVirtualization",
     "Spotify.Spotify",
     "Amazon.AWSCLI",
-    "Microsoft.DotNet.SDK.8"
+    "Microsoft.DotNet.SDK.8",
+    "git.JobNimbus.cd-platform-infra"
   ],
   "todo": [
     "nvm install lts and use lts",

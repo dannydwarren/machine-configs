@@ -1,0 +1,7 @@
+{
+  "appId": "git.JobNimbus.cd-platform-infra",
+  "appType": "gitRepo",
+  "installArgs": "https://github.com/JobNimbus/cd-platform-infra.git",
+  "preventUpgrade": true,
+  "environments": "JobNimbus"
+}
