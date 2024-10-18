@@ -53,7 +53,7 @@
 	cw = commitwip
 	wc = commitwip
 	resumewip = "!if [ \"$(git log -1 --pretty=format:%B)\" == \"WIP\" ]; then git reset HEAD~1; else echo 'The last commit was not \"WIP\"'; fi"
-    wipresume = resumewip
+  wipresume = resumewip
 	rw = resumewip
 	wr = resumewip
 	# DIFF
