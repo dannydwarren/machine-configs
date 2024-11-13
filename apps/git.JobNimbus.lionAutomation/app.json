@@ -1,0 +1,7 @@
+{
+  "appId": "git.JobNimbus.lionAutomation",
+  "appType": "GitRepo",
+  "installArgs": "https://github.com/JobNimbus/lionAutomation.git",
+  "preventUpgrade": true,
+  "environments": "JobNimbus"
+}

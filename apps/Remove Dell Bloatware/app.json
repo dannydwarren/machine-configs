@@ -1,0 +1,5 @@
+{
+  "appId": "Remove Dell Bloatware",
+  "appType": "PowerShell",
+  "environments": "JobNimbus"
+}

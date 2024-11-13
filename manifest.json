@@ -96,11 +96,13 @@
     "git.JobNimbus.jnapp",
     "git.JobNimbus.ops-jenkins-jobs",
     "git.JobNimbus.cd-platform-infra",
+    "git.JobNimbus.lionAutomation",
     "EnableVirtualization",
     "Spotify.Spotify",
     "Amazon.AWSCLI",
     "Microsoft.DotNet.SDK.8",
-    "JetBrains.Rider"
+    "JetBrains.Rider",
+    "Remove Dell Bloatware"
   ],
   "todo": [
     "nvm install lts and use lts",
