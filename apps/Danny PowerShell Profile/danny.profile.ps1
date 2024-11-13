@@ -91,3 +91,19 @@ function test-jncore(){
   $env:env = "dev"
   yarn mocha --ui bdd -R spec -t 5000 '{,!(node_modules)/**}/*.spec.js'
 }
+
+function customFieldsPasswordDev(){
+  $DBPORT="5432"
+  $DB_USERNAME="phoenix"
+  $DBNAME="app_db"
+  $RDSHOST="custom-fields-dev-db.ce0vwjvstvmb.us-west-2.rds.amazonaws.com"
+  echo "$(aws rds generate-db-auth-token --hostname $RDSHOST --port $DBPORT --username $DB_USERNAME)"
+}
+
+function customFieldsPasswordProd(){
+  $DBPORT="5432"
+  $DB_USERNAME="phoenix"
+  $DBNAME="app_db"
+  $RDSHOST="custom-fields-prod-db.cj67xhhcbjuh.us-east-1.rds.amazonaws.com"
+  echo "$(aws rds generate-db-auth-token --hostname $RDSHOST --port $DBPORT --username $DB_USERNAME)"
+}
