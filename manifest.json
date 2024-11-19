@@ -95,11 +95,12 @@
     "git.JobNimbus.sumoquote-frontend",
     "git.JobNimbus.jnapp",
     "git.JobNimbus.ops-jenkins-jobs",
+    "git.JobNimbus.cd-platform-infra",
     "EnableVirtualization",
     "Spotify.Spotify",
     "Amazon.AWSCLI",
     "Microsoft.DotNet.SDK.8",
-    "git.JobNimbus.cd-platform-infra"
+    "JetBrains.Rider"
   ],
   "todo": [
     "nvm install lts and use lts",

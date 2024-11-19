@@ -1,0 +1,6 @@
+{
+    "appId": "JetBrains.Rider",
+    "appType": "winget",
+    "environments": "Personal",
+    "preventUpgrade": true
+}
