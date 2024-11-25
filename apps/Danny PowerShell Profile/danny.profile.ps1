@@ -72,15 +72,22 @@ function generateLocalEnv() {
   Write-Host "Region set to: $env:AWS_REGION"
   
   #to find something aws ecs list-task-definitions | select-string "the thing"
-  runJnLocal webapp-api2-dev "$src\webappnew\future\api\.env"
-  runJnLocal jncore-nodeapi-dev "$src\webappnew\NodeServer\.env"
-  runJnLocal webapp-worker-dev "$src\webappnew\Future\Worker\.env"
-  runJnLocal custom-fields-api-dev "$src\custom-fields-backend\.env"
+  runJnLocalTaskDef "webapp-api2-dev" "$src\webappnew\future\api\.env"
+  runJnLocalTaskDef "jncore-nodeapi-dev" "$src\webappnew\NodeServer\.env"
+  runJnLocalTaskDef "webapp-worker-dev" "$src\webappnew\Future\Worker\.env"
+  runJnLocalTaskDef "custom-fields-api-dev" "$src\custom-fields-backend\api\.env"
+
+  runJnLocalLambdaName "custom-fields-jobs-custom-fields-sync-dev" "$src\custom-fields-backend\lambdas\.env" 
 }
-function runJnLocal($taskDef, $outputFilePath) {
+function runJnLocalTaskDef($taskDef, $outputFilePath) {
   $overridePath = "$HOME\JobNimbus\local-overrides.json"
   jnlocal dotenv --source taskdef $taskDef -o $outputFilePath -w $overridePath
   Write-Host "Secrets stored for $taskDef in $outputFilePath"
+}
+function runJnLocalLambdaName($lambdaName, $outputFilePath) {
+  $overridePath = "$HOME\JobNimbus\local-overrides.json"
+  jnlocal dotenv --source lambda $lambdaName -o $outputFilePath -w $overridePath
+  Write-Host "Secrets stored for $lambdaName in $outputFilePath"
 }
 
 function createBranch($ticketNumber, $branchName) {
