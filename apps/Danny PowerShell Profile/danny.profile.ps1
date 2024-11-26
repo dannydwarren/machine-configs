@@ -71,7 +71,8 @@ function generateLocalEnv() {
   Write-Host "Profile set to: $env:AWS_PROFILE"
   Write-Host "Region set to: $env:AWS_REGION"
   
-  #to find something aws ecs list-task-definitions | select-string "the thing"
+  # To find something aws ecs list-task-definitions | select-string "the thing"
+  # To find something aws lambda list-functions | select-string "FunctionName" | select-string "the thing"
   runJnLocalTaskDef "webapp-api2-dev" "$src\webappnew\future\api\.env"
   runJnLocalTaskDef "jncore-nodeapi-dev" "$src\webappnew\NodeServer\.env"
   runJnLocalTaskDef "webapp-worker-dev" "$src\webappnew\Future\Worker\.env"
