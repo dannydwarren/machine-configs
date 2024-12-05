@@ -1,0 +1,24 @@
+{
+  "AppType": "Script",
+  "AppId": "Disable Locale Hotkeys",
+  "Environments": "All",
+  "Configuration": {
+      "RegistrySettings": [
+        {
+          "KeyName": "HKEY_CURRENT_USER\\Keyboard Layout\\Toggle",
+          "ValueName": "Hotkey",
+          "ValueData": "3"
+        },
+        {
+          "KeyName": "HKEY_CURRENT_USER\\Keyboard Layout\\Toggle",
+          "ValueName": "Language Hotkey",
+          "ValueData": "3"
+        },
+        {
+          "KeyName": "HKEY_CURRENT_USER\\Keyboard Layout\\Toggle",
+          "ValueName": "Layout Hotkey",
+          "ValueData": "3"
+        }
+      ]
+  }
+}
