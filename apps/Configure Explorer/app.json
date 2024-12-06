@@ -95,6 +95,24 @@
               "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoComplete",
               "ValueName": "Append Completion",
               "ValueData": "yes"
+          },
+          {
+            "Description": "Hide Gallery",
+            "KeyName": "HKEY_CURRENT_USER\\Software\\Classes\\CLSID\\{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}",
+            "ValueName": "System.IsPinnedToNameSpaceTree",
+            "ValueData": 0
+          },
+          {
+            "Description": "Hide Home (part 1 of 2)",
+            "KeyName": "HKEY_CURRENT_USER\\Software\\Classes\\CLSID\\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}",
+            "ValueName": "@",
+            "ValueData": "CLSID_MSGraphHomeFolder"
+          },
+          {
+            "Description": "Hide Home (part 2 of 2)",
+            "KeyName": "HKEY_CURRENT_USER\\Software\\Classes\\CLSID\\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}",
+            "ValueName": "System.IsPinnedToNameSpaceTree",
+            "ValueData": 0
           }
       ]
   }
