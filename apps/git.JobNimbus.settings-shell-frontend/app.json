@@ -1,0 +1,7 @@
+{
+  "appType": "gitRepo",
+  "appId": "git.JobNimbus.settings-shell-frontend",
+  "installArgs": "https://github.com/JobNimbus/settings-shell-frontend.git",
+  "preventUpgrade": true,
+  "environments": "JobNimbus"
+}
