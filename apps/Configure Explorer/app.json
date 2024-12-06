@@ -23,6 +23,12 @@
               "ValueData": 0
           },
           {
+            "Description": "View > Options > View > Advanced settings > Files and Folders > Decrease space between items (compact view) = On",
+            "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+            "ValueName": "UseCompactMode",
+            "ValueData": 1
+          },
+          {
               "Description": "View > Options > View > Advanced settings > Files and Folders > Hidden files and folders = Show hidden files, folders, and drives",
               "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
               "ValueName": "Hidden",
