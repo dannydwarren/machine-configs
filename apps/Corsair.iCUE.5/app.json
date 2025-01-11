@@ -1,6 +1,6 @@
 {
   "AppType": "Winget",
-  "AppId": "Corsair.iCUE",
+  "AppId": "Corsair.iCUE.5",
   "Environments": "Moebius",
   "PreventUpgrade": true,
   "Configuration": {
