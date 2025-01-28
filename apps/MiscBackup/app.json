@@ -1,0 +1,6 @@
+{
+    "AppType": "PowerShell",
+    "AppId": "MiscBackup",
+    "Environments": "All",
+    "PreventUpgrade": true
+}

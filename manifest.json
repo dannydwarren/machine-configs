@@ -105,7 +105,8 @@
     "Amazon.AWSCLI",
     "Microsoft.DotNet.SDK.8",
     "JetBrains.Rider",
-    "Remove Dell Bloatware"
+    "Remove Dell Bloatware",
+    "MiscBackup"
   ],
   "todo": [
     "nvm install lts and use lts",
