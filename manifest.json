@@ -79,6 +79,7 @@
     "git.JobNimbus.webappui",
     "git.JobNimbus.webappnew",
     "git.JobNimbus.gazelleAutomation",
+    "chromedriver",
     "git.JobNimbus.web-root",
     "git.JobNimbus.web-state",
     "git.JobNimbus.tiered-pricing-frontend",
