@@ -1,5 +1,5 @@
 {
   "appId": "Microsoft.DotNet.SDK.6",
   "appType": "winget",
-  "environments": "dev"
+  "environments": "dev|JobNimbus"
 }

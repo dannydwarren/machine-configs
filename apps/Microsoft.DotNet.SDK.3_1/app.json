@@ -1,6 +1,6 @@
 {
   "AppType": "Winget",
   "AppId": "Microsoft.DotNet.SDK.3_1",
-  "Environments": "dev",
+  "environments": "dev|JobNimbus",
   "PreventUpgrade": true
 }
