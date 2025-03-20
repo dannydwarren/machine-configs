@@ -107,7 +107,8 @@
     "Microsoft.DotNet.SDK.8",
     "JetBrains.Rider",
     "Remove Dell Bloatware",
-    "MiscBackup"
+    "MiscBackup",
+    "git.JobNimbus.zapier"
   ],
   "todo": [
     "nvm install lts and use lts",
