@@ -1,3 +1,5 @@
+Set-PSReadLineOption -PredictionSource History -PredictionViewStyle ListView
+
 $OneDrive = "$env:UserProfile\OneDrive"
 mkdir $OneDrive -ErrorAction Ignore
 
