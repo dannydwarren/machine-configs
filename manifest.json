@@ -108,7 +108,8 @@
     "JetBrains.Rider",
     "Remove Dell Bloatware",
     "MiscBackup",
-    "git.JobNimbus.zapier"
+    "git.JobNimbus.zapier",
+    "git.JobNimbus.jobnimbus-frontend"
   ],
   "todo": [
     "nvm install lts and use lts",
