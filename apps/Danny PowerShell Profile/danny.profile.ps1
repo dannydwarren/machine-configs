@@ -39,7 +39,7 @@ if ($PSVersionTable.PSVersion.Major -gt 5) {
   applyTheme
 }
 
-Set-Alias -Name tf -Value terraform.exe
+Set-Alias -Name tf -Value tofu.exe
 Set-Alias -Name android -Value scrcpy
 
 # TODO: Run this as nightly job
@@ -57,17 +57,30 @@ function clone-repo($repositoryOrganization, $repositoryName) {
 #OPTIONS: dev-phoenix
 function setAwsProfile($awsProfile) {
   aws s3 ls --profile $awsProfile
-  setJnLocalEnv $awsProfile
+  setAwsEnv $awsProfile
 }
 function loginAws($awsProfile) {
   aws sso login --profile $awsProfile
-  setJnLocalEnv $awsProfile
+  setAwsEnv $awsProfile
+  setTerraformEnv $awsProfile
 }
-function setJnLocalEnv($awsProfile) {
+function setAwsEnv($awsProfile) {
   $env:AWS_PROFILE = $awsProfile
   Write-Host "Profile set to: $env:AWS_PROFILE"
   $env:AWS_REGION = (aws configure get region --profile $env:AWS_PROFILE)
   Write-Host "Region set to: $env:AWS_REGION"
+}
+function setTerraformEnv() {
+  $env:TF_VAR_aws_account_name="dev"
+  Write-Host "TF_VAR_aws_account_name set to: $env:TF_VAR_aws_account_name"
+  $env:TF_VAR_env="dev"
+  Write-Host "TF_VAR_env set to: $env:TF_VAR_env"
+  $env:TF_VAR_runtime_config="dev"
+  Write-Host "TF_VAR_runtime_config set to: $env:TF_VAR_runtime_config"
+  $env:TF_VAR_dd_app_key="null"
+  Write-Host "TF_VAR_dd_app_key set to: $env:TF_VAR_dd_app_key"
+  $env:TF_VAR_dd_api_key="null"
+  Write-Host "TF_VAR_dd_api_key set to: $env:TF_VAR_dd_api_key"
 }
 function generateLocalEnv() {
   Write-Host "Profile set to: $env:AWS_PROFILE"
@@ -116,4 +129,8 @@ function customFieldsPasswordProd(){
   $DBNAME="app_db"
   $RDSHOST="custom-fields-prod-db.cj67xhhcbjuh.us-east-1.rds.amazonaws.com"
   echo "$(aws rds generate-db-auth-token --hostname $RDSHOST --port $DBPORT --username $DB_USERNAME)"
+}
+
+function terraformSetup() {
+  $env:Environment = "dev"
 }
