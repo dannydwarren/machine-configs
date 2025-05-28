@@ -1,0 +1,5 @@
+{
+  "appId": "Gruntwork.Terragrunt",
+  "appType": "winget",
+  "environments": "JobNimbus"
+}

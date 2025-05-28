@@ -65,6 +65,7 @@
     "OpenTofu.Tofu",
     "sysinternals",
     "danny.gitconfig",
+    "danny.git-bash.profile",
     "steamcmd",
     "Gweltaz27.IHateRegions",
     "nerd-fonts",
@@ -109,7 +110,8 @@
     "Remove Dell Bloatware",
     "MiscBackup",
     "git.JobNimbus.zapier",
-    "git.JobNimbus.jobnimbus-frontend"
+    "git.JobNimbus.jobnimbus-frontend",
+    "Gruntwork.Terragrunt"
   ],
   "todo": [
     "nvm install lts and use lts",
