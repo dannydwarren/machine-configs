@@ -78,7 +78,7 @@
     "JetBrains.Toolbox",
     "git.dannydwarren.configurator",
     "git.JobNimbus.webappui",
-    "git.JobNimbus.webappnew",
+    "git.JobNimbus.dotnet-monolith",
     "git.JobNimbus.gazelleAutomation",
     "Chromium.ChromeDriver",
     "git.JobNimbus.web-root",

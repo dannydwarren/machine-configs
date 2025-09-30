@@ -1,7 +1,0 @@
-{
-    "appType": "GitRepo",
-    "appId": "git.JobNimbus.webappnew",
-    "installArgs": "https://github.com/JobNimbus/webappnew.git",
-    "preventUpgrade": true,
-    "environments": "JobNimbus"
-}
