@@ -93,14 +93,16 @@ function generateLocalEnv() {
   Write-Host "AWS_REGION set to: $env:AWS_REGION"
   
   # To find something aws ecs list-task-definitions | select-string "the thing"
-  # To find something aws lambda list-functions | select-string "FunctionName" | select-string "the thing"
-  runJnLocalTaskDef "webapp-api2-dev" "$src\webappnew\future\api\.env"
-  runJnLocalTaskDef "jncore-nodeapi-dev" "$src\webappnew\NodeServer\.env"
-  runJnLocalTaskDef "webapp-worker-dev" "$src\webappnew\Future\Worker\.env"
+  # To find something aws lambda list-functions | select-string "FunctionName"
+  runJnLocalTaskDef "webapp-api2-dev" "$src\dotnet-monolith\API\.env"
+  runJnLocalTaskDef "webapp-auth-dev" "$src\admin-login-page\Auth\.env"
+  runJnLocalTaskDef "jncore-nodeapi-dev" "$src\jncore-monolith-api\.env"
+  runJnLocalTaskDef "webapp-worker-dev" "$src\dotnet-monolith\Worker\.env"
   runJnLocalTaskDef "custom-fields-api-dev" "$src\custom-fields-backend\api\.env"
 
   runJnLocalLambdaName "custom-fields-jobs-custom-fields-sync-dev" "$src\custom-fields-backend\lambdas\.env" 
 }
+
 function runJnLocalTaskDef($taskDef, $outputFilePath) {
   $overridePath = "$HOME\JobNimbus\local-overrides.json"
   jnlocal dotenv --source taskdef $taskDef -o $outputFilePath -w $overridePath
