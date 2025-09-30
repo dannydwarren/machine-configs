@@ -103,6 +103,7 @@
     "git.JobNimbus.lionAutomation",
     "git.JobNimbus.settings-shell-frontend",
     "git.JobNimbus.job-management-frontend",
+    "git.JobNimbus.engineering-standards",
     "EnableVirtualization",
     "Amazon.AWSCLI",
     "Microsoft.DotNet.SDK.8",
