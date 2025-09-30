@@ -1,0 +1,7 @@
+{
+  "appId": "git.JobNimbus.jncore-adhoc-scripts",
+  "appType": "gitRepo",
+  "installArgs": "https://github.com/JobNimbus/jncore-adhoc-scripts.git",
+  "preventUpgrade": true,
+  "environments": "JobNimbus"
+}

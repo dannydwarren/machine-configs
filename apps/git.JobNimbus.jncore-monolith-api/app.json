@@ -1,0 +1,7 @@
+{
+  "appId": "git.JobNimbus.jncore-monolith-api",
+  "appType": "gitRepo",
+  "installArgs": "https://github.com/JobNimbus/jncore-monolith-api.git",
+  "preventUpgrade": true,
+  "environments": "JobNimbus"
+}

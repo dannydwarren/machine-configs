@@ -1,0 +1,7 @@
+{
+  "appId": "git.JobNimbus.jncore-timebased-automation",
+  "appType": "gitRepo",
+  "installArgs": "https://github.com/JobNimbus/jncore-timebased-automation.git",
+  "preventUpgrade": true,
+  "environments": "JobNimbus"
+}
