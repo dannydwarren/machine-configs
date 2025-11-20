@@ -1,0 +1,5 @@
+{
+  "appId": "GitHub.cli",
+  "appType": "winget",
+  "environments": "All"
+}
