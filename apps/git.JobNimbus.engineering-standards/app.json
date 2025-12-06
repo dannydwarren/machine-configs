@@ -1,7 +1,0 @@
-{
-  "appId": "git.JobNimbus.engineering-standards",
-  "appType": "GitRepo",
-  "installArgs": "https://github.com/JobNimbus/engineering-standards.git",
-  "preventUpgrade": true,
-  "environments": "JobNimbus"
-}

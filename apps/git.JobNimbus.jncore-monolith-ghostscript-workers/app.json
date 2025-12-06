@@ -1,7 +1,0 @@
-{
-  "appId": "git.JobNimbus.jncore-monolith-ghostscript-workers",
-  "appType": "gitRepo",
-  "installArgs": "https://github.com/JobNimbus/jncore-monolith-ghostscript-workers.git",
-  "preventUpgrade": true,
-  "environments": "JobNimbus"
-}

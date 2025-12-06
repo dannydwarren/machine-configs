@@ -1,0 +1,7 @@
+{
+  "appId": "git.JobNimbus.jobnimbus-claude-plugin-marketplace",
+  "appType": "GitRepo",
+  "installArgs": "https://github.com/JobNimbus/jobnimbus-claude-plugin-marketplace.git",
+  "preventUpgrade": true,
+  "environments": "JobNimbus"
+}
