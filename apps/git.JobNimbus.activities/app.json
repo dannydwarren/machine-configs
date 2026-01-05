@@ -1,0 +1,7 @@
+{
+    "appType": "GitRepo",
+    "appId": "git.JobNimbus.activities",
+    "installArgs": "https://github.com/JobNimbus/activities.git",
+    "preventUpgrade": true,
+    "environments": "JobNimbus"
+}

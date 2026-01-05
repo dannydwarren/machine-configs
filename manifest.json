@@ -107,6 +107,8 @@
     "git.JobNimbus.jobnimbus-claude-plugin-marketplace",
     "git.JobNimbus.zapier",
     "git.JobNimbus.jobnimbus-frontend",
+    "git.JobNimbus.activities",
+    "git.JobNimbus.JobNimbus.Templates",
     "EnableVirtualization",
     "Amazon.AWSCLI",
     "Microsoft.DotNet.SDK.8",
