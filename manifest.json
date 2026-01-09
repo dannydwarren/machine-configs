@@ -112,6 +112,7 @@
     "EnableVirtualization",
     "Amazon.AWSCLI",
     "Microsoft.DotNet.SDK.8",
+    "Microsoft.DotNet.SDK.10",
     "JetBrains.Rider",
     "Remove Dell Bloatware",
     "MiscBackup",
