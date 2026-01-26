@@ -1,4 +1,4 @@
-#!/bin/bash
+﻿#!/bin/bash
 
 #First Time Setup: https://jobnimbus.atlassian.net/wiki/spaces/DEV/pages/2054684772/Setup+AWS+CLI
 #OPTIONS: aws configure list-profiles
@@ -34,4 +34,16 @@ function setTerraformEnv() {
     echo "TF_VAR_dd_app_key set to $TF_VAR_dd_app_key"
     echo "TF_VAR_dd_api_key set to $TF_VAR_dd_api_key"
   fi
+}
+function loginSpacelift() {
+  tofu login spacelift.io
+}
+function tfInstall() {
+  terragrunt init
+}
+function tfUpgrade(){
+  terragrunt init -upgrade 
+}
+function tfPlan() {
+  terragrunt plan -lock=false
 }
