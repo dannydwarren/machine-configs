@@ -1,0 +1,5 @@
+{
+  "appId": "Pritunl.PritunlClient",
+  "appType": "winget",
+  "environments": "JobNimbus"
+}

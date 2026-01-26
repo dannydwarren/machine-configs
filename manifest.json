@@ -116,12 +116,12 @@
     "JetBrains.Rider",
     "Remove Dell Bloatware",
     "MiscBackup",
-    "Gruntwork.Terragrunt"
+    "Gruntwork.Terragrunt",
+    "Pritunl.PritunlClient"
   ],
   "todo": [
     "nvm install lts and use lts",
     "JobNimbus .npmrc (secure) - maybe empty with prompt? [npm config edit]",
-    "Pritunl",
     "Defender Exclusion List",
     "jnlocal install and add to path",
     "Spotify.Spotify - does not support being installed as admin",
