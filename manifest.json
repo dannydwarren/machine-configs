@@ -117,7 +117,8 @@
     "Remove Dell Bloatware",
     "MiscBackup",
     "Gruntwork.Terragrunt",
-    "Pritunl.PritunlClient"
+    "Pritunl.PritunlClient",
+    "Claude"
   ],
   "todo": [
     "nvm install lts and use lts",
