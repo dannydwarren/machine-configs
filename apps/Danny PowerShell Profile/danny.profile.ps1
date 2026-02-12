@@ -1,4 +1,4 @@
-Set-PSReadLineOption -PredictionSource History -PredictionViewStyle ListView
+﻿Set-PSReadLineOption -PredictionSource History -PredictionViewStyle ListView
 
 $OneDrive = "$env:UserProfile\OneDrive"
 mkdir $OneDrive -ErrorAction Ignore
@@ -42,7 +42,7 @@ if ($PSVersionTable.PSVersion.Major -gt 5) {
 Set-Alias -Name tf -Value tofu.exe
 Set-Alias -Name android -Value scrcpy
 Set-Alias -Name rm -Value RmOverride
-Set-Alias -Name golden-hammer -Value claude
+function golden-hammer { claude --dangerously-skip-permissions @args }
 
 # TODO: Run this as nightly job
 function clear-clipboard {
