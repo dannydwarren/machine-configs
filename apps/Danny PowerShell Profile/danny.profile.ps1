@@ -96,10 +96,11 @@ function generateLocalEnv() {
   # To find something aws ecs list-task-definitions | select-string "the thing"
   # To find something aws lambda list-functions | select-string "FunctionName"
   runJnLocalTaskDef "webapp-api2-dev" "$src\dotnet-monolith\API\.env"
-  runJnLocalTaskDef "webapp-auth-dev" "$src\admin-login-page\Auth\.env"
-  runJnLocalTaskDef "jncore-nodeapi-dev" "$src\jncore-monolith-api\.env"
   runJnLocalTaskDef "webapp-worker-dev" "$src\dotnet-monolith\Worker\.env"
+  runJnLocalTaskDef "jncore-nodeapi-dev" "$src\jncore-monolith\api\.env"
   runJnLocalTaskDef "custom-fields-api-dev" "$src\custom-fields-backend\api\.env"
+  runJnLocalTaskDef "activities-api" "$src\activities\api\.env"
+  runJnLocalTaskDef "record-authorizer-api" "$src\record-authorizer\api\.env"
 
   runJnLocalLambdaName "custom-fields-jobs-custom-fields-sync-dev" "$src\custom-fields-backend\lambdas\.env" 
 }
