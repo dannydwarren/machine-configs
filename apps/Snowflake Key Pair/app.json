@@ -1,0 +1,5 @@
+{
+  "AppType": "PowerShell",
+  "AppId": "Snowflake Key Pair",
+  "Environments": "JobNimbus"
+}

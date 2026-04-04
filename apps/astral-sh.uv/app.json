@@ -1,0 +1,5 @@
+{
+  "appId": "astral-sh.uv",
+  "appType": "winget",
+  "environments": "JobNimbus"
+}

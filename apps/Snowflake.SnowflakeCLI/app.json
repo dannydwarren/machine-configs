@@ -1,0 +1,5 @@
+{
+  "appId": "Snowflake.SnowflakeCLI",
+  "appType": "winget",
+  "environments": "JobNimbus"
+}
