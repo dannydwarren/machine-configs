@@ -110,6 +110,7 @@
     "git.JobNimbus.activities",
     "git.JobNimbus.JobNimbus.Templates",
     "git.JobNimbus.api-tools",
+    "git.JobNimbus.welcome-to-engineering",
     "EnableVirtualization",
     "Amazon.AWSCLI",
     "Microsoft.DotNet.SDK.8",
