@@ -42,7 +42,7 @@ if ($PSVersionTable.PSVersion.Major -gt 5) {
 Set-Alias -Name tf -Value tofu.exe
 Set-Alias -Name android -Value scrcpy
 Set-Alias -Name rm -Value RmOverride
-function golden-hammer { claude --dangerously-skip-permissions @args }
+function golden-hammer { claude --permission-mode auto @args }
 
 # TODO: Run this as nightly job
 function clear-clipboard {
