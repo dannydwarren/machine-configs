@@ -1,0 +1,7 @@
+{
+    "appType": "GitRepo",
+    "appId": "git.JobNimbus.ios-leads-sales-projects",
+    "installArgs": "https://github.com/JobNimbus/ios-leads-sales-projects.git",
+    "preventUpgrade": true,
+    "environments": "JobNimbus"
+}
