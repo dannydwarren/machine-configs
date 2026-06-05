@@ -1,0 +1,7 @@
+{
+    "appType": "GitRepo",
+    "appId": "git.JobNimbus.record-lookup",
+    "installArgs": "https://github.com/JobNimbus/record-lookup.git",
+    "preventUpgrade": true,
+    "environments": "JobNimbus"
+}

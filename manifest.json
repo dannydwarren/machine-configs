@@ -116,6 +116,7 @@
     "git.JobNimbus.accounts-receivable",
     "git.JobNimbus.ios-leads-sales-projects",
     "git.JobNimbus.android-leads-sales-projects",
+    "git.JobNimbus.record-lookup",
     "EnableVirtualization",
     "Amazon.AWSCLI",
     "Microsoft.DotNet.SDK.8",
