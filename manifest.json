@@ -118,6 +118,7 @@
     "git.JobNimbus.android-leads-sales-projects",
     "git.JobNimbus.record-lookup",
     "git.JobNimbus.job-management",
+    "git.JobNimbus.domain-event-bridge",
     "EnableVirtualization",
     "Amazon.AWSCLI",
     "Microsoft.DotNet.SDK.8",

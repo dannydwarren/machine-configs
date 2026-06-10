@@ -1,0 +1,7 @@
+{
+    "appType": "GitRepo",
+    "appId": "git.JobNimbus.domain-event-bridge",
+    "installArgs": "https://github.com/JobNimbus/domain-event-bridge.git",
+    "preventUpgrade": true,
+    "environments": "JobNimbus"
+}
