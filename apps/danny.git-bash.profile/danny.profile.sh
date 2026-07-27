@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 
 #First Time Setup: https://jobnimbus.atlassian.net/wiki/spaces/DEV/pages/2054684772/Setup+AWS+CLI
 #OPTIONS: aws configure list-profiles
