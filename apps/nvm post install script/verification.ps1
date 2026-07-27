@@ -1,1 +1,0 @@
-$(nvm --version).Length -gt 0

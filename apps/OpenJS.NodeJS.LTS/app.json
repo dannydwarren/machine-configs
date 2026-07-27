@@ -1,0 +1,5 @@
+{
+  "appId": "OpenJS.NodeJS.LTS",
+  "appType": "winget",
+  "environments": "All"
+}

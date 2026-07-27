@@ -59,8 +59,7 @@
     "nonportable",
     "mob",
     "scrcpy",
-    "nvm",
-    "nvm post install script",
+    "OpenJS.NodeJS.LTS",
     "paint.net",
     "baretail",
     "OpenTofu.Tofu",
@@ -137,7 +136,6 @@
     "Python.Python.3.14"
   ],
   "todo": [
-    "nvm install lts and use lts",
     "JobNimbus .npmrc (secure) - maybe empty with prompt? [npm config edit]",
     "Defender Exclusion List",
     "jnlocal install and add to path",
