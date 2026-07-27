@@ -133,7 +133,8 @@
     "Claude",
     "Snowflake.SnowflakeCLI",
     "astral-sh.uv",
-    "Snowflake Key Pair"
+    "Snowflake Key Pair",
+    "Python.Python.3.14"
   ],
   "todo": [
     "nvm install lts and use lts",
