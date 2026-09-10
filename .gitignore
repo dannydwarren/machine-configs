@@ -334,4 +334,10 @@ ASALocalRun/
 .ssl/
 
 .DS_Store
+
+# AI
+tmp/
 .claude/settings.local.json
+.claude/worktrees/
+.claude/scheduled_tasks.lock
+.worktrees
