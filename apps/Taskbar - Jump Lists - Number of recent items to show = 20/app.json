@@ -1,0 +1,15 @@
+{
+  "AppType": "Script",
+  "AppId": "Taskbar - Jump Lists - Number of recent items to show = 20",
+  "Environments": "All",
+  "Configuration": {
+      "RegistrySettings": [
+          {
+              "Description": "Taskbar > Jump Lists > Number of recent items to show = 20",
+              "KeyName": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+              "ValueName": "JumpListItems_Maximum",
+              "ValueData": 20
+          }
+      ]
+  }
+}
