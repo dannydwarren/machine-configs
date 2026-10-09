@@ -135,7 +135,8 @@
     "Snowflake.SnowflakeCLI",
     "astral-sh.uv",
     "Snowflake Key Pair",
-    "Python.Python.3.14"
+    "Python.Python.3.14",
+    "Twingate.Client"
   ],
   "todo": [
     "JobNimbus .npmrc (secure) - maybe empty with prompt? [npm config edit]",

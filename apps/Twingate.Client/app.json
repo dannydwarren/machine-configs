@@ -1,0 +1,6 @@
+{
+  "appId": "Twingate.Client",
+  "appType": "PowerShell",
+  "environments": "JobNimbus",
+  "notes": "PowerShell app rather than a plain winget entry for two reasons: the installer may need the wizard walked through plus OS approval of the VPN profile/configuration and the network extension, and on ARM64 the x64 .NET 8 Desktop Runtime must be force-installed first or the MSI fails with 1603."
+}
