@@ -1,0 +1,5 @@
+{
+  "appId": "Okta.OktaVerify",
+  "appType": "winget",
+  "environments": "JobNimbus"
+}

@@ -136,7 +136,8 @@
     "astral-sh.uv",
     "Snowflake Key Pair",
     "Python.Python.3.14",
-    "Twingate.Client"
+    "Twingate.Client",
+    "Okta.OktaVerify"
   ],
   "todo": [
     "JobNimbus .npmrc (secure) - maybe empty with prompt? [npm config edit]",
